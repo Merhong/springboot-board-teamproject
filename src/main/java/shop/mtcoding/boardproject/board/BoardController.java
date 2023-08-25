@@ -1,6 +1,5 @@
 package shop.mtcoding.boardproject.board;
 
-
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 
 @Controller
 public class BoardController {
@@ -21,7 +19,7 @@ public class BoardController {
     }
 
     @PostMapping("/board/{id}/delete")
-    public @ResponseBody String delete(@PathVariable Integer id){
+    public @ResponseBody String delete(@PathVariable Integer id) {
         // boardService.삭제하기(id);
         // return Script.href("/");
         return "";
@@ -32,6 +30,7 @@ public class BoardController {
         // Board board = boardService.상세보기(id);
         // request.setAttribute("board", board);
         return "board/updateForm";
+    }
 
     @Autowired
     private BoardService boardService;

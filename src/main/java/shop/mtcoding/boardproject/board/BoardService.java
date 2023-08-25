@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 public class BoardService {
 
     public void 게시글작성() {
+
     }
 
 }
