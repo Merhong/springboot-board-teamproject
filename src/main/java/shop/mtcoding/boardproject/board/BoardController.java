@@ -32,6 +32,7 @@ public class BoardController {
         // Board board = boardService.상세보기(id);
         // request.setAttribute("board", board);
         return "board/updateForm";
+    }
 
     @Autowired
     private BoardService boardService;
