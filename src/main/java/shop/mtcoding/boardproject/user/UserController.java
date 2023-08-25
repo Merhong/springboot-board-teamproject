@@ -55,5 +55,9 @@ public class UserController {
         session.setAttribute("sessionUser", sessionUser);
         return "redirect:/";
     }
-  
+
+    @GetMapping("/user/updateForm")
+    public String updateForm() {
+         return "/";
+    }
 }
