@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class BoardController {
 
+    @Autowired
+    BoardRepository boardRepository;
+
     @GetMapping("/board/{id}")
     public String detail(@PathVariable Integer id, HttpServletRequest request) { // Model == HttpServletRequest
         // Board board = boardService.상세보기(id);
-        // request.setAttribute("board", board);
-        return "bard/detail";
+        Board board = boardRepository.mFindById(id);
+        request.setAttribute("board", board);
+        return "board/detail";
     }
 
     @PostMapping("/board/{id}/delete")
@@ -32,7 +36,8 @@ public class BoardController {
         // Board board = boardService.상세보기(id);
         // request.setAttribute("board", board);
         return "board/updateForm";
-
+    }
+    
     @Autowired
     private BoardService boardService;
 
