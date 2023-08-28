@@ -10,7 +10,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReplyRepository extends JpaRepository<Reply, Integer> {
 
-    // JpaRepository에는 Entity만 들어갈수 있다 >> Reply객체가 들어가야함
-    @Query
-    List<Reply> findByBoardId(@Param("boardId") Integer boardId);
 }
