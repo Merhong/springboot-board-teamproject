@@ -5,6 +5,9 @@
     height: auto;
     width: 1150px;
   }
+  .shadow {
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  }
 </style>
 
 <section id="contentArea" class="container-fluid">
@@ -12,39 +15,41 @@
     <div>
       <div class="d-flex justify-content-end p-5">
         <aside id="sidebar" class="span3">
-          <form
-            action="/search"
-            method="GET"
-            id="searchBar"
-            class="sm"
-            autocomplete="off"
-          >
-            <input
-              type="hidden"
-              name="collectionId"
-              value="5b28d1512c7d3a0fa9a325f2"
-            />
-            <input
-              type="text"
-              name="query"
-              title="search-query"
-              class="search-query"
-              placeholder="Search"
-              value=""
-              aria-label="Search"
-            />
-            <button type="submit">
-              <span class="sr-only">Toggle Search</span>
-              <i class="icon-search"></i>
-            </button>
-            <div id="serp-dd" style="display: none" class="sb">
-              <ul class="result"></ul>
-            </div>
-          </form>
+          <div class="shadow">
+            <form
+              action="/search"
+              method="GET"
+              id="searchBar"
+              class="sm"
+              autocomplete="off"
+            >
+              <input
+                type="hidden"
+                name="collectionId"
+                value="5b28d1512c7d3a0fa9a325f2"
+              />
+              <input
+                type="text"
+                name="query"
+                title="search-query"
+                class="search-query"
+                placeholder="Search"
+                value=""
+                aria-label="Search"
+              />
+              <button type="submit">
+                <span class="sr-only">Toggle Search</span>
+                <i class="icon-search"></i>
+              </button>
+              <div id="serp-dd" style="display: none" class="sb">
+                <ul class="result"></ul>
+              </div>
+            </form>
+          </div>
         </aside>
       </div>
       <section id="main-content" class="span9 mb-5">
-        <div class="question contentWrapper card p-5">
+        <div class="question shadow contentWrapper card p-5">
           <div>
             <div class="d-flex justify-content-between">
               <h3 class="m-2">자주 묻는 질문</h3>
@@ -77,6 +82,7 @@
             <div class="d-flex mt-3 justify-content-end">
               <button
                 class="btn btn-info"
+                style="box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)"
                 type="button"
                 onclick="questionForm()"
               >

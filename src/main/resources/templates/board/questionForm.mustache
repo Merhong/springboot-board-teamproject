@@ -9,8 +9,8 @@
   }
 </style>
 
-<div class="container p-5 question">
-  <div class="card">
+<div class="container p-5 question mb-5">
+  <div class="card" style="box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3)">
     <div class="card-header"><b>문의 작성</b></div>
     <div class="card-body">
       <form action="/board/save" method="post">
@@ -59,7 +59,11 @@
         </div>
         <div class="d-flex justify-content-end">
           <div>
-            <button type="submit" class="btn btn-info form-control">
+            <button
+              type="submit"
+              class="btn btn-info form-control"
+              style="box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)"
+            >
               제출하기
             </button>
           </div>
