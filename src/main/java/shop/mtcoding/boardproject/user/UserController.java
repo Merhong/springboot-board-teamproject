@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
 
-     @Autowired // DI
+    @Autowired // DI
     private UserService userService;
 
     @Autowired
@@ -31,5 +31,10 @@ public class UserController {
     @GetMapping("/compJoinForm")
     public String compJoinForm() {
         return "user/compJoinForm"; // view 파일 호출 user/loginForm 파일 호출
+    }
+
+    @GetMapping("/selectJoinForm")
+    public String selectJoinForm() {
+        return "user/selectJoinForm";
     }
 }

@@ -1,0 +1,31 @@
+{{> layout/header}}
+
+<div class="d-flex my-5 flex-fill justify-content-center">
+  <div
+    class="d-flex justify-content-center card p-3 m-5 bg-info"
+    onclick="userJoinForm()"
+  >
+    <div class="ms-auto">
+      <h3 class="text-center mb-3">개인회원가입</h3>
+    </div>
+  </div>
+  <div
+    class="d-flex justify-content-center card p-3 m-5 bg-info"
+    onclick="compJoinForm()"
+  >
+    <div class="ms-auto">
+      <h3 class="text-center mb-3">기업회원가입</h3>
+    </div>
+  </div>
+</div>
+
+<script>
+  function userJoinForm() {
+    location.href = "/userJoinForm";
+  }
+
+  function compJoinForm() {
+    location.href = "/compJoinForm";
+  }
+</script>
+{{> layout/footer}}
