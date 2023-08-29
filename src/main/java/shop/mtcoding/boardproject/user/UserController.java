@@ -28,8 +28,8 @@ public class UserController {
     }
 
     // Browser URL : IP주소:포트번호/companyJoinForm 입력시 호출
-    @GetMapping("/companyJoinForm")
-    public String companyJoinForm() {
-        return "user/companyJoinForm"; // view 파일 호출 user/loginForm 파일 호출
+    @GetMapping("/compJoinForm")
+    public String compJoinForm() {
+        return "user/compJoinForm"; // view 파일 호출 user/loginForm 파일 호출
     }
 }
