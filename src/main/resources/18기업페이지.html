@@ -75,7 +75,7 @@
 
 	
 	<div class="h-auto col-xl-6 col-lg-8 col-md-10 col-sm-12 d-flex border border-info">
-		<div class="bg-info col-2">
+		<div class="bg-info col-">
 			<div class="m-2"></div>
 			<a href="#" class="w-100 btn btn-info">마이 페이지</a>
 			<div class="m-2"></div>
@@ -92,57 +92,51 @@
 			<a href="#" class="w-100 btn btn-info">인재 추천</a>
 			<div class="m-2"></div>
 		</div>
-		<div class="col-9">
-			<h1 class="text-center">기업 페이지</h1>
+
+
+		<div class="col-auto container">
+			<h1 class="text-center mt-2">기업 페이지</h1>
 
 			<div class="d-flex">
-				<div class="m-2 col-4 d-flex flex-column align-items-center">
-					<img src="../../../images/basic.jpg" class="img-fluid rounded-circle" style="width:150px; height:150px;"/>
-					<button type="button" class="mt-3 btn btn-info align-middle justify-content-center">사진수정</button>
+				<div class="m-1 col-4 d-flex flex-column align-items-center overflow-hidden" style="width:170px; height:280px;">
+					<img src="../../../images/kakao_logo.png" class=""/>
 				</div>
 
 				<div class="col-8 p-2">
-					<form action="">
 						<div class="input-group mb-3">
 							<span class="input-group-text">회사명</span>
 							<input type="text" class="form-control" value="카카오" disabled>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">사업자번호</span>
-							<input type="text" class="form-control" value="12345" disabled>
+							<input type="text" class="form-control" value="1234" disabled>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">주소</span>
-							<input type="text" class="form-control">
+							<textarea class="form-control" rows="2">서울특별시 송파구 올림픽로 300 롯데월드타워 35층</textarea>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control">
+							<input type="text" class="form-control" value="051-123-4567">
 						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control">
+						<div class="input-group mb-2">
+							<span class="input-group-text">홈페이지</span>
+							<input type="text" class="form-control" value="http://localhost:8080">
 						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control">
-						</div>
-					</form>
 				</div>
 
 			</div>
 
+			<!--
+
+			<div class="input-group mb-3 ms-1">
+				<span class="input-group-text">기업소개</span>
+				<textarea class="form-control" rows="5"></textarea>
+			</div>
+			-->
 
 			<div>
-				<button type="button" class="m-3 w-100 btn btn-success">수정하기</button>
+				<button type="button" class="mb-3 ms-1 w-100 btn btn-success">수정하기</button>
 			</div>
 
 		</div>

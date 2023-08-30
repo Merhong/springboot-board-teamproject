@@ -12,7 +12,28 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 	<style>
+		.main {
+			flex: 3;
+			padding: 20px;
+		}
 
+		.tg {
+			border-collapse: collapse;
+			border-spacing: 0;
+			width: 100%;
+		}
+
+		.tg th,
+		.tg td {
+			border: 1px solid black;
+			padding: 10px;
+			text-align: left;
+			cursor: pointer;
+		}
+
+		.tg th {
+			font-weight: bold;
+		}
 	</style>
 </head>
 
@@ -21,10 +42,9 @@
 	<header>
 		<div class="d-flex justify-content-center align-items-center p-1">
 			<h1 class="text-center flex-grow-1">플랫폼명</h1>
-			<div class="col-3">
-				<a class="btn btn-white" href="/logout">로그아웃</a>
-				<a class="btn btn-white" href="/#">마이페이지</a>
-			</div>
+			<a class="btn btn-white" href="/userJoinForm">유저회원가입</a>
+			<a class="btn btn-white" href="/companyJoinForm">기업회원가입</a>
+			<a class="btn btn-white" href="/loginForm">로그인</a>
 		</div>
 		<nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
 			<a href="/"><img src="../../../../../images/brand.png" class="img-thumbnail" alt="브랜드 로고" width="100px"></a>
@@ -47,10 +67,7 @@
 							<a class="nav-link text-white" href="#">지원내역</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link text-white" href="#">북마크</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-white" href="#">기업추천</a>
+							<a class="nav-link text-white" href="#">고객센터</a>
 						</li>
 					</ul>
 					<form class="d-flex">
@@ -61,8 +78,6 @@
 			</div>
 		</nav>
 	</header>
-
-
 
 
 	<div class="d-flex">
@@ -86,22 +101,8 @@
 				<div class="m-2"></div>
 			</div>
 
-
-
-			<div class="col-9 ms-3">
-				<h1 class="text-center mt-2">북마크</h1>
-
-
-				<div class="d-flex border border-info m-3 p-2">
-					<div class="col-10">
-						<img src="공고사진" alt="Apple(서울/프론트엔드/DB)" class="img-thumbnail" width="100px" height="60px">
-					</div>
-					<div class="mt-2 mb-2">
-						<button type="button" class="btn btn-danger">삭제</button>
-					</div>
-				</div>
-
-
+			<div class="main col-10">
+				<h1 class="text-center">북마크</h1>
 
 				<div class="d-flex border border-info m-3 p-2">
 					<div class="col-10">
