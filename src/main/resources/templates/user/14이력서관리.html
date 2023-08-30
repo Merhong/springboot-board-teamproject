@@ -12,8 +12,23 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
     <style>
-       
-    </style>
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px; /* 줄 간의 간격을 설정 */
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .button-group > button {
+            margin: 0 5px; /* 버튼 사이의 간격을 조절할 수 있습니다. */
+        }
+        </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -87,30 +102,38 @@
             <div>
                 <h1 class="text-center"> 이력서관리하기</h1>
             </div>
+            <div class="button-container">
            <div><button type="button" class="btn btn-warning  w-50">이력서1</button> 
-            
-           <button type="button" class="btn btn-primary btn-sm">수정</button>
+            <button type="button" class="btn btn-primary btn-sm">수정</button>
            <button type="button" class="btn btn-primary btn-sm">삭제</button>
         </div>
+            </div>
+
            <hr>
+           <div class="button-container">
            <div><button type="button" class="btn btn-warning  w-50">이력서2</button> 
-            
-            <button type="button" class="btn btn-primary btn-sm">수정</button>
+          <button type="button" class="btn btn-primary btn-sm">수정</button>
             <button type="button" class="btn btn-primary btn-sm">삭제</button>
          </div>
+        </div>
            <hr>
+           <div class="button-container">
            <div><button type="button" class="btn btn-warning  w-50">이력서3</button> 
-            
-            <button type="button" class="btn btn-primary btn-sm">수정</button>
+         <button type="button" class="btn btn-primary btn-sm">수정</button>
             <button type="button" class="btn btn-primary btn-sm">삭제</button>
          </div>
+        </div>
+         
            <hr>
+           <div class="button-container">
            <div><button type="button" class="btn btn-warning  w-50">이력서4</button> 
             
             <button type="button" class="btn btn-primary btn-sm">수정</button>
             <button type="button" class="btn btn-primary btn-sm">삭제</button>
          </div>
         </div>
+    </div>
+        
 
 
 

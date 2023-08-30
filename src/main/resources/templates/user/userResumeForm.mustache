@@ -1,0 +1,102 @@
+{{> layout/header}}
+
+
+<div class="d-flex mb-3">
+	<div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
+
+	<div class="h-auto col-xl-6 col-lg-8 col-md-10 col-sm-12 d-flex border border-info">
+		<div class="bg-info col-2">
+			<div class="m-2"></div>
+			<a href="#" class="w-100 btn btn-info">마이 페이지</a>
+			<div class="m-2"></div>
+			<a href="#" class="w-100 btn btn-info">공고 관리</a>
+			<div class="m-2"></div>
+			<a href="#" class="w-100 btn btn-info">공고 등록</a>
+			<div class="m-2"></div>
+			<a href="#" class="w-100 btn btn-info">공고 수정</a>
+			<div class="m-2"></div>
+			<a href="#" class="w-100 btn btn-info">지원자 내역</a>
+			<div class="m-2"></div>
+			<a href="#" class="w-100 btn btn-info">지원자 북마크</a>
+			<div class="m-2"></div>
+			<a href="#" class="w-100 btn btn-info">인재 추천</a>
+			<div class="m-2"></div>
+		</div>
+		<div class="col-9 ms-3">
+			<h1 class="text-center mt-2">이력서 등록</h1>
+
+			<div class="d-flex">
+				<div class="m-2 col-4 d-flex flex-column align-items-center">
+					<img src="../../../images/basic.jpg" class="img-fluid rounded-circle"
+					     style="width:150px; height:150px;"/>
+				</div>
+
+				<div class="col-8 p-2">
+					<div class="input-group mb-3">
+					  <span class="input-group-text"
+						><span class="ms-2 me-4">이름</span></span
+					  >
+					  <div type="text" class="form-control"></div>
+					</div>
+					<div class="input-group mb-3">
+					  <span class="input-group-text">전화번호</span>
+					  <div type="text" class="form-control"></div>
+					</div>
+					<div class="input-group mb-3">
+					  <span class="input-group-text"
+						><span class="ms-2 me-4">주소</span></span
+					  >
+					  <div type="text" class="form-control"></div>
+					</div>
+					<div class="input-group mb-3">
+					  <span class="input-group-text">생년월일</span>
+					  <div type="text" class="form-control"></div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="input-group ms-2 mb-3">
+				<span class="input-group-text">학력사항</span>
+				<div type="text" class="form-control"></div>
+			</div>
+
+			<div class="input-group ms-2 mb-3">
+				<span class="input-group-text">경력사항</span>
+				<div type="text" class="form-control"></div>
+			</div>
+
+			<div class="input-group ms-2 mb-3">
+				<span class="input-group-text">보유기술</span>
+				<div type="text" class="form-control"></div>
+			</div>
+
+			<div class="input-group ms-2 mb-3">
+				<span class="input-group-text">자기소개서</span>
+				<textarea class="form-control" rows="5" readonly></textarea>
+			</div>
+
+			<div class="input-group ms-2 mb-3">
+				<span class="input-group-text">이력서 제목</span>
+				<div type="text" class="form-control"></div>
+			</div>
+
+
+			<input type="checkbox" name="cb"/> 이력서 공개 여부
+			<br/>
+			<!-- disabled속성은 입력할 수 없는 input태그를 만든다 -->
+			<!-- disabled속성은 적용된 input은 서버로 데이터가 전송되지 않는다-->
+			<!-- readonly속성은 읽기전용 input태그를 만든다 -->
+			<!-- disabled ="ture"가 생략 된것-->
+
+
+			<div>
+				<button type="button" class="m-2 mb-3 w-100 btn btn-success">이력서 닫기</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
+</div>
+
+
+{{> layout/footer}}
