@@ -8,13 +8,13 @@
 			<h3 class="text-center mb-3">로그인</h3>
 			<div class="d-flex">
 				<a href="" class="mx-auto text-decoration-none text-black">로그인</a>
-				<a href="" class="mx-auto text-decoration-none text-black">회원가입</a>
+				<a href="selectJoinForm" class="mx-auto text-decoration-none text-black">회원가입</a>
 			</div>
 		</div>
 
 		<div class="mt-3"></div>
 
-		<form action="#" method="post" onsubmit="">
+		<form action="/login" method="post" onsubmit="">
 			<div class="d-flex form-group mt-2 mb-2">
 				<input type="email" name="email" class="form-control" placeholder="아이디(이메일)" id="email">
 			</div>
@@ -32,10 +32,42 @@
 			</div>
 
 			<div class="d-grid mb-2">
-				<input id="button" class=" btn btn-primary" type="submit" value="로그인" onclick="">
+				<input id="button" class=" btn btn-primary" type="submit" value="로그인">
 			</div>
 		</form>
 	</div>
 </div>
+
+
+<script>
+	let sessionUserEmail = "{{#sessionUserEmail}}{{.}}{{/sessionUserEmail}}"; // 세션에 저장된 사용자의 이메일 정보
+
+	function changeLoginLinks() {
+		let joinLink = document.querySelector('a[href="/selectJoinForm"]');
+		let loginLink = document.querySelector('a[href="/loginForm"]');
+
+		if (sessionUserEmail) {
+			joinLink.textContent = "로그아웃";
+			joinLink.href = "/logout";
+
+			loginLink.textContent = "마이페이지";
+			loginLink.href = "/userMyPage";
+		} else {
+			joinLink.textContent = "회원가입";
+			joinLink.href = "/selectJoinForm";
+
+			loginLink.textContent = "로그인";
+			loginLink.href = "/loginForm";
+		}
+	}
+
+	document.addEventListener("DOMContentLoaded", function () {
+		let loginButton = document.querySelector("#button");
+		loginButton.addEventListener("click", changeLoginLinks);
+
+		changeLoginLinks(); // 페이지 로드 시 초기 세션 상태에 따라 링크 텍스트 변경
+	});
+
+</script>
 
 {{> layout/footer}}
