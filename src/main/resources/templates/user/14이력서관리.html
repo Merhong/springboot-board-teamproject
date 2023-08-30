@@ -12,29 +12,23 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
     <style>
-        .main {
-            flex: 3;
-            padding: 20px;
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px; /* 줄 간의 간격을 설정 */
         }
-
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            width: 100%;
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
-        .tg th,
-        .tg td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: left;
-            cursor: pointer;
+        
+        .button-group > button {
+            margin: 0 5px; /* 버튼 사이의 간격을 조절할 수 있습니다. */
         }
-
-        .tg th {
-            font-weight: bold;
-        }
-    </style>
+        </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -62,7 +56,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">이력서관리</a>
-                        </li>
+                        </li>                       
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">지원내역</a>
                         </li>
@@ -104,47 +98,53 @@
             </div>
 
 
-
-			<div class="col-9 ms-3">
-				<h1 class="text-center mt-2">MY PAGE</h1>
-	   
-				<div class="d-flex">
-				   <div class="m-2 col-4 d-flex flex-column align-items-center">
-					  <img src="../../../../../images/basic.jpg" class="img-fluid rounded-circle" style="width:150px; height:150px;"/>
-				   </div>
-	   
-				   <div class="col-8 p-2">
-						 <div class="input-group mb-3">
-							<span class="input-group-text">이름</span>
-							<div type="text" class="form-control"></div>
-						 </div>
-						 <div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<div type="text" class="form-control"></div>
-						 </div>
-						 <div class="input-group mb-3">
-							<span class="input-group-text">주소</span>
-							<div type="text" class="form-control"></div>
-						 </div>
-						 <div class="input-group mb-3">
-							<span class="input-group-text">생년월일</span>
-							<div type="date" class="form-control"></div>
-						 </div>
-				   </div>
-	   
-				</div>
-           
-              
-			   <div>
-				<button type="button" class="m-2 mb-3 w-100 btn btn-success">수정</button>
-			 </div>
-               
+            <div class="main col-10">
+            <div>
+                <h1 class="text-center"> 이력서관리하기</h1>
             </div>
-      
-         </div>
+            <div class="button-container">
+           <div><button type="button" class="btn btn-warning  w-50">이력서1</button> 
+            <button type="button" class="btn btn-primary btn-sm">수정</button>
+           <button type="button" class="btn btn-primary btn-sm">삭제</button>
+        </div>
+            </div>
 
-  </div>
-</div>
+           <hr>
+           <div class="button-container">
+           <div><button type="button" class="btn btn-warning  w-50">이력서2</button> 
+          <button type="button" class="btn btn-primary btn-sm">수정</button>
+            <button type="button" class="btn btn-primary btn-sm">삭제</button>
+         </div>
+        </div>
+           <hr>
+           <div class="button-container">
+           <div><button type="button" class="btn btn-warning  w-50">이력서3</button> 
+         <button type="button" class="btn btn-primary btn-sm">수정</button>
+            <button type="button" class="btn btn-primary btn-sm">삭제</button>
+         </div>
+        </div>
+         
+           <hr>
+           <div class="button-container">
+           <div><button type="button" class="btn btn-warning  w-50">이력서4</button> 
+            
+            <button type="button" class="btn btn-primary btn-sm">수정</button>
+            <button type="button" class="btn btn-primary btn-sm">삭제</button>
+         </div>
+        </div>
+    </div>
+        
+
+
+
+
+
+
+
+
+
+        </div>
+ </div>
 
 
     <footer class="bg-info p-2 mt-auto">
