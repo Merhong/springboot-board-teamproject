@@ -1,10 +1,10 @@
-insert into user_tb(username, email ,password , tel, address, role) values('김대홍', '1234', 'kdh@nate.com', '01010001111','부산시 화명동',0);
-insert into user_tb(username, email ,password , tel, address, role) values('유재석', '1234', 'ssar@nate.com', '01012341234','서울시 성동구',1);
-insert into user_tb(username, email ,password , tel, address, role) values('박명수', '1234', 'cos@nate.com', '01012344321','인천시 미추홀구
+insert into user_tb(username, email ,password , tel, address, role) values('김대홍', 'kdh@nate.com', '1234','01010001111','부산시 화명동',0);
+insert into user_tb(username, email ,password , tel, address, role) values('유재석', 'ssar@nate.com','1234', '01012341234','서울시 성동구',1);
+insert into user_tb(username, email ,password , tel, address, role) values('박명수', 'cos@nate.com', '1234','01012344321','인천시 미추홀구
 ',1);
-insert into user_tb(compname , comp_register  ,email , tel, password, address, role) values('LG', '5050','1234', 'love@nate.com', '01055555000','서울',2);
-insert into user_tb(username, email ,password , tel, address, role) values('노홍철', '1234', 'haha@nate.com', '01022223333','부산시 수영구',1);
-insert into user_tb(compname , comp_register  ,email , tel, password, address, role) values('배달의민족', '4636','1234', 'bm@nate.com', '01099998888','부산',2);
+insert into user_tb(compname , comp_register  ,email , password, tel, address, role) values('LG', '5050','love@nate.com', '1234','01055555000','서울',2);
+insert into user_tb(username, email , password , tel, address, role) values('노홍철', 'haha@nate.com', '1234', '01022223333','부산시 수영구',1);
+insert into user_tb(compname , comp_register  ,email , password, tel, address, role) values('배달의민족', '4636', 'bm@nate.com', '1234','01099998888','부산',2);
 
 insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(2, '안녕', '대졸', '신입','하이',true);
 insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(3, '니하오', '고졸', '4년','nihao',true);
