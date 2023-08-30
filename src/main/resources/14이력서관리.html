@@ -12,28 +12,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 	<style>
-        .main {
-            flex: 3;
-            padding: 20px;
-        }
 
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            width: 100%;
-        }
-
-        .tg th,
-        .tg td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: left;
-            cursor: pointer;
-        }
-
-        .tg th {
-            font-weight: bold;
-        }
 	</style>
 </head>
 
@@ -47,7 +26,7 @@
 			<a class="btn btn-white" href="/loginForm">로그인</a>
 		</div>
 		<nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
-			<a href="/"><img src="../../../../../images/brand.png" class="img-thumbnail" alt="브랜드 로고" width="100px"></a>
+			<a href="/"><img src="../../../images/brand.png" class="img-thumbnail" alt="브랜드 로고" width="100px"></a>
 			<div class="container-fluid">
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
 					<span class="navbar-toggler-icon"></span>
@@ -103,51 +82,38 @@
 
 
 			<div class="main col-10">
-				<h1 class="text-center">지원내역</h1>
-				<table class="tg">
-					<thead>
-						<tr>
-							<th>NO</th>
-							<th>공고명</th>
-							<th>이력서</th>
-							<th>포지션</th>
-							<th>상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr onclick="redirectToPage('/')">
-							<td>1</td>
-							<td>백엔드 채용</td>
-							<td>이력서1</td>
-							<td>백엔드</td>
-							<td>대기중</td>
-						</tr>
-						<tr onclick="redirectToPage('/')">
-							<td>2</td>
-							<td>백엔드 채용</td>
-							<td>이력서2</td>
-							<td>백엔드</td>
-							<td>대기중</td>
-						</tr>
-						<tr onclick="redirectToPage('/')">
-							<td>3</td>
-							<td>프론트</td>
-							<td>이력서3</td>
-							<td>프론트</td>
-							<td>대기중</td>
-						</tr>
-						<tr onclick="redirectToPage('/')">
-							<td>4</td>
-							<td>프론트</td>
-							<td>이력서4</td>
-							<td>프론트</td>
-							<td>대기중</td>
-						</tr>
-					</tbody>
-				</table>
+				<div>
+					<h1 class="text-center"> 이력서관리하기</h1>
+				</div>
+				<div>
+					<button type="button" class="btn btn-warning  w-50">이력서1</button>
+
+					<button type="button" class="btn btn-primary btn-sm">수정</button>
+					<button type="button" class="btn btn-primary btn-sm">삭제</button>
+				</div>
+				<hr>
+				<div>
+					<button type="button" class="btn btn-warning  w-50">이력서2</button>
+
+					<button type="button" class="btn btn-primary btn-sm">수정</button>
+					<button type="button" class="btn btn-primary btn-sm">삭제</button>
+				</div>
+				<hr>
+				<div>
+					<button type="button" class="btn btn-warning  w-50">이력서3</button>
+
+					<button type="button" class="btn btn-primary btn-sm">수정</button>
+					<button type="button" class="btn btn-primary btn-sm">삭제</button>
+				</div>
+				<hr>
+				<div>
+					<button type="button" class="btn btn-warning  w-50">이력서4</button>
+
+					<button type="button" class="btn btn-primary btn-sm">수정l</button>
+					<button type="button" class="btn btn-primary btn-sm">삭제</button>
+				</div>
 			</div>
 		</div>
-		<div class="col-2"></div>
 	</div>
 
 

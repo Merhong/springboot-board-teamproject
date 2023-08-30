@@ -9,13 +9,22 @@ public class BoardController {
 
     @Autowired
     private BoardRepository boardRepository;
-  
+
     @Autowired
     private BoardService boardService;
-
 
     @GetMapping("/")
     public String index() {
         return "index";
+    }
+
+    @GetMapping("/qna")
+    public String qna() {
+        return "/board/qna";
+    }
+
+    @GetMapping("/questionForm")
+    public String question() {
+        return "/board/questionForm";
     }
 }
