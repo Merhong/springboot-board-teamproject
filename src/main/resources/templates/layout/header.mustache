@@ -62,3 +62,39 @@
 			</div>
 		</nav>
 	</header>
+
+	<script>
+		function changeLoginLinks() {
+			let joinLink = document.querySelector('a[href="/selectJoinForm"]');
+			let loginLink = document.querySelector('a[href="/loginForm"]');
+
+			let sessionUserEmail = "{{#sessionUserEmail}}{{.}}{{/sessionUserEmail}}";
+
+			if (sessionUserEmail) {
+				joinLink.textContent = "로그아웃";
+				joinLink.href = "/logout";
+
+				loginLink.textContent = "마이페이지";
+				loginLink.href = "/userMyPage";
+			} else {
+				joinLink.textContent = "회원가입";
+				joinLink.href = "/selectJoinForm";
+
+				loginLink.textContent = "로그인";
+				loginLink.href = "/loginForm";
+			}
+		}
+
+		// 페이지 로드 시 초기 세션 상태에 따라 링크 텍스트 변경
+		document.addEventListener("DOMContentLoaded", function () {
+			changeLoginLinks();
+		});
+
+		// 로그인 버튼 클릭 시 세션 상태에 따라 링크 텍스트 변경
+		let loginButton = document.querySelector("#button");
+		if (loginButton) {
+			loginButton.addEventListener("click", function () {
+				setTimeout(changeLoginLinks, 1000); // 로그인 처리 후 잠시 후에 변경 적용
+			});
+		}
+	</script>
