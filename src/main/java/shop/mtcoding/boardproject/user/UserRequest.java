@@ -12,10 +12,12 @@ public class UserRequest {
         private String email;
         private String password;
         private String username;
-        private Integer tel;
+        private String tel;
 
     } 
 
+    @Getter
+    @Setter
     public static class LoginDTO {
         private String email;
         private String password;

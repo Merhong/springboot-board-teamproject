@@ -32,8 +32,6 @@ public class UserService {
 
     }
 
-    @Autowired
-    private UserRepository userRepository;
 
     public User 로그인(LoginDTO loginDTO) {
         User user = userRepository.findByUserEmail(loginDTO.getEmail());
