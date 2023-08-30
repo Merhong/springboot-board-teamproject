@@ -28,6 +28,10 @@ public class CompController {
         return "comp/compMain";
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "comp/test";
+    }
 
 
 
