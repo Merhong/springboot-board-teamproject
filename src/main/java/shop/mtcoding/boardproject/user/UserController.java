@@ -42,12 +42,7 @@ public class UserController {
 
     // 14번 이력서 수정 버튼 POST
 
-
-
     // 14번 이력서 삭제 버튼 POST
-
-
-
 
     // 14_개인이력서관리 화면
     @GetMapping("/userResumeManage")
@@ -56,9 +51,6 @@ public class UserController {
     }
 
     // 13번 사진수정 버튼 POST
-
-
-
 
     // 13번 이력서 등록 버튼 POST
     @PostMapping("/userResumeSave")
@@ -106,6 +98,21 @@ public class UserController {
     @GetMapping("/loginForm")
     public String loginForm() {
         return "user/loginForm"; // view 파일 호출 user/loginForm 파일 호출
+    }
+
+    // 로그인
+    @PostMapping("/login")
+    public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
+        userService.로그인(loginDTO);
+        session.setAttribute("sessionUserEmail", loginDTO.getEmail());
+        return "redirect:/";
+    }
+
+    // 로그아웃
+    @GetMapping("/logout")
+    public String logout() {
+        session.invalidate(); // 세션 무효화(세션 전체를 비움 - 서랍 비우는 거)
+        return "redirect:/";
     }
 
     // 3_개인회원가입 화면

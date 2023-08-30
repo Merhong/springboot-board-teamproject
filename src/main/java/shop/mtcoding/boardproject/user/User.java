@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 @Table(name = "user_tb")
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -28,7 +29,7 @@ public class User {
     private String email;
     private String password;
 
-    private Integer tel;
+    private String tel;
     private String photo;
 
     private String address;
@@ -41,7 +42,7 @@ public class User {
     private Timestamp createdAt;
 
     @Builder
-    public User(String username, String compname, String compRegister, String password, String email, Integer tel,
+    public User(String username, String compname, String compRegister, String password, String email, String tel,
             String photo, String address, Timestamp birth, Integer role) {
         this.username = username;
         this.compname = compname;
