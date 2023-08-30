@@ -114,6 +114,13 @@ public class UserController {
         return "user/userJoinForm"; // view 파일 호출 user/loginForm 파일 호출
     }
 
+    @PostMapping("/join")
+    public String join(UserRequest.JoinDTO joinDTO) {
+        userService.회원가입(joinDTO);
+        return "user/loginForm";
+    }
+
+
     // 2_회원가입유형선택 화면
     @GetMapping("/selectJoinForm")
     public String selectJoinForm() {
