@@ -1,12 +1,14 @@
 {{> layout/header}}
-{{> layout/compHeader}}
+{{> layout/comp2header}}
 
-<!-- 20번 -->
+<!-- 21번 -->
 
 
-		
+
+
+
 		<div class="col-auto container">
-			<h1 class="text-center mt-2">공고등록</h1>
+			<h1 class="text-center mt-2">공고</h1>
 
 			<div class="d-flex">
 				<div class="m-1 col-4 d-flex flex-column align-items-center overflow-hidden" style="width:170px; height:280px;">
@@ -40,17 +42,40 @@
 
 			<div class="input-group mb-3 ms-1">
 				<span class="input-group-text">공고명</span>
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" value="백엔드 개발자 모집합니다." disabled>
 			</div>
 
 			<div class="input-group mb-3 ms-1">
 				<span class="input-group-text">공고내용</span>
-				<textarea class="form-control" rows="5"></textarea>
+				<textarea class="form-control" rows="5" disabled>ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴ</textarea>
+			</div>
+
+			<div class="input-group mb-3 ms-1">
+				<span class="input-group-text">직무</span>
+				<input type="text" class="form-control" value="백엔드{{!직무}}" disabled>
+			</div>
+
+			<div class="input-group mb-3 ms-1">
+				<span class="input-group-text">기술</span>
+				<input type="text" class="form-control" value="Java, JavaScript, DB{{!기술}}" disabled>
+			</div>
+
+			<div class="input-group mb-3 ms-1">
+				<span class="input-group-text">학력</span>
+				<input type="text" class="form-control" value="중학교 졸업{{!학력}} 이상" disabled>
+			</div>
+
+			<div class="input-group mb-3 ms-1">
+				<span class="input-group-text">연차</span>
+				<input type="text" class="form-control" value="3년{{!연차}}차 이상" disabled>
 			</div>
 
 
-			<div>
-				<button type="button" class="mb-3 ms-1 w-100 btn btn-success">공고등록</button>
+
+			
+			<div class="d-flex">
+				<button type="button" class="w-50 mb-3 me-2 btn btn-success">지원하기</button>
+				<button type="button" class="w-50 mb-3 ms-2 btn btn-warning">북마크하기</button>
 			</div>
 
 		</div>
@@ -60,5 +85,7 @@
 
 
 
-{{> layout/compFooter}}
+
+
+{{> layout/comp2footer}}
 {{> layout/footer}}
