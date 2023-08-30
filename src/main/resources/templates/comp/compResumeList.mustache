@@ -1,5 +1,5 @@
 {{> layout/header}}
-{{> layout/compHeader}}
+{{> layout/comp2header}}
 
 <!-- 22번 -->
 
@@ -8,7 +8,30 @@
 
 
 		<div class="col-9 ms-2">
-			<h1 class="text-center mt-2 mb-3">지원자 내역</h1>
+			<h1 class=" text-center mt-2 mb-3">지원자 내역</h1>
+
+
+
+
+		<div class="d-flex justify-content-center">
+			<h5 class="align-self-center">현재 보는 중인 공고 :</h5>
+			<a href="/comp/notice/1" class="btn btn-info ms-2 mb-3">
+				<div class="">
+					<span class="fw-bold">백엔드 개발자 모집합니다.</span>
+					<span class="badge bg-black">D-12</span>
+				</div>
+				<div class="mb-1">
+					<span class="badge bg-primary">Java</span>
+					<span class="badge bg-primary">DB</span>
+					<span class="badge bg-primary">Spring</span>
+				</div>
+				<div>
+					<span class="badge bg-success">신입</span>
+					<span class="badge bg-success">학력무관</span>
+					<span class="badge bg-success">경기도</span>
+				</div>
+			</a>
+		</div>
 
 			
 
@@ -19,7 +42,6 @@
 					<th class="text-center" scope="col">No.</th>
 					<th class="text-center" scope="col">이름</th>
 					<th class="text-center" scope="col">이력서</th>
-					<th class="text-center" scope="col">지원 공고</th>
 					<th class="text-center" scope="col">경력</th>
 					<th class="text-center" scope="col">상태</th>
 					<th class="text-center" scope="col">응답</th>
@@ -29,18 +51,16 @@
 				  <tr>
 					<th class="text-center" scope="row">1</th>
 					<td class="text-center">홍길동</td>
-					<td class="text-center">이력서1</td>
-					<td class="text-center">백엔드채용</td>
+					<td class="text-center"><a href="/comp/resume/1" class="">이력서1</a></td>
 					<td class="text-center">신입</td>
 					<td class="text-center">대기중</td>
 					<td class="text-center">
 						<button class="badge bg-success" type="button">합격</button>
-						<button class="badge bg-danger" type="button">탈락</button>
+						<button class="badge bg-danger" type="button">불합격</button>
 					</td>
 				  </tr>
 				  <tr>
 					<th class="text-center" scope="row">2</th>
-					<td class="text-center"></td>
 					<td class="text-center"></td>
 					<td class="text-center"></td>
 					<td class="text-center"></td>
@@ -54,7 +74,6 @@
 					<td class="text-center"></td>
 					<td class="text-center"></td>
 					<td class="text-center"></td>
-					<td class="text-center"></td>
 				  </tr>
 				  <tr>
 					<th class="text-center" scope="row">4</th>
@@ -63,11 +82,9 @@
 					<td class="text-center"></td>
 					<td class="text-center"></td>
 					<td class="text-center"></td>
-					<td class="text-center"></td>
 				  </tr>
 				  <tr>
 					<th class="text-center" scope="row">5</th>
-					<td class="text-center"></td>
 					<td class="text-center"></td>
 					<td class="text-center"></td>
 					<td class="text-center"></td>
@@ -83,5 +100,5 @@
 
 
 
-{{> layout/compFooter}}
+{{> layout/comp2footer}}
 {{> layout/footer}}
