@@ -18,7 +18,7 @@ public class BoardController {
         return "index";
     }
 
-    @GetMapping("/qna")
+    @GetMapping("/help")
     public String qna() {
         return "/board/qna";
     }

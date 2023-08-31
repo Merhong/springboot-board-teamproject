@@ -15,31 +15,45 @@ import java.sql.Timestamp;
 @Table(name = "user_tb")
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 20, unique = true)
     private String username;
 
-    @Column(nullable = false, length = 60)
+    private String compname;
+
+    private String compRegister;
+
+    private String email;
     private String password;
 
-    @Column(nullable = false, length = 20)
-    private String email;
+    private String tel;
+    private String photo;
 
-    private String picUrl;
+    private String address;
+
+    private Timestamp birth;
+
+    private Integer role;
 
     @CreationTimestamp // Insert 할때 시간을 적어준다.
     private Timestamp createdAt;
 
     @Builder
-    public User(Integer id, String username, String password, String email, String picUrl, Timestamp createdAt) {
-        this.id = id;
+    public User(String username, String compname, String compRegister, String password, String email, String tel,
+            String photo, String address, Timestamp birth, Integer role) {
         this.username = username;
+        this.compname = compname;
+        this.compRegister = compRegister;
         this.password = password;
         this.email = email;
-        this.picUrl = picUrl;
-        this.createdAt = createdAt;
+        this.tel = tel;
+        this.photo = photo;
+        this.address = address;
+        this.birth = birth;
+        this.role = role;
     }
+
 }
