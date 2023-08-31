@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
-
-import shop.mtcoding.boardproject.skill.UserSkill;
-
-import java.net.http.HttpRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -22,9 +18,9 @@ public class UserController {
     private HttpSession session;
 
     // 17_개인기업추천 화면
-    @GetMapping("/user/userRecommendForm")
+    @GetMapping("/user/recommendForm")
     public String userRecommendForm() {
-        return "user/userRecommendForm";
+        return "user/recommendForm";
     }
 
     // 16번 북마크 삭제 버튼 POST
@@ -34,15 +30,15 @@ public class UserController {
     }
 
     // 16_개인북마크 화면
-    @GetMapping("/user/userBookMarkForm")
+    @GetMapping("/user/bookMarkForm")
     public String userBookMarkForm() {
-        return "user/userBookMarkForm";
+        return "user/bookMarkForm";
     }
 
     // 15_개인지원내역 화면
-    @GetMapping("/user/userApplyList")
+    @GetMapping("/user/applyList")
     public String userApplyList() {
-        return "user/userApplyList";
+        return "user/applyList";
     }
 
     // 14번 이력서 수정 버튼 POST
@@ -50,27 +46,27 @@ public class UserController {
     // 14번 이력서 삭제 버튼 POST
 
     // 14_개인이력서관리 화면
-    @GetMapping("/user/userResumeManage")
+    @GetMapping("/user/resumeManage")
     public String userResumeManage() {
-        return "user/userResumeManage";
+        return "/user/resumeManage";
     }
 
     // 13번 사진수정 버튼 POST
 
     // 13번 이력서 등록 버튼 POST
-    @PostMapping("/userResumeSave")
+    @PostMapping("/user/resumeSave")
     public String userResumeSave() {
         return "redirect:/";
     }
 
     // 13_개인이력서등록 화면
-    @GetMapping("/user/userResumeForm")
+    @GetMapping("/user/resumeForm")
     public String userResumeForm() {
-        return "user/userResumeForm";
+        return "user/resumeForm";
     }
 
     // 12번 수정하기 버튼 POST
-    @PostMapping("/userUpdate")
+    @PostMapping("/user/update")
     public String userUpdate(UserRequest.UpdateDTO updateDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         System.out.println("Session user: " + sessionUser);
@@ -87,29 +83,29 @@ public class UserController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User user = userService.회원정보보기(sessionUser.getId());
         request.setAttribute("user", user);
-        return "user/userUpdateForm";
+        return "user/updateForm";
     }
 
     // 11번 지원하기 버튼 POST
-    @PostMapping("/userApply")
+    @PostMapping("/user/apply")
     public String userApply() {
         return "redirect:/";
     }
 
     // 11_개인지원하기 화면
-    @GetMapping("/userApplyForm")
+    @GetMapping("/user/applyForm")
     public String userApplyForm() {
-        return "user/userApplyForm";
+        return "user/applyForm";
     }
 
     // 10_개인공고상세보기 화면
-    @GetMapping("/userPostingDetail")
+    @GetMapping("user/postingDetail")
     public String userPostingDetail() {
-        return "user/userPostingDetail";
+        return "user/postingDetail";
     }
 
     // 5_로그인 화면
-    @GetMapping("/loginForm")
+    @GetMapping("user/loginForm")
     public String loginForm() {
         return "user/loginForm"; // view 파일 호출 user/loginForm 파일 호출
     }
@@ -130,11 +126,12 @@ public class UserController {
     }
 
     // 3_개인회원가입 화면
-    @GetMapping("/userJoinForm")
+    @GetMapping("/user/joinForm")
     public String userJoinForm() {
-        return "user/userJoinForm"; // view 파일 호출 user/loginForm 파일 호출
+        return "user/joinForm"; // view 파일 호출 user/loginForm 파일 호출
     }
 
+    // 2번 회원가입 버튼 POST
     @PostMapping("/join")
     public String join(UserRequest.JoinDTO joinDTO) {
         userService.회원가입(joinDTO);

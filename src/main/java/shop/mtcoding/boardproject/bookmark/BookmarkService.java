@@ -1,17 +1,14 @@
 package shop.mtcoding.boardproject.bookmark;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.user.User;
 import shop.mtcoding.boardproject.user.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookmarkService {

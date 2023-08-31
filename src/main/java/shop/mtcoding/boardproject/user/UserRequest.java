@@ -1,24 +1,23 @@
 package shop.mtcoding.boardproject.user;
 
-import java.sql.Date;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.sql.Date;
 
 public class UserRequest {
 
     @Getter
     @Setter
     public static class JoinDTO {
-      
+
         private String email;
         private String password;
         private String username;
         private String tel;
 
-    } 
+    }
 
     @Getter
     @Setter

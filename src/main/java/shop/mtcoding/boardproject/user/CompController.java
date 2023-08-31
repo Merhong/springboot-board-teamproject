@@ -9,9 +9,9 @@ public class CompController {
 
     // Browser URL : IP주소:포트번호/companyJoinForm 입력시 호출
     // 4_기업회원가입 화면
-    @GetMapping("/compJoinForm")
+    @GetMapping("/comp/joinForm")
     public String compJoinForm() {
-        return "comp/compJoinForm"; // view 파일 호출 comp/compJoinForm 파일 호출
+        return "comp/joinForm"; // view 파일 호출 comp/compJoinForm 파일 호출
     }
 
     @GetMapping("/comp/test")
@@ -21,53 +21,53 @@ public class CompController {
 
     @GetMapping("/comp/main")
     public String Main() {
-        return "comp/compMain";
+        return "comp/main";
     }
 
     @GetMapping("/comp/{compId}/noticeList")
     public String listView(@PathVariable Integer compId) {
         // request.setAttribute("compId", compId);
-        return "comp/compNoticeList";
+        return "comp/noticeList";
     }
 
     @GetMapping("/comp/notice/saveForm")
     public String saveForm() {
-        return "comp/compSaveForm";
+        return "comp/saveForm";
     }
 
     @GetMapping("/comp/notice/{noticeId}")
     public String detail(@PathVariable Integer noticeId) {
         // request.setAttribute("noticeId", noticeId);
-        return "comp/compDetail";
+        return "comp/detail";
     }
 
     @GetMapping("/comp/notice/{noticeId}/updateForm")
     public String updateForm(@PathVariable Integer noticeId) {
         // request.setAttribute("noticeId", noticeId);
-        return "comp/compUpdateForm";
+        return "comp/updateForm";
     }
 
     @GetMapping("/comp/notice/{noticeId}/resumeList")
     public String resumeList(@PathVariable Integer noticeId) {
         // request.setAttribute("noticeId", noticeId);
-        return "comp/compResumeList";
+        return "comp/resumeList";
     }
 
     @GetMapping("/comp/{compId}/bookmarkList")
     public String bookmarkList(@PathVariable Integer compId) {
         // request.setAttribute("compId", compId);
-        return "comp/compBookmarkList";
+        return "comp/bookmarkList";
     }
 
     @GetMapping("/comp/recommend")
     public String recommend() {
-        return "comp/compRecommend";
+        return "comp/recommend";
     }
 
     @GetMapping("/comp/resume/{resumeId}")
     public String resumeDetail(@PathVariable Integer resumeId) {
         // request.setAttribute("noticeId", noticeId);
-        return "comp/compResumeDetail";
+        return "comp/resumeDetail";
     }
 
 

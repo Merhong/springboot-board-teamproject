@@ -1,12 +1,10 @@
 package shop.mtcoding.boardproject.bookmark;
 
-import java.util.List;
-
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import shop.mtcoding.boardproject.posting.Posting;
-import shop.mtcoding.boardproject.user.User;
+
+import java.util.List;
 
 public class UserBookmarkResponse {
 

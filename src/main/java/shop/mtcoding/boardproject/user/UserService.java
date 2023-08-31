@@ -1,45 +1,38 @@
 package shop.mtcoding.boardproject.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject._core.vo.MyPath;
+import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
+import shop.mtcoding.boardproject.user.UserRequest.UpdateDTO;
+
+import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import shop.mtcoding.boardproject._core.error.ex.MyException;
-import shop.mtcoding.boardproject._core.vo.MyPath;
-import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
-import shop.mtcoding.boardproject.user.UserRequest.UpdateDTO;
-import shop.mtcoding.boardproject.user.UserRequest.JoinDTO;
-
 @Service
 public class UserService {
-    @Autowired 
+    @Autowired
     private UserRepository userRepository;
 
 
     @Transactional
     public void 회원가입(UserRequest.JoinDTO joinDTO) {
-        
-    User user = User.builder()
-            .email(joinDTO.getEmail())
-            .password(joinDTO.getPassword())
-            .username(joinDTO.getUsername())
-            .tel(joinDTO.getTel())
-            .build();
-     userRepository.save(user);
+
+        User user = User.builder()
+                .email(joinDTO.getEmail())
+                .password(joinDTO.getPassword())
+                .username(joinDTO.getUsername())
+                .tel(joinDTO.getTel())
+                .build();
+        userRepository.save(user);
 
 
     }
 
-   
 
     public User 로그인(LoginDTO loginDTO) {
         User user = userRepository.findByUserEmail(loginDTO.getEmail());
