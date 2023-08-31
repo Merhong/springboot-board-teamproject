@@ -17,7 +17,18 @@ public class ResumeController {
     @Autowired
     private HttpSession session;
 
+    //개인이력서 상세보기
+    @GetMapping("/user/{id}/resume")
+    public String userResumeDetail(){
+        return null;
+    }
 
+    // 14_개인이력서관리 화면
+    @GetMapping("/user/resumeManage")
+    public String userResumeManage() {
+        
+        return "/user/resumeManage";
+    }
 
     //이력서 등록 버튼 POST
     @PostMapping("/user/resumeSave")
@@ -33,6 +44,8 @@ public class ResumeController {
     public String userResumeForm() {
         return "user/resumeForm";
     }
+
+
 
 
 }

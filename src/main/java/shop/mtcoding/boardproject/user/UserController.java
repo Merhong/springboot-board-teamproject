@@ -45,11 +45,7 @@ public class UserController {
 
     // 14번 이력서 삭제 버튼 POST
 
-    // 14_개인이력서관리 화면
-    @GetMapping("/user/resumeManage")
-    public String userResumeManage() {
-        return "/user/resumeManage";
-    }
+
 
     // 13번 사진수정 버튼 POST
 

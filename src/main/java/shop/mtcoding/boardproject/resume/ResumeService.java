@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeDTO;
 import shop.mtcoding.boardproject.user.User;
-import shop.mtcoding.boardproject.user.UserRepository;
 
 @Service
 public class ResumeService {
@@ -28,6 +27,7 @@ public class ResumeService {
         resumeRepository.save(resume);
 
     }
+
 
 }
 
