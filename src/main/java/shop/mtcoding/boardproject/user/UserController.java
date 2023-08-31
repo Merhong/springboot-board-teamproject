@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import shop.mtcoding.boardproject.skill.UserSkill;
+
+import java.net.http.HttpRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -129,6 +132,12 @@ public class UserController {
     @GetMapping("/userJoinForm")
     public String userJoinForm() {
         return "user/userJoinForm"; // view 파일 호출 user/loginForm 파일 호출
+    }
+
+    @PostMapping("/join")
+    public String join(UserRequest.JoinDTO joinDTO) {
+        userService.회원가입(joinDTO);
+        return "user/loginForm";
     }
 
     // 2_회원가입유형선택 화면

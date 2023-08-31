@@ -39,9 +39,13 @@ public class Posting {
     private String desc;
 
     private String photo;
+
     private String region;
+
     private String homepage;
+
     private String position;
+
     private Timestamp expiryDate;
 
     @CreationTimestamp

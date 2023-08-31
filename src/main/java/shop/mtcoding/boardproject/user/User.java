@@ -46,6 +46,7 @@ public class User {
     private Timestamp createdAt;
 
     @Builder
+
     public User(Integer id, String username, String compname, String compRegister, String password, String email,
             String tel, String photo, String address, Date birth, Integer role) {
         this.id = id;
