@@ -23,9 +23,9 @@ import shop.mtcoding.boardproject.user.User;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(name = "bookmark_tb")
+@Table(name = "userBookmark_tb")
 @Entity
-public class Bookmark {
+public class UserBookmark {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class Bookmark {
     @ManyToOne(fetch = FetchType.LAZY)
     private Posting posting;
 
-    public Bookmark(User user, Posting posting) {
+    public UserBookmark(User user, Posting posting) {
         this.user = user;
         this.posting = posting;
     }

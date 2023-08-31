@@ -37,7 +37,7 @@ public class UserBookmarkController {
     public String userBookMarkForm(HttpSession session, HttpServletRequest request,
             UserBookmarkResponse.UserBookmarkDTO bookmarkDTO) {
         // User user = (User) session.getAttribute("sessioUser");
-        List<Posting> postingList = userBookmarkService.유저북마크(2);
+        List<Posting> postingList = userBookmarkService.유저북마크전체(2);
         request.setAttribute("postingList", postingList);
         System.out.println(request.getAttribute("postingList"));
         return "user/userBookMarkForm";

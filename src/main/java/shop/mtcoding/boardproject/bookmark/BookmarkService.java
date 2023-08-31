@@ -22,16 +22,16 @@ public class BookmarkService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<Posting> 유저북마크(Integer id) {
+    public List<Posting> 유저북마크전체(Integer id) {
         Optional<User> user = userRepository.findById(id);
 
         if (!user.isPresent()) {
             throw new RuntimeException();
         }
         System.out.println("테스트 user.get().getId()" + user.get().getId());
-        List<Bookmark> bookmarkList = userBookmarkRepository.findAllByUserId(user.get().getId());
+        List<UserBookmark> bookmarkList = userBookmarkRepository.findAllByUserId(user.get().getId());
         List<Posting> postingList = new ArrayList<Posting>();
-        for (Bookmark bookmark : bookmarkList) {
+        for (UserBookmark bookmark : bookmarkList) {
             postingList.add(bookmark.getPosting());
         }
 

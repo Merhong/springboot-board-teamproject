@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
 import shop.mtcoding.boardproject.posting.Posting;
 
 @Repository
-public interface BookmarkRepository extends JpaRepository<Bookmark, Integer> {
+public interface BookmarkRepository extends JpaRepository<UserBookmark, Integer> {
 
-    @Query(value = "select * from bookmark_tb where user_Id = :userId", nativeQuery = true)
-    List<Bookmark> findAllByUserId(@Param("userId") Integer userId);
+    @Query(value = "select * from user_bookmark_tb where user_Id = :userId", nativeQuery = true)
+    List<UserBookmark> findAllByUserId(@Param("userId") Integer userId);
 
 }

@@ -30,8 +30,8 @@ insert into user_skill_tb(user_id , java, db , html_and_css, python, javascript)
 insert into user_skill_tb(user_id , java, db , html_and_css, python, javascript) values(6,false,false,true,false,true);
 
 
-insert into bookmark_tb (user_id ,posting_id) values(2,2);
-insert into bookmark_tb (user_id ,posting_id) values(2,3);
+insert into user_bookmark_tb (user_id ,posting_id) values(2,2);
+insert into user_bookmark_tb (user_id ,posting_id) values(2,3);
 
 
 
