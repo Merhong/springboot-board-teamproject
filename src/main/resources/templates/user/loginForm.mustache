@@ -40,7 +40,7 @@
 
 
 <script>
-	let sessionUserEmail = "{{#sessionUserEmail}}{{.}}{{/sessionUserEmail}}"; // 세션에 저장된 사용자의 이메일 정보
+	let sessionUser = "{{#sessionUser}}{{.}}{{/sessionUser}}"; // 세션에 저장된 사용자의 이메일 정보
 
 	function changeLoginLinks() {
 		let joinLink = document.querySelector('a[href="/selectJoinForm"]');
@@ -51,7 +51,7 @@
 			joinLink.href = "/logout";
 
 			loginLink.textContent = "마이페이지";
-			loginLink.href = "/userMyPage";
+			loginLink.href = "/updateForm";
 		} else {
 			joinLink.textContent = "회원가입";
 			joinLink.href = "/selectJoinForm";

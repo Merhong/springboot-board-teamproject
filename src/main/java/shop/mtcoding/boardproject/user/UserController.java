@@ -5,10 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import shop.mtcoding.boardproject.skill.UserSkill;
 
 import java.net.http.HttpRequest;
-
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -21,13 +21,25 @@ public class UserController {
     private HttpSession session;
 
     // 17_개인기업추천 화면
-    @GetMapping("/userRecommendForm")
+    @GetMapping("/user/userRecommendForm")
     public String userRecommendForm() {
         return "user/userRecommendForm";
     }
 
+    // 16번 북마크 삭제 버튼 POST
+    @PostMapping("/userBookMarkDelete")
+    public String userBookMarkDelete() {
+        return "redirect:/";
+    }
+
+    // 16_개인북마크 화면
+    @GetMapping("/user/userBookMarkForm")
+    public String userBookMarkForm() {
+        return "user/userBookMarkForm";
+    }
+
     // 15_개인지원내역 화면
-    @GetMapping("/userApplyList")
+    @GetMapping("/user/userApplyList")
     public String userApplyList() {
         return "user/userApplyList";
     }
@@ -37,7 +49,7 @@ public class UserController {
     // 14번 이력서 삭제 버튼 POST
 
     // 14_개인이력서관리 화면
-    @GetMapping("/userResumeManage")
+    @GetMapping("/user/userResumeManage")
     public String userResumeManage() {
         return "user/userResumeManage";
     }
@@ -51,21 +63,30 @@ public class UserController {
     }
 
     // 13_개인이력서등록 화면
-    @GetMapping("/userResumeForm")
+    @GetMapping("/user/userResumeForm")
     public String userResumeForm() {
         return "user/userResumeForm";
     }
 
     // 12번 수정하기 버튼 POST
     @PostMapping("/userUpdate")
-    public String userUpdate() {
+    public String userUpdate(UserRequest.UpdateDTO updateDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        System.out.println("Session user: " + sessionUser);
+
+        User user = userService.회원수정(updateDTO, sessionUser.getId());
+        session.setAttribute("sessionUser", user);
+
         return "redirect:/";
     }
 
     // 12_마이페이지 화면
-    @GetMapping("/userMyPage")
-    public String userMyPage() {
-        return "user/userMyPage";
+    @GetMapping("/user/updateForm")
+    public String userMyPage(HttpServletRequest request) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        User user = userService.회원정보보기(sessionUser.getId());
+        request.setAttribute("user", user);
+        return "user/userUpdateForm";
     }
 
     // 11번 지원하기 버튼 POST
@@ -95,12 +116,8 @@ public class UserController {
     // 로그인
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
-        userService.로그인(loginDTO);
-        session.setAttribute("sessionUserEmail", loginDTO.getEmail());
-
-        UserSkill us = new UserSkill();
-
-        System.out.println(us.getClass().getFields());
+        User sessionUser = userService.로그인(loginDTO);
+        session.setAttribute("sessionUser", sessionUser);
         return "redirect:/";
     }
 

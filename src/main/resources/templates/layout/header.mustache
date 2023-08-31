@@ -98,8 +98,8 @@
         let joinLink = document.querySelector('a[href="/selectJoinForm"]');
         let loginLink = document.querySelector('a[href="/loginForm"]');
 
-        let sessionUserEmail =
-          "{{#sessionUserEmail}}{{.}}{{/sessionUserEmail}}";
+
+			let sessionUserEmail = "{{#sessionUser}}{{.}}{{/sessionUser}}";
 
         if (sessionUserEmail) {
           joinLink.textContent = "로그아웃";
