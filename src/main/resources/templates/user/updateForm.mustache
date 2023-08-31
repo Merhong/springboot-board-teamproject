@@ -1,7 +1,7 @@
 {{> layout/header}}
 
 <!--12번 개인마이페이지 화면-->
-<div class="d-flex">
+<div class="d-flex mb-3">
 
 	<div class="col-2"></div>
 
@@ -37,7 +37,7 @@
 
 					<div>
 						<div class="input-group col-6 mb-3">
-							<span class="input-group-text">이 름</span>
+							<span class="input-group-text"><span class="ms-2 me-4">이름</span></span>
 							<input type="text" class="form-control" value="{{user.username}}" name="username">
 						</div>
 						<div class=" input-group mb-3">
@@ -45,7 +45,7 @@
 							<input type="tel" class="form-control" value="{{user.tel}}" name="tel">
 						</div>
 						<div class="input-group mb-3">
-							<span class="input-group-text">주 소</span>
+							<span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
 							<input type="text" class="form-control" value="{{user.address}}" name="address">
 						</div>
 						<div class="input-group mb-3">
