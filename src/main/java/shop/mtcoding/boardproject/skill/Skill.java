@@ -10,18 +10,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(name = "skill_list_tb")
+@Table(name = "skill_tb")
 @Entity
-public class SkillList {
+public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String skillname;
 
     @Builder
-    public SkillList(String name) {
-        this.name = name;
+    public Skill(String skillname) {
+        this.skillname = skillname;
     }
 
 }

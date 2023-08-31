@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(name = "userBookmark_tb")
+@Table(name = "userbookmark_tb")
 @Entity
 public class UserBookmark {
 

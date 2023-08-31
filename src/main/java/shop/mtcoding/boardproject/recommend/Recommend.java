@@ -1,28 +1,31 @@
-package shop.mtcoding.boardproject.skill;
+package shop.mtcoding.boardproject.recommend;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import shop.mtcoding.boardproject.posting.Posting;
-import shop.mtcoding.boardproject.user.User;
+import shop.mtcoding.boardproject.resume.Resume;
 
 import javax.persistence.*;
 
+
+/* 기업추천, 인재추천 테이블 - 중간테이블 */
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(name = "userskill_tb")
+@Table(name = "recommend_tb")
 @Entity
-public class UserSkill {
+public class Recommend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    private Posting posting;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Skill skill;
+    private Resume resume;
+
+
 }

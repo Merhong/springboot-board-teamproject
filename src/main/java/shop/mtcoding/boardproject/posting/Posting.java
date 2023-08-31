@@ -45,8 +45,7 @@ public class Posting {
     private User user; // 1+N
 
     @Builder
-    public Posting(String title, String desc, String photo, String region, String homepage, String position,
-                   Timestamp expiryDate, Timestamp createdAt, User user) {
+    public Posting(String title, String desc, String photo, String region, String homepage, String position, Timestamp expiryDate, Timestamp createdAt, User user) {
         this.title = title;
         this.desc = desc;
         this.photo = photo;

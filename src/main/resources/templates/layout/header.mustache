@@ -95,7 +95,7 @@
 	<script>
 		function changeLoginLinks() {
 			let joinLink = document.querySelector('a[href="/selectJoinForm"]');
-			let loginLink = document.querySelector('a[href="/loginForm"]');
+			let loginLink = document.querySelector('a[href="user/loginForm"]');
 
 
 			let sessionUserEmail = "{{#sessionUser}}{{.}}{{/sessionUser}}";
@@ -111,7 +111,7 @@
 				joinLink.href = "/selectJoinForm";
 
 				loginLink.textContent = "로그인";
-				loginLink.href = "/loginForm";
+				loginLink.href = "user/loginForm";
 			}
 		}
 
