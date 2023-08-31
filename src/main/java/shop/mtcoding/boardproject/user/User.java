@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @NoArgsConstructor
@@ -30,11 +32,13 @@ public class User {
     private String password;
 
     private String tel;
+
+    @Column(nullable = true)
     private String photo;
 
     private String address;
 
-    private Timestamp birth;
+    private Date birth;
 
     private Integer role;
 
@@ -42,8 +46,9 @@ public class User {
     private Timestamp createdAt;
 
     @Builder
-    public User(String username, String compname, String compRegister, String password, String email, String tel,
-            String photo, String address, Timestamp birth, Integer role) {
+    public User(Integer id, String username, String compname, String compRegister, String password, String email,
+            String tel, String photo, String address, Date birth, Integer role) {
+        this.id = id;
         this.username = username;
         this.compname = compname;
         this.compRegister = compRegister;
