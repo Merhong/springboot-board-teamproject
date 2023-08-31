@@ -30,6 +30,10 @@ insert into user_skill_tb(user_id , java, db , html_and_css, python, javascript)
 insert into user_skill_tb(user_id , java, db , html_and_css, python, javascript) values(6,false,false,true,false,true);
 
 
+insert into user_bookmark_tb (user_id ,posting_id) values(2,2);
+insert into user_bookmark_tb (user_id ,posting_id) values(2,3);
+
+
 
 -- insert into user_tb(username, password, email, pic_url) values('cos', '1234', 'cos@nate.com', 'spongebob.jpeg');
 -- insert into user_tb(username, password, email, pic_url) values('asdf', 'asdf', 'asdf@nate.com', 'haejin.jpg');

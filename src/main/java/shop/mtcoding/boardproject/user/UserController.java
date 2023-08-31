@@ -5,6 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import shop.mtcoding.boardproject.skill.UserSkill;
+
+import java.net.http.HttpRequest;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -20,18 +24,6 @@ public class UserController {
     @GetMapping("/userRecommendForm")
     public String userRecommendForm() {
         return "user/userRecommendForm";
-    }
-
-    // 16번 북마크 삭제 버튼 POST
-    @PostMapping("/userBookMarkDelete")
-    public String userBookMarkDelete() {
-        return "redirect:/";
-    }
-
-    // 16_개인북마크 화면
-    @GetMapping("/userBookMarkForm")
-    public String userBookMarkForm() {
-        return "user/userBookMarkForm";
     }
 
     // 15_개인지원내역 화면
@@ -105,6 +97,10 @@ public class UserController {
     public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
         userService.로그인(loginDTO);
         session.setAttribute("sessionUserEmail", loginDTO.getEmail());
+
+        UserSkill us = new UserSkill();
+
+        System.out.println(us.getClass().getFields());
         return "redirect:/";
     }
 
@@ -126,7 +122,6 @@ public class UserController {
         userService.회원가입(joinDTO);
         return "user/loginForm";
     }
-
 
     // 2_회원가입유형선택 화면
     @GetMapping("/selectJoinForm")
