@@ -10,6 +10,7 @@ public class ResumeRequest {
     @Getter
     @Setter
     public static class ResumeDTO {
+        private Integer id;
         private String username;
         private String tel;
         private String address;

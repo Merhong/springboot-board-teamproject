@@ -22,8 +22,8 @@
       </div>
       <div class="col-9 ms-3">
          <h1 class="text-center mt-2">이력서 등록</h1>
-
-         <form action="/userResumeSave" method="post">
+		<!-- th:object="${resumeDTO}"는 템플릿에서 폼 데이터를 관리하기 위해 사용되며, @ModelAttribute("resumeDTO")에서 전달한 모델 객체를 참조-->
+         <form action="/user/resumeSave" method="post" >
             <div class="d-flex">
                <div class="m-2 col-4 d-flex flex-column align-items-center">
                   <img src="../../../images/basic.jpg" class="img-fluid rounded-circle"
@@ -62,14 +62,13 @@
             </div>
 
             <div class="input-group ms-2 mb-3">
-               <span class="input-group-text">경력사항</span>
+               <span class="input-group-text" center>경력사항</span>
                <input type="text" class="form-control" name="career">
             </div>
 
-            <div class="input-group ms-2 mb-3">
-               <span class="input-group-text">보유기술</span>
-               <input type="text" class="form-control">
-			   <div class="d-flex flex-wrap">
+            <div class="card input-group ms-2 mb-3">
+				<span class="input-group-text" >보유 기술</span>
+				<div class="d-flex flex-wrap">
 					<div class="form-check d-inline-block ms-3 me-2">
 						<input class="form-check-input" type="checkbox" id="">
 						<label class="form-check-label">Java</label>

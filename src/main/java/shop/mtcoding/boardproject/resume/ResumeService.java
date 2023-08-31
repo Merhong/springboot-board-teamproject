@@ -15,9 +15,6 @@ public class ResumeService {
     @Autowired
     private ResumeRepository resumeRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Transactional
     public void 이력서등록(ResumeDTO resumeDTO, Integer id) {
         Resume resume = Resume.builder()
