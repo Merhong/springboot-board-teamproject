@@ -1,26 +1,19 @@
-package shop.mtcoding.boardproject.board;
+package shop.mtcoding.boardproject.master;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import shop.mtcoding.boardproject.reply.Reply;
 import shop.mtcoding.boardproject.user.User;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @Setter
 @Getter
 @Table(name = "resume_tb")
 @Entity // ddl-auto가 create
-public class Board {
+public class Master {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
