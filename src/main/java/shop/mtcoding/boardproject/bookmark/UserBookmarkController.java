@@ -26,12 +26,6 @@ public class UserBookmarkController {
     @Autowired
     private HttpSession session;
 
-    // 16번 북마크 삭제 버튼 POST
-    @PostMapping("/userBookMarkDelete")
-    public String userBookMarkDelete() {
-        return "redirect:/";
-    }
-
     // 16_개인북마크 화면
     @GetMapping("/userBookMarkForm")
     public String userBookMarkForm(HttpSession session, HttpServletRequest request,
