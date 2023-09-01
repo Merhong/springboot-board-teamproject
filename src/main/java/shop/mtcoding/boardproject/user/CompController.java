@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.skill.PostingSkill;
 
@@ -58,7 +60,8 @@ public class CompController {
         request.setAttribute("posting", posting);
         return "comp/detail";
     }
-    
+
+    // TODO : 가져온걸 화면에 뿌려야하는데 자바에서 하니까 너무 노가다임. 현재 기술까지만 되어있음
     @GetMapping("/comp/posting/{postingId}/updateForm")
     public String updateForm(@PathVariable Integer postingId, HttpServletRequest request) {
         Posting posting = compService.공고찾기(postingId);
@@ -131,8 +134,21 @@ public class CompController {
     }
 
     @PostMapping("/comp/main/{userId}/update")
-    public String compUpdate(@PathVariable Integer userId, CompRequest.compUpdateDTO DTO) {
+    public @ResponseBody String compUpdate(@PathVariable Integer userId, CompRequest.compUpdateDTO DTO) {
         compService.기업정보수정(userId, DTO);
-        return "redirect:/comp/main";
+        return Script.href("/comp/main","정보 수정 완료");
     }
+
+    @PostMapping("/comp/posting/{postingId}/delete")
+    public @ResponseBody String delete(@PathVariable Integer postingId){
+        int userId = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
+        compService.공고삭제(postingId);
+        return Script.href("/comp/"+userId+"/postingList","삭제 완료");
+    }
+
+
+
+
+
+
 }

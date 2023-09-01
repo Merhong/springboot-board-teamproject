@@ -191,7 +191,8 @@
 			<div class="col-lg-3 col-md-4 col-sm-6">
 				<div class="border border-info m-2 p-2">
 					<h4 class="text-center fw-bold">{{user.compname}}</h4>
-					<a href="/posting/{{id}}" class="text-black text-decoration-none"><img src="../../../images/{{user.compname}}_logo.png" class="img-fluid d-block m-auto" style="height: 120px;">
+					{{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto" style="height: 120px;">{{/user.photo}}
+					{{^user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img src="../../../images/no_logo.png" class="img-fluid d-block m-auto" style="height: 120px;">{{/user.photo}}
 						<h5 class="mt-1 fw-bold">{{title}}</h5>
 						<div class="mb-1 fst-italic">{{position}}</div>
 						<div class="mb-1">

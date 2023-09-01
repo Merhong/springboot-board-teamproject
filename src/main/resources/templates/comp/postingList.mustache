@@ -30,9 +30,12 @@
 
 				<h3>{{title}}</h3>
 
-				<div class="align-self-center col-auto ms-1">
-					<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning">수정하기</a>
-					<a href="/comp/posting/{{id}}/resumeList" class="btn btn-success">지원자 보기</a>
+				<div class="d-flex flex-column">
+					<a href="/comp/posting/{{id}}/resumeList" class="btn btn-success btn-sm mb-1">지원자 보기</a>
+					<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning btn-sm mb-1">수정하기</a>
+					<form action="/comp/posting/{{id}}/delete" method="post">
+						<input class="btn btn-danger btn-sm w-100" type="submit" value="삭제하기">
+					</form>
 				</div>
 			</div>
 			{{/postingList}}

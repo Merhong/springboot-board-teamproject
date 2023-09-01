@@ -4,12 +4,12 @@
 <!-- 18번 -->
 
 
-		<form action="/comp/main/{{sessionComp.userId}}/update" method="post" onsubmit="" class="col-auto container" id="selectform">
+		<form action="/comp/main/{{sessionComp.userId}}/update" method="post" onsubmit="" class="col-auto container" id="selectform" enctype="multipart/form-data">
 			<h1 class="text-center mt-2">기업 페이지</h1>
 
 			<div class="d-flex">
-				<div class="m-1 col-4 d-flex flex-column align-items-center overflow-hidden" style="width:170px; height:280px;">
-					<img src="../../../images/{{sessionComp.compname}}_logo.png" class=""/>
+				<div class="m-1 col-4 d-flex flex-column img-fluid d-block m-auto" style="width:180px; height:280px;">
+					<img src="../../../images/{{#sessionComp.photo}}{{sessionComp.photo}}{{/sessionComp.photo}}" class=""/>
 				</div>
 
 				<div class="col-8 p-2">
@@ -23,16 +23,20 @@
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">주소</span>
-							<textarea class="form-control" rows="2">{{#sessionComp.address}}{{sessionComp.address}}{{/sessionComp.address}}</textarea>
+							<textarea class="form-control" rows="2" name="address">{{#sessionComp.address}}{{sessionComp.address}}{{/sessionComp.address}}</textarea>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control" value="{{sessionComp.tel}}">
+							<input type="text" class="form-control" value="{{sessionComp.tel}}" name="tel">
 						</div>
-						<div class="input-group mb-2">
+						<div class="input-group mb-3">
 							<span class="input-group-text">홈페이지</span>
-							<input type="text" class="form-control" value="{{sessionComp.homepage}}">
+							<input type="text" class="form-control" value="{{sessionComp.homepage}}" name="homepage">
 						</div>
+						<div class="mb-2">
+							<input type="file" class="form-control" name="photo">
+						</div>
+						
 				</div>
 
 			</div>
