@@ -9,29 +9,29 @@
 
 			<div class="d-flex">
 				<div class="m-1 col-4 d-flex flex-column align-items-center overflow-hidden" style="width:170px; height:280px;">
-					<img src="../../../images/kakao_logo.png" class=""/>
+					<img src="../../../images/{{sessionComp.compname}}_logo.png" class=""/>
 				</div>
 
 				<div class="col-8 p-2">
 						<div class="input-group mb-3">
 							<span class="input-group-text">회사명</span>
-							<input type="text" class="form-control" value="카카오" disabled>
+							<input type="text" class="form-control" value="{{sessionComp.compname}}" disabled>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">사업자번호</span>
-							<input type="text" class="form-control" value="1234" disabled>
+							<input type="text" class="form-control" value="{{sessionComp.compRegister}}" disabled>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">주소</span>
-							<textarea class="form-control" rows="2">서울특별시 송파구 올림픽로 300 롯데월드타워 35층</textarea>
+							<textarea class="form-control" rows="2">{{#sessionComp.address}}{{sessionComp.address}}{{/sessionComp.address}}</textarea>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control" value="051-123-4567">
+							<input type="text" class="form-control" value="{{sessionComp.tel}}">
 						</div>
 						<div class="input-group mb-2">
 							<span class="input-group-text">홈페이지</span>
-							<input type="text" class="form-control" value="http://localhost:8080">
+							<input type="text" class="form-control" value="asd">
 						</div>
 				</div>
 

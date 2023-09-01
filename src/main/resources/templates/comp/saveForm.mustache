@@ -5,8 +5,8 @@
 
 
 		
-		<div class="col-8 container">
-			<h1 class="text-center mt-2">공고등록</h1>
+		<form action="/comp/posting/save" method="post" onsubmit="" class="col-8 container" id="selectform">
+			<h1 class="text-center mt-2">공고 등록</h1>
 
 			<!--
 			<div class="d-flex">
@@ -41,12 +41,12 @@
 
 			<div class="input-group mb-3 ms-1">
 				<span class="input-group-text">공고명</span>
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" name="title">
 			</div>
 
 			<div class="input-group mb-3 ms-1">
 				<span class="input-group-text">공고내용</span>
-				<textarea class="form-control" rows="10"></textarea>
+				<textarea class="form-control" rows="10" name="desc"></textarea>
 			</div>
 
 
@@ -64,40 +64,49 @@
 				<hr class="m-1">
 				<div class="d-flex flex-wrap">
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">백엔드</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="position" value="백엔드">
+						백엔드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">프런트엔드</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="position" value="프론트엔드">
+						프런트엔드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">풀스택</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="position" value="풀스택">
+						풀스택</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">안드로이드</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="position" value="안드로이드">
+						안드로이드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">IOS</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="position" value="IOS">
+						IOS</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">임베디드</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="position" value="임베디드">
+						임베디드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">빅데이터</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="position" value="빅데이터">
+						빅데이터</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">서버</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="position" value="서버">
+						서버</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">머신러닝</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="position" value="머신러닝">
+						머신러닝</label>
 					</div>
 				</div>
 			</div>
@@ -115,36 +124,44 @@
 				<hr class="m-1">
 				<div class="d-flex flex-wrap">
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">Java</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="Java">
+						Java</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">DB</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="DB">
+						DB</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">HTML / CSS</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="HTML/CSS">
+						HTML/CSS</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">Python</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="Python">
+						Python</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">JavaScript</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="JavaScript">
+						JavaScript</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">Git</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="Git">
+						Git</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">Spring Framework</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="Spring">
+						Spring Framework</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">C</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="C">
+						C</label>
 					</div>
 				</div>
 			</div>
@@ -155,55 +172,67 @@
 
 			<div class="ms-1 card mb-3">
 				<h4 class="mt-2 mb-0 text-center">연차</h4>
-				<div class="form-check d-inline-block ms-3 me-2">
-					<input class="form-check-input" type="radio" id="" name="radiobuttonyear" checked>
-					<label class="form-check-label">제한 없음</label>
-				</div>
 				<hr class="m-1">
 				<div class="d-flex flex-wrap">
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">0-1년</label>
+						<label class="form-check-label">경력무관
+							<input class="form-check-input" type="radio" id="" name="career" checked value="경력무관">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">1년</label>
+						<label class="form-check-label">0-1년
+							<input class="form-check-input" type="radio" id="" name="career" value="0-1년">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">2년</label>
+						<label class="form-check-label">1년
+							<input class="form-check-input" type="radio" id="" name="career" value="1년">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">3년</label>
+						<label class="form-check-label">2년
+							<input class="form-check-input" type="radio" id="" name="career" value="2년">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">4년</label>
+						<label class="form-check-label">3년
+							<input class="form-check-input" type="radio" id="" name="career" value="3년">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">5년</label>
+						<label class="form-check-label">4년
+							<input class="form-check-input" type="radio" id="" name="career" value="4년">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">6년</label>
+						<label class="form-check-label">5년
+							<input class="form-check-input" type="radio" id="" name="career" value="5년">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">7년</label>
+						<label class="form-check-label">6년
+							<input class="form-check-input" type="radio" id="" name="career" value="6년">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">8년</label>
+						<label class="form-check-label">7년
+							<input class="form-check-input" type="radio" id="" name="career" value="7년">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">9년</label>
+						<label class="form-check-label">8년
+							<input class="form-check-input" type="radio" id="" name="career" value="8년">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonyear">
-						<label class="form-check-label">10년 이상</label>
+						<label class="form-check-label">9년
+							<input class="form-check-input" type="radio" id="" name="career" value="9년">
+						</label>
+					</div>
+					<div class="form-check d-inline-block ms-3 me-2">
+						<label class="form-check-label">10년 이상
+							<input class="form-check-input" type="radio" id="" name="career" value="10년 이상">
+						</label>
 					</div>
 				</div>
 			</div>
@@ -214,57 +243,90 @@
 
 			<div class="ms-1 card mb-3">
 				<h4 class="mt-2 mb-0 text-center">학력</h4>
-				<div class="form-check d-inline-block ms-3 me-2">
-					<input class="form-check-input" type="radio" id="" name="radiobuttonschool" checked>
-					<label class="form-check-label">제한 없음</label>
-				</div>
 				<hr class="m-1">
 				<div class="d-flex flex-wrap">
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonschool">
-						<label class="form-check-label">중학교 졸업</label>
+						<label class="form-check-label">학력무관
+							<input class="form-check-input" type="radio" id="" name="education" checked value="학력무관">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonschool">
-						<label class="form-check-label">고등학교 졸업</label>
+						<label class="form-check-label">고등학교 졸업
+							<input class="form-check-input" type="radio" id="" name="education" value="고교 졸업">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonschool">
-						<label class="form-check-label">대학 졸업(2,3년제)</label>
+						<label class="form-check-label">대학 졸업(2, 3년제)
+							<input class="form-check-input" type="radio" id="" name="education" value="대학 졸업">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonschool">
-						<label class="form-check-label">대학교 졸업(4년제)</label>
+						<label class="form-check-label">대학교 졸업(4년제)
+							<input class="form-check-input" type="radio" id="" name="education" value="대학교 졸업">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonschool">
-						<label class="form-check-label">대학원 석사 졸업</label>
+						<label class="form-check-label">대학원 석사 졸업
+							<input class="form-check-input" type="radio" id="" name="education" value="석사 졸업">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonschool">
-						<label class="form-check-label">대학원 박사 졸업</label>
+						<label class="form-check-label">대학원 박사 졸업
+							<input class="form-check-input" type="radio" id="" name="education" value="박사 졸업">
+						</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobuttonschool">
-						<label class="form-check-label">박사 졸업 이상</label>
+						<label class="form-check-label">박사 졸업 이상
+							<input class="form-check-input" type="radio" id="" name="education" value="박사 이상">
+						</label>
 					</div>
 				</div>
 			</div>
 
 
 
+			<div class="ms-1 card mb-3">
+				<h4 class="mt-2 mb-0 text-center">기간</h4>
+				<hr class="m-1">
+				<div class="m-2 align-self-center">
+					<label for="date">공고 종료일을 선택하세요 :
+						<input type="date" id="" min="2023-09-01" value="2025-01-01" name="expiryDate">
+					  </label>
 
-
-
-
-
-
-			
-			<div>
-				<button type="button" class="mb-3 ms-1 w-100 btn btn-success">공고 등록하기</button>
+				</div>
 			</div>
 
-		</div>
+
+			<div class="ms-1 card mb-3">
+				<h4 class="mt-2 mb-0 text-center">지역</h4>
+				<hr class="m-1">
+
+				<div class="d-flex justify-content-center m-2">
+
+					<select class="me-2" name="region" form="selectform">
+						<option value="서울">서울/인천/경기</option> 
+						<option value="부산">부산/울산/경남</option> 
+						<option value="대구">대구/경북</option> 
+					  </select>
+
+					  <select class=""> 
+						<option value="강서구">강서구</option> 
+						<option value="금정구">금정구</option> 
+						<option value="남구">남구</option> 
+						<option value="동구">동구</option> 
+						<option value="동래구">동래구</option> 
+					  </select>
+
+				</div>
+
+			</div>
+			
+
+			<div class="d-flex">
+				<input id="button" class="mb-3 ms-1 w-100 btn btn-success" type="submit" value="공고 등록하기" onclick="">
+			</div>
+
+		</form>
 
 
 

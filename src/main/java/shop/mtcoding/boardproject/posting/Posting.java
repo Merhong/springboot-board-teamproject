@@ -6,10 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+
+import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.user.User;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Setter
@@ -33,19 +37,30 @@ public class Posting {
 
     private String homepage;
 
+    @Column(nullable = false)
     private String position;
+
+    private String career;
+    
+    private String education;
 
     private Timestamp expiryDate;
 
-    @CreationTimestamp
-    private Timestamp createdAt;
+    @OneToMany(mappedBy = "posting", fetch = FetchType.LAZY)
+    private List<PostingSkill> postingSkill = new ArrayList<>();
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user; // 1+N
 
+    @CreationTimestamp
+    private Timestamp createdAt;
+
+    
     @Builder
-    public Posting(String title, String desc, String photo, String region, String homepage, String position, Timestamp expiryDate, Timestamp createdAt, User user) {
+    public Posting(Integer id, String title, String desc, String photo, String region, String homepage, String position,
+            Timestamp expiryDate, List<PostingSkill> postingSkill, User user, Timestamp createdAt) {
+        this.id = id;
         this.title = title;
         this.desc = desc;
         this.photo = photo;
@@ -53,7 +68,12 @@ public class Posting {
         this.homepage = homepage;
         this.position = position;
         this.expiryDate = expiryDate;
+        this.postingSkill = postingSkill;
         this.user = user;
+        this.createdAt = createdAt;
     }
+
+
+    
 
 }
