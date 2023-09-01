@@ -29,12 +29,6 @@ public class UserController {
         return "redirect:/";
     }
 
-    // 16_개인북마크 화면
-    @GetMapping("/user/bookMarkForm")
-    public String userBookMarkForm() {
-        return "user/bookMarkForm";
-    }
-
     // 14번 이력서 수정 버튼 POST
 
     // 14번 이력서 삭제 버튼 POST

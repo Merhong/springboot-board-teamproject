@@ -24,7 +24,8 @@ public class ApplyController {
     @GetMapping("/user/applyList")
 
     public String userApplyList(HttpServletRequest request) {
-        List<Apply> applyList = applyRepository.findApplyByUserId(2);
+        User user = (User) session.getAttribute("sessionUser");
+        List<Apply> applyList = applyRepository.findApplyByUserId(user.getId());
         request.setAttribute("applyList", applyList);
 
         return "user/applyList";

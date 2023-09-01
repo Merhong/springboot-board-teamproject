@@ -97,12 +97,6 @@ public class CompController {
         return "comp/resumeList";
     }
 
-    @GetMapping("/comp/{compId}/bookmarkList")
-    public String bookmarkList(@PathVariable Integer compId) {
-        // request.setAttribute("compId", compId);
-        return "comp/bookmarkList";
-    }
-
     @GetMapping("/comp/recommend")
     public String recommend() {
         return "comp/recommend";
@@ -134,5 +128,4 @@ public class CompController {
         compService.공고수정(postingId, updateDTO);
         return "redirect:/posting/"+postingId;
     }
-
 }
