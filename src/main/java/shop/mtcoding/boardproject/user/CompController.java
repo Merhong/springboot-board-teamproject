@@ -53,12 +53,6 @@ public class CompController {
         return "comp/resumeList";
     }
 
-    @GetMapping("/comp/{compId}/bookmarkList")
-    public String bookmarkList(@PathVariable Integer compId) {
-        // request.setAttribute("compId", compId);
-        return "comp/bookmarkList";
-    }
-
     @GetMapping("/comp/recommend")
     public String recommend() {
         return "comp/recommend";
@@ -69,6 +63,5 @@ public class CompController {
         // request.setAttribute("noticeId", noticeId);
         return "comp/resumeDetail";
     }
-
 
 }

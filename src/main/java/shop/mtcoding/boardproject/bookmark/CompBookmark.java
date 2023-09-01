@@ -3,8 +3,8 @@ package shop.mtcoding.boardproject.bookmark;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
-import shop.mtcoding.boardproject.user.User;
 
 import javax.persistence.*;
 
@@ -20,14 +20,13 @@ public class CompBookmark {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    private Posting posting;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Resume resume;
 
-    public CompBookmark(Integer id, User user, Resume resume) {
-        this.id = id;
-        this.user = user;
+    public CompBookmark(Posting posting, Resume resume) {
+        this.posting = posting;
         this.resume = resume;
     }
 
