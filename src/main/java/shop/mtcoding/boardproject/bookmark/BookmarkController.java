@@ -5,12 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import shop.mtcoding.boardproject.bookmark.BookmarkResponse.CompBookmarkDTO;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.user.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,11 +37,18 @@ public class BookmarkController {
 
     // 기업북마크 화면
     @GetMapping("/comp/{compId}/bookmarkList")
-    public String bookmarkList(@PathVariable Integer compId, HttpServletRequest request) {
+    public String bookmarkList(@PathVariable Integer compId, HttpServletRequest request,
+            BookmarkResponse.CompBookmarkDTO compBookmarkDTO) {
 
-        // User user = (User) session.getAttribute("sessionUser");
-        // List<Resume> resumeList = BookmarkService.기업북마크전체(user.getId());
-        // request.setAttribute("resumeList", resumeList);
+        User user = (User) session.getAttribute("sessionUser");
+        List<CompBookmark> compBookmarkList = BookmarkService.기업북마크전체(5);
+        List<CompBookmarkDTO> compBookmarkDTOList = new ArrayList<CompBookmarkDTO>();
+        for (CompBookmark bookmark : compBookmarkList) {
+            compBookmarkDTO.setResume(bookmark.getResume());
+            compBookmarkDTO.setPosting(bookmark.getPosting());
+            compBookmarkDTOList.add(compBookmarkDTO);
+        }
+        request.setAttribute("compBookmarkDTOList", compBookmarkDTOList);
         return "comp/bookmarkList";
     }
 

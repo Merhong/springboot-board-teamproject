@@ -42,8 +42,6 @@ insert into postingSkill_tb(skill, posting_id) values('Python', 5);
 insert into postingSkill_tb(skill, posting_id) values('JavaScript', 5);
 
 
-
-
 insert into apply_tb( resume_id, posting_id, statement) values(1, 2, '대기');
 insert into apply_tb( resume_id, posting_id, statement) values(4, 3, '합격');
 insert into apply_tb( resume_id, posting_id, statement) values(2, 1, '대기');
@@ -54,6 +52,10 @@ insert into userbookmark_tb ( user_id, posting_id ) values(2, 2);
 insert into userbookmark_tb ( user_id, posting_id ) values(2, 3);
 insert into userbookmark_tb ( user_id, posting_id ) values(3, 1);
 insert into userbookmark_tb ( user_id, posting_id ) values(5, 3);
+
+
+insert into compbookmark_tb ( resume_id, posting_id ) values(2, 1);
+insert into compbookmark_tb ( resume_id, posting_id ) values(1, 2);
 
 
 

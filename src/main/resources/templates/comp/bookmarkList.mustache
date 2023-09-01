@@ -3,69 +3,28 @@
 
 <!-- 23번 -->
 
+<div class="col-9 ms-3">
+  <h1 class="text-center mt-2">북마크된 이력서</h1>
 
-		<div class="col-9 ms-3">
-			<h1 class="text-center mt-2">이력서 북마크</h1>
-
-
-
-			
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<div class="">
-					<div>이력서 A</div>
-				</div>
-				<div class="">
-					<button type="button" class="btn btn-warning">이력서 보기</button>
-					<button type="button" class="btn btn-success">연락</button>
-					<button type="button" class="btn btn-danger">삭제</button>
-				</div>
-			</div>
-
-
-			
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<div class="">
-					<div>이력서 B</div>
-				</div>
-				<div class="">
-					<button type="button" class="btn btn-warning">이력서 보기</button>
-					<button type="button" class="btn btn-success">연락</button>
-					<button type="button" class="btn btn-danger">삭제</button>
-				</div>
-			</div>
-
-
-			
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<div class="">
-					<div>이력서 C</div>
-				</div>
-				<div class="">
-					<button type="button" class="btn btn-warning">이력서 보기</button>
-					<button type="button" class="btn btn-success">연락</button>
-					<button type="button" class="btn btn-danger">삭제</button>
-				</div>
-			</div>
-
-
-			
-			
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<div class="">
-					<div>이력서 D</div>
-				</div>
-				<div class="">
-					<button type="button" class="btn btn-warning">이력서 보기</button>
-					<button type="button" class="btn btn-success">연락</button>
-					<button type="button" class="btn btn-danger">삭제</button>
-				</div>
-			</div>
-
-
-		</div>
-
-
-
+  {{#compBookmarkDTOList}}
+  <div class="d-flex border border-info m-3 p-2 justify-content-between">
+    <div class="">
+      <div
+        class="d-flex border border-info justify-content-center"
+        style="width: auto"
+      >
+        <div>{{ posting.title }}</div>
+      </div>
+      <div>{{ resume.title }}</div>
+    </div>
+    <div class="">
+      <button type="button" class="btn btn-warning">이력서 보기</button>
+      <button type="button" class="btn btn-success">연락</button>
+      <button type="button" class="btn btn-danger">삭제</button>
+    </div>
+  </div>
+  {{/compBookmarkDTOList}}
+</div>
 
 {{> layout/comp2footer}}
 {{> layout/footer}}
