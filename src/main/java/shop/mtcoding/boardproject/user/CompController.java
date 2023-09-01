@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import shop.mtcoding.boardproject.apply.Apply;
+import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.skill.PostingSkill;
 
@@ -17,6 +20,9 @@ public class CompController {
 
     @Autowired
     private CompService compService;
+
+    @Autowired
+    private ApplyService applyService;
 
     @Autowired
     private HttpSession session;
@@ -136,11 +142,15 @@ public class CompController {
         return "comp/updateForm";
     }
 
-
     @GetMapping("/comp/posting/{postingId}/resumeList")
     public String resumeList(@PathVariable Integer postingId, HttpServletRequest request) {
-        Posting posting = compService.공고찾기(postingId);
+        User user = (User) session.getAttribute("sessionUser");
+
+        List<Apply> applyList = applyService.공고지원현황(postingId);
+        // Posting posting = compService.공고찾기(postingId);
+        Posting posting = applyList.get(0).getPosting();
         request.setAttribute("posting", posting);
+        request.setAttribute("applyList", applyList);
         return "comp/resumeList";
     }
 
