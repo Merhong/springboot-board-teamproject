@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,6 +62,16 @@ public class CompController {
         request.setAttribute("posting", posting);
         return "comp/detail";
     }
+
+
+    // @ResponseBody
+    // @GetMapping("/comp/posting/check")
+    // public ResponseEntity<String> check(int postingId){
+    //     Posting posting = compService.공고찾기(postingId);
+    //     if (posting != null) {
+    //         return posting;
+    //     }
+    // }
 
     // TODO : 가져온걸 화면에 뿌려야하는데 자바에서 하니까 너무 노가다임. 현재 기술까지만 되어있음
     @GetMapping("/comp/posting/{postingId}/updateForm")
@@ -149,6 +161,12 @@ public class CompController {
 
 
 
+
+    // @GetMapping("/comp/test2")
+    // public String compTest2() {
+    //     compService.테스트2("Java");
+    //     return "comp/main";
+    // }
 
 
 }

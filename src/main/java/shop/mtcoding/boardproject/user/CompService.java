@@ -212,6 +212,10 @@ public class CompService {
         }
     }
 
+    // public void 테스트2(String string) {
+    //     PostingSkill.findBySkill
+    // }
+
 
 
 
