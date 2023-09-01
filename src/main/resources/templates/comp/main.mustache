@@ -4,7 +4,7 @@
 <!-- 18번 -->
 
 
-		<div class="col-auto container">
+		<form action="/comp/main/{{sessionComp.userId}}/update" method="post" onsubmit="" class="col-auto container" id="selectform">
 			<h1 class="text-center mt-2">기업 페이지</h1>
 
 			<div class="d-flex">
@@ -31,7 +31,7 @@
 						</div>
 						<div class="input-group mb-2">
 							<span class="input-group-text">홈페이지</span>
-							<input type="text" class="form-control" value="asd">
+							<input type="text" class="form-control" value="{{sessionComp.homepage}}">
 						</div>
 				</div>
 
@@ -46,10 +46,10 @@
 			-->
 
 			<div>
-				<button type="button" class="mb-3 ms-1 w-100 btn btn-success">기업 정보 수정</button>
+				<input id="button" class="mb-3 ms-1 w-100 btn btn-success" type="submit" value="기업 정보 수정" onclick="">
 			</div>
 
-		</div>
+		</form>
 
 
 

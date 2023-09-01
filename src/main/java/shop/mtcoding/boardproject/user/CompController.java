@@ -121,11 +121,18 @@ public class CompController {
         int id = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
         return "redirect:/comp/"+id+"/postingList";
     }
-
+    
     @PostMapping("/comp/posting/{postingId}/update")
     public String postingUpdate(@PathVariable Integer postingId, CompRequest.UpdateDTO updateDTO) {
         // System.out.println("테스트updateDTO:"+updateDTO);
         compService.공고수정(postingId, updateDTO);
-        return "redirect:/posting/"+postingId;
+        int id = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
+        return "redirect:/comp/"+id+"/postingList";
+    }
+
+    @PostMapping("/comp/main/{userId}/update")
+    public String compUpdate(@PathVariable Integer userId, CompRequest.compUpdateDTO DTO) {
+        compService.기업정보수정(userId, DTO);
+        return "redirect:/comp/main";
     }
 }

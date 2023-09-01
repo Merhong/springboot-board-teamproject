@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.boardproject.user.CompRequest.JoinDTO;
 import shop.mtcoding.boardproject.user.CompRequest.SaveDTO;
 import shop.mtcoding.boardproject.user.CompRequest.UpdateDTO;
+import shop.mtcoding.boardproject.user.CompRequest.compUpdateDTO;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
@@ -151,10 +152,16 @@ public class CompService {
                 postingSkillRepository.save(skill);
             }
 
-
         } else{
             throw new MyException(postingId + "공고없음");
         }
+    }
+
+
+    public void 기업정보수정(Integer userId, compUpdateDTO dTO) {
+
+
+
     }
 
 }
