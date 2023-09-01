@@ -35,17 +35,9 @@ public class UserController {
         return "user/bookMarkForm";
     }
 
-    // 15_개인지원내역 화면
-    @GetMapping("/user/applyList")
-    public String userApplyList() {
-        return "user/applyList";
-    }
-
     // 14번 이력서 수정 버튼 POST
 
     // 14번 이력서 삭제 버튼 POST
-
-
 
     // 13번 사진수정 버튼 POST
 

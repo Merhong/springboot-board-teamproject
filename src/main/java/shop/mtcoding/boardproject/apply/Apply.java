@@ -1,16 +1,20 @@
 package shop.mtcoding.boardproject.apply;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
+import java.sql.Timestamp;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.boardproject.posting.Posting;
-import shop.mtcoding.boardproject.user.User;
-
-import javax.persistence.*;
-import java.sql.Timestamp;
+import shop.mtcoding.boardproject.resume.Resume;
 
 @NoArgsConstructor
 @Setter
@@ -18,34 +22,25 @@ import java.sql.Timestamp;
 @Table(name = "apply_tb")
 @Entity
 public class Apply {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // 직책
-    private String position;
-
-    // 상태
-    private String statement;
-
-    @CreationTimestamp
-    private Timestamp createdAt;
-
-    // 유저 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    private Resume resume;
 
-    // 공고 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
     private Posting posting;
 
-    @Builder
-    public Apply(Integer id, String position, String statement, Timestamp createdAt, User user, Posting posting) {
-        this.id = id;
-        this.position = position;
-        this.statement = statement;
-        this.createdAt = createdAt;
-        this.user = user;
+    private String statement;
+
+    private Timestamp createdAt;
+
+    public Apply(Resume resume, Posting posting, String statement) {
+        this.resume = resume;
         this.posting = posting;
+        this.statement = statement;
     }
+
 }

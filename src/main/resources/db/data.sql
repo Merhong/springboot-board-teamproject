@@ -43,4 +43,10 @@ insert into postingSkill_tb(skill, posting_id) values('JavaScript', 5);
 
 
 
+
+insert into apply_tb( resume_id, posting_id, statement) values(1, 2, '대기');
+insert into apply_tb( resume_id, posting_id, statement) values(4, 3, '합격');
+insert into apply_tb( resume_id, posting_id, statement) values(2, 1, '대기');
+insert into apply_tb( resume_id, posting_id, statement) values(5, 3, '불합');
+
 -- insert into userskill_tb(user_id , java, db , html_and_css, python, javascript) values(2,true,true,true,true,true);
