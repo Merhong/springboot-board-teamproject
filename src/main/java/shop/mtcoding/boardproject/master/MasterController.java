@@ -26,11 +26,11 @@ public class MasterController {
 
     @GetMapping("/help")
     public String qna() {
-        return "/board/qna";
+        return "/master/qna";
     }
 
     @GetMapping("/questionForm")
     public String question() {
-        return "/board/questionForm";
+        return "/master/questionForm";
     }
 }
