@@ -1,9 +1,9 @@
 package shop.mtcoding.boardproject.resume;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.sql.Date;
 
 public class ResumeRequest {
 

@@ -24,26 +24,3 @@ insert into posting_tb( user_id, title, desc, region, homepage, position) values
 insert into posting_tb( user_id, title, desc, region, homepage, position) values(4, '신입구함', '경력 무관', '서울','lg.com', '프론트엔드');
 
 -- insert into userskill_tb(user_id , java, db , html_and_css, python, javascript) values(2,true,true,true,true,true);
--- insert into userskill_tb(user_id , java, db , html_and_css, python, javascript) values(3,false,true,false,true,false);
--- insert into userskill_tb(user_id , java, db , html_and_css, python, javascript) values(4,true,true,false,false,false);
--- insert into userskill_tb(user_id , java, db , html_and_css, python, javascript) values(5,false,false,true,false,true);
--- insert into userskill_tb(user_id , java, db , html_and_css, python, javascript) values(6,false,false,true,false,true);
-
-
--- insert into user_bookmark_tb (user_id ,posting_id) values(2,2);
--- insert into user_bookmark_tb (user_id ,posting_id) values(2,3);
-
-
-
--- insert into user_tb(username, password, email, pic_url) values('cos', '1234', 'cos@nate.com', 'spongebob.jpeg');
--- insert into user_tb(username, password, email, pic_url) values('asdf', 'asdf', 'asdf@nate.com', 'haejin.jpg');
--- insert into board_tb(title, content, user_id, created_at) values('제목1', '내용1', 1, now());
--- insert into board_tb(title, content, user_id, created_at) values('제목1', '내용2', 1, now());
--- insert into board_tb(title, content, user_id, created_at) values('제목1', '내용3', 1, now());
--- insert into board_tb(title, content, user_id, created_at) values('제목2', '내용4', 2, now());
--- insert into board_tb(title, content, user_id, created_at) values('제목3', '내용5', 2, now());
--- insert into board_tb(title, content, user_id, created_at) values('제목3', '내용5', 2, now());
--- insert into board_tb(title, content, user_id, created_at) values('제목3', '내용5', 2, now());
--- insert into board_tb(title, content, user_id, created_at) values('제목3', '내용5', 2, now());
--- insert into reply_tb(comment, board_id, user_id) values('댓글1', 1, 2);
--- insert into reply_tb(comment, board_id, user_id) values('댓글2', 1, 2);
