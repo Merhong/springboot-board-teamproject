@@ -65,7 +65,7 @@ public class ResumeService {
 
     @Transactional
     public void 이력서삭제(Integer resumeId) {
-        resumeRepository.deleteById(resumeId);
+        resumeRepository.deleteById(1);
 
     }
 }
