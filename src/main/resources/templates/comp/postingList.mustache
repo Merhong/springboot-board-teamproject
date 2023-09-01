@@ -13,7 +13,7 @@
 
 			{{#postingList}}
 			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<a href="/notice/{{id}}" class="btn btn-info">
+				<a href="/posting/{{id}}" class="btn btn-info">
 					<div class="">
 						<span class="fw-bold">{{position}}</span>
 						<span class="badge bg-black">D-{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
@@ -31,8 +31,8 @@
 				<h3>{{title}}</h3>
 
 				<div class="align-self-center col-auto ms-1">
-					<a href="/comp/notice/{{id}}/updateForm" class="btn btn-warning">수정하기</a>
-					<a href="/comp/notice/{{id}}/resumeList" class="btn btn-success">지원자 보기</a>
+					<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning">수정하기</a>
+					<a href="/comp/posting/{{id}}/resumeList" class="btn btn-success">지원자 보기</a>
 				</div>
 			</div>
 			{{/postingList}}

@@ -40,28 +40,28 @@ public class CompController {
         return "comp/main";
     }
 
-    @GetMapping("/comp/{compId}/noticeList")
+    @GetMapping("/comp/{compId}/postingList")
     public String listView(@PathVariable Integer compId, HttpServletRequest request) {
         List<Posting> postingList = compService.회사별공고찾기(compId);
         request.setAttribute("postingList", postingList);
-        return "comp/noticeList";
+        return "comp/postingList";
     }
 
-    @GetMapping("/comp/notice/saveForm")
+    @GetMapping("/comp/posting/saveForm")
     public String saveForm() {
         return "comp/saveForm";
     }
 
-    @GetMapping("/notice/{noticeId}")
-    public String detail(@PathVariable Integer noticeId, HttpServletRequest request) {
-        Posting posting = compService.공고찾기(noticeId);
+    @GetMapping("/posting/{postingId}")
+    public String detail(@PathVariable Integer postingId, HttpServletRequest request) {
+        Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
         return "comp/detail";
     }
     
-    @GetMapping("/comp/notice/{noticeId}/updateForm")
-    public String updateForm(@PathVariable Integer noticeId, HttpServletRequest request) {
-        Posting posting = compService.공고찾기(noticeId);
+    @GetMapping("/comp/posting/{postingId}/updateForm")
+    public String updateForm(@PathVariable Integer postingId, HttpServletRequest request) {
+        Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
         
         String position = posting.getPosition();
@@ -90,9 +90,9 @@ public class CompController {
         return "comp/updateForm";
     }
 
-    @GetMapping("/comp/notice/{noticeId}/resumeList")
-    public String resumeList(@PathVariable Integer noticeId, HttpServletRequest request) {
-        Posting posting = compService.공고찾기(noticeId);
+    @GetMapping("/comp/posting/{postingId}/resumeList")
+    public String resumeList(@PathVariable Integer postingId, HttpServletRequest request) {
+        Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
         return "comp/resumeList";
     }
@@ -110,7 +110,7 @@ public class CompController {
 
     @GetMapping("/resume/{resumeId}")
     public String resumeDetail(@PathVariable Integer resumeId) {
-        // request.setAttribute("noticeId", noticeId);
+        // request.setAttribute("postingId", postingId);
         return "comp/resumeDetail";
     }
 
@@ -120,19 +120,19 @@ public class CompController {
         return "redirect:/user/loginForm";
     }
 
-    @PostMapping("/comp/notice/save")
-    public String noticeSave(CompRequest.SaveDTO saveDTO) {
+    @PostMapping("/comp/posting/save")
+    public String postingSave(CompRequest.SaveDTO saveDTO) {
         // System.out.println("테스트saveDTO:"+saveDTO);
         compService.공고작성(saveDTO);
         int id = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
-        return "redirect:/comp/"+id+"/noticeList";
+        return "redirect:/comp/"+id+"/postingList";
     }
 
-    @PostMapping("/comp/notice/{noticeId}/update")
-    public String noticeUpdate(@PathVariable Integer noticeId, CompRequest.UpdateDTO updateDTO) {
+    @PostMapping("/comp/posting/{postingId}/update")
+    public String postingUpdate(@PathVariable Integer postingId, CompRequest.UpdateDTO updateDTO) {
         // System.out.println("테스트updateDTO:"+updateDTO);
-        compService.공고수정(noticeId, updateDTO);
-        return "redirect:/notice/"+noticeId;
+        compService.공고수정(postingId, updateDTO);
+        return "redirect:/posting/"+postingId;
     }
 
 }
