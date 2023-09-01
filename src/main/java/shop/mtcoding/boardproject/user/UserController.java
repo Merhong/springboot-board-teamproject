@@ -23,12 +23,6 @@ public class UserController {
         return "user/recommendForm";
     }
 
-    // 16번 북마크 삭제 버튼 POST
-    @PostMapping("/userBookMarkDelete")
-    public String userBookMarkDelete() {
-        return "redirect:/";
-    }
-
     // 14번 이력서 수정 버튼 POST
 
     // 14번 이력서 삭제 버튼 POST
@@ -69,13 +63,13 @@ public class UserController {
     }
 
     // 10_개인공고상세보기 화면
-    @GetMapping("user/postingDetail")
+    @GetMapping("/user/postingDetail")
     public String userPostingDetail() {
         return "user/postingDetail";
     }
 
     // 5_로그인 화면
-    @GetMapping("user/loginForm")
+    @GetMapping("/user/loginForm")
     public String loginForm() {
         return "user/loginForm"; // view 파일 호출 user/loginForm 파일 호출
     }

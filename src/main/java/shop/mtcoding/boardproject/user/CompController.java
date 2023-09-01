@@ -52,7 +52,7 @@ public class CompController {
         return "comp/saveForm";
     }
 
-    @GetMapping("/posting/{postingId}")
+    @GetMapping("/comp/posting/{postingId}")
     public String detail(@PathVariable Integer postingId, HttpServletRequest request) {
         Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
