@@ -103,41 +103,42 @@ public class CompController {
             request.setAttribute("머신러닝", true);
         }
 
-        List<PostingSkill> skillList = posting.getPostingSkill();
-        for (PostingSkill s : skillList) {
-            if (s.getSkill().indexOf("Java") == 0 && s.getSkill().indexOf("cript") == -1) {
-                request.setAttribute("Java", true);
-                continue;
-            }
-            if (s.getSkill().indexOf("DB") == 0) {
-                request.setAttribute("DB", true);
-                continue;
-            }
-            if (s.getSkill().indexOf("HTML") == 0) {
-                request.setAttribute("HTML", true);
-                continue;
-            }
-            if (s.getSkill().indexOf("Python") == 0) {
-                request.setAttribute("Python", true);
-                continue;
-            }
-            if (s.getSkill().indexOf("JavaScript") == 0) {
-                request.setAttribute("JavaScript", true);
-                continue;
-            }
-            if (s.getSkill().indexOf("Git") == 0) {
-                request.setAttribute("Git", true);
-                continue;
-            }
-            if (s.getSkill().indexOf("Spring") == 0) {
-                request.setAttribute("Spring", true);
-                continue;
-            }
-            if (s.getSkill().equals("C")) {
-                request.setAttribute("C", true);
-                continue;
-            }
-        }
+        // List<PostingSkill> skillList = posting.getPostingSkill();
+        // for (PostingSkill s : skillList) {
+        // if (s.getSkill().indexOf("Java") == 0 && s.getSkill().indexOf("cript") == -1)
+        // {
+        // request.setAttribute("Java", true);
+        // continue;
+        // }
+        // if (s.getSkill().indexOf("DB") == 0) {
+        // request.setAttribute("DB", true);
+        // continue;
+        // }
+        // if (s.getSkill().indexOf("HTML") == 0) {
+        // request.setAttribute("HTML", true);
+        // continue;
+        // }
+        // if (s.getSkill().indexOf("Python") == 0) {
+        // request.setAttribute("Python", true);
+        // continue;
+        // }
+        // if (s.getSkill().indexOf("JavaScript") == 0) {
+        // request.setAttribute("JavaScript", true);
+        // continue;
+        // }
+        // if (s.getSkill().indexOf("Git") == 0) {
+        // request.setAttribute("Git", true);
+        // continue;
+        // }
+        // if (s.getSkill().indexOf("Spring") == 0) {
+        // request.setAttribute("Spring", true);
+        // continue;
+        // }
+        // if (s.getSkill().equals("C")) {
+        // request.setAttribute("C", true);
+        // continue;
+        // }
+        // }
 
         return "comp/updateForm";
     }

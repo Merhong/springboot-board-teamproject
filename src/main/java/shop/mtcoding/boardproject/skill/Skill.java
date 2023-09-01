@@ -17,11 +17,11 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String skillname;
+    private String skillName;
 
     @Builder
-    public Skill(String skillname) {
-        this.skillname = skillname;
+    public Skill(String skillName) {
+        this.skillName = skillName;
     }
 
 }

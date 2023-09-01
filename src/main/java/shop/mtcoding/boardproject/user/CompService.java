@@ -39,14 +39,14 @@ public class CompService {
     @Transactional
     public void 회원가입(JoinDTO joinDTO) {
         User user = User.builder()
-        .role(joinDTO.getRole())
-        .email(joinDTO.getEmail())
-        .password(joinDTO.getPassword())
-        .compname(joinDTO.getCompname())
-        .compRegister(joinDTO.getCompRegister())
-        .tel(joinDTO.getTel())
-        .address(joinDTO.getAddress())
-        .build();
+                .role(joinDTO.getRole())
+                .email(joinDTO.getEmail())
+                .password(joinDTO.getPassword())
+                .compname(joinDTO.getCompname())
+                .compRegister(joinDTO.getCompRegister())
+                .tel(joinDTO.getTel())
+                .address(joinDTO.getAddress())
+                .build();
         userRepository.save(user);
 
     }
@@ -61,33 +61,32 @@ public class CompService {
         Posting posting = new Posting();
         posting.setUser(new User());
         posting.getUser().setId(
-            ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId()
-        );
+                ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId());
         posting.setTitle(saveDTO.getTitle());
         posting.setDesc(saveDTO.getDesc());
         posting.setPosition(saveDTO.getPosition());
         posting.setRegion(saveDTO.getRegion());
         posting.setCareer(saveDTO.getCareer());
         posting.setEducation(saveDTO.getEducation());
-        
+
         Timestamp timestamp = new Timestamp(saveDTO.getExpiryDate().getTime());
         posting.setExpiryDate(timestamp);
 
         // System.out.println("테스트 : " + saveDTO.getPostingSkill());
 
-        List<PostingSkill> psList = new ArrayList<>();
-        
         List<String> psStringList = saveDTO.getPostingSkill();
+
+        List<PostingSkill> psList = new ArrayList<>();
 
         postingRepository.save(posting);
 
-        int get=0;
-        while(psStringList.size()>0){
-            psList.add(new PostingSkill());
-            psList.get(get).setPosting(posting);
-            psList.get(get++).setSkill(psStringList.get(0));
-            psStringList.remove(0);
-        }
+        // int get = 0;
+        // while (psStringList.size() > 0) {
+        // psList.add(new PostingSkill());
+        // psList.get(get).setPosting(posting);
+        // psList.get(get++).setSkill(psStringList.get(0));
+        // psStringList.remove(0);
+        // }
         // System.out.println("테스트11:"+psList);
 
         // posting.setPostingSkill(psList);
@@ -107,7 +106,7 @@ public class CompService {
         if (postingOP.isPresent()) {
             return postingOP.get();
         } else {
-            throw new MyException(postingId+" 없음");
+            throw new MyException(postingId + " 없음");
         }
     }
 
@@ -139,28 +138,25 @@ public class CompService {
 
             postingSkillRepository.deleteByPostingId(postingId);
 
-            int get=0;
-            while(psStringList.size()>0){
-                psList.add(new PostingSkill());
-                psList.get(get).setPosting(posting);
-                psList.get(get++).setSkill(psStringList.get(0));
-                psStringList.remove(0);
-            }
+            // int get = 0;
+            // while (psStringList.size() > 0) {
+            // psList.add(new PostingSkill());
+            // psList.get(get).setPosting(posting);
+            // psList.get(get++).setSkill(psStringList.get(0));
+            // psStringList.remove(0);
+            // }
 
             for (PostingSkill skill : psList) {
                 skill.getPosting().setId(posting.getId());
                 postingSkillRepository.save(skill);
             }
 
-        } else{
+        } else {
             throw new MyException(postingId + "공고없음");
         }
     }
 
-
     public void 기업정보수정(Integer userId, compUpdateDTO dTO) {
-
-
 
     }
 

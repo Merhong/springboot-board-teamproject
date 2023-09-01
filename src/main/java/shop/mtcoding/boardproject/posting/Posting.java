@@ -39,13 +39,10 @@ public class Posting {
     private String position;
 
     private String career;
-    
+
     private String education;
 
     private Timestamp expiryDate;
-
-    @OneToMany(mappedBy = "posting", fetch = FetchType.LAZY)
-    private List<PostingSkill> postingSkill = new ArrayList<>();
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,10 +51,9 @@ public class Posting {
     @CreationTimestamp
     private Timestamp createdAt;
 
-
     @Builder
     public Posting(Integer id, String title, String desc, String photo, String region, String position, String career,
-            String education, Timestamp expiryDate, List<PostingSkill> postingSkill, User user, Timestamp createdAt) {
+            String education, Timestamp expiryDate, User user, Timestamp createdAt) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -67,12 +63,8 @@ public class Posting {
         this.career = career;
         this.education = education;
         this.expiryDate = expiryDate;
-        this.postingSkill = postingSkill;
         this.user = user;
         this.createdAt = createdAt;
     }
-
-
-    
 
 }

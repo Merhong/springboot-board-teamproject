@@ -26,20 +26,31 @@ insert into posting_tb( user_id, title, desc, region, position, expiry_date, car
 insert into posting_tb( user_id, title, desc, region, position, expiry_date, career, education) values(7, '경력직 모집', '경력 7년 이상', '대구', '빅데이터', '2025-01-11','7년', '학력무관');
 insert into posting_tb( user_id, title, desc, region, position, expiry_date, career, education) values(5, '신입구함', '경력 무관', '서울', '프론트엔드', '2023-05-12','경력무관', '대학교 졸업');
 
-insert into postingSkill_tb(skill, posting_id) values('Java', 1);
-insert into postingSkill_tb(skill, posting_id) values('Spring', 1);
-insert into postingSkill_tb(skill, posting_id) values('Git', 1);
-insert into postingSkill_tb(skill, posting_id) values('C', 1);
-insert into postingSkill_tb(skill, posting_id) values('Java', 2);
-insert into postingSkill_tb(skill, posting_id) values('JavaScript', 2);
-insert into postingSkill_tb(skill, posting_id) values('Git', 3);
-insert into postingSkill_tb(skill, posting_id) values('HTML/CSS', 3);
-insert into postingSkill_tb(skill, posting_id) values('C', 3);
-insert into postingSkill_tb(skill, posting_id) values('Java', 4);
-insert into postingSkill_tb(skill, posting_id) values('JavaScript', 4);
-insert into postingSkill_tb(skill, posting_id) values('Git', 4);
-insert into postingSkill_tb(skill, posting_id) values('Python', 5);
-insert into postingSkill_tb(skill, posting_id) values('JavaScript', 5);
+-- insert into postingSkill_tb(skill_id, posting_id) values(1, 1);
+-- insert into postingSkill_tb(skill_id, posting_id) values(2, 1);
+-- insert into postingSkill_tb(skill_id, posting_id) values(4, 1);
+-- insert into postingSkill_tb(skill_id, posting_id) values(5, 1);
+-- insert into postingSkill_tb(skill_id, posting_id) values(1, 2);
+-- insert into postingSkill_tb(skill_id, posting_id) values(8, 2);
+-- insert into postingSkill_tb(skill_id, posting_id) values(4, 3);
+-- insert into postingSkill_tb(skill_id, posting_id) values(6, 3);
+-- insert into postingSkill_tb(skill_id, posting_id) values(5, 3);
+-- insert into postingSkill_tb(skill_id, posting_id) values(1, 4);
+-- insert into postingSkill_tb(skill_id, posting_id) values(8, 4);
+-- insert into postingSkill_tb(skill_id, posting_id) values(4, 4);
+-- insert into postingSkill_tb(skill_id, posting_id) values(7, 5);
+-- insert into postingSkill_tb(skill_id, posting_id) values(8, 5);
+
+
+insert into Skill_tb(skill_name) values('Java');
+insert into Skill_tb(skill_name) values('Spring Framework');
+insert into Skill_tb(skill_name) values('DB');
+insert into Skill_tb(skill_name) values('Git');
+insert into Skill_tb(skill_name) values('C');
+insert into Skill_tb(skill_name) values('HTML/CSS');
+insert into Skill_tb(skill_name) values('Python');
+insert into Skill_tb(skill_name) values('JavaScript');
+
 
 
 insert into apply_tb( resume_id, posting_id, statement) values(1, 2, '대기');
