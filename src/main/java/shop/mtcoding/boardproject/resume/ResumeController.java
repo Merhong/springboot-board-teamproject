@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.mtcoding.boardproject.skill.Skill;
+import shop.mtcoding.boardproject.skill.SkillService;
 import shop.mtcoding.boardproject.user.User;
 
 import java.util.List;
@@ -17,8 +19,13 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class ResumeController {
+
     @Autowired
     private ResumeService resumeService;
+
+    @Autowired
+    private SkillService skillService;
+
     @Autowired
     private HttpSession session;
 
@@ -85,7 +92,9 @@ public class ResumeController {
 
     // 개인이력서등록 화면
     @GetMapping("/user/resumeForm")
-    public String userResumeForm() {
+    public String userResumeForm(HttpServletRequest request) {
+        List<Skill> skillList = skillService.전체기술조회();
+        request.setAttribute("skillList", skillList);
         return "user/resumeForm";
     }
 

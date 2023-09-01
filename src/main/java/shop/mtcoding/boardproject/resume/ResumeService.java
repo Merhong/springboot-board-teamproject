@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeDTO;
 import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeUpdateDTO;
+import shop.mtcoding.boardproject.skill.UserSkillRepository;
 import shop.mtcoding.boardproject.user.User;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class ResumeService {
     @Autowired
     private ResumeRepository resumeRepository;
 
+    @Autowired
+    private UserSkillRepository userSkillRepository;
+
     @Transactional
     public void 이력서등록(ResumeDTO resumeDTO, Integer id) {
         Resume resume = Resume.builder()
@@ -24,9 +28,14 @@ public class ResumeService {
                 .grade(resumeDTO.getGrade())
                 .career(resumeDTO.getCareer())
                 .personalStatement(resumeDTO.getPersonalStatement())
+                .disclosure(resumeDTO.getDisclosure())
                 .build();
-
         resumeRepository.save(resume);
+
+        List<Integer> skillList = resumeDTO.getSkillList();
+        for (Integer integer : skillList) {
+            userSkillRepository.insertUserSkill(integer, id);
+        }
     }
 
     public Resume 이력서상세보기(Integer id) {
