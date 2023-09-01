@@ -2,6 +2,8 @@ package shop.mtcoding.boardproject.bookmark;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import shop.mtcoding.boardproject.bookmark.BookmarkResponse.CompBookmarkDTO;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.user.User;
@@ -39,18 +41,8 @@ public class BookmarkService {
 
     }
 
-    public List<Resume> 기업북마크전체(Integer id) {
-        Optional<User> user = userRepository.findById(id);
-
-        if (!user.isPresent()) {
-            throw new RuntimeException();
-        }
-        List<CompBookmark> bookmarkList = compBookmarkRepository.findAllByUserId(user.get().getId());
-        List<Resume> resumeList = new ArrayList<Resume>();
-        for (CompBookmark bookmark : bookmarkList) {
-            resumeList.add(bookmark.getResume());
-        }
-
-        return resumeList;
+    public List<CompBookmark> 기업북마크전체(Integer id) {
+        List<CompBookmark> compBookmarksList = compBookmarkRepository.findAllByUserId(id);
+        return compBookmarksList;
     }
 }

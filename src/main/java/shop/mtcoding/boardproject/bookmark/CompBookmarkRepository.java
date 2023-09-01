@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface CompBookmarkRepository extends JpaRepository<CompBookmark, Integer> {
 
-    @Query(value = "select * from userbookmark_tb where user_Id = :userId", nativeQuery = true)
+    @Query(value = "SELECT * FROM COMPBOOKMARK_TB ct left outer join posting_tb pt on pt.id = ct.posting_id where pt.user_id = :userId", nativeQuery = true)
     List<CompBookmark> findAllByUserId(@Param("userId") Integer userId);
-
 }
