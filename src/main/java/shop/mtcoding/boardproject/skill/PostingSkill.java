@@ -21,6 +21,6 @@ public class PostingSkill {
     @ManyToOne(fetch = FetchType.LAZY)
     private Posting posting;
 
-    @Column(nullable = false)
-    private String skill;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Skill skill;
 }

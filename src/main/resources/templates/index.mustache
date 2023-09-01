@@ -65,50 +65,15 @@
 				<hr class="m-1">
 				<div class="d-flex flex-wrap">
 					
+					{{#skillList}}
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="skillList" id="" value="java" {{#skillDTO.java}}checked{{/skillDTO.java}}>
-						Java</label>
+							<input class="form-check-input" type="checkbox" name="skillList" id="" value="{{skillname}}">
+						{{skillname}}</label>
 					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="skillList" id="" value="db" {{#skillDTO.db}}checked{{/skillDTO.db}}>
-						DB</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="skillList" id="" value="htmlCss" {{#skillDTO.htmlCss}}checked{{/skillDTO.htmlCss}}>
-						HTML/CSS</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="skillList" id="" value="python" {{#skillDTO.python}}checked{{/skillDTO.python}}>
-						Python</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="skillList" id="" value="javaScript" {{#skillDTO.javaScript}}checked{{/skillDTO.javaScript}}>
-						JavaScript</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="skillList" id="" value="git" {{#skillDTO.git}}checked{{/skillDTO.git}}>
-						Git</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="skillList" id="" value="springFramework" {{#skillDTO.springFramework}}checked{{/skillDTO.springFramework}}>
-						Spring Framework</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="skillList" id="" value="C" {{#skillDTO.C}}checked{{/skillDTO.C}}>
-						C</label>
-					</div>
+					{{/skillList}}
 					
 				</div>
-
-				
 			</div>
 
 			<div class="m-2 border border-info col-4">
@@ -196,7 +161,7 @@
 						<h5 class="mt-1 fw-bold">{{title}}</h5>
 						<div class="mb-1 fst-italic">{{position}}</div>
 						<div class="mb-1">
-							{{#postingSkill}}<span class="badge bg-primary me-1">{{skill}}</span>{{/postingSkill}}
+							{{#postingSkill}}<span class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
 						</div>
 						<div>
 							{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}

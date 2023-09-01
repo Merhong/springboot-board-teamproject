@@ -17,9 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.skill.PostingSkill;
+import shop.mtcoding.boardproject.skill.Skill;
+import shop.mtcoding.boardproject.skill.SkillRepository;
 
 @Controller
 public class CompController {
+
+    @Autowired
+    private SkillRepository skillRepository;
 
     @Autowired
     private CompService compService;
@@ -52,7 +57,9 @@ public class CompController {
     }
 
     @GetMapping("/comp/posting/saveForm")
-    public String saveForm() {
+    public String saveForm(HttpServletRequest request) {
+        List<Skill> skillList = skillRepository.findAll();
+        request.setAttribute("skillList", skillList);
         return "comp/saveForm";
     }
 
@@ -76,6 +83,9 @@ public class CompController {
     // TODO : 가져온걸 화면에 뿌려야하는데 자바에서 하니까 너무 노가다임. 현재 기술까지만 되어있음
     @GetMapping("/comp/posting/{postingId}/updateForm")
     public String updateForm(@PathVariable Integer postingId, HttpServletRequest request) {
+        List<Skill> skillList = skillRepository.findAll();
+        request.setAttribute("skillList", skillList);
+
         Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
         
@@ -90,17 +100,17 @@ public class CompController {
         if(position.equals("서버")){request.setAttribute("서버", true);}
         if(position.equals("머신러닝")){request.setAttribute("머신러닝", true);}
         
-        List<PostingSkill> skillList = posting.getPostingSkill();
-        for (PostingSkill s : skillList) {
-            if(s.getSkill().indexOf("Java")==0 && s.getSkill().indexOf("cript")==-1){request.setAttribute("Java", true); continue;}
-            if(s.getSkill().indexOf("DB")==0){request.setAttribute("DB", true); continue;}
-            if(s.getSkill().indexOf("HTML")==0){request.setAttribute("HTML", true); continue;}
-            if(s.getSkill().indexOf("Python")==0){request.setAttribute("Python", true); continue;}
-            if(s.getSkill().indexOf("JavaScript")==0){request.setAttribute("JavaScript", true); continue;}
-            if(s.getSkill().indexOf("Git")==0){request.setAttribute("Git", true); continue;}
-            if(s.getSkill().indexOf("Spring")==0){request.setAttribute("Spring", true); continue;}
-            if(s.getSkill().equals("C")){request.setAttribute("C", true); continue;}
-        }
+        // List<PostingSkill> sl = posting.getPostingSkill();
+        // for (PostingSkill s : sl) {
+        //     if(s.getSkill().getId()==1){request.setAttribute("Java", true); continue;}
+        //     if(s.getSkill().getId()==2){request.setAttribute("Spring", true); continue;}
+        //     if(s.getSkill().getId()==3){request.setAttribute("DB", true); continue;}
+        //     if(s.getSkill().getId()==4){request.setAttribute("HTML", true); continue;}
+        //     if(s.getSkill().getId()==5){request.setAttribute("Python", true); continue;}
+        //     if(s.getSkill().getId()==6){request.setAttribute("JavaScript", true); continue;}
+        //     if(s.getSkill().getId()==7){request.setAttribute("Git", true); continue;}
+        //     if(s.getSkill().getId()==8){request.setAttribute("C", true); continue;}
+        // }
 
         return "comp/updateForm";
     }
@@ -113,7 +123,9 @@ public class CompController {
     }
 
     @GetMapping("/comp/recommend")
-    public String recommend() {
+    public String recommend(HttpServletRequest request) {
+        List<Skill> skillList = skillRepository.findAll();
+        request.setAttribute("skillList", skillList);
         return "comp/recommend";
     }
 

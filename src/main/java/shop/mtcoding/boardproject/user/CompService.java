@@ -17,6 +17,8 @@ import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.skill.PostingSkillRepository;
+import shop.mtcoding.boardproject.skill.Skill;
+import shop.mtcoding.boardproject.skill.SkillRepository;
 import shop.mtcoding.boardproject.user.CompRequest.JoinDTO;
 import shop.mtcoding.boardproject.user.CompRequest.SaveDTO;
 import shop.mtcoding.boardproject.user.CompRequest.UpdateDTO;
@@ -33,6 +35,9 @@ public class CompService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SkillRepository skillRepository;
 
     @Autowired
     private HttpSession session;
@@ -79,33 +84,31 @@ public class CompService {
         Timestamp timestamp = new Timestamp(saveDTO.getExpiryDate().getTime());
         posting.setExpiryDate(timestamp);
 
-        // System.out.println("테스트 : " + saveDTO.getPostingSkill());
+        List<String> StringList = saveDTO.getPostingSkill();
+
+        List<Skill> skillList = skillRepository.findAll();
 
         List<PostingSkill> psList = new ArrayList<>();
-        
-        List<String> psStringList = saveDTO.getPostingSkill();
 
         postingRepository.save(posting);
 
-        int get=0;
-        while(psStringList.size()>0){
+        int get=0; 
+        while(StringList.size()>0){
             psList.add(new PostingSkill());
             psList.get(get).setPosting(posting);
-            psList.get(get++).setSkill(psStringList.get(0));
-            psStringList.remove(0);
-        }
-        // System.out.println("테스트11:"+psList);
 
-        // posting.setPostingSkill(psList);
-
-        // System.out.println("테스트12"+posting.getId());
-        for (PostingSkill skill : psList) {
-            skill.getPosting().setId(posting.getId());
-            postingSkillRepository.save(skill);
+            for (Skill s : skillList) {
+                if(s.getSkillname().equals(StringList.get(0))){psList.get(get++).setSkill(s); break;}
+            }
+            StringList.remove(0);
         }
 
-        // System.out.println(psList);
+        // posting.setPostingSkill(psList); // 안해도됨
 
+        for (PostingSkill sk : psList) {
+            sk.getPosting().setId(posting.getId());
+            postingSkillRepository.save(sk);
+        }
     }
 
     public Posting 공고찾기(Integer postingId) {
@@ -137,20 +140,23 @@ public class CompService {
             Timestamp timestamp = new Timestamp(updateDTO.getExpiryDate().getTime());
             posting.setExpiryDate(timestamp);
 
-            // List<PostingSkill> PostingSkillList = updateDTO.getPostingSkill();
-
+            List<String> StringList = updateDTO.getPostingSkill();
+            
+            List<Skill> skillList = skillRepository.findAll();
+            
             List<PostingSkill> psList = new ArrayList<>();
-
-            List<String> psStringList = updateDTO.getPostingSkill();
 
             postingSkillRepository.deleteByPostingId(postingId);
 
             int get=0;
-            while(psStringList.size()>0){
+            while(StringList.size()>0){
                 psList.add(new PostingSkill());
                 psList.get(get).setPosting(posting);
-                psList.get(get++).setSkill(psStringList.get(0));
-                psStringList.remove(0);
+    
+                for (Skill s : skillList) {
+                    if(s.getSkillname().equals(StringList.get(0))){psList.get(get++).setSkill(s); break;}
+                }
+                StringList.remove(0);
             }
 
             for (PostingSkill skill : psList) {
