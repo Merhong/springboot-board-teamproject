@@ -35,6 +35,20 @@ public class ResumeController {
 
     }
 
+    @GetMapping("/user/resumeUpdateForm/{id}")
+    public String userResumeUpdate(@PathVariable Integer id, HttpServletRequest request) {
+        Resume resume = resumeService.이력서상세보기(id);
+        System.out.println("아이디: " + resume.getId());
+        if (resume != null) {
+            User sessionUser = (User) session.getAttribute("sessionUser");
+            if (sessionUser.getId().equals(resume.getUser().getId())) {
+                request.setAttribute("resume", resume);
+                return "/user/resumeUpdateForm";
+            }
+        }
+        return "redirect:/user/resumeManage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
+    }
+
     // 개인이력서 상세보기
     @GetMapping("/user/resume/{id}")
     public String userResumeDetail(@PathVariable Integer id, HttpServletRequest request) {

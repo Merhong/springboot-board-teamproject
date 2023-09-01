@@ -27,11 +27,10 @@
 				<span type="text" class="w-50">{{title}}</span>
 				<a href="/user/resume/{{id}}" class="w-20 btn btn-info">상세보기</a>
 				<a href="/user/resumeUpdateForm/{{id}}" class="w-20 btn btn-info">수정</a>
-				<form action="/board/{{resumeId}}/delete" method="post">
-					<button type="submit" class="btn btn-danger">삭제</button>
+
+				<form action="/resume/delete/{{id}}" method="post">
+					<button class="btn btn-primary btn-sm" type="submit">삭제</button>
 				</form>
-
-
 				<hr>
 			</div>
 			{{/resumes}}
