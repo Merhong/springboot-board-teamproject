@@ -69,11 +69,11 @@
 						</li>
 						<li class="nav-item">
 							{{^sessionComp.compname}}<a class="nav-link text-white" href="/user/resumeForm">이력서등록</a>{{/sessionComp.compname}}
-							{{#sessionComp.compname}}<a class="nav-link text-white" href="/comp/notice/saveForm">채용공고등록</a>{{/sessionComp.compname}}
+							{{#sessionComp.compname}}<a class="nav-link text-white" href="/comp/posting/saveForm">채용공고등록</a>{{/sessionComp.compname}}
 						</li>
 						<li class="nav-item">
 							{{^sessionComp.compname}}<a class="nav-link text-white" href="/user/resumeManage">이력서관리</a>{{/sessionComp.compname}}
-							{{#sessionComp.compname}}<a class="nav-link text-white" href="/comp/{{sessionComp.userId}}/noticeList">채용공고관리</a>{{/sessionComp.compname}}
+							{{#sessionComp.compname}}<a class="nav-link text-white" href="/comp/{{sessionComp.userId}}/postingList">채용공고관리</a>{{/sessionComp.compname}}
 						  </li>
 						<li class="nav-item">
 							<a class="nav-link text-white" href="/user/applyList"

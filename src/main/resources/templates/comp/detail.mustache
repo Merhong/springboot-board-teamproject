@@ -11,7 +11,7 @@
 
 			<div class="d-flex">
 				<div class="m-1 col-4 d-flex flex-column align-items-center overflow-hidden" style="width:170px; height:280px;">
-					<img src="../../../images/kakao_logo.png" class=""/>
+					<img src="../../../images/{{posting.user.compname}}_logo.png" class=""/>
 				</div>
 
 				<div class="col-8 p-2">
@@ -83,8 +83,8 @@
 
 			
 			<div class="d-flex">
-				<button type="button" class="w-50 mb-3 me-2 btn btn-success">지원하기</button>
-				<button type="button" class="w-50 mb-3 ms-2 btn btn-warning">북마크하기</button>
+				{{^sessionComp.compname}}<button type="button" class="w-50 mb-3 me-2 btn btn-success">지원하기</button>
+				<button type="button" class="w-50 mb-3 ms-2 btn btn-warning">북마크하기</button>{{/sessionComp.compname}}
 			</div>
 
 		</div>

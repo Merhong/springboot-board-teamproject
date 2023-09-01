@@ -101,12 +101,12 @@ public class CompService {
 
     }
 
-    public Posting 공고찾기(Integer noticeId) {
-        Optional<Posting> postingOP = postingRepository.findById(noticeId);
+    public Posting 공고찾기(Integer postingId) {
+        Optional<Posting> postingOP = postingRepository.findById(postingId);
         if (postingOP.isPresent()) {
             return postingOP.get();
         } else {
-            throw new MyException(noticeId+" 없음");
+            throw new MyException(postingId+" 없음");
         }
     }
 
@@ -116,8 +116,8 @@ public class CompService {
     }
 
     @Transactional
-    public void 공고수정(Integer noticeId, UpdateDTO updateDTO) {
-        Optional<Posting> postingOP = postingRepository.findById(noticeId);
+    public void 공고수정(Integer postingId, UpdateDTO updateDTO) {
+        Optional<Posting> postingOP = postingRepository.findById(postingId);
 
         if (postingOP.isPresent()) {
             Posting posting = postingOP.get();
@@ -129,8 +129,31 @@ public class CompService {
             posting.setEducation(updateDTO.getEducation());
             Timestamp timestamp = new Timestamp(updateDTO.getExpiryDate().getTime());
             posting.setExpiryDate(timestamp);
+
+            // List<PostingSkill> PostingSkillList = updateDTO.getPostingSkill();
+
+            List<PostingSkill> psList = new ArrayList<>();
+
+            List<String> psStringList = updateDTO.getPostingSkill();
+
+            postingSkillRepository.deleteByPostingId(postingId);
+
+            int get=0;
+            while(psStringList.size()>0){
+                psList.add(new PostingSkill());
+                psList.get(get).setPosting(posting);
+                psList.get(get++).setSkill(psStringList.get(0));
+                psStringList.remove(0);
+            }
+
+            for (PostingSkill skill : psList) {
+                skill.getPosting().setId(posting.getId());
+                postingSkillRepository.save(skill);
+            }
+
+
         } else{
-            throw new MyException(noticeId + "공고없음");
+            throw new MyException(postingId + "공고없음");
         }
     }
 
