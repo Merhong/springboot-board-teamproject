@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import shop.mtcoding.boardproject.posting.PostiongRepository;
+import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 import shop.mtcoding.boardproject.skill.UserSkillRepository;
 
@@ -18,7 +18,7 @@ class BoardProjectApplicationTests {
 	private UserSkillRepository userSkillRepository;
 
 	@Autowired
-	private PostiongRepository postingRepository;
+	private PostingRepository postingRepository;
 
 	@Test
 	void contextLoads() {

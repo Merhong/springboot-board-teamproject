@@ -115,6 +115,23 @@ public class UserController {
     public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
         User sessionUser = userService.로그인(loginDTO);
         session.setAttribute("sessionUser", sessionUser);
+
+        if(sessionUser.getCompname()!=null){
+            CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
+                .userId(sessionUser.getId())
+                .email(sessionUser.getEmail())
+                .compname(sessionUser.getCompname())
+                .compRegister(sessionUser.getCompRegister())
+                .tel(sessionUser.getTel())
+                .photo(sessionUser.getPhoto())
+                .address(sessionUser.getAddress())
+                .role(sessionUser.getRole())
+                .build();
+            // System.out.println("테스트:"+sessionComp);
+            session.setAttribute("sessionComp", sessionComp);
+        }
+
+
         return "redirect:/";
     }
 

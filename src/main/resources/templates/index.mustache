@@ -10,6 +10,7 @@
 	<div class="col-xxl-7 col-xl-9 col-lg-10 col-md-11 col-sm-12">
 
 
+		<form action="/" method="get">
 		<div class="d-flex justify-content-around ps-4 pe-4" style="height: 295px;">
 			<div class="m-2 border border-info col-4">
 				<h4 class="mt-2 text-center">지역별</h4>
@@ -55,44 +56,54 @@
 				<h4 class="mt-2 text-center">기술별</h4>
 
 				<div class="form-check d-inline-block ms-3 me-2">
-					<input class="form-check-input" type="checkbox" id="" checked>
-					<label class="form-check-label">모두</label>
+					<label class="form-check-label">
+						<input class="form-check-input" type="checkbox" id="" name="skillList" value="all" {{#skillDTO.all}}checked{{/skillDTO.all}}>
+					모두</label>
 				</div>
+				<button class="btn btn-primary" type="submit">검색하기</button>
 				
 				<hr class="m-1">
 				<div class="d-flex flex-wrap">
-
+					
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">Java</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="skillList" id="" value="java" {{#skillDTO.java}}checked{{/skillDTO.java}}>
+						Java</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">DB</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="skillList" id="" value="db" {{#skillDTO.db}}checked{{/skillDTO.db}}>
+						DB</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">HTML / CSS</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="skillList" id="" value="htmlCss" {{#skillDTO.htmlCss}}checked{{/skillDTO.htmlCss}}>
+						HTML/CSS</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">Python</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="skillList" id="" value="python" {{#skillDTO.python}}checked{{/skillDTO.python}}>
+						Python</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">JavaScript</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="skillList" id="" value="javaScript" {{#skillDTO.javaScript}}checked{{/skillDTO.javaScript}}>
+						JavaScript</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">Git</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="skillList" id="" value="git" {{#skillDTO.git}}checked{{/skillDTO.git}}>
+						Git</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">Spring Framework</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="skillList" id="" value="springFramework" {{#skillDTO.springFramework}}checked{{/skillDTO.springFramework}}>
+						Spring Framework</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="checkbox" id="">
-						<label class="form-check-label">C</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="skillList" id="" value="C" {{#skillDTO.C}}checked{{/skillDTO.C}}>
+						C</label>
 					</div>
 					
 				</div>
@@ -104,49 +115,60 @@
 				<h4 class="mt-2 text-center">직무별</h4>
 
 				<div class="form-check d-inline-block ms-3 me-2">
-					<input class="form-check-input" type="radio" id="" name="radiobutton" checked>
-					<label class="form-check-label">모두</label>
+					<label class="form-check-label">
+						<input class="form-check-input" type="radio" id="" name="jobList" value="all" {{#jobDTO.all}}checked{{/jobDTO.all}}>
+					모두</label>
 				</div>
+				<button class="btn btn-primary" type="submit">검색하기</button>
 
 				<hr class="m-1">
 
 				<div class="d-flex flex-wrap">
 
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">백엔드</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="jobList" value="backend" {{#jobDTO.backend}}checked{{/jobDTO.backend}}>
+						백엔드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">프런트엔드</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="jobList" value="frontend" {{#jobDTO.frontend}}checked{{/jobDTO.frontend}}>
+						프런트엔드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">풀스택</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="jobList" value="fullstack" {{#jobDTO.fullstack}}checked{{/jobDTO.fullstack}}>
+						풀스택</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">안드로이드</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="jobList" value="android" {{#jobDTO.android}}checked{{/jobDTO.android}}>
+						안드로이드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">IOS</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="jobList" value="IOS" {{#jobDTO.IOS}}checked{{/jobDTO.IOS}}>
+						IOS</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">임베디드</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="jobList" value="embedded" {{#jobDTO.embedded}}checked{{/jobDTO.embedded}}>
+						임베디드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">빅데이터</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="jobList" value="bigdata" {{#jobDTO.bigdata}}checked{{/jobDTO.bigdata}}>
+						빅데이터</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">서버</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="jobList" value="server" {{#jobDTO.server}}checked{{/jobDTO.server}}>
+						서버</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
-						<input class="form-check-input" type="radio" id="" name="radiobutton">
-						<label class="form-check-label">머신러닝</label>
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="" name="jobList" value="machinelearning" {{#jobDTO.machinelearning}}checked{{/jobDTO.machinelearning}}>
+						머신러닝</label>
 					</div>
 
 				</div>
@@ -156,7 +178,7 @@
 
 			
 		</div>
-
+		</form>
 
 
 
@@ -165,137 +187,32 @@
 		<div class="mb-4 d-flex flex-wrap">
 
 
-
+			{{#postingList}}
 			<div class="col-lg-3 col-md-4 col-sm-6">
 				<div class="border border-info m-2 p-2">
-					<a href="#" class="text-black text-decoration-none"><img src="../../../images/kakao_logo.png" class="img-fluid">
-						<h4 class="mt-1 fw-bold">카카오</h4>
-						<div class="mb-1 fst-italic">백엔드 개발자</div>
-						<div class="mb-2">
-							<span class="badge bg-primary">Java</span>
-							<span class="badge bg-primary">DB</span>
-							<span class="badge bg-primary">Spring</span>
+					<h4 class="text-center fw-bold">{{user.compname}}</h4>
+					<a href="/notice/{{id}}" class="text-black text-decoration-none"><img src="../../../images/{{user.compname}}_logo.png" class="img-fluid d-block m-auto" style="height: 120px;">
+						<h5 class="mt-1 fw-bold">{{title}}</h5>
+						<div class="mb-1 fst-italic">{{position}}</div>
+						<div class="mb-1">
+							{{#postingSkill}}<span class="badge bg-primary me-1">{{skill}}</span>{{/postingSkill}}
 						</div>
 						<div>
-							<span class="badge bg-success">신입</span>
-							<span class="badge bg-success">학력무관</span>
-							<span class="badge bg-success">경기도</span>
+							{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
+							{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
+							<span class="badge bg-success">{{region}}</span>
 						</div>
 					</a>
 					<div class="d-flex justify-content-between">
-						<button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button>
+						<button type="button" class="border-0 bg-white mt-1"><h3>❤️</h3></button>
 						<!-- <button type="button" class="border-0 bg-white mt-2"><h3>🤍</h3></button> -->
-						<span class="fw-bold align-self-center me-3">D-34</span>
+						<span class="fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
 					</div>
 				</div>
 			</div>
+			{{/postingList}}
 
 
-
-			<div class="col-lg-3 col-md-4 col-sm-6">
-				<div class="border border-info m-2 p-2">
-					<a href="#" class="text-black text-decoration-none"><img src="../../../images/kakao_logo.png" class="img-fluid">
-						<h4 class="mt-1 fw-bold">카카오</h4>
-						<div class="mb-1 fst-italic">백엔드 개발자</div>
-						<div class="mb-2">
-							<span class="badge bg-primary">Java</span>
-							<span class="badge bg-primary">DB</span>
-							<span class="badge bg-primary">Spring</span>
-						</div>
-						<div>
-							<span class="badge bg-success">신입</span>
-							<span class="badge bg-success">학력무관</span>
-							<span class="badge bg-success">경기도</span>
-						</div>
-					</a>
-					<div class="d-flex justify-content-between">
-						<button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button>
-						<!-- <button type="button" class="border-0 bg-white mt-2"><h3>🤍</h3></button> -->
-						<span class="fw-bold align-self-center me-3">D-34</span>
-					</div>
-				</div>
-			</div>
-
-
-
-			<div class="col-lg-3 col-md-4 col-sm-6">
-				<div class="border border-info m-2 p-2">
-					<a href="#" class="text-black text-decoration-none"><img src="../../../images/kakao_logo.png" class="img-fluid">
-						<h4 class="mt-1 fw-bold">카카오</h4>
-						<div class="mb-1 fst-italic">백엔드 개발자</div>
-						<div class="mb-2">
-							<span class="badge bg-primary">Java</span>
-							<span class="badge bg-primary">DB</span>
-							<span class="badge bg-primary">Spring</span>
-						</div>
-						<div>
-							<span class="badge bg-success">신입</span>
-							<span class="badge bg-success">학력무관</span>
-							<span class="badge bg-success">경기도</span>
-						</div>
-					</a>
-					<div class="d-flex justify-content-between">
-						<button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button>
-						<!-- <button type="button" class="border-0 bg-white mt-2"><h3>🤍</h3></button> -->
-						<span class="fw-bold align-self-center me-3">D-34</span>
-					</div>
-				</div>
-			</div>
-
-
-
-			<div class="col-lg-3 col-md-4 col-sm-6">
-				<div class="border border-info m-2 p-2">
-					<a href="#" class="text-black text-decoration-none"><img src="../../../images/kakao_logo.png" class="img-fluid">
-						<h4 class="mt-1 fw-bold">카카오</h4>
-						<div class="mb-1 fst-italic">백엔드 개발자</div>
-						<div class="mb-2">
-							<span class="badge bg-primary">Java</span>
-							<span class="badge bg-primary">DB</span>
-							<span class="badge bg-primary">Spring</span>
-						</div>
-						<div>
-							<span class="badge bg-success">신입</span>
-							<span class="badge bg-success">학력무관</span>
-							<span class="badge bg-success">경기도</span>
-						</div>
-					</a>
-					<div class="d-flex justify-content-between">
-						<button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button>
-						<!-- <button type="button" class="border-0 bg-white mt-2"><h3>🤍</h3></button> -->
-						<span class="fw-bold align-self-center me-3">D-34</span>
-					</div>
-				</div>
-			</div>
-
-
-
-			<div class="col-lg-3 col-md-4 col-sm-6">
-				<div class="border border-info m-2 p-2">
-					<a href="#" class="text-black text-decoration-none"><img src="../../../images/kakao_logo.png" class="img-fluid">
-						<h4 class="mt-1 fw-bold">카카오</h4>
-						<div class="mb-1 fst-italic">백엔드 개발자</div>
-						<div class="mb-2">
-							<span class="badge bg-primary">Java</span>
-							<span class="badge bg-primary">DB</span>
-							<span class="badge bg-primary">Spring</span>
-						</div>
-						<div>
-							<span class="badge bg-success">신입</span>
-							<span class="badge bg-success">학력무관</span>
-							<span class="badge bg-success">경기도</span>
-						</div>
-					</a>
-					<div class="d-flex justify-content-between">
-						<button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button>
-						<!-- <button type="button" class="border-0 bg-white mt-2"><h3>🤍</h3></button> -->
-						<span class="fw-bold align-self-center me-3">D-34</span>
-					</div>
-				</div>
-			</div>
-
-
-			
 
 			
 		</div>
