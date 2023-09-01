@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.user.User;
 
 import java.util.List;
@@ -18,14 +20,14 @@ public class ApplyController {
     private HttpSession session;
 
     @Autowired
-    private ApplyRepository applyRepository;
+    private ApplyService applyservice;
 
     // 15_개인지원내역 화면
     @GetMapping("/user/applyList")
 
     public String userApplyList(HttpServletRequest request) {
         User user = (User) session.getAttribute("sessionUser");
-        List<Apply> applyList = applyRepository.findApplyByUserId(user.getId());
+        List<Apply> applyList = applyservice.유저지원내역전체(user.getId());
         request.setAttribute("applyList", applyList);
 
         return "user/applyList";

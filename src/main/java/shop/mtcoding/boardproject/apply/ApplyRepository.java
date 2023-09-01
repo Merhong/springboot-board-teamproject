@@ -15,6 +15,8 @@ public interface ApplyRepository extends JpaRepository<Apply, Integer> {
     // public List<ApplyResponse.TestApplyListDTO> findApplyList(@Param("userId")
     // Integer userId, @Param("postingId") Integer postingId);
     @Query(value = "select * from Apply_tb at left outer join posting_tb pt on at.posting_id = pt.id left outer join resume_tb rt on rt.id = at.resume_id where rt.user_id = :userId", nativeQuery = true)
-    List<Apply> findApplyByUserId(@Param("userId") Integer userId);
+    List<Apply> findApplyResumeByUserId(@Param("userId") Integer userId);
 
+    @Query(value = "select * from Apply_tb at left outer join posting_tb pt on at.posting_id = pt.id where at.posting_id = :postingId", nativeQuery = true)
+    List<Apply> findApplyPostingByPositngId(@Param("postingId") Integer postingId);
 }

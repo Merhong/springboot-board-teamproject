@@ -3,99 +3,106 @@
 
 <!-- 22번 -->
 
+<div class="col-9 ms-2">
+  <h1 class="text-center mt-2 mb-3">지원자 내역</h1>
 
+  <div class="d-flex justify-content-center">
+    <h5 class="align-self-center">이 공고에 지원한 지원자입니다. :</h5>
 
-		<div class="col-9 ms-2">
-			<h1 class=" text-center mt-2 mb-3">지원자 내역</h1>
-
-
-
-		<div class="d-flex justify-content-center">
-			<h5 class="align-self-center">이 공고에 지원한 지원자입니다. :</h5>
-
-			<a href="/comp/posting/{{posting.id}}" class="btn btn-info m-2">
-				<div class="">
-					<span class="fw-bold">{{posting.position}}</span>
-					<span class="badge bg-black">D-{{#posting.expiryDate}}{{posting.expiryDate}}{{/posting.expiryDate}}</span>
-				</div>
-				<div class="mb-1">
-					{{#posting.postingSkill}}<span class="badge bg-primary me-1">{{skill}}</span>{{/posting.postingSkill}}
-				</div>
-				<div>
-					{{#posting.career}}<span class="badge bg-success">{{posting.career}}</span>{{/posting.career}}
-					{{#posting.education}}<span class="badge bg-success">{{posting.education}}</span>{{/posting.education}}
-					<span class="badge bg-success">{{posting.region}}</span>
-				</div>
-			</a>
-
-		</div>
-
-			
-
-
-			<table class="table table-bordered border ms-3">
-				<thead>
-				  <tr class="table-secondary">
-					<th class="text-center" scope="col">No.</th>
-					<th class="text-center" scope="col">이름</th>
-					<th class="text-center" scope="col">이력서</th>
-					<th class="text-center" scope="col">경력</th>
-					<th class="text-center" scope="col">상태</th>
-					<th class="text-center" scope="col">응답</th>
-				  </tr>
-				</thead>
-				<tbody>
-				  <tr>
-					<th class="text-center" scope="row">1</th>
-					<td class="text-center">홍길동</td>
-					<td class="text-center"><a href="/resume/1" class="">이력서1</a></td>
-					<td class="text-center">신입</td>
-					<td class="text-center">대기중</td>
-					<td class="text-center">
-						<button class="badge bg-success" type="button">합격</button>
-						<button class="badge bg-danger" type="button">불합격</button>
-					</td>
-				  </tr>
-				  <tr>
-					<th class="text-center" scope="row">2</th>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-				  </tr>
-				  <tr>
-					<th class="text-center" scope="row">3</th>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-				  </tr>
-				  <tr>
-					<th class="text-center" scope="row">4</th>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-				  </tr>
-				  <tr>
-					<th class="text-center" scope="row">5</th>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-				  </tr>
-				</tbody>
-			  </table>
-
-
-		</div>
+    <a href="/comp/posting/{{ posting.id }}" class="btn btn-info m-2">
+      <div class="">
+        <span class="fw-bold">{{ posting.position }}</span>
+        <span class="badge bg-black"
+          >D-{{#posting.expiryDate}}{{ posting.expiryDate
+          }}{{/posting.expiryDate}}</span
+        >
+      </div>
+      <div class="mb-1">
+        {{#posting.postingSkill
 
 
 
+        }}<span class="badge bg-primary me-1">{{ skill }}</span
+        >{{/posting.postingSkill}}
+      </div>
+      <div>
+        {{#posting.career
+
+
+
+        }}<span class="badge bg-success">{{ posting.career }}</span
+        >{{/posting.career}}
+        {{#posting.education
+
+
+
+        }}<span class="badge bg-success">{{ posting.education }}</span
+        >{{/posting.education}}
+        <span class="badge bg-success">{{ posting.region }}</span>
+      </div>
+    </a>
+  </div>
+
+  <table class="table table-bordered border ms-3">
+    <thead>
+      <tr class="table-secondary">
+        <th class="text-center" scope="col">No.</th>
+        <th class="text-center" scope="col">이름</th>
+        <th class="text-center" scope="col">이력서</th>
+        <th class="text-center" scope="col">경력</th>
+        <th class="text-center" scope="col">상태</th>
+        <th class="text-center" scope="col">응답</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#applyList}}
+      <tr>
+        <th class="text-center" scope="row">1</th>
+        <td class="text-center">{{ resume.user.username }}</td>
+        <td class="text-center"><a href="/resume/1" class="">이력서1</a></td>
+        <td class="text-center">신입</td>
+        <td class="text-center">대기중</td>
+        <td class="text-center">
+          <button class="badge bg-success" type="button">합격</button>
+          <button class="badge bg-danger" type="button">불합격</button>
+        </td>
+      </tr>
+      {{/applyList}}
+      <tr>
+        <th class="text-center" scope="row">2</th>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <th class="text-center" scope="row">3</th>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <th class="text-center" scope="row">4</th>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <th class="text-center" scope="row">5</th>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 {{> layout/comp2footer}}
 {{> layout/footer}}
