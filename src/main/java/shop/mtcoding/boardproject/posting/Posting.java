@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-
 import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.user.User;
 
@@ -39,7 +38,7 @@ public class Posting {
     private String position;
 
     private String career;
-    
+
     private String education;
 
     private Timestamp expiryDate;
@@ -57,7 +56,7 @@ public class Posting {
 
     @Builder
     public Posting(Integer id, String title, String desc, String photo, String region, String position, String career,
-            String education, Timestamp expiryDate, List<PostingSkill> postingSkill, User user, Timestamp createdAt) {
+                   String education, Timestamp expiryDate, List<PostingSkill> postingSkill, User user, Timestamp createdAt) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -72,7 +71,5 @@ public class Posting {
         this.createdAt = createdAt;
     }
 
-
-    
 
 }

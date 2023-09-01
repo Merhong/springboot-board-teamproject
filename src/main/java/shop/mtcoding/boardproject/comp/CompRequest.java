@@ -1,15 +1,10 @@
-package shop.mtcoding.boardproject.user;
+package shop.mtcoding.boardproject.comp;
+
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 public class CompRequest {
 
@@ -32,7 +27,7 @@ public class CompRequest {
 
         @Builder
         public SessionCompDTO(Integer userId, String email, String compname, String compRegister, String tel,
-                String photo, String address, String homepage, Integer role) {
+                              String photo, String address, String homepage, Integer role) {
             this.userId = userId;
             this.email = email;
             this.compname = compname;
@@ -43,13 +38,13 @@ public class CompRequest {
             this.homepage = homepage;
             this.role = role;
         }
-    } 
+    }
 
 
     @Getter
     @Setter
     @ToString
-    public static class PicDTO{
+    public static class PicDTO {
         private MultipartFile photo;
     }
 
@@ -69,7 +64,7 @@ public class CompRequest {
         public JoinDTO() {
             this.role = 2;
         }
-    } 
+    }
 
     @Getter
     @Setter
@@ -101,7 +96,7 @@ public class CompRequest {
         private Date expiryDate;
 
         private List<String> postingSkill;
-    } 
+    }
 
     @Getter
     @Setter
@@ -111,7 +106,7 @@ public class CompRequest {
         private String address;
         private String tel;
         private String homepage;
-    } 
+    }
 
 
 }

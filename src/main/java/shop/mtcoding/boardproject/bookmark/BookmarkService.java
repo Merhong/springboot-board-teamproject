@@ -2,10 +2,7 @@ package shop.mtcoding.boardproject.bookmark;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import shop.mtcoding.boardproject.bookmark.BookmarkResponse.CompBookmarkDTO;
 import shop.mtcoding.boardproject.posting.Posting;
-import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.user.User;
 import shop.mtcoding.boardproject.user.UserRepository;
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import shop.mtcoding.boardproject.comp.CompRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -80,24 +81,23 @@ public class UserController {
         User sessionUser = userService.로그인(loginDTO);
         session.setAttribute("sessionUser", sessionUser);
 
-        if(sessionUser.getCompname()!=null){
+        if (sessionUser.getCompname() != null) {
             CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
-                .userId(sessionUser.getId())
-                .email(sessionUser.getEmail())
-                .compname(sessionUser.getCompname())
-                .compRegister(sessionUser.getCompRegister())
-                .tel(sessionUser.getTel())
-                .photo(sessionUser.getPhoto())
-                .address(sessionUser.getAddress())
-                .homepage(sessionUser.getHomepage())
-                .role(sessionUser.getRole())
-                .build();
+                    .userId(sessionUser.getId())
+                    .email(sessionUser.getEmail())
+                    .compname(sessionUser.getCompname())
+                    .compRegister(sessionUser.getCompRegister())
+                    .tel(sessionUser.getTel())
+                    .photo(sessionUser.getPhoto())
+                    .address(sessionUser.getAddress())
+                    .homepage(sessionUser.getHomepage())
+                    .role(sessionUser.getRole())
+                    .build();
             // System.out.println("테스트:"+sessionComp);
             session.setAttribute("sessionComp", sessionComp);
         }
 
 
-        
         return "redirect:/";
     }
 

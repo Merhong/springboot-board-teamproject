@@ -1,4 +1,4 @@
-package shop.mtcoding.boardproject.user;
+package shop.mtcoding.boardproject.comp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyService;
-
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.skill.PostingSkill;
+import shop.mtcoding.boardproject.user.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -195,19 +194,15 @@ public class CompController {
     @PostMapping("/comp/main/{userId}/update")
     public @ResponseBody String compUpdate(@PathVariable Integer userId, CompRequest.compUpdateDTO DTO) {
         compService.기업정보수정(userId, DTO);
-        return Script.href("/comp/main","정보 수정 완료");
+        return Script.href("/comp/main", "정보 수정 완료");
     }
 
     @PostMapping("/comp/posting/{postingId}/delete")
-    public @ResponseBody String delete(@PathVariable Integer postingId){
-        int userId = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
+    public @ResponseBody String delete(@PathVariable Integer postingId) {
+        int userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId();
         compService.공고삭제(postingId);
-        return Script.href("/comp/"+userId+"/postingList","삭제 완료");
+        return Script.href("/comp/" + userId + "/postingList", "삭제 완료");
     }
-
-
-
-
 
 
 }

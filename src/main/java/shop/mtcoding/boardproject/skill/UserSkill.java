@@ -1,10 +1,8 @@
 package shop.mtcoding.boardproject.skill;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.user.User;
 
 import javax.persistence.*;
