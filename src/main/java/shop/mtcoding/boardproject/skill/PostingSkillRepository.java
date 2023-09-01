@@ -8,4 +8,6 @@ import org.springframework.data.repository.query.Param;
 public interface PostingSkillRepository extends JpaRepository<PostingSkill, Integer> {
 
     List<PostingSkill> deleteByPostingId(@Param("postingId") Integer postingId);
+
+    List<PostingSkill> findByPostingId(@Param("postingId") Integer postingId);
 }

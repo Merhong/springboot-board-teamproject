@@ -3,9 +3,9 @@ insert into user_tb(username, email ,password , tel, photo, address, birth, role
 insert into user_tb(username, email ,password , tel, photo, address, birth, role) values('박명수', 'cos@nate.com','1234', '01012344321',  'basic.jpg','인천시 미추홀구', now(),1);
 insert into user_tb(username, email ,password , tel, address, role) values('노홍철', 'haha@nate.com', '1234', '01022223333','부산시 수영구',1);
 
-insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage, role) values('LG', '5050','love@nate.com', '1234', '01055555000', '서울','lg.com', 2);
-insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage, role) values('배달의민족', '4636','bm@nate.com', '1234', '01099998888', '부산','bm.com', 2);
-insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage, role) values('kakao', '6666','kakao@nate.com', '1234', '01066667777', '대구','kakao.com', 2);
+insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage,photo,role) values('LG', '5050','love@nate.com', '1234', '01055555000', '서울','lg.com','LG_logo.png',2);
+insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage,photo,role) values('배달의민족', '4636','bm@nate.com', '1234', '01099998888', '부산','bm.com','배달의민족_logo.png', 2);
+insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage,photo,role) values('kakao', '6666','kakao@nate.com', '1234', '01066667777', '대구','kakao.com','kakao_logo.png', 2);
 
 insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(2, '안녕', '대졸', '신입','하이',true);
 insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(3, '니하오', '고졸', '4년','nihao',true);

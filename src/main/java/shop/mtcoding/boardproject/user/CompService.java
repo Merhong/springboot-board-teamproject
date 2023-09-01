@@ -11,15 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import shop.mtcoding.boardproject.user.CompRequest.JoinDTO;
-import shop.mtcoding.boardproject.user.CompRequest.SaveDTO;
-import shop.mtcoding.boardproject.user.CompRequest.UpdateDTO;
-import shop.mtcoding.boardproject.user.CompRequest.compUpdateDTO;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject._core.util.Image;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.skill.PostingSkillRepository;
+import shop.mtcoding.boardproject.user.CompRequest.JoinDTO;
+import shop.mtcoding.boardproject.user.CompRequest.SaveDTO;
+import shop.mtcoding.boardproject.user.CompRequest.UpdateDTO;
+import shop.mtcoding.boardproject.user.CompRequest.compUpdateDTO;
 
 @Service
 public class CompService {
@@ -38,13 +39,18 @@ public class CompService {
 
     @Transactional
     public void 회원가입(JoinDTO joinDTO) {
+        
+        String fileName = Image.updateImage(joinDTO);
+
         User user = User.builder()
         .role(joinDTO.getRole())
+        .photo(fileName)
         .email(joinDTO.getEmail())
         .password(joinDTO.getPassword())
         .compname(joinDTO.getCompname())
         .compRegister(joinDTO.getCompRegister())
         .tel(joinDTO.getTel())
+        .homepage(joinDTO.getHomepage())
         .address(joinDTO.getAddress())
         .build();
         userRepository.save(user);
@@ -158,10 +164,57 @@ public class CompService {
     }
 
 
-    public void 기업정보수정(Integer userId, compUpdateDTO dTO) {
+    @Transactional
+    public void 기업정보수정(Integer userId, compUpdateDTO DTO) {
+        Optional<User> userOP = userRepository.findById(userId);
+        
+        String fileName = Image.updateImage(DTO);
 
+        if (userOP.isPresent()) {
+            User user = userOP.get();
+            user.setAddress(DTO.getAddress());
+            user.setTel(DTO.getTel());
+            user.setHomepage(DTO.getHomepage());
+            if(fileName != null){ // 사진 안넣으면 기존 사진 유지하게
+                user.setPhoto(fileName);
+            }
+            CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
+                .userId(user.getId())
+                .email(user.getEmail())
+                .compname(user.getCompname())
+                .compRegister(user.getCompRegister())
+                .tel(user.getTel())
+                .photo(user.getPhoto())
+                .address(user.getAddress())
+                .homepage(user.getHomepage())
+                .role(user.getRole())
+                .build();
+            session.setAttribute("sessionComp", sessionComp);
 
-
+        } else{
+            throw new MyException(userId + "없음");
+        }
     }
+
+    @Transactional
+    public void 공고삭제(Integer postingId) {
+        // TODO : 공고에 지원한 이력서랑 공고를 북마크한것도 처리 해야함
+        
+        List<PostingSkill> skillList = postingSkillRepository.findByPostingId(postingId);
+        for (PostingSkill skill : skillList) {
+            skill.setPosting(null);
+        }
+
+        try {
+            postingRepository.deleteById(postingId);
+        } catch (Exception e) {
+            throw new MyException("없는공고");
+        }
+    }
+
+
+
+
+
 
 }

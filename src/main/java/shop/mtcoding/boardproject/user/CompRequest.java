@@ -3,6 +3,8 @@ package shop.mtcoding.boardproject.user;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,13 +49,21 @@ public class CompRequest {
     @Getter
     @Setter
     @ToString
-    public static class JoinDTO {
+    public static class PicDTO{
+        private MultipartFile photo;
+    }
+
+    @Getter
+    @Setter
+    @ToString
+    public static class JoinDTO extends PicDTO {
         private String email;
         private String password;
         private String compname;
         private String compRegister;
         private String tel;
         private String address;
+        private String homepage;
         private Integer role;
 
         public JoinDTO() {
@@ -97,7 +107,7 @@ public class CompRequest {
     @Setter
     @NoArgsConstructor
     @ToString
-    public static class compUpdateDTO {
+    public static class compUpdateDTO extends PicDTO {
         private String address;
         private String tel;
         private String homepage;

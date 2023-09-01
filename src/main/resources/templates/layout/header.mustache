@@ -40,7 +40,7 @@
 			</div>
 			<div class="col-4 d-flex justify-content-end">
 				<a class="btn btn-white fw-bold" href="/selectJoinForm">회원가입</a>
-				{{^sessionUser}}<a class="btn btn-white fw-bold" href="/user/loginForm">로그인</a>{{/sessionUser}}
+				{{^sessionComp.compname}}<a class="btn btn-white fw-bold" href="/user/loginForm">로그인</a>{{/sessionComp.compname}}
 				{{#sessionComp.compname}}<a class="btn btn-white fw-bold" href="/comp/main">내 회사 정보</a>{{/sessionComp.compname}}
 			</div>
 		</div>
