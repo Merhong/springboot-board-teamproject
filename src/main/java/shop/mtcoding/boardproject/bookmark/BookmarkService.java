@@ -14,7 +14,7 @@ import java.util.Optional;
 public class BookmarkService {
 
     @Autowired
-    private BookmarkRepository userBookmarkRepository;
+    private UserBookmarkRepository userBookmarkRepository;
 
     @Autowired
     private UserRepository userRepository;

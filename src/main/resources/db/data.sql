@@ -29,4 +29,13 @@ insert into apply_tb( resume_id, posting_id, statement) values(4, 3, '합격');
 insert into apply_tb( resume_id, posting_id, statement) values(2, 1, '대기');
 insert into apply_tb( resume_id, posting_id, statement) values(5, 3, '불합');
 
+
+insert into userbookmark_tb ( user_id, posting_id ) values(2, 2);
+insert into userbookmark_tb ( user_id, posting_id ) values(2, 3);
+insert into userbookmark_tb ( user_id, posting_id ) values(3, 1);
+insert into userbookmark_tb ( user_id, posting_id ) values(5, 3);
+
+
+
+
 -- insert into userskill_tb(user_id , java, db , html_and_css, python, javascript) values(2,true,true,true,true,true);

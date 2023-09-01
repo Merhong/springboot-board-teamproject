@@ -19,14 +19,15 @@ public class UserBookmarkController {
     private HttpSession session;
 
     // 16_개인북마크 화면
-    @GetMapping("/userBookMarkForm")
+    @GetMapping("/user/bookMarkForm")
     public String userBookMarkForm(HttpSession session, HttpServletRequest request,
-                                   UserBookmarkResponse.UserBookmarkDTO bookmarkDTO) {
+            BookmarkResponse.UserBookmarkDTO bookmarkDTO) {
         // User user = (User) session.getAttribute("sessioUser");
         List<Posting> postingList = userBookmarkService.유저북마크전체(2);
+        System.out.println(postingList.get(0).getTitle());
         request.setAttribute("postingList", postingList);
         System.out.println(request.getAttribute("postingList"));
-        return "bookMarkForm";
+        return "/user/bookMarkForm";
     }
 
 }

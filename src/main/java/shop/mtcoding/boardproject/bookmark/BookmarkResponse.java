@@ -6,7 +6,7 @@ import shop.mtcoding.boardproject.posting.Posting;
 
 import java.util.List;
 
-public class UserBookmarkResponse {
+public class BookmarkResponse {
 
     @Getter
     @Setter
