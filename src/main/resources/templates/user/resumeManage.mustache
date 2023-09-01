@@ -1,13 +1,7 @@
 {{> layout/header}}
-
 <!-- 14번 이력서관리 화면-->
-
-
 <div class="d-flex mb-3">
-
 	<div class="col-2"></div>
-
-
 	<div class="class col-8 h-auto d-flex border border-info">
 		<div class="bg-info col-2">
 			<div class="m-2"></div>
@@ -19,47 +13,29 @@
 			<div class="m-2"></div>
 			<a href="applyList" class="w-100 btn btn-info">지원내역</a>
 			<div class="m-2"></div>
-			<a href="bookmarkForm" class="w-100 btn btn-info">북마크</a>
+			<a href="bookMarkForm" class="w-100 btn btn-info">북마크</a>
 			<div class="m-2"></div>
 			<a href="recommendForm" class="w-100 btn btn-info">기업추천</a>
 			<div class="m-2"></div>
 		</div>
-
-
 		<div class="main col-10">
 			<div>
 				<h1 class="text-center"> 이력서관리하기</h1>
 			</div>
+			{{#resumes}}
 			<div>
-				<button type="button" class="btn btn-warning  w-50">이력서1</button>
+				<span type="text" class="w-50">{{title}}</span>
+				<a href="/user/resume/{{id}}" class="w-20 btn btn-info">상세보기</a>
+				<a href="/user/resumeUpdateForm/{{id}}" class="w-20 btn btn-info">수정</a>
+				<form action="/board/{{resumeId}}/delete" method="post">
+					<button type="submit" class="btn btn-danger">삭제</button>
+				</form>
 
-				<button type="button" class="btn btn-primary btn-sm">수정</button>
-				<button type="button" class="btn btn-primary btn-sm">삭제</button>
-			</div>
-			<hr>
-			<div>
-				<button type="button" class="btn btn-warning  w-50">이력서2</button>
 
-				<button type="button" class="btn btn-primary btn-sm">수정</button>
-				<button type="button" class="btn btn-primary btn-sm">삭제</button>
+				<hr>
 			</div>
-			<hr>
-			<div>
-				<button type="button" class="btn btn-warning  w-50">이력서3</button>
+			{{/resumes}}
 
-				<button type="button" class="btn btn-primary btn-sm">수정</button>
-				<button type="button" class="btn btn-primary btn-sm">삭제</button>
-			</div>
-			<hr>
-			<div>
-				<button type="button" class="btn btn-warning  w-50">이력서4</button>
-
-				<button type="button" class="btn btn-primary btn-sm">수정l</button>
-				<button type="button" class="btn btn-primary btn-sm">삭제</button>
-			</div>
 		</div>
 	</div>
 </div>
-
-
-{{> layout/footer}}
