@@ -23,4 +23,10 @@ insert into posting_tb( user_id, title, desc, region, homepage, position) values
 insert into posting_tb( user_id, title, desc, region, homepage, position) values(6, '신입구함', '경력 무관', '부산','bm.com', '백엔드');
 insert into posting_tb( user_id, title, desc, region, homepage, position) values(4, '신입구함', '경력 무관', '서울','lg.com', '프론트엔드');
 
+
+insert into apply_tb( resume_id, posting_id, statement) values(1, 2, '대기');
+insert into apply_tb( resume_id, posting_id, statement) values(4, 3, '합격');
+insert into apply_tb( resume_id, posting_id, statement) values(2, 1, '대기');
+insert into apply_tb( resume_id, posting_id, statement) values(5, 3, '불합');
+
 -- insert into userskill_tb(user_id , java, db , html_and_css, python, javascript) values(2,true,true,true,true,true);

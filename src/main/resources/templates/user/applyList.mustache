@@ -3,100 +3,78 @@
 <!-- 15번 개인지원내역 화면-->
 
 <style>
-	.main {
-		flex: 3;
-		padding: 20px;
-	}
+  .main {
+    flex: 3;
+    padding: 20px;
+  }
 
-	.tg {
-		border-collapse: collapse;
-		border-spacing: 0;
-		width: 100%;
-	}
+  .tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
 
-	.tg th,
-	.tg td {
-		border: 1px solid black;
-		padding: 10px;
-		text-align: left;
-		cursor: pointer;
-	}
+  .tg th,
+  .tg td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+  }
 
-	.tg th {
-		font-weight: bold;
-	}
+  .tg th {
+    font-weight: bold;
+  }
 </style>
 
 <div class="d-flex mb-3">
-   <div class="col-2"></div>
+  <div class="col-2"></div>
 
-   <div class="class col-8 h-auto d-flex border border-info">
-      <div class="bg-info col-2">
-			<div class="m-2"></div>
-			<a href="updateForm" class="w-100 btn btn-info">마이 페이지</a>
-			<div class="m-2"></div>
-			<a href="resumeForm" class="w-100 btn btn-info">이력서 등록</a>
-			<div class="m-2"></div>
-			<a href="resumeManage" class="w-100 btn btn-info">이력서 관리</a>
-			<div class="m-2"></div>
-			<a href="applyList" class="w-100 btn btn-info">지원내역</a>
-			<div class="m-2"></div>
-			<a href="bookMarkForm" class="w-100 btn btn-info">북마크</a>
-			<div class="m-2"></div>
-			<a href="recommendForm" class="w-100 btn btn-info">기업추천</a>
-			<div class="m-2"></div>
-		</div>
+  <div class="class col-8 h-auto d-flex border border-info">
+    <div class="bg-info col-2">
+      <div class="m-2"></div>
+      <a href="updateForm" class="w-100 btn btn-info">마이 페이지</a>
+      <div class="m-2"></div>
+      <a href="resumeForm" class="w-100 btn btn-info">이력서 등록</a>
+      <div class="m-2"></div>
+      <a href="resumeManage" class="w-100 btn btn-info">이력서 관리</a>
+      <div class="m-2"></div>
+      <a href="applyList" class="w-100 btn btn-info">지원내역</a>
+      <div class="m-2"></div>
+      <a href="bookMarkForm" class="w-100 btn btn-info">북마크</a>
+      <div class="m-2"></div>
+      <a href="recommendForm" class="w-100 btn btn-info">기업추천</a>
+      <div class="m-2"></div>
+    </div>
 
+    <div class="main col-10">
+      <h1 class="text-center">지원내역</h1>
+      <table class="tg">
+        <thead>
+          <tr>
+            <th>NO</th>
+            <th>공고명</th>
+            <th>이력서</th>
+            <th>포지션</th>
+            <th>상태</th>
+          </tr>
+        </thead>
 
-		<div class="main col-10">
-			<h1 class="text-center">지원내역</h1>
-			<table class="tg">
-				<thead>
-					<tr>
-						<th>NO</th>
-						<th>공고명</th>
-						<th>이력서</th>
-						<th>포지션</th>
-						<th>상태</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr onclick="redirectToPage('/')">
-						<td>1</td>
-						<td>백엔드 채용</td>
-						<td>이력서1</td>
-						<td>백엔드</td>
-						<td>대기중</td>
-					</tr>
-					<tr onclick="redirectToPage('/')">
-						<td>2</td>
-						<td>백엔드 채용</td>
-						<td>이력서2</td>
-						<td>백엔드</td>
-						<td>대기중</td>
-					</tr>
-					<tr onclick="redirectToPage('/')">
-						<td>3</td>
-						<td>프론트</td>
-						<td>이력서3</td>
-						<td>프론트</td>
-						<td>대기중</td>
-					</tr>
-					<tr onclick="redirectToPage('/')">
-						<td>4</td>
-						<td>프론트</td>
-						<td>이력서4</td>
-						<td>프론트</td>
-						<td>대기중</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="col-2"></div>
+        <tbody>
+          {{#applyList}}
+          <tr onclick="redirectToPage('/notice/{{ posting.id }}')">
+            <td>{{ id }}</td>
+            <td>{{ posting.title }}</td>
+            <td>{{ resume.title }}</td>
+            <td>{{ posting.position }}</td>
+            <td>{{ statement }}</td>
+          </tr>
+          {{/applyList}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-2"></div>
 </div>
-
-
-
 
 {{> layout/footer}}
