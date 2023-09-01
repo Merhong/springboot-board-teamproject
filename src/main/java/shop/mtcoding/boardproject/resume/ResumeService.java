@@ -5,11 +5,12 @@ import org.springframework.stereotype.Service;
 import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeDTO;
 import shop.mtcoding.boardproject.user.User;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 @Service
 public class ResumeService {
-
     @Autowired
     private ResumeRepository resumeRepository;
 
@@ -24,9 +25,13 @@ public class ResumeService {
                 .build();
 
         resumeRepository.save(resume);
-
     }
 
+    public Resume 이력서상세보기(Integer id) {
+        return resumeRepository.findByResume(id);
+    }
 
+    public List<Resume> 이력서목록(Integer id) {
+        return resumeRepository.findByResumeUser(id);
+    }
 }
-

@@ -2,44 +2,57 @@ package shop.mtcoding.boardproject.resume;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import shop.mtcoding.boardproject.user.User;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
 public class ResumeController {
-
     @Autowired
     private ResumeService resumeService;
-
     @Autowired
     private HttpSession session;
 
-    // 개인이력서 삭제 버튼 POST
-    @PostMapping("/user/resumeDelete")
-    public String userResumeDelete() {
-        return null;
-    }
-
-    // 개인이력서 수정 버튼 POST
-    @PostMapping("/user/resumeUpdate")
-    public String userResumeUpdate() {
-        return null;
-    }
-
-
     // 개인이력서 상세보기
-    @GetMapping("/user/{id}/resume")
-    public String userResumeDetail() {
-        return null;
+    @GetMapping("/user/resume/{id}")
+    public String userResumeDetail(@PathVariable Integer id, HttpServletRequest request) {
+        Resume resume = resumeService.이력서상세보기(id);
+        System.out.println("아이디: " + resume.getId());
+        if (resume != null) {
+            User sessionUser = (User) session.getAttribute("sessionUser");
+            if (sessionUser.getId().equals(resume.getUser().getId())) {
+                request.setAttribute("resume", resume);
+                return "/user/resumeDetailForm";
+            }
+        }
+        return "redirect:/user/resumeManage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
     }
+
+    // @GetMapping("/user/resumeManage")
+    // public String userResumeManage(Integer id, Model model) {
+    // List<Resume> resumes = resumeService.이력서목록(id);
+    // model.addAttribute("resumes", resumes);
+    // return "/user/resumeManage";
+    // }
 
     // 14_개인이력서관리 화면
     @GetMapping("/user/resumeManage")
-    public String userResumeManage() {
-
+    public String userResumeManage(Model model) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Integer userId = sessionUser.getId();
+        List<Resume> resumes = resumeService.이력서목록(userId);
+        model.addAttribute("resumes", resumes);
+        model.addAttribute("userId", userId); // 유저 아이디를 모델에 추가
         return "/user/resumeManage";
     }
 
@@ -48,7 +61,6 @@ public class ResumeController {
     public String userResumeSave(ResumeRequest.ResumeDTO resumeDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.이력서등록(resumeDTO, sessionUser.getId());
-
         return "redirect:/";
     }
 
@@ -57,6 +69,5 @@ public class ResumeController {
     public String userResumeForm() {
         return "user/resumeForm";
     }
-
 
 }

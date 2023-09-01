@@ -7,12 +7,12 @@ insert into user_tb(compname , comp_register  ,email , password, tel, address,ho
 insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage, role) values('배달의민족', '4636','bm@nate.com', '1234', '01099998888', '부산','bm.com', 2);
 insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage, role) values('kakao', '6666','kakao@nate.com', '1234', '01066667777', '대구','kakao.com', 2);
 
-insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(2, '안녕', '대졸', '신입','하이',true);
-insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(3, '니하오', '고졸', '4년','nihao',true);
-insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(5, '헬로', '초대졸', '1년','hello',false);
-insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(2, '사와디캅', '대졸', '신입','ssawadi',true);
-insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(5, '나마스떼', '초대졸', '1년','nanstte',true);
-insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(2, '반갑', '대졸', '신입','반갑습니다',false);
+insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(2, '지원서1', '대졸', '신입','하이',true);
+insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(3, '지원서1', '고졸', '4년','nihao',true);
+insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(5, '지원서1', '초대졸', '1년','hello',false);
+insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(2, '지원서2', '대졸', '신입','ssawadi',true);
+insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(5, '지원서2', '초대졸', '1년','nanstte',true);
+insert into resume_tb(user_id, title ,grade , career, personal_statement , disclosure ) values(2, '지원서3', '대졸', '신입','반갑습니다',false);
 
 -- insert into skill_tb (name) values('java');
 -- insert into skill_tb (name) values('DB');
