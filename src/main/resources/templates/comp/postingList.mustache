@@ -4,42 +4,43 @@
 <!-- 19번 -->
 
 
+<div class="col-9 ms-3">
+	<h1 class="text-center mt-2">공고관리</h1>
 
-		<div class="col-9 ms-3">
-			<h1 class="text-center mt-2">공고관리</h1>
 
-			
-			
 
-			{{#postingList}}
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<a href="/comp/posting/{{id}}" class="btn btn-info">
-					<div class="">
-						<span class="fw-bold">{{position}}</span>
-						<span class="badge bg-black">D-{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
-					</div>
-					<div class="mb-1">
-						{{#postingSkill}}<span class="badge bg-primary me-1">{{skill}}</span>{{/postingSkill}}
-					</div>
-					<div>
-						{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
-						{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
-						<span class="badge bg-success">{{region}}</span>
-					</div>
-				</a>
 
-				<h3>{{title}}</h3>
-
-				<div class="align-self-center col-auto ms-1">
-					<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning">수정하기</a>
-					<a href="/comp/posting/{{id}}/resumeList" class="btn btn-success">지원자 보기</a>
+	{{#postingList}}
+		<div class="d-flex border border-info m-3 p-2 justify-content-between">
+			<a href="/comp/posting/{{id}}" class="btn btn-info">
+				<div class="">
+					<span class="fw-bold">{{position}}</span>
+					<span class="badge bg-black">D-{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
 				</div>
+				<div class="mb-1">
+					{{#postingSkill}}<span class="badge bg-primary me-1">{{skill}}</span>{{/postingSkill}}
+				</div>
+				<div>
+					{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
+					{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
+					<span class="badge bg-success">{{region}}</span>
+				</div>
+			</a>
+
+			<h3>{{title}}</h3>
+
+			<div class="d-flex flex-column">
+				<a href="/comp/posting/{{id}}/resumeList" class="btn btn-success btn-sm mb-1">지원자 보기</a>
+				<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning btn-sm mb-1">수정하기</a>
+				<form action="/comp/posting/{{id}}/delete" method="post">
+					<input class="btn btn-danger btn-sm w-100" type="submit" value="삭제하기">
+				</form>
 			</div>
-			{{/postingList}}
-
-
-
 		</div>
+	{{/postingList}}
+
+
+</div>
 
 
 

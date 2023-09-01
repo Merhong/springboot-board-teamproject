@@ -2,14 +2,9 @@ package shop.mtcoding.boardproject.apply;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import shop.mtcoding.boardproject.resume.ResumeRepository;
-import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeDTO;
-import shop.mtcoding.boardproject.user.User;
 
 import java.util.List;
-
-import javax.transaction.Transactional;
 
 @Service
 public class ApplyService {

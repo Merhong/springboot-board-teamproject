@@ -31,6 +31,7 @@
 			border-color: silver !important;
 		}
 	</style>{{/sessionComp.compname}}
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -47,6 +48,7 @@
 				<a class="btn btn-white fw-bold" href="/user/loginForm">로그인</a>
 				{{#sessionComp.compname}}<a class="btn btn-white fw-bold" href="/comp/main">내 회사
 					정보</a>{{/sessionComp.compname}}
+
 			</div>
 		</div>
 
@@ -64,6 +66,7 @@
 						</li>
 						<li class="nav-item">
 							{{^sessionComp.compname}}<a class="nav-link text-white"
+
 								href="/user/resumeForm">이력서등록</a>{{/sessionComp.compname}}
 							{{#sessionComp.compname}}<a class="nav-link text-white"
 								href="/comp/posting/saveForm">채용공고등록</a>{{/sessionComp.compname}}
@@ -73,6 +76,7 @@
 								href="/user/resumeManage">이력서관리</a>{{/sessionComp.compname}}
 							{{#sessionComp.compname}}<a class="nav-link text-white"
 								href="/comp/{{sessionComp.userId}}/postingList">채용공고관리</a>{{/sessionComp.compname}}
+
 						</li>
 						<li class="nav-item">
 							<a class="nav-link text-white" href="/user/applyList">지원내역</a>

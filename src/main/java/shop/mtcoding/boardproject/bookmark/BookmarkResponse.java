@@ -7,9 +7,6 @@ import shop.mtcoding.boardproject.resume.Resume;
 
 import java.util.List;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-
 public class BookmarkResponse {
 
     @Getter

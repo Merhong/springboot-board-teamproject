@@ -4,10 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.skill.UserSkill;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -31,11 +30,11 @@ public class User {
     private String username; // 회사X
 
     private Date birth; // 회사X
-   
+
     private String compname; // 개인X
 
     private String compRegister; // 개인X
-    
+
     private String homepage; // 개인X 
 
     private String email;
@@ -61,8 +60,8 @@ public class User {
 
     @Builder
     public User(Integer id, Integer role, String username, Date birth, String compname, String compRegister,
-            String homepage, String email, String password, String tel, String photo, String address,
-            List<Posting> postingList, List<UserSkill> userSkillList, Timestamp createdAt) {
+                String homepage, String email, String password, String tel, String photo, String address,
+                List<Posting> postingList, List<UserSkill> userSkillList, Timestamp createdAt) {
         this.id = id;
         this.role = role;
         this.username = username;
@@ -79,7 +78,6 @@ public class User {
         this.userSkillList = userSkillList;
         this.createdAt = createdAt;
     }
-
 
 
 }

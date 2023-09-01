@@ -4,52 +4,58 @@
 <!-- 18번 -->
 
 
-		<form action="/comp/main/{{sessionComp.userId}}/update" method="post" onsubmit="" class="col-auto container" id="selectform">
-			<h1 class="text-center mt-2">기업 페이지</h1>
+<form action="/comp/main/{{sessionComp.userId}}/update" method="post" onsubmit="" class="col-auto container"
+      id="selectform" enctype="multipart/form-data">
+	<h1 class="text-center mt-2">기업 페이지</h1>
 
-			<div class="d-flex">
-				<div class="m-1 col-4 d-flex flex-column align-items-center overflow-hidden" style="width:170px; height:280px;">
-					<img src="../../../images/{{sessionComp.compname}}_logo.png" class=""/>
-				</div>
+	<div class="d-flex">
+		<div class="m-1 col-4 d-flex flex-column img-fluid d-block m-auto" style="width:180px; height:280px;">
+			<img src="../../../images/{{#sessionComp.photo}}{{sessionComp.photo}}{{/sessionComp.photo}}" class=""/>
+		</div>
 
-				<div class="col-8 p-2">
-						<div class="input-group mb-3">
-							<span class="input-group-text">회사명</span>
-							<input type="text" class="form-control" value="{{sessionComp.compname}}" disabled>
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">사업자번호</span>
-							<input type="text" class="form-control" value="{{sessionComp.compRegister}}" disabled>
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">주소</span>
-							<textarea class="form-control" rows="2">{{#sessionComp.address}}{{sessionComp.address}}{{/sessionComp.address}}</textarea>
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control" value="{{sessionComp.tel}}">
-						</div>
-						<div class="input-group mb-2">
-							<span class="input-group-text">홈페이지</span>
-							<input type="text" class="form-control" value="{{sessionComp.homepage}}">
-						</div>
-				</div>
-
+		<div class="col-8 p-2">
+			<div class="input-group mb-3">
+				<span class="input-group-text">회사명</span>
+				<input type="text" class="form-control" value="{{sessionComp.compname}}" disabled>
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-text">사업자번호</span>
+				<input type="text" class="form-control" value="{{sessionComp.compRegister}}" disabled>
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-text">주소</span>
+				<textarea class="form-control" rows="2"
+				          name="address">{{#sessionComp.address}}{{sessionComp.address}}{{/sessionComp.address}}</textarea>
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-text">전화번호</span>
+				<input type="text" class="form-control" value="{{sessionComp.tel}}" name="tel">
+			</div>
+			<div class="input-group mb-3">
+				<span class="input-group-text">홈페이지</span>
+				<input type="text" class="form-control" value="{{sessionComp.homepage}}" name="homepage">
+			</div>
+			<div class="mb-2">
+				<input type="file" class="form-control" name="photo">
 			</div>
 
-			<!--
+		</div>
 
-			<div class="input-group mb-3 ms-1">
-				<span class="input-group-text">기업소개</span>
-				<textarea class="form-control" rows="5"></textarea>
-			</div>
-			-->
+	</div>
 
-			<div>
-				<input id="button" class="mb-3 ms-1 w-100 btn btn-success" type="submit" value="기업 정보 수정" onclick="">
-			</div>
+	<!--
 
-		</form>
+    <div class="input-group mb-3 ms-1">
+        <span class="input-group-text">기업소개</span>
+        <textarea class="form-control" rows="5"></textarea>
+    </div>
+    -->
+
+	<div>
+		<input id="button" class="mb-3 ms-1 w-100 btn btn-success" type="submit" value="기업 정보 수정" onclick="">
+	</div>
+
+</form>
 
 
 

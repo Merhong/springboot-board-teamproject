@@ -3,49 +3,49 @@
 <!-- 16번 개인북마크 화면 -->
 
 <div class="d-flex mb-3">
-  <div class="col-2"></div>
+	<div class="col-2"></div>
 
-  <div class="class col-8 h-auto d-flex border border-info">
-    <div class="bg-info col-2">
-      <div class="m-2"></div>
-      <a href="updateForm" class="w-100 btn btn-info">마이 페이지</a>
-      <div class="m-2"></div>
-      <a href="resumeForm" class="w-100 btn btn-info">이력서 등록</a>
-      <div class="m-2"></div>
-      <a href="resumeManage" class="w-100 btn btn-info">이력서 관리</a>
-      <div class="m-2"></div>
-      <a href="applyList" class="w-100 btn btn-info">지원내역</a>
-      <div class="m-2"></div>
-      <a href="bookmarkForm" class="w-100 btn btn-info">북마크</a>
-      <div class="m-2"></div>
-      <a href="recommendForm" class="w-100 btn btn-info">기업추천</a>
-      <div class="m-2"></div>
-    </div>
+	<div class="class col-8 h-auto d-flex border border-info">
+		<div class="bg-info col-2">
+			<div class="m-2"></div>
+			<a href="updateForm" class="w-100 btn btn-info">마이 페이지</a>
+			<div class="m-2"></div>
+			<a href="resumeForm" class="w-100 btn btn-info">이력서 등록</a>
+			<div class="m-2"></div>
+			<a href="resumeManage" class="w-100 btn btn-info">이력서 관리</a>
+			<div class="m-2"></div>
+			<a href="applyList" class="w-100 btn btn-info">지원내역</a>
+			<div class="m-2"></div>
+			<a href="bookmarkForm" class="w-100 btn btn-info">북마크</a>
+			<div class="m-2"></div>
+			<a href="recommendForm" class="w-100 btn btn-info">기업추천</a>
+			<div class="m-2"></div>
+		</div>
 
-    <div class="main col-10">
-      <h1 class="text-center">북마크</h1>
-      {{#postingList }}
-      <div class="d-flex border border-info m-3 p-2">
-        <div class="col-10">
-          <a href="/comp/posting/{{ id }}"
-            ><img
-              src="공고사진"
-              alt="{{ user.compname }}(
+		<div class="main col-10">
+			<h1 class="text-center">북마크</h1>
+			{{#postingList }}
+				<div class="d-flex border border-info m-3 p-2">
+					<div class="col-10">
+						<a href="/comp/posting/{{ id }}"
+						><img
+							src="공고사진"
+							alt="{{ user.compname }}(
 				{{ title }}/{{ position }})"
-              class="img-thumbnail"
-              width="100px"
-              height="60px"
-          /></a>
-        </div>
-        <div class="mt-2 mb-2">
-          <button type="button" class="btn btn-danger">삭제</button>
-        </div>
-      </div>
-      {{/postingList}}
+							class="img-thumbnail"
+							width="100px"
+							height="60px"
+						/></a>
+					</div>
+					<div class="mt-2 mb-2">
+						<button type="button" class="btn btn-danger">삭제</button>
+					</div>
+				</div>
+			{{/postingList}}
 
-      <div class="col-2"></div>
-    </div>
-  </div>
+			<div class="col-2"></div>
+		</div>
+	</div>
 </div>
 
 {{> layout/footer}}
