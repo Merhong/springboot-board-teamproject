@@ -95,6 +95,7 @@ public class UserController {
                 .tel(sessionUser.getTel())
                 .photo(sessionUser.getPhoto())
                 .address(sessionUser.getAddress())
+                .homepage(sessionUser.getHomepage())
                 .role(sessionUser.getRole())
                 .build();
             // System.out.println("테스트:"+sessionComp);

@@ -26,11 +26,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String username;
+    private Integer role; // 관리자0? 개인1 회사2
 
-    private String compname;
+    private String username; // 회사X
 
-    private String compRegister;
+    private Date birth; // 회사X
+   
+    private String compname; // 개인X
+
+    private String compRegister; // 개인X
+    
+    private String homepage; // 개인X 
 
     private String email;
 
@@ -43,10 +49,6 @@ public class User {
 
     private String address;
 
-    private Date birth;
-
-    private Integer role;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Posting> postingList = new ArrayList<>();
 
@@ -56,24 +58,28 @@ public class User {
     @CreationTimestamp // Insert 할때 시간을 적어준다.
     private Timestamp createdAt;
 
+
     @Builder
-    public User(Integer id, String username, String compname, String compRegister, String email, String password,
-            String tel, String photo, String address, Date birth, Integer role, List<Posting> postingList,
-            List<UserSkill> userSkillList, Timestamp createdAt) {
+    public User(Integer id, Integer role, String username, Date birth, String compname, String compRegister,
+            String homepage, String email, String password, String tel, String photo, String address,
+            List<Posting> postingList, List<UserSkill> userSkillList, Timestamp createdAt) {
         this.id = id;
+        this.role = role;
         this.username = username;
+        this.birth = birth;
         this.compname = compname;
         this.compRegister = compRegister;
+        this.homepage = homepage;
         this.email = email;
         this.password = password;
         this.tel = tel;
         this.photo = photo;
         this.address = address;
-        this.birth = birth;
-        this.role = role;
         this.postingList = postingList;
         this.userSkillList = userSkillList;
         this.createdAt = createdAt;
     }
+
+
 
 }

@@ -35,8 +35,6 @@ public class Posting {
 
     private String region;
 
-    private String homepage;
-
     @Column(nullable = false)
     private String position;
 
@@ -56,17 +54,18 @@ public class Posting {
     @CreationTimestamp
     private Timestamp createdAt;
 
-    
+
     @Builder
-    public Posting(Integer id, String title, String desc, String photo, String region, String homepage, String position,
-            Timestamp expiryDate, List<PostingSkill> postingSkill, User user, Timestamp createdAt) {
+    public Posting(Integer id, String title, String desc, String photo, String region, String position, String career,
+            String education, Timestamp expiryDate, List<PostingSkill> postingSkill, User user, Timestamp createdAt) {
         this.id = id;
         this.title = title;
         this.desc = desc;
         this.photo = photo;
         this.region = region;
-        this.homepage = homepage;
         this.position = position;
+        this.career = career;
+        this.education = education;
         this.expiryDate = expiryDate;
         this.postingSkill = postingSkill;
         this.user = user;
