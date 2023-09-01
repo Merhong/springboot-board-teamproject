@@ -6,12 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.boardproject.user.User;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +21,19 @@ public class ResumeController {
     private ResumeService resumeService;
     @Autowired
     private HttpSession session;
+
+    @PostMapping("/resume/delete/{resumeId}")
+    public @ResponseBody String delete(@PathVariable Integer resumeId) {
+        resumeService.이력서삭제(resumeId);
+        return "redirect:/user/resumeManage";
+    }
+
+    @PostMapping("/resume/{resumeId}/update")
+    public String update(@PathVariable Integer resumeId, ResumeRequest.ResumeUpdateDTO resumeUpdateDTO) {
+        resumeService.이력서수정(resumeId, resumeUpdateDTO);
+        return "redirect:/user/resumeManage";
+
+    }
 
     // 개인이력서 상세보기
     @GetMapping("/user/resume/{id}")
@@ -37,13 +49,6 @@ public class ResumeController {
         }
         return "redirect:/user/resumeManage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
     }
-
-    // @GetMapping("/user/resumeManage")
-    // public String userResumeManage(Integer id, Model model) {
-    // List<Resume> resumes = resumeService.이력서목록(id);
-    // model.addAttribute("resumes", resumes);
-    // return "/user/resumeManage";
-    // }
 
     // 14_개인이력서관리 화면
     @GetMapping("/user/resumeManage")

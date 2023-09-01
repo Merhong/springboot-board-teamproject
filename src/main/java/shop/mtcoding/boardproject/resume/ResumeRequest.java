@@ -23,4 +23,20 @@ public class ResumeRequest {
 
     }
 
+    @Getter
+    @Setter
+    public static class ResumeUpdateDTO {
+        private Integer id;
+        private String username;
+        private String tel;
+        private String address;
+        private Date birth;
+
+        private String title;
+        private String grade;
+        private String career;
+        private String personalStatement;
+
+    }
+
 }
