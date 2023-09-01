@@ -45,25 +45,9 @@ public class UserController {
 
     // 14번 이력서 삭제 버튼 POST
 
-    // 14_개인이력서관리 화면
-    @GetMapping("/user/resumeManage")
-    public String userResumeManage() {
-        return "/user/resumeManage";
-    }
+
 
     // 13번 사진수정 버튼 POST
-
-    // 13번 이력서 등록 버튼 POST
-    @PostMapping("/user/resumeSave")
-    public String userResumeSave() {
-        return "redirect:/";
-    }
-
-    // 13_개인이력서등록 화면
-    @GetMapping("/user/resumeForm")
-    public String userResumeForm() {
-        return "user/resumeForm";
-    }
 
     // 12번 수정하기 버튼 POST
     @PostMapping("/user/update")

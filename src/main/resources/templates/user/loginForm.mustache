@@ -38,4 +38,27 @@
 	</div>
 </div>
 
+<script>
+	let sessionUser = "{{#sessionUser}}{{.}}{{/sessionUser}}"; // 세션에 저장된 사용자의 이메일 정보
+	function changeLoginLinks() {
+		let joinLink = document.querySelector('a[href="/selectJoinForm"]');
+		let loginLink = document.querySelector('a[href="/user/loginForm"]');
+		if (sessionUser) {
+			joinLink.textContent = "로그아웃";
+			joinLink.href = "/logout";
+			loginLink.textContent = "마이페이지";
+			loginLink.href = "/user/updateForm";
+		} else {
+			joinLink.textContent = "회원가입";
+			joinLink.href = "/selectJoinForm";
+			loginLink.textContent = "로그인";
+			loginLink.href = "/user/loginForm";
+		}
+	}
+	document.addEventListener("DOMContentLoaded", function () {
+		let loginButton = document.querySelector("#button");
+		loginButton.addEventListener("click", changeLoginLinks);
+		changeLoginLinks(); // 페이지 로드 시 초기 세션 상태에 따라 링크 텍스트 변경
+	});
+</script>
 {{> layout/footer}}
