@@ -24,7 +24,7 @@ public class MasterController {
         return "index";
     }
 
-    @GetMapping("/help")
+    @GetMapping("/master/help")
     public String qna() {
         return "/master/qna";
     }

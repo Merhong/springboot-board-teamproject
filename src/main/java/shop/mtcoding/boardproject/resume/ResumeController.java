@@ -17,6 +17,19 @@ public class ResumeController {
     @Autowired
     private HttpSession session;
 
+    // 개인이력서 삭제 버튼 POST
+    @PostMapping("/user/resumeDelete")
+    public String userResumeDelete() {
+        return null;
+    }
+
+    // 개인이력서 수정 버튼 POST
+    @PostMapping("/user/resumeUpdate")
+    public String userResumeUpdate() {
+        return null;
+    }
+
+
     // 개인이력서 상세보기
     @GetMapping("/user/{id}/resume")
     public String userResumeDetail() {

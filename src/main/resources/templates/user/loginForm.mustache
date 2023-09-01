@@ -42,7 +42,7 @@
 	let sessionUser = "{{#sessionUser}}{{.}}{{/sessionUser}}"; // 세션에 저장된 사용자의 이메일 정보
 	function changeLoginLinks() {
 		let joinLink = document.querySelector('a[href="/selectJoinForm"]');
-		let loginLink = document.querySelector('a[href="/user/loginForm"]');
+		let loginLink = document.querySelector('a[href="/loginForm"]');
 		if (sessionUser) {
 			joinLink.textContent = "로그아웃";
 			joinLink.href = "/logout";
@@ -52,7 +52,7 @@
 			joinLink.textContent = "회원가입";
 			joinLink.href = "/selectJoinForm";
 			loginLink.textContent = "로그인";
-			loginLink.href = "/user/loginForm";
+			loginLink.href = "/loginForm";
 		}
 	}
 	document.addEventListener("DOMContentLoaded", function () {

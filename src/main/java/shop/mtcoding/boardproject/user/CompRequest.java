@@ -24,11 +24,13 @@ public class CompRequest {
         private String tel;
         private String photo;
         private String address;
+        private String homepage;
         private Integer role;
+
 
         @Builder
         public SessionCompDTO(Integer userId, String email, String compname, String compRegister, String tel,
-                String photo, String address, Integer role) {
+                String photo, String address, String homepage, Integer role) {
             this.userId = userId;
             this.email = email;
             this.compname = compname;
@@ -36,6 +38,7 @@ public class CompRequest {
             this.tel = tel;
             this.photo = photo;
             this.address = address;
+            this.homepage = homepage;
             this.role = role;
         }
     } 
@@ -88,6 +91,16 @@ public class CompRequest {
         private Date expiryDate;
 
         private List<String> postingSkill;
+    } 
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @ToString
+    public static class compUpdateDTO {
+        private String address;
+        private String tel;
+        private String homepage;
     } 
 
 
