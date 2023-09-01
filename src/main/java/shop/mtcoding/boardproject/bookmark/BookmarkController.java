@@ -22,6 +22,12 @@ public class BookmarkController {
     @Autowired
     private HttpSession session;
 
+    // 북마크 삭제 버튼 POST
+    @PostMapping("/bookmarkDelete")
+    public String bookmarkDelete() {
+        return null;
+    }
+
     // 개인북마크 화면
     @GetMapping("/user/bookmarkForm")
     public String userBookMarkForm(HttpServletRequest request,
