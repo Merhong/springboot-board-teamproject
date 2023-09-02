@@ -7,6 +7,10 @@ import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.sql.Timestamp;
 
 @NoArgsConstructor
@@ -21,6 +25,7 @@ public class Apply {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Resume resume;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -30,7 +30,7 @@ public class ResumeController {
     private HttpSession session;
 
     @PostMapping("/resume/delete/{resumeId}")
-    public @ResponseBody String delete(@PathVariable Integer resumeId) {
+    public String delete(@PathVariable Integer resumeId) {
         resumeService.이력서삭제(resumeId);
         return "redirect:/user/resumeManage";
     }
