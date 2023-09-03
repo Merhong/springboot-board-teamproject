@@ -8,6 +8,8 @@ import shop.mtcoding.boardproject.resume.Resume;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /* 기업추천, 인재추천 테이블 - 중간테이블 */
 @NoArgsConstructor
@@ -25,7 +27,7 @@ public class Recommend {
     private Posting posting;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Resume resume;
-
 
 }

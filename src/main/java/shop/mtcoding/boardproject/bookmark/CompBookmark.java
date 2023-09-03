@@ -8,6 +8,9 @@ import shop.mtcoding.boardproject.resume.Resume;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -23,6 +26,7 @@ public class CompBookmark {
     private Posting posting;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Resume resume;
 
     public CompBookmark(Posting posting, Resume resume) {
