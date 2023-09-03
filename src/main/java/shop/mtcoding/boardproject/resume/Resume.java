@@ -29,14 +29,14 @@ public class Resume {
     @Lob
     private String personalStatement;
 
-    private boolean disclosure;
+    private Boolean disclosure;
     @JsonIgnore
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @Builder
-    public Resume(String title, String career, String grade, String personalStatement, boolean disclosure, User user) {
+    public Resume(String title, String career, String grade, String personalStatement, Boolean disclosure, User user) {
         this.title = title;
         this.career = career;
         this.grade = grade;

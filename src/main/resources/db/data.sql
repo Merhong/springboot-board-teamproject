@@ -61,6 +61,15 @@ insert into postingSkill_tb(skill, posting_id)
 values ('JavaScript', 5);
 
 
+insert into Skill_tb(skillname) values ('Java');
+insert into Skill_tb(skillname) values ('Spring Framework');
+insert into Skill_tb(skillname) values ('DB');
+insert into Skill_tb(skillname) values ('Git');
+insert into Skill_tb(skillname) values ('C');
+insert into Skill_tb(skillname) values ('Python');
+insert into Skill_tb(skillname) values ('HTML/CSS');
+insert into Skill_tb(skillname) values ('JavaScript');
+
 insert into apply_tb(resume_id, posting_id, statement)
 values (1, 2, '대기');
 insert into apply_tb(resume_id, posting_id, statement)

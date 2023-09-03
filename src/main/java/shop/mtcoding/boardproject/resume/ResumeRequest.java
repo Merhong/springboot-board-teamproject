@@ -2,8 +2,14 @@ package shop.mtcoding.boardproject.resume;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Builder.Default;
 
 import java.sql.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+
+import org.hibernate.annotations.ColumnDefault;
 
 public class ResumeRequest {
 
@@ -20,6 +26,13 @@ public class ResumeRequest {
         private String grade;
         private String career;
         private String personalStatement;
+
+        private List<Integer> skillList;
+        private Boolean disclosure;
+
+        public ResumeDTO() {
+            this.disclosure = false;
+        }
 
     }
 
