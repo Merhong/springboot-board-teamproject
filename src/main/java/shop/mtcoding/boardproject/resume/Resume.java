@@ -9,6 +9,8 @@ import shop.mtcoding.boardproject.user.User;
 
 import javax.persistence.*;
 
+/* 이력서 엔티티 클래스 */
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -20,18 +22,24 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // 이력서 제목
     private String title;
 
+    // 이력서 경력
     private String career;
 
+    // 이력서 학력
     private String grade;
 
+    // 이력서 자기소개
     @Lob
     private String personalStatement;
 
+    // 이력서 공개여부
     private Boolean disclosure;
     @JsonIgnore
 
+    // 유저 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 

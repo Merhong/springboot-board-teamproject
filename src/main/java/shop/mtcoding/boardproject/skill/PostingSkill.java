@@ -7,6 +7,9 @@ import shop.mtcoding.boardproject.posting.Posting;
 
 import javax.persistence.*;
 
+/* 공고 요구스킬 중간 테이블 */
+// 공고id, 스킬id
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -18,9 +21,11 @@ public class PostingSkill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // 공고 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
     private Posting posting;
 
+    // 스킬 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
     private Skill skill;
 }

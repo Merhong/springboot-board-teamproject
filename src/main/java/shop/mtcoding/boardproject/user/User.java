@@ -14,6 +14,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/* 유저 엔티티 클래스 */
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -25,35 +27,49 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // 회원유형
     private Integer role; // 관리자0? 개인1 회사2
 
-    private String username; // 회사X
+    // 개인이름, 기업은 null
+    private String username;
 
-    private Date birth; // 회사X
+    // 생년월일, 기업은 null
+    private Date birth;
 
-    private String compname; // 개인X
+    // 기업이름, 개인은 null
+    private String compname;
 
-    private String compRegister; // 개인X
+    // 사업자번호, 개인은 null
+    private String compRegister;
 
-    private String homepage; // 개인X 
+    // 홈페이지, 개인은 null
+    private String homepage; 
 
+    // 이메일, 로그인시 아이디로 사용
     private String email;
 
+    // 비밀번호
     private String password;
 
+    // 전화번호
     private String tel;
 
+    // 프로필 사진
     @Column(nullable = true)
     private String photo;
 
+    // 주소
     private String address;
 
+    // 양방향 매핑 (공고 리스트)
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Posting> postingList = new ArrayList<>();
 
+    // 양방향 매핑 (개인 스킬 리스트)
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserSkill> userSkillList = new ArrayList<>();
 
+    // Log용 타임스탬프
     @CreationTimestamp // Insert 할때 시간을 적어준다.
     private Timestamp createdAt;
 

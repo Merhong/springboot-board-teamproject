@@ -14,6 +14,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/* 공고 엔티티 클래스 */
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -25,31 +27,41 @@ public class Posting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // 공고 제목
     @Column(nullable = false, length = 100)
     private String title;
 
+    // 공고 내용
     private String desc;
 
+    // 공고 사진
     private String photo;
 
+    // 공고 관할 지역
     private String region;
 
+    // 공고 요구 직무
     @Column(nullable = false)
     private String position;
 
+    // 공고 요구 경력
     private String career;
 
+    // 공고 요구 학력
     private String education;
 
+    // 공고 만료일
     private Timestamp expiryDate;
 
     @OneToMany(mappedBy = "posting", fetch = FetchType.LAZY)
     private List<PostingSkill> postingSkill = new ArrayList<>();
 
+    // 유저 테이블 ORM
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user; // 1+N
 
+    // 로그용 타임스탬프
     @CreationTimestamp
     private Timestamp createdAt;
 

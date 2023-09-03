@@ -8,6 +8,9 @@ import shop.mtcoding.boardproject.user.User;
 
 import javax.persistence.*;
 
+/* 개인의 북마크 중간테이블 */
+// 유저id, 공고id
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -19,9 +22,11 @@ public class UserBookmark {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // 유저 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    // 공고 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
     private Posting posting;
 
