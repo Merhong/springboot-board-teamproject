@@ -55,19 +55,19 @@
 				<div class="col-8 p-2">
 						<div class="input-group mb-3">
 							<span class="input-group-text">이름</span>
-							<input type="text" class="form-control" value="홍길동" disabled>
+							<input type="text" class="form-control" value="{{#resume.user.username}}{{resume.user.username}}{{/resume.user.username}}" disabled>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control" value="010-1234-5678" disabled>
+							<input type="text" class="form-control" value="{{#resume.user.tel}}{{resume.user.tel}}{{/resume.user.tel}}" disabled>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">주소</span>
-							<textarea class="form-control" rows="2" disabled>서울특별시 송파구 올림픽로 300 롯데월드타워 35층</textarea>
+							<textarea class="form-control" rows="2" disabled>{{#resume.user.address}}{{resume.user.address}}{{/resume.user.address}}</textarea>
 						</div>
 						<div class="input-group mb-2">
 							<span class="input-group-text">생년월일</span>
-							<input type="text" class="form-control" value="1111.11.11" disabled>
+							<input type="text" class="form-control" value="{{#resume.user.birth}}{{resume.user.birth}}{{/resume.user.birth}}" disabled>
 						</div>
 				</div>
 
@@ -75,27 +75,32 @@
 
 			<div class="input-group mb-3">
 				<span class="input-group-text">학력사항</span>
-				<input type="text" class="form-control" value="asdasdas" disabled>
+				<input type="text" class="form-control" value="{{resume.grade}}" disabled>
 			</div>
 
 			<div class="input-group mb-3">
 				<span class="input-group-text">경력사항</span>
-				<input type="text" class="form-control" value="asdasdas" disabled>
+				<input type="text" class="form-control" value="{{resume.career}}" disabled>
 			</div>
 
 			<div class="input-group mb-3">
 				<span class="input-group-text">보유기술</span>
-				<input type="text" class="form-control" value="asdasdas" disabled>
+				<input type="text" class="form-control" value="" disabled>
 			</div>
 
 			<div class="input-group mb-3">
-				<span class="input-group-text">자기소개서</span>
-				<textarea class="form-control" rows="5" disabled>asfasfasfasf</textarea>
+				<span class="input-group-text">제목</span>
+				<input type="text" class="form-control" value="{{resume.title}}" disabled>
+			</div>
+
+			<div class="input-group mb-3">
+				<span class="input-group-text">내용</span>
+				<textarea class="form-control" rows="5" disabled>{{resume.personalStatement}}</textarea>
 			</div>
 
 
 			<div class="d-flex justify-content-center">
-				<button type="button" class="mb-3 ms-1 w-100 btn btn-success">연락하기</button>
+				<button type="button" class="mb-3 w-100 btn btn-success">연락하기</button>
 				<button type="button" class="mb-3 ms-3 w-100 btn btn-warning">북마크하기</button>
 			</div>
 

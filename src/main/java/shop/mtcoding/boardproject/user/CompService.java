@@ -13,8 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.Image;
+import shop.mtcoding.boardproject.apply.Apply;
+import shop.mtcoding.boardproject.apply.ApplyRepository;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
+import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.skill.PostingSkillRepository;
 import shop.mtcoding.boardproject.skill.Skill;
@@ -38,6 +41,9 @@ public class CompService {
 
     @Autowired
     private SkillRepository skillRepository;
+
+    @Autowired
+    private ApplyRepository applyRepository;
 
     @Autowired
     private HttpSession session;
@@ -216,6 +222,27 @@ public class CompService {
         } catch (Exception e) {
             throw new MyException("없는공고");
         }
+    }
+
+    public List<Resume> 공고에지원한이력서찾기(Integer postingId) {
+
+        List<Apply> applyList = applyRepository.findByPostingId(postingId);
+        
+        // System.out.println("테스트33:"+applyList);
+        // System.out.println("테스트33:"+applyList.get(0));
+        // System.out.println("테스트33:"+applyList.get(0).getId());
+        // System.out.println("테스트33:"+applyList.get(0).getStatement());
+        // System.out.println("테스트33:"+applyList.get(0).getPosting().getTitle());
+        // System.out.println("테스트33:"+applyList.get(0).getResume().getTitle());
+
+        List<Resume> resumeList = new ArrayList<>();
+
+        while(applyList.size()>0){
+            resumeList.add(applyList.get(0).getResume());
+            applyList.remove(0);
+        }
+
+        return resumeList;
     }
 
     // public void 테스트2(String string) {

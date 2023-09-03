@@ -16,7 +16,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.boardproject._core.util.Script;
+import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.resume.Resume;
+import shop.mtcoding.boardproject.resume.ResumeService;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillService;
 
@@ -28,6 +31,9 @@ public class CompController {
 
     @Autowired
     private CompService compService;
+
+    @Autowired
+    private ResumeService resumeService;
 
     @Autowired
     private HttpSession session;
@@ -112,6 +118,15 @@ public class CompController {
     public String resumeList(@PathVariable Integer postingId, HttpServletRequest request) {
         Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
+        
+        List<Resume> resumeList = compService.공고에지원한이력서찾기(postingId);
+
+        // System.out.println("테스트:" +resumeList.get(0).getTitle());
+
+
+
+        request.setAttribute("resumeList", resumeList);
+
         return "comp/resumeList";
     }
 
@@ -123,14 +138,17 @@ public class CompController {
     }
 
     @GetMapping("/resume/{resumeId}")
-    public String resumeDetail(@PathVariable Integer resumeId) {
-        // request.setAttribute("postingId", postingId);
+    public String resumeDetail(@PathVariable Integer resumeId, HttpServletRequest request) {
+        Resume resume = resumeService.이력서찾기(resumeId);
+        request.setAttribute("resume", resume);
         return "comp/resumeDetail";
     }
 
     @GetMapping("/resume/newWindow/{resumeId}")
-    public String resumeDetail2(@PathVariable Integer resumeId) {
-        // request.setAttribute("postingId", postingId);
+    public String resumeDetail2(@PathVariable Integer resumeId, HttpServletRequest request) {
+        Resume resume = resumeService.이력서찾기(resumeId);
+        // System.out.println("테스트"+resume.getUser().getUsername());
+        request.setAttribute("resume", resume);
         return "comp/resumeDetailOnly";
     }
 

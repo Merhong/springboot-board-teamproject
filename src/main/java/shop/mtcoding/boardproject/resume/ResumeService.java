@@ -2,8 +2,13 @@ package shop.mtcoding.boardproject.resume;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeDTO;
 import shop.mtcoding.boardproject.user.User;
+
+import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -27,6 +32,17 @@ public class ResumeService {
 
     }
 
+    public Resume 이력서찾기(Integer resumeId) {
+        Optional<Resume> resumeOP = resumeRepository.findById(resumeId);
+        if (resumeOP.isPresent()) {
+            return resumeOP.get();
+        } else {
+            throw new MyException(resumeId+" 없음");
+        }
+    }
+
+
+    
 
 }
 
