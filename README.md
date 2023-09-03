@@ -11,17 +11,32 @@
 ## 1단계 기능
 
 - (특징 : 자바스크립트, 예외처리)
-- 회원가입
-- 로그인 
-- 회원정보 보기
-- 회원정보 수정하기
-- 게시글 작성하기
-- 게시글 목록보기
-- 게시글 상세보기
-- 게시글 삭제하기
-- 게시글 수정하기
-- 댓글 작성하기
-- 댓글 삭제하기
+- 회원가입(기업/개인)
+- 로그인
+- 로그아웃
+- 회원정보 보기(기업/개인)
+- 회원정보 수정(기업/개인)
+
+### <개인>
+- 회원정보(마이페이지) 보기
+- 회원정보(마이페이지) 수정
+- 이력서 등록
+- 이력서 관리(상세보기, 수정, 삭제)
+- 지원내역 보기
+- 지역별 공고 상세보기
+- 기술별 공고 상세보기
+- 직무별 공고 상세보기
+- 공고 지원하기
+- 공고 북마크하기 + 북마크 표시
+- 북마크 리스트 보기
+- 기업추천(기술, 직무)
+
+### <기업>
+- 회원정보(기업페이지) 보기
+- 회원정보(기업페이지) 수정
+- 
+
+
 - 예외처리
 
 ## 2단계 기능
@@ -46,35 +61,64 @@ blogdb;
 
 create table user_tb
 (
-    id         integer auto_increment,
-    created_at timestamp,
-    email      varchar(20) not null,
-    password   varchar(60) not null,
-    pic_url    longtext,
-    username   varchar(20) not null unique,
+    id            integer auto_increment,
+    address       varchar(255),
+    birth         date,
+    comp_register varchar(255),
+    compname      varchar(255),
+    created_at    timestamp,
+    email         varchar(255),
+    homepage      varchar(255),
+    password      varchar(255),
+    photo         varchar(255),
+    role          integer,
+    tel           varchar(255),
+    username      varchar(255),
     primary key (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-create table board_tb
+create table posting_tb
+(
+    id          integer auto_increment,
+    career      varchar(255),
+    created_at  timestamp,
+    desc        varchar(255),
+    education   varchar(255),
+    expiry_date timestamp,
+    photo       varchar(255),
+    position    varchar(255) not null,
+    region      varchar(255),
+    title       varchar(100) not null,
+    user_id     integer,
+    primary key (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+create table resume_tb
+(
+    id                 integer auto_increment,
+    career             varchar(255),
+    disclosure         boolean,
+    grade              varchar(255),
+    personal_statement clob,
+    title              varchar(255),
+    user_id            integer,
+    primary key (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+create table skill_tb
+(
+    id        integer auto_increment,
+    skillname varchar(255),
+    primary key (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+create table master_tb
 (
     id         integer auto_increment,
-    content    longtext,
+    content    varchar(255),
     created_at timestamp,
     title      varchar(100) not null,
     user_id    integer,
-    primary key (id),
-    constraint fk_board_user_id foreign key (user_id) references user_tb (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-create table reply_tb
-(
-    id         integer auto_increment,
-    comment    varchar(100) not null,
-    created_at timestamp,
-    board_id   integer,
-    user_id    integer,
-    primary key (id),
-    constraint fk_reply_board_id foreign key (board_id) references board_tb (id),
-    constraint fk_reply_user_id foreign key (user_id) references user_tb (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+    primary key (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```

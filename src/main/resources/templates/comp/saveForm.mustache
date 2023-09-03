@@ -123,46 +123,15 @@
         -->
 		<hr class="m-1">
 		<div class="d-flex flex-wrap">
-			<div class="form-check d-inline-block ms-3 me-2">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="Java">
-					Java</label>
-			</div>
-			<div class="form-check d-inline-block ms-3 me-2">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="DB">
-					DB</label>
-			</div>
-			<div class="form-check d-inline-block ms-3 me-2">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="HTML/CSS">
-					HTML/CSS</label>
-			</div>
-			<div class="form-check d-inline-block ms-3 me-2">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="Python">
-					Python</label>
-			</div>
-			<div class="form-check d-inline-block ms-3 me-2">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="JavaScript">
-					JavaScript</label>
-			</div>
-			<div class="form-check d-inline-block ms-3 me-2">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="Git">
-					Git</label>
-			</div>
-			<div class="form-check d-inline-block ms-3 me-2">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="Spring">
-					Spring Framework</label>
-			</div>
-			<div class="form-check d-inline-block ms-3 me-2">
-				<label class="form-check-label">
-					<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="C">
-					C</label>
-			</div>
+
+			{{#skillList}}
+				<div class="form-check d-inline-block ms-3 me-2">
+					<label class="form-check-label">
+						<input class="form-check-input" type="checkbox" name="postingSkill" id="" value="{{skillname}}">
+						{{skillname}}</label>
+				</div>
+			{{/skillList}}
+
 		</div>
 	</div>
 

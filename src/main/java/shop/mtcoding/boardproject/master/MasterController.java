@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import shop.mtcoding.boardproject.comp.CompService;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.skill.Skill;
+import shop.mtcoding.boardproject.skill.SkillRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -15,8 +17,13 @@ public class MasterController {
     @Autowired
     private CompService compService;
 
+    @Autowired
+    private SkillRepository skillRepository;
+
     @GetMapping("/")
     public String index(HttpServletRequest request) {
+        List<Skill> skillList = skillRepository.findAll();
+        request.setAttribute("skillList", skillList);
         List<Posting> postingList = compService.모든공고찾기();
         request.setAttribute("postingList", postingList);
         return "index";
