@@ -10,65 +10,30 @@
 	<div class="col-xxl-7 col-xl-9 col-lg-10 col-md-11 col-sm-12">
 
 
-		<form action="/" method="get">
-		<div class="d-flex justify-content-around ps-4 pe-4" style="height: 295px;">
-			<div class="m-2 border border-info col-4">
-				<h4 class="mt-2 text-center">지역별</h4>
-				<div class="d-flex justify-content-around p-1">
-						<div class="flex-wrap overflow-y-scroll border me-2 " style="height: 212px;">
-							<button type="button" class="d-block border-0 bg-white text-start w-100 bg-secondary-subtle">전국</button>
-							<hr class="m-0">
-							<button type="button" class="d-block border-0 bg-white text-start w-100">서울/인천/경기</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">부산/울산/경남</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">대구/경북</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">광주/전라</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">대전/세종/충청</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">강원</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">제주</button>
-						</div>
-						<div class="flex-wrap overflow-y-scroll border " style="height: 212px;">
-							<button type="button" class="d-block border-0 bg-white text-start w-100 bg-secondary-subtle">전체</button>
-							<hr class="m-0">
-							<button type="button" class="d-block border-0 bg-white text-start w-100">강서구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">금정구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">남구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">동구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">동래구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">부산진구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">북구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">사상구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">사하구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">서구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">수영구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">연제구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">영도구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">중구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">해운대구</button>
-							<button type="button" class="d-block border-0 bg-white text-start w-100">기장군</button>
-						</div>
-				</div>
-
-			</div>
+		<form action="/" method="get" id="selectform"> <!-- form="selectform"랑 id 같게 해야 받아옴  -->
+		<div class="d-flex justify-content-around ps-4 pe-4">
 
 
 
-			<div class="m-2 border border-info col-4">
+			<div class="order-2 m-2 border border-info col-4">
 				<h4 class="mt-2 text-center">기술별</h4>
 
-				<div class="form-check d-inline-block ms-3 me-2">
-					<label class="form-check-label">
-						<input class="form-check-input" type="checkbox" id="" name="skillList" value="all" {{#skillDTO.all}}checked{{/skillDTO.all}}>
-					모두</label>
+				<div class="d-flex justify-content-between">
+					<div class="form-check d-inline-block ms-3 me-2 align-self-end">
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox" name="skillList" id="all" value="all" onclick="skillCheck(this)">
+						모두</label>
+					</div>
+					<div class="btn btn-primary me-3 m-1 btn-sm" onclick="searchOnlySkill()">기술만 검색</div>
 				</div>
-				<button class="btn btn-primary" type="submit">검색하기</button>
-				
+
 				<hr class="m-1">
 				<div class="d-flex flex-wrap">
 					
 					{{#skillList}}
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" name="skillList" id="" value="{{skillname}}">
+							<input class="skillFind form-check-input" type="checkbox" name="skillList" value="{{skillname}}" id="{{skillname}}" onclick='skillAllCheck()'>
 						{{skillname}}</label>
 					</div>
 					{{/skillList}}
@@ -76,15 +41,65 @@
 				</div>
 			</div>
 
-			<div class="m-2 border border-info col-4">
+
+
+			<div class="order-1 m-2 border border-info col-4">
+				<h4 class="mt-2 text-center">지역별</h4>
+				
+				<div class="d-flex justify-content-between">
+					<div class="form-check d-inline-block ms-3 me-2 align-self-end">
+						<label class="form-check-label">
+							<input class="form-check-input all3checkbox" type="checkbox" name="" id="" value="" onclick="regionCheck(this)">
+						모두</label>
+					</div>
+					<div class="btn btn-primary me-3 m-1 btn-sm" onclick="searchOnlyRegion()">지역만 검색</div>
+				</div>
+
+				<hr class="m-1">
+				
+				<div class="d-flex justify-content-around p-1">
+						
+					<div class="d-flex justify-content-center">
+
+						<select class="me-2" name="region" form="selectform" onchange="regionCheck2(this)">
+							<option class="all3" id="all3" value="all">선택하세요.</option> 
+							<option id="서울" value="서울">서울/인천/경기</option> 
+							<option id="부산" value="부산">부산/울산/경남</option> 
+							<option id="대구" value="대구">대구/경북</option> 
+							<option id="광주" value="광주">광주/전라</option> 
+							<option id="대전" value="대전">대전/세종/충청</option> 
+							<option id="강원" value="강원">강원</option> 
+							<option id="제주" value="제주">제주</option> 
+						</select>
+	
+						<select class=""> 
+							<option id="" value="">선택하세요.</option> 
+							<option value="강서구">강서구</option> 
+							<option value="금정구">금정구</option> 
+							<option value="남구">남구</option> 
+							<option value="동구">동구</option> 
+							<option value="동래구">동래구</option> 
+						</select>
+	
+					</div>
+				</div>
+
+			</div>
+
+
+
+
+			<div class="order-3 m-2 border border-info col-4">
 				<h4 class="mt-2 text-center">직무별</h4>
 
-				<div class="form-check d-inline-block ms-3 me-2">
-					<label class="form-check-label">
-						<input class="form-check-input" type="radio" id="" name="jobList" value="all" {{#jobDTO.all}}checked{{/jobDTO.all}}>
-					모두</label>
+				<div class="d-flex justify-content-between">
+					<div class="form-check d-inline-block ms-3 me-2 align-self-end">
+						<label class="form-check-label">
+							<input class="form-check-input" type="radio" id="all2" name="position" value="all">
+						모두</label>
+					</div>
+					<div class="btn btn-primary me-3 m-1 btn-sm" onclick="searchOnlyPosition()">직무만 검색</div>
 				</div>
-				<button class="btn btn-primary" type="submit">검색하기</button>
 
 				<hr class="m-1">
 
@@ -92,47 +107,47 @@
 
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="jobList" value="backend" {{#jobDTO.backend}}checked{{/jobDTO.backend}}>
+							<input class="form-check-input" type="radio" id="백엔드" name="position" value="백엔드">
 						백엔드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="jobList" value="frontend" {{#jobDTO.frontend}}checked{{/jobDTO.frontend}}>
-						프런트엔드</label>
+							<input class="form-check-input" type="radio" id="프론트엔드" name="position" value="프론트엔드">
+						프론트엔드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="jobList" value="fullstack" {{#jobDTO.fullstack}}checked{{/jobDTO.fullstack}}>
+							<input class="form-check-input" type="radio" id="풀스택" name="position" value="풀스택">
 						풀스택</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="jobList" value="android" {{#jobDTO.android}}checked{{/jobDTO.android}}>
+							<input class="form-check-input" type="radio" id="안드로이드" name="position" value="안드로이드">
 						안드로이드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="jobList" value="IOS" {{#jobDTO.IOS}}checked{{/jobDTO.IOS}}>
+							<input class="form-check-input" type="radio" id="IOS" name="position" value="IOS">
 						IOS</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="jobList" value="embedded" {{#jobDTO.embedded}}checked{{/jobDTO.embedded}}>
+							<input class="form-check-input" type="radio" id="임베디드" name="position" value="임베디드">
 						임베디드</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="jobList" value="bigdata" {{#jobDTO.bigdata}}checked{{/jobDTO.bigdata}}>
+							<input class="form-check-input" type="radio" id="빅데이터" name="position" value="빅데이터">
 						빅데이터</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="jobList" value="server" {{#jobDTO.server}}checked{{/jobDTO.server}}>
+							<input class="form-check-input" type="radio" id="서버" name="position" value="서버">
 						서버</label>
 					</div>
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="jobList" value="machinelearning" {{#jobDTO.machinelearning}}checked{{/jobDTO.machinelearning}}>
+							<input class="form-check-input" type="radio" id="머신러닝" name="position" value="머신러닝">
 						머신러닝</label>
 					</div>
 
@@ -143,7 +158,10 @@
 
 			
 		</div>
-		</form>
+		<div class="m-2">
+			<div class="btn btn-success w-100" onclick="searchAll()">검색하기</div>
+		</div>
+	</form>
 
 
 
@@ -154,7 +172,7 @@
 
 			{{#postingList}}
 			<div class="col-lg-3 col-md-4 col-sm-6">
-				<div class="border border-info m-2 p-2">
+				<div class="border border-info m-2 ps-2 pe-2 pt-1">
 					<h4 class="text-center fw-bold">{{user.compname}}</h4>
 					{{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto" style="height: 120px;">{{/user.photo}}
 					{{^user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img src="../../../images/no_logo.png" class="img-fluid d-block m-auto" style="height: 120px;">{{/user.photo}}
@@ -172,7 +190,7 @@
 					<div class="d-flex justify-content-between">
 						<button type="button" class="border-0 bg-white mt-1"><h3>❤️</h3></button>
 						<!-- <button type="button" class="border-0 bg-white mt-2"><h3>🤍</h3></button> -->
-						<span class="fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
+						<span class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
 					</div>
 				</div>
 			</div>
@@ -186,6 +204,177 @@
 
 	<div class="col-auto"></div>
 </div>
+
+
+
+
+<input type="hidden" value="{{json}}" name="json" id="json">
+<input type="hidden" value="{{position}}" name="positionSet" id="positionSet">
+<input type="hidden" value="{{region}}" name="regionSet" id="regionSet">
+
+<script>
+
+
+
+
+
+	function Ddaycheck(day){
+		if(typeof day === "string"){
+			let day2 = new Date(day);
+			return Ddaycheck(day2);
+		} else{
+			let today = new Date();
+
+			// console.log((day-today) / (1000 * 60 * 60 * 24));
+			let DDay = Math.ceil( (day-today) / (1000 * 60 * 60 * 24));
+
+			if(DDay==0){
+				// console.log("D-Day");
+				return "D-Day";
+			}
+			else if(DDay<0){
+				// console.log("만료");
+				return "만료";
+			}
+			else{
+				// console.log("D-"+DDay); 
+				return "D-"+DDay;
+			}
+		}
+	}
+	let day = document.querySelectorAll('.expiryDate');
+	day.forEach(element => {
+		element.textContent = Ddaycheck(element.textContent);
+	});
+	// 날짜 D-Day로 바꾸기
+
+
+	
+	function skillCheck(selectAll){
+		let skillAll=document.querySelectorAll(".skillFind");
+		// let allCheck=document.querySelector("#all");
+
+		skillAll.forEach(element => {
+			element.checked=selectAll.checked;
+		});
+	}
+	function skillAllCheck(){
+		let allCheck=document.querySelector("#all");
+		let skillAll=document.querySelectorAll(".skillFind");
+		let skillAllCheck=document.querySelectorAll(".skillFind:checked");
+
+		if(skillAll.length==skillAllCheck.length){
+			allCheck.checked=true;
+		}else{
+			allCheck.checked=false
+		};
+	}
+	// 기술 모두 체크박스 작동하게
+
+//////////
+	function check(){
+		const json = JSON.parse(document.querySelector("#json").value);
+
+		let skillCheckBoxAll = document.getElementById("all");
+
+		if(json[0]!=skillCheckBoxAll.value){
+			json.forEach(element => {
+				document.getElementById(element).checked=true;
+			});
+			skillCheckBoxAll.checked=false;
+		} else{
+			skillCheckBoxAll.checked=true;
+			let skillFind2 = document.querySelectorAll(".skillFind")
+			skillFind2.forEach(element => {
+				element.checked=true;
+			});
+		}
+	}
+	check();
+
+	const positionSet = document.querySelector("#positionSet").value;
+	if(positionSet=="all"){
+		document.getElementById("all2").checked=true;
+	} else{
+		document.getElementById(positionSet).checked=true;
+	}
+
+	const regionSet = document.querySelector("#regionSet").value;
+	if(regionSet=="all"){
+		document.querySelector(".all3checkbox").checked=true;
+	} else{
+		document.getElementById(regionSet).selected=true;
+	}
+////////// 현재 검색중인거 뷰 다시 불러와도 읽어오게
+	
+	function regionCheck(checkbox){
+		if(checkbox.checked){
+			document.getElementById("all3").selected=true;
+		}
+	}
+	function regionCheck2(checkbox){
+		let select = checkbox.value;
+		if(select=="all"){
+			document.querySelector(".all3checkbox").checked=true;
+		} else{
+			document.querySelector(".all3checkbox").checked=false;
+		}
+	}
+	// 지역별 선택바-모두체크박스 연동
+	
+
+	function searchOnlyPosition(){
+		document.querySelector(".all3checkbox").checked=true;
+		document.getElementById("all3").selected=true;
+		
+		let skillfind = document.querySelectorAll(".skillFind")
+		skillfind.forEach(element => {
+			element.checked=false;
+		});
+		document.querySelector("#all").checked=true;
+
+		let submit = document.getElementById("selectform");
+		submit.submit();
+	}
+
+	function searchOnlyRegion(){
+		document.getElementById("all2").checked=true;
+
+		let skillfind = document.querySelectorAll(".skillFind")
+		skillfind.forEach(element => {
+			element.checked=false;
+		});
+		document.querySelector("#all").checked=true;
+
+		let submit = document.getElementById("selectform");
+		submit.submit();
+	}
+
+	function searchOnlySkill(){
+		document.querySelector(".all3checkbox").checked=true;
+		document.getElementById("all3").selected=true;
+
+		document.getElementById("all2").checked=true;
+
+		let submit = document.getElementById("selectform");
+		submit.submit();
+	}
+
+	function searchAll(){
+		if(document.querySelector("#all").checked){
+			let skillfind = document.querySelectorAll(".skillFind")
+			skillfind.forEach(element => {
+				element.checked=false;
+			});
+		}
+		let submit = document.getElementById("selectform");
+		submit.submit();
+	}
+
+
+</script>
+
+
 
 
 {{> layout/footer}}

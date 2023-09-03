@@ -7,27 +7,47 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.skill.Skill;
-import shop.mtcoding.boardproject.skill.SkillRepository;
-import shop.mtcoding.boardproject.user.CompService;
+import shop.mtcoding.boardproject.skill.SkillService;
 
 @Controller
 public class MasterController {
 
     @Autowired
-    private CompService compService;
+    private MasterService masterService;
 
     @Autowired
-    private SkillRepository skillRepository;
+    private SkillService skillService;
+
 
     @GetMapping("/")
-    public String index(HttpServletRequest request) {
-        List<Skill> skillList = skillRepository.findAll();
-        request.setAttribute("skillList", skillList);
-        List<Posting> postingList = compService.모든공고찾기();
+    public String index(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, @RequestParam(defaultValue = "all") String region, HttpServletRequest request) {
+
+        List<Skill> sl = skillService.스킬이름전부();
+        request.setAttribute("skillList", sl);
+        // 뷰에서 기술목록 뿌릴때 사용
+
+        request.setAttribute("position", position);
+        request.setAttribute("region", region);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(skillList);
+            // System.out.println("테스트"+json);
+            request.setAttribute("json", json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        // 뷰에 뭘 검색한건지 적혀있게
+        
+        List<Posting> postingList = masterService.메인화면검색(skillList, position, region);
         request.setAttribute("postingList", postingList);
+
         return "index";
     }
 

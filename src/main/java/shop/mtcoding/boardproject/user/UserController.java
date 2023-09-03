@@ -80,7 +80,7 @@ public class UserController {
         User sessionUser = userService.로그인(loginDTO);
         session.setAttribute("sessionUser", sessionUser);
 
-        if(sessionUser.getCompname()!=null){
+        if(sessionUser.getRole() != 1){
             CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                 .userId(sessionUser.getId())
                 .email(sessionUser.getEmail())

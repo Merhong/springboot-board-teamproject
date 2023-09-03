@@ -7,6 +7,8 @@ import shop.mtcoding.boardproject.posting.Posting;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @NoArgsConstructor
 @Setter
 @Getter
@@ -18,6 +20,7 @@ public class PostingSkill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     private Posting posting;
 

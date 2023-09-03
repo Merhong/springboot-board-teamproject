@@ -6,25 +6,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.posting.Posting;
-import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.skill.Skill;
-import shop.mtcoding.boardproject.skill.SkillRepository;
+import shop.mtcoding.boardproject.skill.SkillService;
 
 @Controller
 public class CompController {
 
     @Autowired
-    private SkillRepository skillRepository;
+    private SkillService skillService;
 
     @Autowired
     private CompService compService;
@@ -58,7 +58,7 @@ public class CompController {
 
     @GetMapping("/comp/posting/saveForm")
     public String saveForm(HttpServletRequest request) {
-        List<Skill> skillList = skillRepository.findAll();
+        List<Skill> skillList = skillService.스킬이름전부();
         request.setAttribute("skillList", skillList);
         return "comp/saveForm";
     }
@@ -67,7 +67,14 @@ public class CompController {
     public String detail(@PathVariable Integer postingId, HttpServletRequest request) {
         Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
-        return "comp/detail";
+        return "comp/postingDetail";
+    }
+
+    @GetMapping("/comp/posting/newWindow/{postingId}")
+    public String detail2(@PathVariable Integer postingId, HttpServletRequest request) {
+        Posting posting = compService.공고찾기(postingId);
+        request.setAttribute("posting", posting);
+        return "comp/postingDetailOnly";
     }
 
 
@@ -80,38 +87,24 @@ public class CompController {
     //     }
     // }
 
-    // TODO : 가져온걸 화면에 뿌려야하는데 자바에서 하니까 너무 노가다임. 현재 기술까지만 되어있음
     @GetMapping("/comp/posting/{postingId}/updateForm")
     public String updateForm(@PathVariable Integer postingId, HttpServletRequest request) {
-        List<Skill> skillList = skillRepository.findAll();
+        List<Skill> skillList = skillService.스킬이름전부();
         request.setAttribute("skillList", skillList);
-
+        
         Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
         
-        String position = posting.getPosition();
-        if(position.equals("백엔드")){request.setAttribute("백엔드", true);}
-        if(position.equals("프론트엔드")){request.setAttribute("프론트엔드", true);}
-        if(position.equals("풀스택")){request.setAttribute("풀스택", true);}
-        if(position.equals("안드로이드")){request.setAttribute("안드로이드", true);}
-        if(position.equals("IOS")){request.setAttribute("IOS", true);}
-        if(position.equals("임베디드")){request.setAttribute("임베디드", true);}
-        if(position.equals("빅데이터")){request.setAttribute("빅데이터", true);}
-        if(position.equals("서버")){request.setAttribute("서버", true);}
-        if(position.equals("머신러닝")){request.setAttribute("머신러닝", true);}
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(posting);
+            // System.out.println("테스트"+json);
+            request.setAttribute("json", json);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
-        // List<PostingSkill> sl = posting.getPostingSkill();
-        // for (PostingSkill s : sl) {
-        //     if(s.getSkill().getId()==1){request.setAttribute("Java", true); continue;}
-        //     if(s.getSkill().getId()==2){request.setAttribute("Spring", true); continue;}
-        //     if(s.getSkill().getId()==3){request.setAttribute("DB", true); continue;}
-        //     if(s.getSkill().getId()==4){request.setAttribute("HTML", true); continue;}
-        //     if(s.getSkill().getId()==5){request.setAttribute("Python", true); continue;}
-        //     if(s.getSkill().getId()==6){request.setAttribute("JavaScript", true); continue;}
-        //     if(s.getSkill().getId()==7){request.setAttribute("Git", true); continue;}
-        //     if(s.getSkill().getId()==8){request.setAttribute("C", true); continue;}
-        // }
-
         return "comp/updateForm";
     }
 
@@ -124,7 +117,7 @@ public class CompController {
 
     @GetMapping("/comp/recommend")
     public String recommend(HttpServletRequest request) {
-        List<Skill> skillList = skillRepository.findAll();
+        List<Skill> skillList = skillService.스킬이름전부();
         request.setAttribute("skillList", skillList);
         return "comp/recommend";
     }
@@ -133,6 +126,12 @@ public class CompController {
     public String resumeDetail(@PathVariable Integer resumeId) {
         // request.setAttribute("postingId", postingId);
         return "comp/resumeDetail";
+    }
+
+    @GetMapping("/resume/newWindow/{resumeId}")
+    public String resumeDetail2(@PathVariable Integer resumeId) {
+        // request.setAttribute("postingId", postingId);
+        return "comp/resumeDetailOnly";
     }
 
     @PostMapping("/comp/join")

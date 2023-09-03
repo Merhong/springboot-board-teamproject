@@ -15,11 +15,11 @@
 				<div class="col-8 p-2">
 						<div class="input-group mb-3">
 							<span class="input-group-text">회사명</span>
-							<input type="text" class="form-control" value="{{sessionComp.compname}}" disabled>
+							<input type="text" class="form-control" value="{{#sessionComp.compname}}{{sessionComp.compname}}{{/sessionComp.compname}}" disabled>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">사업자번호</span>
-							<input type="text" class="form-control" value="{{sessionComp.compRegister}}" disabled>
+							<input type="text" class="form-control" value="{{#sessionComp.compRegister}}{{sessionComp.compRegister}}{{/sessionComp.compRegister}}" disabled>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">주소</span>
@@ -31,7 +31,7 @@
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">홈페이지</span>
-							<input type="text" class="form-control" value="{{sessionComp.homepage}}" name="homepage">
+							<input type="text" class="form-control" value="{{#sessionComp.homepage}}{{sessionComp.homepage}}{{/sessionComp.homepage}}" name="homepage">
 						</div>
 						<div class="mb-2">
 							<input type="file" class="form-control" name="photo">
@@ -50,7 +50,7 @@
 			-->
 
 			<div>
-				<input id="button" class="mb-3 ms-1 w-100 btn btn-success" type="submit" value="기업 정보 수정" onclick="">
+				<input id="button" class="btn btn-primary w-100 mb-3" type="submit" value="기업 정보 수정" onclick="">
 			</div>
 
 		</form>
