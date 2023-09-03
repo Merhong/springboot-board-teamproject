@@ -94,7 +94,7 @@
 
 			<div class="input-group mb-3">
 				<span class="input-group-text">기술</span>
-				<input type="text" class="form-control" value="{{#posting.postingSkill}}{{skill.skillname}}, {{/posting.postingSkill}}" disabled>
+				<input type="text" class="form-control comma" value="{{#posting.postingSkill}}{{skill.skillname}}, {{/posting.postingSkill}}" disabled>
 			</div>
 
 			<div class="input-group mb-3">
@@ -128,6 +128,16 @@
 		</div>
 
 
+
+		<script>
+
+			let comma = document.querySelector(".comma");
+			console.log(comma.value);
+			comma.value = comma.value.slice(0, -2);
+			console.log(comma.value);
+
+
+		</script>
 
 
 

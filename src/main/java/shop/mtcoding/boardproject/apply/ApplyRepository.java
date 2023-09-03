@@ -20,5 +20,8 @@ public interface ApplyRepository extends JpaRepository<Apply, Integer> {
     List<Apply> findApplyPostingByPositngId(@Param("postingId") Integer postingId);
     
     List<Apply> findByPostingId(@Param("postingId") Integer postingId);
-
+    
+    // @Query(value = "select user_tb.* from user_tb join resume_tb on user_tb.id = resume_tb.user_id join apply_tb on resume_tb.id = apply_tb.resume_id where apply_tb.id = :applyId", nativeQuery = true)
+    // User resumeJoinUserJoinApply(@Param("applyId") Integer applyId);
+    
 }

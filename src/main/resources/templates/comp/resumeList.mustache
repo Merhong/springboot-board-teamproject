@@ -6,11 +6,11 @@
 
 
 		<div class="col-9 ms-2">
-			<h1 class=" text-center mt-2 mb-3">지원자 내역</h1>
+			<h1 class=" text-center mt-2 mb-2">지원자 내역</h1>
 
 
 
-		<div class="d-flex justify-content-center">
+		<div class="d-flex justify-content-center mb-2">
 			<h5 class="align-self-center">이 공고에 지원한 지원자입니다. :</h5>
 
 			<a href="javascript:void(0);" class="btn btn-info m-2" onclick="openNewWindow('/comp/posting/newWindow/{{posting.id}}')">
@@ -40,61 +40,43 @@
 					<th class="text-center" scope="col">No.</th>
 					<th class="text-center" scope="col">이름</th>
 					<th class="text-center" scope="col">이력서</th>
+					<!-- <th class="text-center" scope="col">생년월일</th> -->
 					<th class="text-center" scope="col">경력</th>
-					<th class="text-center" scope="col">상태</th>
+					<th class="text-center" scope="col">학력</th>
+					<th class="text-center" scope="col">보유기술</th>
 					<th class="text-center" scope="col">응답</th>
 				  </tr>
 				</thead>
 				<tbody>
 
 
-				  {{#resumeList}}
+				  {{#applyList}}
 				  <tr>
-					<th class="text-center" scope="row">1</th>
-					<td class="text-center">홍길동</td>
-					<td class="text-center"><a href="javascript:void(0);" class="" onclick="openNewWindow('/resume/newWindow/{{posting.id}}')">이력서1</a></td>
-					<td class="text-center">신입</td>
-					<td class="text-center">대기중</td>
+					<th class="text-center" scope="row"><div class="increNumber"></div></th>
+					<td class="text-center">{{resume.user.username}}</td>
+					<td class="text-center"><a href="javascript:void(0);" class="" onclick="openNewWindow('/resume/newWindow/{{resume.id}}')">보기</a></td>
+					<!-- <td class="text-center">{{resume.user.birth}}</td> -->
+					<td class="text-center">{{resume.career}}</td>
+					<td class="text-center">{{resume.grade}}</td>
 					<td class="text-center">
-						<button class="badge bg-success" type="button">합격</button>
-						<button class="badge bg-danger" type="button">불합격</button>
+						<div class="comma">{{#resume.user.userSkillList}}{{skill.skillname}}, {{/resume.user.userSkillList}}</div>
+					</td>
+					<td class="d-flex justify-content-center statementJS">
+						<input type="hidden" value="{{statement}}">
+						<div class="statementJS2"></div>
+
+						<form action="/comp/posting/apply/{{id}}/pass" method="post">
+							<input class="btn btn-sm btn-success p-0 ps-1 pe-1 me-1 passButton" type="submit" value="합격">
+						</form>
+						<form action="/comp/posting/apply/{{id}}/fail" method="post">
+							<input class="btn btn-sm btn-danger p-0 ps-1 pe-1 failButton" type="submit" value="불합격">
+						</form>
 					</td>
 				  </tr>
-				  {{/resumeList}}
+				  {{/applyList}}
 
 
-				  <tr>
-					<th class="text-center" scope="row">2</th>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-				  </tr>
-				  <tr>
-					<th class="text-center" scope="row">3</th>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-				  </tr>
-				  <tr>
-					<th class="text-center" scope="row">4</th>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-				  </tr>
-				  <tr>
-					<th class="text-center" scope="row">5</th>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-					<td class="text-center"></td>
-				  </tr>
+
 				</tbody>
 			  </table>
 
@@ -106,6 +88,55 @@
 
 
 		<script>
+
+
+			let statementJS = document.querySelectorAll(".statementJS");
+			// console.log(typeof statementJS);
+			// console.log(typeof statementJS[0]);
+			// console.log(typeof statementJS[0].value);
+			// console.log(statementJS[0].value);
+			// console.log(statementJS[1].value);
+			// console.log(statementJS[2].value);
+			
+			statementJS.forEach(element => {
+				let input = element.querySelector("input");
+
+				if(input.value == "대기"){
+					return;
+				}
+
+				let passButton = element.querySelector("form .passButton");
+				let failButton = element.querySelector(".failButton");
+				let statementJS2 = element.querySelector(".statementJS2");
+				
+				if(input.value == "합격"){
+					passButton.style.display = 'none';
+					failButton.style.display = 'none';
+					statementJS2.innerText = "합격";
+				} else {
+					passButton.style.display = 'none';
+					failButton.style.display = 'none';
+					statementJS2.innerText = "불합격";
+				}
+			});
+
+
+			
+			let increNumber = document.querySelectorAll(".increNumber");
+			// console.log(increNumber);
+			let count=1;
+			increNumber.forEach(element => {
+				element.innerHTML=count++;
+			});
+
+
+
+
+			let comma = document.querySelectorAll(".comma");
+			comma.forEach(element => {
+				element.innerHTML = element.innerHTML.slice(0, -2);
+			});
+
 
 
 
@@ -129,19 +160,19 @@
 				} else{
 					let today = new Date();
 		
-					console.log((day-today) / (1000 * 60 * 60 * 24));
+					// console.log((day-today) / (1000 * 60 * 60 * 24));
 					let DDay = Math.ceil( (day-today) / (1000 * 60 * 60 * 24));
 		
 					if(DDay==0){
-						console.log("D-Day");
+						// console.log("D-Day");
 						return "D-Day";
 					}
 					else if(DDay<0){
-						console.log("만료");
+						// console.log("만료");
 						return "만료";
 					}
 					else{
-						console.log("D-"+DDay); 
+						// console.log("D-"+DDay); 
 						return "D-"+DDay;
 					}
 				}

@@ -16,6 +16,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.boardproject._core.util.Script;
+import shop.mtcoding.boardproject.apply.Apply;
+import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeService;
@@ -33,6 +35,9 @@ public class CompController {
 
     @Autowired
     private ResumeService resumeService;
+
+    @Autowired
+    private ApplyService applyService;
 
     @Autowired
     private HttpSession session;
@@ -118,13 +123,13 @@ public class CompController {
         Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
         
-        List<Resume> resumeList = compService.공고에지원한이력서찾기(postingId);
+        List<Apply> applyList = compService.공고지원신청찾기(postingId);
 
         // System.out.println("테스트:" +resumeList.get(0).getTitle());
 
 
 
-        request.setAttribute("resumeList", resumeList);
+        request.setAttribute("applyList", applyList);
 
         return "comp/resumeList";
     }
@@ -186,8 +191,19 @@ public class CompController {
         return Script.href("/comp/"+userId+"/postingList","삭제 완료");
     }
 
+    @PostMapping("/comp/posting/apply/{applyId}/pass")
+    public String applyPass(@PathVariable Integer applyId){
+        Apply apply = applyService.공고지원합격(applyId);
 
+        return "redirect:/comp/posting/"+apply.getPosting().getId()+"/resumeList";
+    }
 
+    @PostMapping("/comp/posting/apply/{applyId}/fail")
+    public String applyFail(@PathVariable Integer applyId){
+        Apply apply = applyService.공고지원불합격(applyId);
+
+        return "redirect:/comp/posting/"+apply.getPosting().getId()+"/resumeList";
+    }
 
 
     // @GetMapping("/comp/test2")

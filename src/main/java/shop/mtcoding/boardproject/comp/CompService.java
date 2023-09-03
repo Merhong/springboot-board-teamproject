@@ -224,7 +224,7 @@ public class CompService {
         }
     }
 
-    public List<Resume> 공고에지원한이력서찾기(Integer postingId) {
+    public List<Apply> 공고지원신청찾기(Integer postingId) {
 
         List<Apply> applyList = applyRepository.findByPostingId(postingId);
         
@@ -235,14 +235,14 @@ public class CompService {
         // System.out.println("테스트33:"+applyList.get(0).getPosting().getTitle());
         // System.out.println("테스트33:"+applyList.get(0).getResume().getTitle());
 
-        List<Resume> resumeList = new ArrayList<>();
+        // List<Resume> resumeList = new ArrayList<>();
 
-        while(applyList.size()>0){
-            resumeList.add(applyList.get(0).getResume());
-            applyList.remove(0);
-        }
+        // while(applyList.size()>0){
+        //     resumeList.add(applyList.get(0).getResume());
+        //     applyList.remove(0);
+        // }
 
-        return resumeList;
+        return applyList;
     }
 
     // public void 테스트2(String string) {
