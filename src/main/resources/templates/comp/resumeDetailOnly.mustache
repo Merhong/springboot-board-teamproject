@@ -99,9 +99,18 @@
 			</div>
 
 
-			<div class="d-flex justify-content-center">
-				<button type="button" class="mb-3 w-100 btn btn-success">연락하기</button>
-				<button type="button" class="mb-3 ms-3 w-100 btn btn-warning">북마크하기</button>
+			<div class="d-flex justify-content-center me-1">
+				<div class="w-100 mb-2">
+					<button type="button" class="w-100 btn btn-success me-1 ms-0">연락하기</button>
+				</div>
+
+				<form action="/comp/bookmarkList/save" method="post" class="w-100">
+					{{#resume}}
+					<input type="hidden" name="ResumeId" value="{{id}}">
+					{{/resume}}
+					<input class="w-100 btn btn-warning ms-1 me-0" type="submit" value="북마크하기">
+				</form>
+
 			</div>
 
 		</div>

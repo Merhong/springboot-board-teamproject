@@ -13,6 +13,8 @@ import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.Image;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyRepository;
+import shop.mtcoding.boardproject.bookmark.UserBookmark;
+import shop.mtcoding.boardproject.bookmark.UserBookmarkRepository;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
@@ -44,6 +46,9 @@ public class CompService {
 
     @Autowired
     private ApplyRepository applyRepository;
+
+    @Autowired
+    private UserBookmarkRepository userBookmarkRepository;
 
     @Autowired
     private HttpSession session;
@@ -211,6 +216,11 @@ public class CompService {
     @Transactional
     public void 공고삭제(Integer postingId) {
         // TODO : 공고를 북마크한것도 지우거나 연결끊어야함
+
+        List<UserBookmark> userBookmarkList = userBookmarkRepository.findByPostingId(postingId);
+        for (UserBookmark userbookmark : userBookmarkList) {
+            userbookmark.setPosting(null);
+        }
 
         List<PostingSkill> skillList = postingSkillRepository.findByPostingId(postingId);
         for (PostingSkill skill : skillList) {

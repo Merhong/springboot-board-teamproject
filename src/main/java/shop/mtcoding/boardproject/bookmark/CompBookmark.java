@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
+import shop.mtcoding.boardproject.user.User;
 
 import javax.persistence.*;
 
@@ -27,16 +28,23 @@ public class CompBookmark {
 
     // 공고 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
-    private Posting posting;
+    private User user;
 
     // 이력서 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Resume resume;
 
-    public CompBookmark(Posting posting, Resume resume) {
-        this.posting = posting;
+    public CompBookmark(User user, Resume resume) {
+        this.user = user;
         this.resume = resume;
     }
+
+    // public CompBookmark(Integer user, Integer resume) {
+    //     this.user = new User();
+    //     this.user.setId(user);
+    //     this.resume = new Resume();
+    //     this.resume.setId(resume);
+    // }
 
 }

@@ -1,12 +1,12 @@
 -- User 테이블 (개인회원)
 insert into user_tb(username, email, password, tel, photo, address, birth, role)
-values ('김대홍', 'kdh@nate.com', '1234', '01010001111', 'basic.jpg', '부산시 화명동', '1955-07-21', 0);
+values ('김대홍', 'kdh@nate.com', '1234', '01010001111', 'basic.jpg', '부산', '1955-07-21', 0);
 insert into user_tb(username, email, password, tel, photo, address, birth,position, role)
-values ('유재석', 'ssar@nate.com', '1234', '01012341234', 'basic.jpg', '서울시 성동구', '1966-07-13','백엔드', 1);
+values ('유재석', 'ssar@nate.com', '1234', '01012341234', 'basic.jpg', '서울', '1966-07-13','백엔드', 1);
 insert into user_tb(username, email, password, tel, photo, address, birth,position, role)
-values ('박명수', 'cos@nate.com', '1234', '01012344321', 'basic.jpg', '인천시 미추홀구', '1977-04-22','임베디드', 1);
+values ('박명수', 'cos@nate.com', '1234', '01012344321', 'basic.jpg', '대구', '1977-04-22','임베디드', 1);
 insert into user_tb(username, email, password, tel, photo, address, birth,position, role)
-values ('노홍철', 'haha@nate.com', '1234', '01022223333', 'basic.jpg', '부산시 수영구', '1988-11-11','프론트엔드', 1);
+values ('노홍철', 'haha@nate.com', '1234', '01022223333', 'basic.jpg', '부산', '1988-11-11','프론트엔드', 1);
 
 
 -- User 테이블 (기업회원)
@@ -19,7 +19,7 @@ values ('kakao', '6666', 'kakao@nate.com', '1234', '01066667777', 'kakao_logo.pn
 insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage,photo,role) values('네이버', '5555','naver@nate.com', '1234', '010612345678', '서울','naver.com','네이버_logo.png', 2);
 insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage,photo,role) values('삼성', '4444','samsung@nate.com', '1234', '01087654321', '광주','samsung.com','삼성_logo.png', 2);
 
-insert into user_tb(username, email, password, tel, photo, address, birth,position, role) values ('홍길동', 'hong@nate.com', '1234', '01012342143', 'basic.jpg', '부산8', '1912-01-15','풀스택', 1);
+insert into user_tb(username, email, password, tel, photo, address, birth,position, role) values ('홍길동', 'hong@nate.com', '1234', '01012342143', 'basic.jpg', '부산', '1912-01-15','풀스택', 1);
 insert into user_tb(username, email, password, tel, photo, address, birth,position, role) values ('임꺽정', 'im@nate.com', '1234', '01087664434', 'basic.jpg', '서울', '1922-03-13','백엔드', 1);
 insert into user_tb(username, email, password, tel, photo, address, birth,position, role) values ('장보고', 'jang@nate.com', '1234', '01045454545', 'basic.jpg', '광주', '1944-07-07','IOS', 1);
 
@@ -159,13 +159,17 @@ values (2, 3);
 insert into userbookmark_tb (user_id, posting_id)
 values (3, 1);
 insert into userbookmark_tb (user_id, posting_id)
-values (5, 3);
+values (4, 3);
 
 -- CompBookmark 테이블 (중간 테이블)
-insert into compbookmark_tb (resume_id, posting_id)
-values (2, 1);
-insert into compbookmark_tb (resume_id, posting_id)
-values (1, 2);
+insert into compbookmark_tb (user_id, resume_id) values (5, 1);
+insert into compbookmark_tb (user_id, resume_id) values (5, 2);
+insert into compbookmark_tb (user_id, resume_id) values (5, 3);
+insert into compbookmark_tb (user_id, resume_id) values (5, 4);
+insert into compbookmark_tb (user_id, resume_id) values (5, 8);
+insert into compbookmark_tb (user_id, resume_id) values (5, 9);
+insert into compbookmark_tb (user_id, resume_id) values (5, 10);
+insert into compbookmark_tb (user_id, resume_id) values (5, 11);
 
 
 -- Recommend 테이블 (중간 테이블)

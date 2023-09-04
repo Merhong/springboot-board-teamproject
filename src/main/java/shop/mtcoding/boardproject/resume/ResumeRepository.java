@@ -21,4 +21,10 @@ public interface ResumeRepository extends JpaRepository<Resume, Integer> {
     @Query(value = "select resume_tb.* from skill_tb join userSkill_tb on skill_tb.id = userSkill_tb.skill_id join user_tb on userSkill_tb.user_id = user_tb.id join resume_tb on user_tb.id = resume_tb.user_id where skill_tb.skillname = :skillname", nativeQuery = true)
     List<Resume> findBySkillReturnResume(@Param("skillname") String skillname);
 
+    @Query(value = "select user_tb.* from skill_tb join userSkill_tb on skill_tb.id = userSkill_tb.skill_id inner join user_tb on userSkill_tb.user_id = user_tb.id where skill_tb.skillname = :skillname", nativeQuery = true)
+    List<User> findResumeByCompId(@Param("skillname") String skillname);
+
+    @Query(value = "select RT.* from compbookmark_tb CT join resume_tb RT on CT.resume_id = RT.id where CT.user_id = :compId", nativeQuery = true)
+    List<Resume> findResumeByCompId(@Param("compId") Integer compId);
+
 }

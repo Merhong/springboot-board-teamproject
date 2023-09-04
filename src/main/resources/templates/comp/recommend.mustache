@@ -7,7 +7,7 @@
 
 
 		<div class="col-9 ms-3">
-			<h1 class="text-center mt-2">인재추천</h1>
+			<h1 class="text-center mt-2">인재 찾기</h1>
 
 			
 
@@ -111,7 +111,7 @@
 
 
 			{{#userList}}
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
+			<div class="d-flex border border-info m-3 p-2 mt-4 justify-content-between bg-info">
 				<div>
 
 					<div>
@@ -119,7 +119,7 @@
 						{{#userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/userSkillList}}
 					</div>
 
-					<div class="">
+					<div class="mb-1">
 						<div>'<b>{{username}}</b>'님의 공개 이력서 모음입니다.</div>
 					</div>
 					
@@ -135,7 +135,12 @@
 					<form action="" method="post">
 						<input class="btn btn-primary btn-sm w-100 mb-1" type="submit" value="연락하기">
 					</form>
-					<a href="" class="btn btn-warning btn-sm">북마크하기</a>
+					<form action="/comp/bookmarkList/saveAll" method="post">
+						{{#resumeList}}
+						<input type="hidden" name="ResumeIdList" value="{{id}}">
+						{{/resumeList}}
+						<input class="btn btn-warning btn-sm w-100 mb-1" type="submit" value="전체 북마크">
+					</form>
 				</div>
 			</div>
 			{{/userList}}
