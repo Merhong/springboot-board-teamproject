@@ -53,7 +53,7 @@
         <div class="question shadow contentWrapper card p-5">
           <div>
             <div class="d-flex justify-content-between">
-              <h3 class="m-2">자주 묻는 질문</h3>
+              <h3 class="m-2">질문 목록</h3>
               <div class="btn-group">
                 <button
                   id="selectButton"
@@ -81,43 +81,17 @@
                 </div>
               </div>
             </div>
-
             <ul class="list-group list-group-flush mt-2">
-              <li class="list-group-item">계정 이미지는 어떻게 설정하나요?</li>
-              <li class="list-group-item">아이디/비밀번호를 잊어버렸어요.</li>
-              <li class="list-group-item">인증 받을 메일이 없어졌어요.</li>
-              <li class="list-group-item">
-                개인정보가 포함된 이력서가 검색됩니다.
-              </li>
-              <li class="list-group-item">
-                실수로 삭제한 글을 복구할수 있나요?
-              </li>
-              <li class="list-group-item">도용/해킹이 의심돼요.</li>
-              <li class="list-group-item">탈퇴한 아이디를 복구할수 있나요?</li>
+              {{#DTOList}}
+              <a class="list-group-item" href="/question/{{ id }}">{{
+                title
+              }}</a>
+              {{/DTOList}}
             </ul>
           </div>
           <div>
             <div class="d-flex mt-3 justify-content-end">
-              <div>
-                <button
-                  class="btn btn-info"
-                  style="box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)"
-                  type="button"
-                  onclick="questionForm()"
-                >
-                  문의 작성 하기
-                </button>
-              </div>
-              <div class="mx-2">
-                <button
-                  class="btn btn-info"
-                  style="box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)"
-                  type="button"
-                  onclick="questionList()"
-                >
-                  작성 문의 보기
-                </button>
-              </div>
+              <div></div>
             </div>
           </div>
         </div>
@@ -127,10 +101,7 @@
 </section>
 <script>
   function questionForm() {
-    location.href = "/question/Form";
-  }
-  function questionList() {
-    location.href = "/question/List";
+    location.href = "/questionForm";
   }
 
   function selectButton(selectId) {
