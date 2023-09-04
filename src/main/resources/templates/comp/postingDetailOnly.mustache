@@ -124,7 +124,7 @@
 				{{^sessionComp.compname}}<button type="button" class="w-50 mb-3 me-2 btn btn-success">지원하기</button>
 				<button type="button" class="w-50 mb-3 ms-2 btn btn-warning">북마크하기</button>{{/sessionComp.compname}}
 			</div>
-
+			<button class="w-100 btn btn-danger mb-3" onclick="closeWindow()">새 창 닫기</button>
 		</div>
 
 
@@ -136,6 +136,9 @@
 			comma.value = comma.value.slice(0, -2);
 			console.log(comma.value);
 
+			function closeWindow() {
+				window.close();
+			}
 
 		</script>
 

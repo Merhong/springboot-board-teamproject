@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.bookmark.BookmarkResponse.CompBookmarkDTO;
@@ -76,12 +77,13 @@ public class BookmarkController {
         return "redirect:/comp/"+compId+"/bookmarkList";
     }
 
+    // @ResponseBody
     @PostMapping("/comp/bookmarkList/save")
     public String bookmarkSave(@RequestParam(defaultValue = "") Integer ResumeId) {
         Integer compId = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
         bookmarkService.회사북마크추가(compId, ResumeId);
         
-        // return Script.href("/", "북마크 성공");
         return "redirect:/resume/newWindow/"+ResumeId;
+        // return Script.href("/resume/newWindow/"+ResumeId, "북마크 성공");
     }
 }

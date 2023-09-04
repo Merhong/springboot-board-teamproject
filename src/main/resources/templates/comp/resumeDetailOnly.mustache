@@ -101,18 +101,18 @@
 
 			<div class="d-flex justify-content-center me-1">
 				<div class="w-100 mb-2">
-					<button type="button" class="w-100 btn btn-success me-1 ms-0">연락하기</button>
+					<button type="button" class="w-100 btn btn-success me-1 ms-0">입사 제안</button>
 				</div>
 
 				<form action="/comp/bookmarkList/save" method="post" class="w-100">
 					{{#resume}}
 					<input type="hidden" name="ResumeId" value="{{id}}">
 					{{/resume}}
-					<input class="w-100 btn btn-warning ms-1 me-0" type="submit" value="북마크하기">
+					<input class="w-100 btn btn-warning ms-1 me-0" type="submit" value="북마크">
 				</form>
 
 			</div>
-
+			<button class="w-100 btn btn-danger mb-3" onclick="closeWindow()">새 창 닫기</button>
 		</div>
 
 
@@ -125,6 +125,10 @@
 			comma.value = comma.value.slice(0, -2);
 			console.log(comma.value);
 
+
+			function closeWindow() {
+				window.close();
+			}
 
 		</script>
 
