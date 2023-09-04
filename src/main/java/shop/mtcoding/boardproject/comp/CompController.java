@@ -19,11 +19,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.boardproject._core.util.Script;
+import shop.mtcoding.boardproject.apply.Apply;
+import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeService;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillService;
+import shop.mtcoding.boardproject.user.User;
 
 @Controller
 public class CompController {
@@ -36,6 +39,9 @@ public class CompController {
 
     @Autowired
     private ResumeService resumeService;
+
+    @Autowired
+    private ApplyService applyService;
 
     @Autowired
     private HttpSession session;
@@ -77,8 +83,6 @@ public class CompController {
         if (sessionComp == null) {
             return "redirect:/user/loginForm";
         }
-
-        List<Skill> skillList = skillRepository.findAll();
       
         List<Skill> skillList = skillService.스킬이름전부();
 
@@ -119,8 +123,6 @@ public class CompController {
             throw new MyException("권한이 없습니다.");
         }
 
-        List<Skill> skillList = skillRepository.findAll();
-
         List<Skill> skillList = skillService.스킬이름전부();
 
         request.setAttribute("skillList", skillList);
@@ -138,24 +140,24 @@ public class CompController {
             e.printStackTrace();
         }
 
-        if (position.equals("안드로이드")) {
-            request.setAttribute("안드로이드", true);
-        }
-        if (position.equals("IOS")) {
-            request.setAttribute("IOS", true);
-        }
-        if (position.equals("임베디드")) {
-            request.setAttribute("임베디드", true);
-        }
-        if (position.equals("빅데이터")) {
-            request.setAttribute("빅데이터", true);
-        }
-        if (position.equals("서버")) {
-            request.setAttribute("서버", true);
-        }
-        if (position.equals("머신러닝")) {
-            request.setAttribute("머신러닝", true);
-        }
+        // if (position.equals("안드로이드")) {
+        //     request.setAttribute("안드로이드", true);
+        // }
+        // if (position.equals("IOS")) {
+        //     request.setAttribute("IOS", true);
+        // }
+        // if (position.equals("임베디드")) {
+        //     request.setAttribute("임베디드", true);
+        // }
+        // if (position.equals("빅데이터")) {
+        //     request.setAttribute("빅데이터", true);
+        // }
+        // if (position.equals("서버")) {
+        //     request.setAttribute("서버", true);
+        // }
+        // if (position.equals("머신러닝")) {
+        //     request.setAttribute("머신러닝", true);
+        // }
 
         // List<PostingSkill> sl = posting.getPostingSkill();
         // for (PostingSkill s : sl) {
@@ -182,18 +184,12 @@ public class CompController {
         }
 
         List<Apply> applyList = applyService.공고지원현황(postingId);
-        // Posting posting = compService.공고찾기(postingId);
-        Posting posting = applyList.get(0).getPosting();
 
         Posting posting = compService.공고찾기(postingId);
 
         request.setAttribute("posting", posting);
         
         List<Resume> resumeList = compService.공고에지원한이력서찾기(postingId);
-
-        // System.out.println("테스트:" +resumeList.get(0).getTitle());
-
-
 
         request.setAttribute("resumeList", resumeList);
 
@@ -257,9 +253,9 @@ public class CompController {
 
         throw new MyException("권한이 없습니다.");
 
-        compService.공고수정(postingId, updateDTO);
-        int id = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
-        return "redirect:/comp/"+id+"/postingList";
+        // compService.공고수정(postingId, updateDTO);
+        // int id = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
+        // return "redirect:/comp/"+id+"/postingList";
 
     }
 
