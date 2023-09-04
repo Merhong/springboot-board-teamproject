@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -300,4 +302,14 @@ public class CompController {
     // }
 
 
+     //중복체크
+    @GetMapping("/comp/check")
+    public @ResponseBody ApiUtil<String> check(String useremail){
+        User user = compService.이메일중복체크(useremail);
+        if (user != null){
+            return new ApiUtil<String>(false, "이메일이 중복 되었습니다.");
+        }
+        System.out.println("테스트 3");
+        return new ApiUtil<String>(true, "이메일을 사용 할 수 있습니다.");
+    }
 }

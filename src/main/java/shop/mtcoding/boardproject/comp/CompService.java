@@ -228,6 +228,11 @@ public class CompService {
         }
     }
 
+    public User 이메일중복체크(String email) {
+        User user = userRepository.FindByemail(email);
+        return user;
+    }
+
     public List<Resume> 공고에지원한이력서찾기(Integer postingId) {
 
         List<Apply> applyList = applyRepository.findByPostingId(postingId);
@@ -247,6 +252,7 @@ public class CompService {
         }
 
         return resumeList;
+
     }
 
     // public void 테스트2(String string) {
