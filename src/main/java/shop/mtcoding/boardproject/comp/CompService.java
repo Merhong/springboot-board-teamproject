@@ -218,6 +218,11 @@ public class CompService {
         }
     }
 
+    public User 이메일중복체크(String useremail) {
+        User user = userRepository.FindByemail(useremail);
+        return user;
+    }
+
     // public void 테스트2(String string) {
     //     PostingSkill.findBySkill
     // }

@@ -132,7 +132,7 @@ public class UserController {
     //중복체크
     @GetMapping("/check")
     public @ResponseBody ApiUtil<String> check(String useremail){
-        User user = userService.유저네임중복체크(useremail);
+        User user = userService.이메일중복체크(useremail);
         if (user != null){
             return new ApiUtil<String>(false, "이메일이 중복 되었습니다.");
         }
