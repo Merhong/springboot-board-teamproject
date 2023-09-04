@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.skill.UserSkill;
 
 import javax.persistence.*;
@@ -43,7 +44,7 @@ public class User {
     private String compRegister;
 
     // 홈페이지, 개인은 null
-    private String homepage; 
+    private String homepage;
 
     // 이메일, 로그인시 아이디로 사용
     private String email;
@@ -69,15 +70,18 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserSkill> userSkillList = new ArrayList<>();
 
+    // 이력서 목록
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Resume> resumeList = new ArrayList<>();
+
     // Log용 타임스탬프
     @CreationTimestamp // Insert 할때 시간을 적어준다.
     private Timestamp createdAt;
 
-
     @Builder
     public User(Integer id, Integer role, String username, Date birth, String compname, String compRegister,
-                String homepage, String email, String password, String tel, String photo, String address,
-                List<Posting> postingList, List<UserSkill> userSkillList, Timestamp createdAt) {
+            String homepage, String email, String password, String tel, String photo, String address,
+            List<Posting> postingList, List<UserSkill> userSkillList, Timestamp createdAt) {
         this.id = id;
         this.role = role;
         this.username = username;
@@ -94,6 +98,5 @@ public class User {
         this.userSkillList = userSkillList;
         this.createdAt = createdAt;
     }
-
 
 }

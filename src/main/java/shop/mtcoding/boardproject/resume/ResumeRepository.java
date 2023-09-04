@@ -16,4 +16,7 @@ public interface ResumeRepository extends JpaRepository<Resume, Integer> {
     @Query("select r from Resume r inner join r.user u where u.id= :id")
     List<Resume> findByResumeUser(@Param("id") Integer id);
 
+    // 이력서를 제목을 통해 검색하는 JPQL 쿼리 메서드
+    @Query("select r from Resume r where r.title = :title")
+    List<Resume> findByTitle(@Param("title") String title);
 }

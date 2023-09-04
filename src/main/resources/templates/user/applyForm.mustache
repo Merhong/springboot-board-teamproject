@@ -6,67 +6,58 @@
 
 	<div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 border border-info">
 		<h1 class="text-center">지원하기</h1>
+
 		<div class="d-flex m-2">
 			<div class="col-5">
 				<a href="#"><img src="../../../images/basic.jpg" class="img-fluid"
-				                 style="width:300px; height:200px;"/></a>
+						style="width:300px; height:200px;" /></a>
 			</div>
 
-			<div class="col-7 p-3">
-				<div class="input-group mb-3">
-					<span class="input-group-text">공고명</span>
-					<input type="text" class="form-control" value="백엔드 개발자 모집" readonly>
+			<form action="/user/apply" method="post">
+
+				<div class="col-7 p-3">
+					<div class="input-group mb-3">
+						<span class="input-group-text">공고명</span>
+						<input type="text" class="form-control" name="postingTitle" value="{{posting.title}}" readonly>
+					</div>
+					<div class="input-group mb-3">
+						<span class="input-group-text">회사명</span>
+						<input type="text" class="form-control" nane="compname" value="{{posting.user.compname}}"
+							readonly>
+					</div>
+					<div class="input-group mb-3">
+						<span class="input-group-text">홈페이지</span>
+						<input type="text" class="form-control" value="http://aasdasd.com" readonly>
+					</div>
 				</div>
-				<div class="input-group mb-3">
-					<span class="input-group-text">회사명</span>
-					<input type="text" class="form-control" value="카카오" readonly>
-				</div>
-				<div class="input-group mb-3">
-					<span class="input-group-text">홈페이지</span>
-					<input type="text" class="form-control" value="http://aasdasd.com" readonly>
-				</div>
-			</div>
 		</div>
 
 		<div class="ms-2 me-2">
-			<a href="#" class="w-100 btn btn-success">이력서 등록하기</a>
+			<a href="/user/resumeForm" class="w-100 btn btn-success">이력서 등록하기</a>
 		</div>
 
 		<div class="p-3 m-3 d-flex flex-column align-items-center">
+			{{#resumes}} {{! 이력서 목록 }}
 			<div class="input-group mb-3">
-				<span class="input-group-text"><input class="form-check-input d-inline-block" type="checkbox"
-				                                      id=""></span>
-				<div class="form-control">
-					<h3>이력서1</h3>
-				</div>
+				<label class="form-check-label">
+					<input class="form-check-input" type="radio" name="selectedResume" value="{{id}}">
+					{{title}}</label>
 			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text"><input class="form-check-input d-inline-block" type="checkbox"
-				                                      id=""></span>
-				<div class="form-control">
-					<h3>이력서2</h3>
-				</div>
+			{{/resumes}}
+
+
+			<div class="ms-2 me-2 mb-2">
+				<input type="hidden" name="postingId" value="{{posting.id}}">
+				<input id="button" class=" btn btn-primary w-100" type="submit" value="지원하기">
 			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text"><input class="form-check-input d-inline-block" type="checkbox"
-				                                      id=""></span>
-				<div class="form-control">
-					<h3>이력서3</h3>
-				</div>
-			</div>
+
+			</form>
 		</div>
 
-
-		<div class="ms-2 me-2 mb-2">
-			<a href="userApply" class="w-100 btn btn-info">지원하기</a>
-		</div>
-
+		<div class="col-xl-3 col-lg-2 col-md-1"></div>
 	</div>
 
 
-	<div class="col-xl-3 col-lg-2 col-md-1"></div>
 </div>
-
-
 
 {{> layout/footer}}

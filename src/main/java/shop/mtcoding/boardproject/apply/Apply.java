@@ -43,10 +43,15 @@ public class Apply {
     @ManyToOne(fetch = FetchType.LAZY)
     private Posting posting;
 
-    public Apply(Resume resume, Posting posting, String statement) {
+    // 유저 테이블
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    public Apply(Resume resume, Posting posting, String statement, User user) {
         this.resume = resume;
         this.posting = posting;
         this.statement = statement;
+        this.user = user;
     }
 
 }
