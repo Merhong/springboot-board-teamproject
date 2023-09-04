@@ -15,19 +15,20 @@
             <div class="col-8 p-2">
                 <div class="input-group mb-3">
                     <span class="input-group-text"><span class="ms-2 me-4">이름</span></span>
-                    <div name="username">{{{resume.user.username}}}</div>
+                    <input type="text" class="form-control " name="username" value="{{{resume.user.username}}}"
+                        disabled>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">전화번호</span>
-                    <div name="username">{{{resume.user.tel}}}</div>
+                    <input type="text" class="form-control" name="tel" value="{{{resume.user.tel}}}" disabled>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
-                    <div name="username">{{{resume.user.address}}}</div>
+                    <input type="text" class="form-control" name="address" value="{{{resume.user.address}}}" disabled>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">생년월일</span>
-                    <div name="username">{{{resume.user.birth}}}</div>
+                    <input type="text" class="form-control" name="birth" value="{{{resume.user.birth}}}" disabled>
                 </div>
             </div>
 
@@ -35,17 +36,18 @@
 
         <div class="input-group ms-2 mb-3">
             <div><span class="input-group-text">이력서 제목</span></div>
-            <div>{{{resume.title}}}</div>
+            <input type="text" class="form-control" value="{{{resume.title}}}" disabled>
+
         </div>
 
         <div class="input-group ms-2 mb-3">
             <span class="input-group-text">학력사항</span>
-            <div>{{{resume.grade}}}</div>
+            <input type="text" class="form-control" value="{{{resume.grade}}}" disabled>
         </div>
 
         <div class="input-group ms-2 mb-3">
             <span class="input-group-text" center>경력사항</span>
-            <div>{{{resume.career}}}</div>
+            <input type="text" class="form-control" value="{{{resume.career}}}" disabled>
         </div>
 
         <div class="card input-group ms-2 mb-3">
@@ -88,7 +90,7 @@
 
         <div class="input-group ms-2 mb-3">
             <span class="input-group-text">자기소개서</span>
-            <div>{{{resume.personalStatement}}}</div>
+            <textarea class="form-control" rows="5" disabled>{{{resume.personalStatement}}}</textarea>
         </div>
 
         <!-- disabled속성은 입력할 수 없는 input태그를 만든다 -->
