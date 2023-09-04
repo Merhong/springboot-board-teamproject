@@ -79,4 +79,11 @@ public class UserService {
     }
 
 
+    public User 유저네임중복체크(String email) {
+        User user = userRepository.FindByemail(email);
+        return user;
+    }
+    
+
+
 }

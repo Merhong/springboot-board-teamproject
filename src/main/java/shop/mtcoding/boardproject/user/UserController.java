@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject.comp.CompRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -126,5 +129,14 @@ public class UserController {
     public String selectJoinForm() {
         return "user/selectJoinForm";
     }
-
+    //중복체크
+    @GetMapping("/check")
+    public @ResponseBody ApiUtil<String> check(String useremail){
+        User user = userService.유저네임중복체크(useremail);
+        if (user != null){
+            return new ApiUtil<String>(false, "이메일이 중복 되었습니다.");
+        }
+        System.out.println("테스트 3");
+        return new ApiUtil<String>(true, "이메일을 사용 할 수 있습니다.");
+    }
 }
