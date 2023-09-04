@@ -1,28 +1,31 @@
 package shop.mtcoding.boardproject.comp;
 
+import java.sql.Timestamp;
+
+import java.util.*;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.Image;
-import shop.mtcoding.boardproject.comp.CompRequest.JoinDTO;
-import shop.mtcoding.boardproject.comp.CompRequest.SaveDTO;
-import shop.mtcoding.boardproject.comp.CompRequest.UpdateDTO;
-import shop.mtcoding.boardproject.comp.CompRequest.compUpdateDTO;
+import shop.mtcoding.boardproject.apply.Apply;
+import shop.mtcoding.boardproject.apply.ApplyRepository;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
+import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.skill.PostingSkillRepository;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillRepository;
 import shop.mtcoding.boardproject.user.User;
 import shop.mtcoding.boardproject.user.UserRepository;
-
-import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import shop.mtcoding.boardproject.comp.CompRequest.JoinDTO;
+import shop.mtcoding.boardproject.comp.CompRequest.SaveDTO;
+import shop.mtcoding.boardproject.comp.CompRequest.UpdateDTO;
+import shop.mtcoding.boardproject.comp.CompRequest.compUpdateDTO;
 
 @Service
 public class CompService {
@@ -38,6 +41,9 @@ public class CompService {
 
     @Autowired
     private SkillRepository skillRepository;
+
+    @Autowired
+    private ApplyRepository applyRepository;
 
     @Autowired
     private HttpSession session;
@@ -92,7 +98,7 @@ public class CompService {
 
         postingRepository.save(posting);
 
-        int get=0;
+        int get=0; 
         while(StringList.size()>0){
             psList.add(new PostingSkill());
             psList.get(get).setPosting(posting);
@@ -141,9 +147,9 @@ public class CompService {
             posting.setExpiryDate(timestamp);
 
             List<String> StringList = updateDTO.getPostingSkill();
-
+            
             List<Skill> skillList = skillRepository.findAll();
-
+            
             List<PostingSkill> psList = new ArrayList<>();
 
             postingSkillRepository.deleteByPostingId(postingId);
@@ -152,7 +158,7 @@ public class CompService {
             while(StringList.size()>0){
                 psList.add(new PostingSkill());
                 psList.get(get).setPosting(posting);
-
+    
                 for (Skill s : skillList) {
                     if(s.getSkillname().equals(StringList.get(0))){psList.get(get++).setSkill(s); break;}
                 }
@@ -218,8 +224,30 @@ public class CompService {
         }
     }
 
+    public List<Resume> 공고에지원한이력서찾기(Integer postingId) {
+
+        List<Apply> applyList = applyRepository.findByPostingId(postingId);
+        
+        // System.out.println("테스트33:"+applyList);
+        // System.out.println("테스트33:"+applyList.get(0));
+        // System.out.println("테스트33:"+applyList.get(0).getId());
+        // System.out.println("테스트33:"+applyList.get(0).getStatement());
+        // System.out.println("테스트33:"+applyList.get(0).getPosting().getTitle());
+        // System.out.println("테스트33:"+applyList.get(0).getResume().getTitle());
+
+        List<Resume> resumeList = new ArrayList<>();
+
+        while(applyList.size()>0){
+            resumeList.add(applyList.get(0).getResume());
+            applyList.remove(0);
+        }
+
+        return resumeList;
+    }
+
     // public void 테스트2(String string) {
     //     PostingSkill.findBySkill
     // }
+
 
 }
