@@ -17,6 +17,14 @@ public class ApplyService {
 
     public List<Apply> 유저지원내역전체(Integer id) {
         List<Apply> applyList = applyRepository.findApplyResumeByUserId(id);
+
+        for (Apply apply : applyList) {
+            if (apply.getStatement() == null) {
+                // statement가 null인 경우 대기 상태로 설정
+                apply.setStatement("대기 상태");
+            }
+
+        }
         return applyList;
     }
 
@@ -25,4 +33,7 @@ public class ApplyService {
         return applyList;
     }
 
+    public void 지원(Apply apply) {
+        applyRepository.save(apply);
+    }
 }

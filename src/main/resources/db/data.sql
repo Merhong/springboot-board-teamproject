@@ -106,14 +106,14 @@ insert into postingSkill_tb(skill_id, posting_id) values(7, 12);
 
 
 -- Apply 테이블 (중간 테이블)
-insert into apply_tb(resume_id, posting_id, statement)
-values (1, 2, '대기');
-insert into apply_tb(resume_id, posting_id, statement)
-values (4, 3, '합격');
-insert into apply_tb(resume_id, posting_id, statement)
-values (2, 1, '대기');
-insert into apply_tb(resume_id, posting_id, statement)
-values (5, 3, '불합');
+insert into apply_tb(resume_id, posting_id, statement, user_id)
+values (1, 2, '대기',2);
+insert into apply_tb(resume_id, posting_id, statement, user_id)
+values (4, 3, '합격',2);
+insert into apply_tb(resume_id, posting_id, statement, user_id)
+values (2, 1, '대기',3);
+insert into apply_tb(resume_id, posting_id, statement, user_id)
+values (5, 3, '불합',3);
 insert into apply_tb(resume_id, posting_id, statement) values (1, 1, '불합');
 insert into apply_tb(resume_id, posting_id, statement) values (2, 5, '불합');
 insert into apply_tb(resume_id, posting_id, statement) values (3, 1, '불합');

@@ -2,21 +2,35 @@ package shop.mtcoding.boardproject.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import shop.mtcoding.boardproject._core.util.ApiUtil;
+import shop.mtcoding.boardproject.apply.Apply;
+import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.comp.CompRequest;
+import shop.mtcoding.boardproject.comp.CompService;
+import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.resume.Resume;
+import shop.mtcoding.boardproject.resume.ResumeService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
 
     @Autowired // DI
     private UserService userService;
+
+    @Autowired // DI
+    private ResumeService resumeService;
+
+    @Autowired // DI
+    private ApplyService applyService;
+
+    @Autowired // DI
+    private CompService compService;
 
     @Autowired
     private HttpSession session;
@@ -25,6 +39,15 @@ public class UserController {
     @GetMapping("/user/recommendForm")
     public String userRecommendForm() {
         return "user/recommendForm";
+    }
+
+    // 15_개인지원내역 화면
+    @GetMapping("/user/applyList")
+    public String userApplyList(HttpServletRequest request) {
+        User user = (User) session.getAttribute("sessionUser");
+        List<Apply> applyList = applyService.유저지원내역전체(user.getId());
+        request.setAttribute("applyList", applyList);
+        return "user/applyList";
     }
 
     // 14번 이력서 수정 버튼 POST
@@ -56,13 +79,34 @@ public class UserController {
 
     // 11번 지원하기 버튼 POST
     @PostMapping("/user/apply")
-    public String userApply() {
+    public String userApply(@RequestParam("selectedResume") Integer selectedResumeId,
+                            @RequestParam("postingId") Integer postingId) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        Posting posting = compService.공고찾기(postingId);
+        Resume selectedResume = resumeService.이력서찾기(selectedResumeId); // 선택한 이력서를 ID로 조회
+
+        Apply apply = new Apply();
+        apply.setUser(sessionUser);
+        apply.setResume(selectedResume);
+        apply.setPosting(posting); // Apply 엔티티에 공고 설정
+        applyService.지원(apply); // Apply 엔티티 저장
+
         return "redirect:/";
     }
 
     // 11_개인지원하기 화면
-    @GetMapping("/user/applyForm")
-    public String userApplyForm() {
+    @GetMapping("/user/applyForm/{postingId}")
+    public String userApplyForm(Model model, @PathVariable("postingId") Integer postingId) {
+        Posting posting = compService.공고찾기(postingId);
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Integer user = sessionUser.getId();
+        List<Resume> resumes = resumeService.이력서목록(user);
+
+        model.addAttribute("resumes", resumes); // 목록 추가
+        model.addAttribute("user", user); // 유저 아이디를 모델에 추가
+        model.addAttribute("posting", posting); // 유저 아이디를 모델에 추가
         return "user/applyForm";
     }
 
@@ -84,7 +128,7 @@ public class UserController {
         User sessionUser = userService.로그인(loginDTO);
         session.setAttribute("sessionUser", sessionUser);
 
-        if(sessionUser.getRole() != 1){
+        if (sessionUser.getRole() != 1) {
             CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                     .userId(sessionUser.getId())
                     .email(sessionUser.getEmail())
@@ -129,11 +173,12 @@ public class UserController {
     public String selectJoinForm() {
         return "user/selectJoinForm";
     }
-    //중복체크
+
+    // 중복체크
     @GetMapping("/check")
-    public @ResponseBody ApiUtil<String> check(String useremail){
+    public @ResponseBody ApiUtil<String> check(String useremail) {
         User user = userService.유저네임중복체크(useremail);
-        if (user != null){
+        if (user != null) {
             return new ApiUtil<String>(false, "이메일이 중복 되었습니다.");
         }
         System.out.println("테스트 3");
