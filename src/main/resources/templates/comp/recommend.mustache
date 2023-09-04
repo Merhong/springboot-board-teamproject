@@ -12,15 +12,14 @@
 			
 
 
-			<div class="d-flex justify-content-around m-2">
-
+			<form action="/comp/recommend" method="get" id="selectform" class="d-flex justify-content-around m-2">
 
 				<div class="m-2 border border-info">
 					<h4 class="mt-2 text-center">기술별</h4>
 	
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" id="" checked>
+							<input class="form-check-input" type="checkbox" name="skillList" id="skillAll" value="all" onclick="skillCheck(this)">
 						모두</label>
 					</div>
 					
@@ -30,7 +29,7 @@
 						{{#skillList}}
 						<div class="form-check d-inline-block ms-3 me-2">
 							<label class="form-check-label">
-								<input class="form-check-input" type="checkbox" id="" name="postingSkill" value="{{skillname}}">
+								<input class="skillFind form-check-input" type="checkbox" id="{{skillname}}" name="skillList" value="{{skillname}}" onclick='skillAllCheck()'>
 							{{skillname}}</label>
 						</div>
 						{{/skillList}}
@@ -47,125 +46,194 @@
 	
 					<div class="form-check d-inline-block ms-3 me-2">
 						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" checked>
+							<input class="form-check-input" type="radio" id="all2" name="position" value="all">
 						모두</label>
 					</div>
 	
 					<hr class="m-1">
 	
 					<div class="d-flex flex-wrap">
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" value="백엔드">
-						백엔드</label>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="백엔드" name="position" value="백엔드">
+							백엔드</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="프론트엔드" name="position" value="프론트엔드">
+							프론트엔드</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="풀스택" name="position" value="풀스택">
+							풀스택</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="안드로이드" name="position" value="안드로이드">
+							안드로이드</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="IOS" name="position" value="IOS">
+							IOS</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="임베디드" name="position" value="임베디드">
+							임베디드</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="빅데이터" name="position" value="빅데이터">
+							빅데이터</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="서버" name="position" value="서버">
+							서버</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="머신러닝" name="position" value="머신러닝">
+							머신러닝</label>
+						</div>
 					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" value="프론트엔드">
-						프런트엔드</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" value="풀스택">
-						풀스택</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" value="안드로이드">
-						안드로이드</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" value="IOS">
-						IOS</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" value="임베디드">
-						임베디드</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" value="빅데이터">
-						빅데이터</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" value="서버">
-						서버</label>
-					</div>
-					<div class="form-check d-inline-block ms-3 me-2">
-						<label class="form-check-label">
-							<input class="form-check-input" type="radio" id="" name="position" value="머신러닝">
-						머신러닝</label>
-					</div>
-				</div>
+		
 	
-	
 				</div>
-				
+			</form>
+
+			<div class="m-2 ms-3 me-3">
+				<div class="btn btn-success w-100" onclick="searchAll()">검색하기</div>
 			</div>
 
 
 
-
-
-			
+			{{#userList}}
 			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<div class="">
-					<div>'<b>홍길동</b>' 님의 이력서입니다.</div>
+				<div>
+
+					<div>
+						<span class="badge bg-danger">{{position}}</span>
+						{{#userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/userSkillList}}
+					</div>
+
+					<div class="">
+						<div>'<b>{{username}}</b>'님의 공개 이력서 모음입니다.</div>
+					</div>
+					
+					<div class="">
+						{{#resumeList}}
+						<a href="javascript:void(0);" class="{{disclosure}}" onclick="openNewWindow('/resume/newWindow/{{id}}')">{{title}}</a>
+						{{/resumeList}}
+					</div>
+
 				</div>
-				<div class="d-flex flex-column">
+
+				<div class="d-flex flex-column justify-content-between">
 					<form action="" method="post">
-						<input class="btn btn-success btn-sm w-100 mb-1" type="submit" value="연락하기">
+						<input class="btn btn-primary btn-sm w-100 mb-1" type="submit" value="연락하기">
 					</form>
 					<a href="" class="btn btn-warning btn-sm">북마크하기</a>
 				</div>
 			</div>
-			
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<div class="">
-					<div>'<b>홍길동</b>' 님의 이력서입니다.</div>
-				</div>
-				<div class="d-flex flex-column">
-					<form action="" method="post">
-						<input class="btn btn-success btn-sm w-100 mb-1" type="submit" value="연락하기">
-					</form>
-					<a href="" class="btn btn-warning btn-sm">북마크하기</a>
-				</div>
-			</div>
-
-			
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<div class="">
-					<div>'<b>홍길동</b>' 님의 이력서입니다.</div>
-				</div>
-				<div class="d-flex flex-column">
-					<form action="" method="post">
-						<input class="btn btn-success btn-sm w-100 mb-1" type="submit" value="연락하기">
-					</form>
-					<a href="" class="btn btn-warning btn-sm">북마크하기</a>
-				</div>
-			</div>
-
-			
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<div class="">
-					<div>'<b>홍길동</b>' 님의 이력서입니다.</div>
-				</div>
-				<div class="d-flex flex-column">
-					<form action="" method="post">
-						<input class="btn btn-success btn-sm w-100 mb-1" type="submit" value="연락하기">
-					</form>
-					<a href="" class="btn btn-warning btn-sm">북마크하기</a>
-				</div>
-			</div>
-
+			{{/userList}}
 
 
 		</div>
 
 
+		
+<input type="hidden" value="{{json}}" name="json" id="json">
+<input type="hidden" value="{{position}}" name="positionSet" id="positionSet">
+
+
+		<script>
+
+			function skillCheck(selectAll){
+				let skillAll=document.querySelectorAll(".skillFind");
+				// let allCheck=document.querySelector("#all");
+
+				skillAll.forEach(element => {
+					element.checked=selectAll.checked;
+				});
+			}
+			function skillAllCheck(){
+				let allCheck=document.querySelector("#skillAll");
+				let skillAll=document.querySelectorAll(".skillFind");
+				let skillAllCheck=document.querySelectorAll(".skillFind:checked");
+
+				if(skillAll.length==skillAllCheck.length){
+					allCheck.checked=true;
+				}else{
+					allCheck.checked=false
+				};
+			}
+
+
+			function searchAll(){
+				if(document.querySelector("#skillAll").checked){
+					let skillfind = document.querySelectorAll(".skillFind")
+					skillfind.forEach(element => {
+						element.checked=false;
+					});
+				}
+				let submit = document.getElementById("selectform");
+				submit.submit();
+			}
+
+			function openNewWindow(url) {
+				var width = 600; // 새 창의 가로 크기
+				var height = 1100; // 새 창의 세로 크기
+				var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+				var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
+				
+				var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+				window.open(url, '새 창', options);
+			}
+
+
+			// 비공개이력서 숨기기
+			let disclosureFalseList = document.querySelectorAll(".false");
+			disclosureFalseList.forEach(element => {
+				element.style.display = "none";
+			});
+
+
+
+			
+
+			function check(){
+				const json = JSON.parse(document.querySelector("#json").value);
+
+				let skillCheckBoxAll = document.getElementById("skillAll");
+
+				if(json[0]!=skillCheckBoxAll.value){
+					json.forEach(element => {
+						document.getElementById(element).checked=true;
+					});
+					skillCheckBoxAll.checked=false;
+				} else{
+					skillCheckBoxAll.checked=true;
+					let skillFind2 = document.querySelectorAll(".skillFind")
+					skillFind2.forEach(element => {
+						element.checked=true;
+					});
+				}
+			}
+			check();
+
+			const positionSet = document.querySelector("#positionSet").value;
+			if(positionSet=="all"){
+				document.getElementById("all2").checked=true;
+			} else{
+				document.getElementById(positionSet).checked=true;
+			}
+
+
+			
+		</script>
 
 
 

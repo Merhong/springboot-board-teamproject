@@ -34,7 +34,7 @@
 			
 
 
-			<table class="table table-bordered border ms-3">
+			<table class="table table-bordered ms-3">
 				<thead>
 				  <tr class="table-secondary">
 					<th class="text-center" scope="col">No.</th>
@@ -49,12 +49,12 @@
 				</thead>
 				<tbody>
 
-
+				
 				  {{#applyList}}
-				  <tr>
+				  <tr class="{{statement}}">
 					<th class="text-center" scope="row"><div class="increNumber"></div></th>
 					<td class="text-center">{{resume.user.username}}</td>
-					<td class="text-center"><a href="javascript:void(0);" class="" onclick="openNewWindow('/resume/newWindow/{{resume.id}}')">보기</a></td>
+					<td class="text-center"><a href="javascript:void(0);" class="" onclick="openNewWindow('/resume/newWindow/{{resume.id}}')">{{resume.title}}</a></td>
 					<!-- <td class="text-center">{{resume.user.birth}}</td> -->
 					<td class="text-center">{{resume.career}}</td>
 					<td class="text-center">{{resume.grade}}</td>
@@ -184,7 +184,17 @@
 			day.forEach(element => {
 				element.textContent = Ddaycheck(element.textContent);
 			});
-		
+
+			
+			
+			let statementRed = document.querySelectorAll('.불합');
+			statementRed.forEach(element => {
+				element.classList.add("table-danger");
+			});
+			let statementGreen = document.querySelectorAll('.합격');
+			statementGreen.forEach(element => {
+				element.classList.add("table-success");
+			});
 		
 		</script>
 		

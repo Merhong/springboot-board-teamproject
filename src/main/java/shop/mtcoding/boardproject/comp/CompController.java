@@ -1,5 +1,6 @@
 package shop.mtcoding.boardproject.comp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,6 +25,7 @@ import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeService;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillService;
+import shop.mtcoding.boardproject.user.User;
 
 @Controller
 public class CompController {
@@ -135,9 +138,23 @@ public class CompController {
     }
 
     @GetMapping("/comp/recommend")
-    public String recommend(HttpServletRequest request) {
-        List<Skill> skillList = skillService.스킬이름전부();
-        request.setAttribute("skillList", skillList);
+    public String recommend(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
+        List<Skill> sl = skillService.스킬이름전부();
+        request.setAttribute("skillList", sl);
+
+        request.setAttribute("position", position);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(skillList);
+            // System.out.println("테스트"+json);
+            request.setAttribute("json", json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        List<User> userList = compService.인재추천검색(skillList, position);
+        request.setAttribute("userList", userList);
+
         return "comp/recommend";
     }
 

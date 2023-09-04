@@ -1,12 +1,12 @@
 -- User 테이블 (개인회원)
 insert into user_tb(username, email, password, tel, photo, address, birth, role)
 values ('김대홍', 'kdh@nate.com', '1234', '01010001111', 'basic.jpg', '부산시 화명동', '1955-07-21', 0);
-insert into user_tb(username, email, password, tel, photo, address, birth, role)
-values ('유재석', 'ssar@nate.com', '1234', '01012341234', 'basic.jpg', '서울시 성동구', '1966-07-13', 1);
-insert into user_tb(username, email, password, tel, photo, address, birth, role)
-values ('박명수', 'cos@nate.com', '1234', '01012344321', 'basic.jpg', '인천시 미추홀구', '1977-04-22', 1);
-insert into user_tb(username, email, password, tel, photo, address, birth, role)
-values ('노홍철', 'haha@nate.com', '1234', '01022223333', 'basic.jpg', '부산시 수영구', '1988-11-11', 1);
+insert into user_tb(username, email, password, tel, photo, address, birth,position, role)
+values ('유재석', 'ssar@nate.com', '1234', '01012341234', 'basic.jpg', '서울시 성동구', '1966-07-13','백엔드', 1);
+insert into user_tb(username, email, password, tel, photo, address, birth,position, role)
+values ('박명수', 'cos@nate.com', '1234', '01012344321', 'basic.jpg', '인천시 미추홀구', '1977-04-22','임베디드', 1);
+insert into user_tb(username, email, password, tel, photo, address, birth,position, role)
+values ('노홍철', 'haha@nate.com', '1234', '01022223333', 'basic.jpg', '부산시 수영구', '1988-11-11','프론트엔드', 1);
 
 
 -- User 테이블 (기업회원)
@@ -19,12 +19,16 @@ values ('kakao', '6666', 'kakao@nate.com', '1234', '01066667777', 'kakao_logo.pn
 insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage,photo,role) values('네이버', '5555','naver@nate.com', '1234', '010612345678', '서울','naver.com','네이버_logo.png', 2);
 insert into user_tb(compname , comp_register  ,email , password, tel, address,homepage,photo,role) values('삼성', '4444','samsung@nate.com', '1234', '01087654321', '광주','samsung.com','삼성_logo.png', 2);
 
+insert into user_tb(username, email, password, tel, photo, address, birth,position, role) values ('홍길동', 'hong@nate.com', '1234', '01012342143', 'basic.jpg', '부산8', '1912-01-15','풀스택', 1);
+insert into user_tb(username, email, password, tel, photo, address, birth,position, role) values ('임꺽정', 'im@nate.com', '1234', '01087664434', 'basic.jpg', '서울', '1922-03-13','백엔드', 1);
+insert into user_tb(username, email, password, tel, photo, address, birth,position, role) values ('장보고', 'jang@nate.com', '1234', '01045454545', 'basic.jpg', '광주', '1944-07-07','IOS', 1);
+
 
 -- Posting(공고) 테이블
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
-values (5, '임원구함', '경력 4년 이상', '서울', '백엔드', '2023-10-1', '8년', '학력무관');
+values (5, '임원구함', '8년 이상 모집', '서울', '백엔드', '2023-10-1', '8년', '학력무관');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
-values (7, '신입모집합니다', '경력 2년 이상', '대구', '풀스택', '2024-01-2', '3년', '대학교 졸업');
+values (7, '신입모집합니다', '경력 3년 이상', '대구', '풀스택', '2024-01-2', '3년', '대학교 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
 values (6, '신입구함', '경력 무관', '부산', '백엔드', '2023-09-11', '1년', '석사 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
@@ -54,6 +58,11 @@ values (4, '지원서2', '초대졸', '1년', 'nanstte', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
 values (2, '지원서3', '대졸', '신입', '반갑습니다', false);
 
+insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure) values (10, '홍길동지원서1', '대졸', '신입', '반갑습니다1', true);
+insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure) values (10, '홍길동지원서2', '대졸', '신입', '반갑습니다2', true);
+insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure) values (11, '임꺽정지원서1', '고졸', '3년', '반갑습니다3', true);
+insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure) values (11, '임꺽정지원서2', '고졸', '3년', '반갑습니다4', true);
+insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure) values (12, '장보고지원서2', '대졸', '2년', '반갑습니다5', true);
 
 -- Skill(기술) 테이블
 insert into skill_tb (skillname)
@@ -76,13 +85,20 @@ values ('Python');
 
 -- UserSkill 테이블 (중간 테이블)
 insert into userskill_tb(skill_id, user_id) values (1, 2);
-insert into userskill_tb(skill_id, user_id) values (5, 2);
+insert into userskill_tb(skill_id, user_id) values (2, 2);
 insert into userskill_tb(skill_id, user_id) values (6, 2);
-insert into userskill_tb(skill_id, user_id) values (2, 3);
 insert into userskill_tb(skill_id, user_id) values (3, 3);
+insert into userskill_tb(skill_id, user_id) values (5, 3);
 insert into userskill_tb(skill_id, user_id) values (4, 4);
 insert into userskill_tb(skill_id, user_id) values (7, 4);
 insert into userskill_tb(skill_id, user_id) values (8, 4);
+insert into userskill_tb(skill_id, user_id) values (1, 10);
+insert into userskill_tb(skill_id, user_id) values (5, 10);
+insert into userskill_tb(skill_id, user_id) values (3, 11);
+insert into userskill_tb(skill_id, user_id) values (6, 11);
+insert into userskill_tb(skill_id, user_id) values (8, 11);
+insert into userskill_tb(skill_id, user_id) values (3, 12);
+insert into userskill_tb(skill_id, user_id) values (7, 12);
 
 
 -- PostingSkill 테이블 (중간 테이블)
@@ -126,6 +142,14 @@ insert into apply_tb(resume_id, posting_id, statement) values (3, 1, '대기');
 insert into apply_tb(resume_id, posting_id, statement) values (4, 5, '합격');
 insert into apply_tb(resume_id, posting_id, statement) values (5, 6, '대기');
 insert into apply_tb(resume_id, posting_id, statement) values (6, 6, '불합');
+insert into apply_tb(resume_id, posting_id, statement) values (7, 2, '대기');
+insert into apply_tb(resume_id, posting_id, statement) values (7, 6, '대기');
+insert into apply_tb(resume_id, posting_id, statement) values (8, 1, '대기');
+insert into apply_tb(resume_id, posting_id, statement) values (8, 7, '대기');
+insert into apply_tb(resume_id, posting_id, statement) values (9, 1, '대기');
+insert into apply_tb(resume_id, posting_id, statement) values (9, 2, '대기');
+insert into apply_tb(resume_id, posting_id, statement) values (10, 5, '대기');
+insert into apply_tb(resume_id, posting_id, statement) values (10, 4, '대기');
 
 -- UserBookmark 테이블 (중간 테이블)
 insert into userbookmark_tb (user_id, posting_id)

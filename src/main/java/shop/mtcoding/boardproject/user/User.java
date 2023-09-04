@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.skill.UserSkill;
 
 import javax.persistence.*;
@@ -35,6 +36,9 @@ public class User {
 
     // 생년월일, 기업은 null
     private Date birth;
+
+    // (추가) 개인이 원하는 직무, 기업은 null 
+    private String position;
 
     // 기업이름, 개인은 null
     private String compname;
@@ -69,19 +73,24 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserSkill> userSkillList = new ArrayList<>();
 
+    // 양방향 매핑 (개인 이력서 리스트)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Resume> resumeList = new ArrayList<>();
+
     // Log용 타임스탬프
     @CreationTimestamp // Insert 할때 시간을 적어준다.
     private Timestamp createdAt;
 
 
     @Builder
-    public User(Integer id, Integer role, String username, Date birth, String compname, String compRegister,
+    public User(Integer id, Integer role, String username, Date birth, String position, String compname, String compRegister,
                 String homepage, String email, String password, String tel, String photo, String address,
-                List<Posting> postingList, List<UserSkill> userSkillList, Timestamp createdAt) {
+                List<Posting> postingList, List<UserSkill> userSkillList, List<Resume> resumeList, Timestamp createdAt) {
         this.id = id;
         this.role = role;
         this.username = username;
         this.birth = birth;
+        this.position = position;
         this.compname = compname;
         this.compRegister = compRegister;
         this.homepage = homepage;
@@ -92,6 +101,7 @@ public class User {
         this.address = address;
         this.postingList = postingList;
         this.userSkillList = userSkillList;
+        this.resumeList = resumeList;
         this.createdAt = createdAt;
     }
 
