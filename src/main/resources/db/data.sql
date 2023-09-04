@@ -133,6 +133,10 @@ values (1, 2);
 
 
 -- Master 테이블
+insert into master_tb (category, user_id, title, content) values ('불만', 1, '질문', '아침 메뉴 추천');
+insert into master_tb (category, user_id, title, content) values ('불만', 5, '문의', '점심 메뉴 추천');
+insert into master_tb (category, user_id, title, content) values ('불만', 3, '의문', '저녁 메뉴 추천');
+
 
 
 

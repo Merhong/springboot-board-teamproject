@@ -21,6 +21,10 @@ public class UserController {
     // 17_개인기업추천 화면
     @GetMapping("/user/recommendForm")
     public String userRecommendForm() {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/user/loginForm";
+        }
         return "user/recommendForm";
     }
 
@@ -34,8 +38,9 @@ public class UserController {
     @PostMapping("/user/update")
     public String userUpdate(UserRequest.UpdateDTO updateDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        System.out.println("Session user: " + sessionUser);
-
+        if (sessionUser == null) {
+            return "redirect:/user/loginForm";
+        }
         User user = userService.회원수정(updateDTO, sessionUser.getId());
         session.setAttribute("sessionUser", user);
 
@@ -46,6 +51,9 @@ public class UserController {
     @GetMapping("/user/updateForm")
     public String userMyPage(HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/user/loginForm";
+        }
         User user = userService.회원정보보기(sessionUser.getId());
         request.setAttribute("user", user);
         return "user/updateForm";
@@ -54,18 +62,30 @@ public class UserController {
     // 11번 지원하기 버튼 POST
     @PostMapping("/user/apply")
     public String userApply() {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/user/loginForm";
+        }
         return "redirect:/";
     }
 
     // 11_개인지원하기 화면
     @GetMapping("/user/applyForm")
     public String userApplyForm() {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/user/loginForm";
+        }
         return "user/applyForm";
     }
 
     // 10_개인공고상세보기 화면
     @GetMapping("/user/postingDetail")
     public String userPostingDetail() {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/user/loginForm";
+        }
         return "user/postingDetail";
     }
 
@@ -79,9 +99,17 @@ public class UserController {
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
         User sessionUser = userService.로그인(loginDTO);
-        session.setAttribute("sessionUser", sessionUser);
-
+        if (sessionUser.getRole() == 0) {
+            session.setAttribute("sessionAdmin", sessionUser);
+        }
+        if (sessionUser.getRole() == 1) {
+            session.setAttribute("sessionUser", sessionUser);
+        }
+        if (sessionUser.getRole() == 2) {
+            session.setAttribute("CompSession", sessionUser);
+        }
         if (sessionUser.getCompname() != null) {
+            System.out.println("sessionComp 실행");
             CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                     .userId(sessionUser.getId())
                     .email(sessionUser.getEmail())
@@ -97,15 +125,21 @@ public class UserController {
             session.setAttribute("sessionComp", sessionComp);
         }
 
-
         return "redirect:/";
     }
 
     // 로그아웃
     @GetMapping("/logout")
     public String logout() {
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+        if (sessionUser == null && sessionComp == null) {
+            return "redirect:/user/loginForm";
+        }
         session.invalidate(); // 세션 무효화(세션 전체를 비움 - 서랍 비우는 거)
         return "redirect:/";
+
     }
 
     // 3_개인회원가입 화면

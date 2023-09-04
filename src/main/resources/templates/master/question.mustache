@@ -1,0 +1,73 @@
+{{> layout/header}}
+
+<style>
+  .question {
+    width: 800px;
+  }
+
+  .type {
+    width: 300px;
+  }
+</style>
+
+<div class="container p-5 question mb-5">
+  <div class="card" style="box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3)">
+    <div class="card-header"><b>문의</b></div>
+    <div class="card-body">
+      <form action="/board/save" method="post">
+        <div class="mb-3">
+          <div class="mb-2"><b>문의 유형</b></div>
+          <div class="d-flex justify-content-start">
+            <button
+              type="button"
+              class="btn dropdown-toggle border"
+              data-bs-toggle="dropdown"
+            >
+              {{ master.category }}
+            </button>
+            <div></div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="mb-2"><b>이메일 주소</b></div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter email"
+            name="title"
+            value="{{ master.user.email }}"
+            disabled
+          />
+        </div>
+        <div class="mb-3">
+          <div class="mb-2"><b>제목</b></div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter title"
+            name="title"
+            value="{{ master.title }}"
+            disabled
+          />
+        </div>
+        <div class="mb-3">
+          <div class="mb-2"><b>내용</b></div>
+          <textarea
+            class="form-control"
+            rows="5"
+            name="content"
+            placeholder="내용을 작성하세요"
+            disabled
+            >{{ master.content }}</textarea
+          >
+        </div>
+        <div class="d-flex justify-content-end">
+          <div>
+            <a href="/help"> </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{> layout/footer}}

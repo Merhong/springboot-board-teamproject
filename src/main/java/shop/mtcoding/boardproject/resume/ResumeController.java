@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillService;
 import shop.mtcoding.boardproject.user.User;
@@ -31,21 +33,42 @@ public class ResumeController {
 
     @PostMapping("/resume/delete/{resumeId}")
     public String delete(@PathVariable Integer resumeId) {
-        resumeService.이력서삭제(resumeId);
-        return "redirect:/user/resumeManage";
+        Resume resume = resumeService.이력서상세보기(resumeId);
+
+        if (resume == null) {
+            throw new MyException("없는 이력서 입니다.");
+        }
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        if (sessionUser.getId().equals(resume.getUser().getId())) {
+            resumeService.이력서삭제(resumeId);
+        }
+
+        throw new MyException("권한이 없습니다.");
     }
 
     @PostMapping("/resume/{resumeId}/update")
     public String update(@PathVariable Integer resumeId, ResumeRequest.ResumeUpdateDTO resumeUpdateDTO) {
-        resumeService.이력서수정(resumeId, resumeUpdateDTO);
-        return "redirect:/user/resumeManage";
 
+        Resume resume = resumeService.이력서상세보기(resumeId);
+
+        if (resume == null) {
+            throw new MyException("없는 이력서 입니다.");
+        }
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        if (sessionUser.getId().equals(resume.getUser().getId())) {
+            resumeService.이력서수정(resumeId, resumeUpdateDTO);
+        }
+
+        throw new MyException("권한이 없습니다.");
     }
 
     @GetMapping("/user/resumeUpdateForm/{id}")
     public String userResumeUpdate(@PathVariable Integer id, HttpServletRequest request) {
         Resume resume = resumeService.이력서상세보기(id);
-        System.out.println("아이디: " + resume.getId());
         if (resume != null) {
             User sessionUser = (User) session.getAttribute("sessionUser");
             if (sessionUser.getId().equals(resume.getUser().getId())) {
@@ -59,11 +82,13 @@ public class ResumeController {
     // 개인이력서 상세보기
     @GetMapping("/user/resume/{id}")
     public String userResumeDetail(@PathVariable Integer id, HttpServletRequest request) {
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
         Resume resume = resumeService.이력서상세보기(id);
-        System.out.println("아이디: " + resume.getId());
         if (resume != null) {
-            User sessionUser = (User) session.getAttribute("sessionUser");
-            if (sessionUser.getId().equals(resume.getUser().getId())) {
+
+            if (sessionUser != null || sessionComp != null) {
                 request.setAttribute("resume", resume);
                 return "/user/resumeDetailForm";
             }
@@ -75,6 +100,9 @@ public class ResumeController {
     @GetMapping("/user/resumeManage")
     public String userResumeManage(Model model) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/user/loginForm";
+        }
         Integer userId = sessionUser.getId();
         List<Resume> resumes = resumeService.이력서목록(userId);
         model.addAttribute("resumes", resumes);
@@ -86,6 +114,9 @@ public class ResumeController {
     @PostMapping("/user/resumeSave")
     public String userResumeSave(ResumeRequest.ResumeDTO resumeDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/user/loginForm";
+        }
         resumeService.이력서등록(resumeDTO, sessionUser.getId());
         return "redirect:/";
     }
@@ -93,6 +124,10 @@ public class ResumeController {
     // 개인이력서등록 화면
     @GetMapping("/user/resumeForm")
     public String userResumeForm(HttpServletRequest request) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/user/loginForm";
+        }
         List<Skill> skillList = skillService.전체기술조회();
         request.setAttribute("skillList", skillList);
         return "user/resumeForm";
