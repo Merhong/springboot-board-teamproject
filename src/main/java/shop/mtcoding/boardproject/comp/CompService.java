@@ -5,12 +5,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.Image;
+import shop.mtcoding.boardproject.apply.Apply;
+import shop.mtcoding.boardproject.apply.ApplyRepository;
 import shop.mtcoding.boardproject.comp.CompRequest.JoinDTO;
 import shop.mtcoding.boardproject.comp.CompRequest.SaveDTO;
 import shop.mtcoding.boardproject.comp.CompRequest.UpdateDTO;
 import shop.mtcoding.boardproject.comp.CompRequest.compUpdateDTO;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
+import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.skill.PostingSkillRepository;
 import shop.mtcoding.boardproject.skill.Skill;
@@ -38,6 +41,9 @@ public class CompService {
 
     @Autowired
     private SkillRepository skillRepository;
+
+    @Autowired
+    private ApplyRepository applyRepository;
 
     @Autowired
     private HttpSession session;
@@ -71,9 +77,7 @@ public class CompService {
     public void 공고작성(SaveDTO saveDTO) {
         Posting posting = new Posting();
         posting.setUser(new User());
-        posting.getUser().setId(
-                ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId()
-        );
+        posting.getUser().setId(((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId());
         posting.setTitle(saveDTO.getTitle());
         posting.setDesc(saveDTO.getDesc());
         posting.setPosition(saveDTO.getPosition());
@@ -92,13 +96,16 @@ public class CompService {
 
         postingRepository.save(posting);
 
-        int get=0;
-        while(StringList.size()>0){
+        int get = 0;
+        while (StringList.size() > 0) {
             psList.add(new PostingSkill());
             psList.get(get).setPosting(posting);
 
             for (Skill s : skillList) {
-                if(s.getSkillname().equals(StringList.get(0))){psList.get(get++).setSkill(s); break;}
+                if (s.getSkillname().equals(StringList.get(0))) {
+                    psList.get(get++).setSkill(s);
+                    break;
+                }
             }
             StringList.remove(0);
         }
@@ -116,7 +123,7 @@ public class CompService {
         if (postingOP.isPresent()) {
             return postingOP.get();
         } else {
-            throw new MyException(postingId+" 없음");
+            throw new MyException(postingId + " 없음");
         }
     }
 
@@ -148,13 +155,16 @@ public class CompService {
 
             postingSkillRepository.deleteByPostingId(postingId);
 
-            int get=0;
-            while(StringList.size()>0){
+            int get = 0;
+            while (StringList.size() > 0) {
                 psList.add(new PostingSkill());
                 psList.get(get).setPosting(posting);
 
                 for (Skill s : skillList) {
-                    if(s.getSkillname().equals(StringList.get(0))){psList.get(get++).setSkill(s); break;}
+                    if (s.getSkillname().equals(StringList.get(0))) {
+                        psList.get(get++).setSkill(s);
+                        break;
+                    }
                 }
                 StringList.remove(0);
             }
@@ -164,7 +174,7 @@ public class CompService {
                 postingSkillRepository.save(skill);
             }
 
-        } else{
+        } else {
             throw new MyException(postingId + "공고없음");
         }
     }
@@ -181,7 +191,7 @@ public class CompService {
             user.setAddress(DTO.getAddress());
             user.setTel(DTO.getTel());
             user.setHomepage(DTO.getHomepage());
-            if(fileName != null){ // 사진 안넣으면 기존 사진 유지하게
+            if (fileName != null) { // 사진 안넣으면 기존 사진 유지하게
                 user.setPhoto(fileName);
             }
             CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
@@ -197,7 +207,7 @@ public class CompService {
                     .build();
             session.setAttribute("sessionComp", sessionComp);
 
-        } else{
+        } else {
             throw new MyException(userId + "없음");
         }
     }
@@ -218,8 +228,30 @@ public class CompService {
         }
     }
 
+    public List<Resume> 공고에지원한이력서찾기(Integer postingId) {
+
+        List<Apply> applyList = applyRepository.findByPostingId(postingId);
+
+        // System.out.println("테스트33:"+applyList);
+        // System.out.println("테스트33:"+applyList.get(0));
+        // System.out.println("테스트33:"+applyList.get(0).getId());
+        // System.out.println("테스트33:"+applyList.get(0).getStatement());
+        // System.out.println("테스트33:"+applyList.get(0).getPosting().getTitle());
+        // System.out.println("테스트33:"+applyList.get(0).getResume().getTitle());
+
+        List<Resume> resumeList = new ArrayList<>();
+
+        while (applyList.size() > 0) {
+            resumeList.add(applyList.get(0).getResume());
+            applyList.remove(0);
+        }
+
+        return resumeList;
+    }
+
     // public void 테스트2(String string) {
     //     PostingSkill.findBySkill
     // }
+
 
 }

@@ -9,14 +9,10 @@
 
 		<div class="mt-3"></div>
 
-		<form action="/join" method="post" onsubmit="valid()">
-
-			<form action="/login" method="post" onsubmit="">
-				<div class="d-flex form-group mt-2 mb-2">
-					<input type="email" name="email" class="form-control" placeholder="아이디(이메일)" id="email"/>
-					<button type="button" class="badge bg-secondary ms-2" onclick="">
-						중복체크
-					</button>
+		<form action="/join" method="post" enctype="multipart/form-data" onsubmit="valid()">
+					<div class="d-flex form-group mt-2 mb-2">
+					<input type="email" name="email" class="form-control" placeholder="아이디(이메일)" id="email" onchange="useremailChange()"/>
+					<button type="button" class="btn btn-warning" onclick="check()">중복체크</button>
 				</div>
 
 				<div class="mt-4"></div>
@@ -49,26 +45,26 @@
 				<div class="mt-4"></div>
 
 				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id=""/>
-					<label class="form-check-label" for="flexCheckDefault">서비스 이용약관 관련 전체동의</label>
+					<input class="form-check-input" type="checkbox" id="serviceAgreement"/>
+					<label class="form-check-label" for="serviceAgreement">서비스 이용약관 관련 전체동의</label>
 				</div>
 
 				<hr/>
 
 				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id=""/>
-					<label class="form-check-label" for="flexCheckChecked">(필수) 이용약관 동의</label>
+					<input class="form-check-input" type="checkbox" id="termsAgreement"/>
+					<label class="form-check-label" for="termsAgreement">(필수) 이용약관 동의</label>
 				</div>
 				<div class="form-check">
-					<input class="form-check-input" type="checkbox" id=""/>
-					<label class="form-check-label" for="flexCheckChecked">(필수) 개인정보 수집 및 이용 동의</label>
+					<input class="form-check-input" type="checkbox" id="privacyAgreement"/>
+					<label class="form-check-label" for="privacyAgreement">(필수) 개인정보 수집 및 이용 동의</label>
 				</div>
 
 				<div class="mt-3"></div>
 
 				<div class="form-check mb-3">
-					<input class="form-check-input" type="checkbox" id=""/>
-					<label class="form-check-label" for="flexCheckChecked">(선택) 이메일 수신 동의</label>
+					<input class="form-check-input" type="checkbox" id="emailAgreement"/>
+					<label class="form-check-label" for="emailAgreement">(선택) 이메일 수신 동의</label>
 				</div>
 				<div class="d-grid">
 					<input id="button" class="btn btn-primary" type="submit" value="회원가입" onclick=""/>
@@ -76,4 +72,58 @@
 			</form>
 	</div>
 </div>
+<script>
+	// 전체동의 체크박스 요소
+	let serviceAgreementCheckbox = document.querySelector("#serviceAgreement");
+    // 필수 약관 동의 체크박스 요소들
+    let termsAgreementCheckbox = document.querySelector("#termsAgreement");
+    let privacyAgreementCheckbox = document.querySelector("#privacyAgreement");
+	let emailAgreementCheckbox = document.querySelector("#emailAgreement");
+
+    // 전체동의 체크박스가 변경되면 선택 이메일 수신 동의 체크박스도 변경됩니다.
+    serviceAgreementCheckbox.addEventListener("change", function () {
+        let checked = serviceAgreementCheckbox.checked;
+        termsAgreementCheckbox.checked = checked;
+        privacyAgreementCheckbox.checked = checked;
+        emailAgreementCheckbox.checked = checked;
+    });
+    
+    let useremailSameCheck = false;
+
+    function useremailChange() {
+        console.log("이메일 값이 변경됨");
+        useremailSameCheck = false;
+    }
+    function valid() {
+        if (useremailSameCheck) {
+            return true;
+        } else {
+            alert("이메일 중복체크를 해주세요");
+            return false;
+        }
+    }
+
+    // 책임 : input태그로 부터 useremail을 가져와서 통신을 요청하고, 중복이 되었는지 확인한다.
+	async function check() {
+        // 1. DOM으로 부터 값 가져오기
+        let useremail = document.querySelector("#email").value;
+
+        // 2. 통신하기
+        let response = await fetch(`/check?useremail=${useremail}`);
+
+        // 3. 파싱하기
+        let responseBody = await response.json();
+        console.log(responseBody);
+
+        // 4. 상태코드 확인
+        let button = document.querySelector("#button");
+        if (responseBody.sucuess === true) {
+            alert("이메일을 사용할 수 있습니다.");
+            useremailSameCheck = true;
+        } else {
+            alert("이메일을 사용할 수 없습니다.");
+            useremailSameCheck = false;
+        }
+	}
+</script>
 {{> layout/footer}}

@@ -2,7 +2,6 @@
 
 <!-- 21번 -->
 
-
 <div class="col-auto container border border-info mb-2">
 	<h1 class="text-center mt-2">공고</h1>
 
@@ -12,6 +11,7 @@
 		</div>
 
 		<div class="col-8 p-2">
+
 			<div class="input-group mb-3">
 				<span class="input-group-text">회사명</span>
 				<input type="text" class="form-control" value="{{posting.user.compname}}" disabled>
@@ -36,22 +36,18 @@
 		</div>
 
 	</div>
-
 	<div class="input-group mb-3 ms-1">
 		<span class="input-group-text">공고명</span>
 		<input type="text" class="form-control" value="{{posting.title}}" disabled>
 	</div>
-
 	<div class="input-group mb-3 ms-1">
 		<span class="input-group-text">공고내용</span>
 		<textarea class="form-control" rows="5" disabled>{{posting.desc}}</textarea>
 	</div>
-
 	<div class="input-group mb-3 ms-1">
 		<span class="input-group-text">직무</span>
 		<input type="text" class="form-control" value="{{posting.position}}" disabled>
 	</div>
-
 	<div class="input-group mb-3 ms-1">
 		<span class="input-group-text">기술</span>
 		<input type="text" class="form-control"
@@ -85,17 +81,12 @@
 
 	<div class="d-flex">
 		{{^sessionComp.compname}}
-			<button type="button" class="w-50 mb-3 me-2 btn btn-success">지원하기</button>
-			<button type="button" class="w-50 mb-3 ms-2 btn btn-warning">북마크하기</button>{{/sessionComp.compname}}
+			<a href="/user/applyForm/{{postingId}}" class="w-50 mb-3 ms-2 btn btn-info">지원하기</a> {{! 지원하기 하이퍼링크연결 }}
+			<button type="button" class="w-50 mb-3 ms-2 btn btn-warning">북마크하기</button>
+		{{/sessionComp.compname}}
 	</div>
 
 </div>
-
-
-
-
-
-
 
 
 {{> layout/footer}}

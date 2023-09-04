@@ -33,5 +33,4 @@ public class ApplyController {
 
         return "user/applyList";
     }
-
 }

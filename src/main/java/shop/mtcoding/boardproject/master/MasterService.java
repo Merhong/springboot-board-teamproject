@@ -1,5 +1,6 @@
 package shop.mtcoding.boardproject.master;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -7,16 +8,26 @@ import javax.swing.text.html.Option;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject.master.MasterRequest.MasterDTO;
 import shop.mtcoding.boardproject.user.User;
 
+import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingRepository;
+
+
 @Service
 public class MasterService {
 
     @Autowired
+
     private MasterRepository masterRepository;
 
     public List<Master> 모든문의찾기() {
@@ -48,5 +59,4 @@ public class MasterService {
         List<Master> masterList = masterRepository.findByUserId(Id);
         return masterList;
     }
-
 }

@@ -2,18 +2,35 @@ package shop.mtcoding.boardproject.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import shop.mtcoding.boardproject._core.util.ApiUtil;
+import shop.mtcoding.boardproject.apply.Apply;
+import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.comp.CompRequest;
+import shop.mtcoding.boardproject.comp.CompService;
+import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.resume.Resume;
+import shop.mtcoding.boardproject.resume.ResumeService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
 
     @Autowired // DI
     private UserService userService;
+
+    @Autowired // DI
+    private ResumeService resumeService;
+
+    @Autowired // DI
+    private ApplyService applyService;
+
+    @Autowired // DI
+    private CompService compService;
 
     @Autowired
     private HttpSession session;
@@ -26,6 +43,15 @@ public class UserController {
             return "redirect:/user/loginForm";
         }
         return "user/recommendForm";
+    }
+
+    // 15_개인지원내역 화면
+    @GetMapping("/user/applyList")
+    public String userApplyList(HttpServletRequest request) {
+        User user = (User) session.getAttribute("sessionUser");
+        List<Apply> applyList = applyService.유저지원내역전체(user.getId());
+        request.setAttribute("applyList", applyList);
+        return "user/applyList";
     }
 
     // 14번 이력서 수정 버튼 POST
@@ -66,16 +92,31 @@ public class UserController {
         if (sessionUser == null) {
             return "redirect:/user/loginForm";
         }
+
         return "redirect:/";
     }
 
     // 11_개인지원하기 화면
+
     @GetMapping("/user/applyForm")
     public String userApplyForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/user/loginForm";
         }
+
+    @GetMapping("/user/applyForm/{postingId}")
+    public String userApplyForm(Model model, @PathVariable("postingId") Integer postingId) {
+        Posting posting = compService.공고찾기(postingId);
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Integer user = sessionUser.getId();
+        List<Resume> resumes = resumeService.이력서목록(user);
+
+        model.addAttribute("resumes", resumes); // 목록 추가
+        model.addAttribute("user", user); // 유저 아이디를 모델에 추가
+        model.addAttribute("posting", posting); // 유저 아이디를 모델에 추가
+
         return "user/applyForm";
     }
 
@@ -99,6 +140,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
         User sessionUser = userService.로그인(loginDTO);
+
         if (sessionUser.getRole() == 0) {
             session.setAttribute("sessionAdmin", sessionUser);
         }
@@ -110,6 +152,9 @@ public class UserController {
         }
         if (sessionUser.getCompname() != null) {
             System.out.println("sessionComp 실행");
+          
+          
+        if (sessionUser.getRole() != 1) {
             CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                     .userId(sessionUser.getId())
                     .email(sessionUser.getEmail())
@@ -161,4 +206,14 @@ public class UserController {
         return "user/selectJoinForm";
     }
 
+    // 중복체크
+    @GetMapping("/check")
+    public @ResponseBody ApiUtil<String> check(String useremail) {
+        User user = userService.유저네임중복체크(useremail);
+        if (user != null) {
+            return new ApiUtil<String>(false, "이메일이 중복 되었습니다.");
+        }
+        System.out.println("테스트 3");
+        return new ApiUtil<String>(true, "이메일을 사용 할 수 있습니다.");
+    }
 }
