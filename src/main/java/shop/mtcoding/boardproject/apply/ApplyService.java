@@ -18,10 +18,12 @@ public class ApplyService {
     public List<Apply> 유저지원내역전체(Integer id) {
         List<Apply> applyList = applyRepository.findApplyResumeByUserId(id);
 
-        // 각 Apply 엔티티의 posting 필드에 접근하여 title을 가져오고자 할 때
         for (Apply apply : applyList) {
-            String postingTite = apply.getPosting().getTitle();
-            // 이제 postingTitle 변수에 해당 Apply의 Posting title이 들어있습니다.
+            if (apply.getStatement() == null) {
+                // statement가 null인 경우 대기 상태로 설정
+                apply.setStatement("대기 상태");
+            }
+
         }
         return applyList;
     }

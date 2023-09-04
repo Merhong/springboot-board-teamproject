@@ -62,10 +62,10 @@
 
 				<tbody>
 					{{#applyList}}
-					<tr onclick="redirectToPage('/notice/')">
+					<tr>
 						<td>{{ id }}</td>
-						<td>{{ posting.title }}</td>
-						<td>{{ resume.title }}</td>
+						<td class="clickable" data-type="posting" data-id="{{ posting.id }}">{{ posting.title }}</td>
+						<td class="clickable" data-type="resume" data-id="{{ resume.id }}">{{ resume.title }}</td>
 						<td>{{ posting.position }}</td>
 						<td>{{ statement }}</td>
 					</tr>
@@ -77,4 +77,24 @@
 	<div class="col-2"></div>
 </div>
 
+
+<script>
+	// 클릭 이벤트 핸들러 함수
+	function handleItemClick(event) {
+		const targetType = event.target.getAttribute('data-type');
+		const itemId = event.target.getAttribute('data-id');
+
+		if (targetType === 'posting') {
+			window.location.href = '/comp/posting/' + itemId;
+		} else if (targetType === 'resume') {
+			window.location.href = '/resume/' + itemId;
+		}
+	}
+
+	// 모든 클릭 가능한 항목에 클릭 이벤트 핸들러 등록
+	const clickableItems = document.querySelectorAll('.clickable');
+	clickableItems.forEach((item) => {
+		item.addEventListener('click', handleItemClick);
+	});
+</script>
 {{> layout/footer}}

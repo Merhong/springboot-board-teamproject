@@ -59,7 +59,6 @@ public class UserController {
 
         User user = userService.회원수정(updateDTO, sessionUser.getId());
         session.setAttribute("sessionUser", user);
-
         return "redirect:/";
     }
 
@@ -74,12 +73,10 @@ public class UserController {
 
     // 15_개인지원내역 화면
     @GetMapping("/user/applyList")
-
     public String userApplyList(HttpServletRequest request) {
         User user = (User) session.getAttribute("sessionUser");
         List<Apply> applyList = applyService.유저지원내역전체(user.getId());
         request.setAttribute("applyList", applyList);
-
         return "user/applyList";
     }
 
