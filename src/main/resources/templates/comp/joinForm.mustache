@@ -10,9 +10,9 @@
 
 		<div class="mt-3"></div>
 
-		<form action="/comp/join" method="post" onsubmit="" enctype="multipart/form-data" onsubmit="valid()">
+		<form action="/comp/join" method="post" enctype="multipart/form-data" onsubmit="valid()">
 			<div class="d-flex form-group mt-2 mb-2">
-				<input type="email" name="email" class="form-control" placeholder="아이디(이메일)"  onchange="useremailChange()"/>
+				<input type="email" name="email" class="form-control" placeholder="아이디(이메일)" id="email" onchange="useremailChange()"/>
 				<button type="button" class="badge bg-secondary ms-2"onclick="check()">중복체크</button>
 			</div>
 

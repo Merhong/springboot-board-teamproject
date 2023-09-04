@@ -218,8 +218,8 @@ public class CompService {
         }
     }
 
-    public User 이메일중복체크(String useremail) {
-        User user = userRepository.FindByemail(useremail);
+    public User 이메일중복체크(String email) {
+        User user = userRepository.FindByemail(email);
         return user;
     }
 
