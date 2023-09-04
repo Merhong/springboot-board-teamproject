@@ -3,106 +3,163 @@
 
 <!-- 22번 -->
 
-<div class="col-9 ms-2">
-	<h1 class="text-center mt-2 mb-3">지원자 내역</h1>
 
-	<div class="d-flex justify-content-center">
-		<h5 class="align-self-center">이 공고에 지원한 지원자입니다. :</h5>
 
-		<a href="/comp/posting/{{ posting.id }}" class="btn btn-info m-2">
-			<div class="">
-				<span class="fw-bold">{{ posting.position }}</span>
-				<span class="badge bg-black"
-				>D-{{#posting.expiryDate}}{{ posting.expiryDate
-				}}{{/posting.expiryDate}}</span
-				>
-			</div>
-			<div class="mb-1">
-				{{#posting.postingSkill
+		<div class="col-9 ms-2">
+			<h1 class=" text-center mt-2 mb-3">지원자 내역</h1>
 
 
 
-				}}<span class="badge bg-primary me-1">{{ skill }}</span
-				>{{/posting.postingSkill}}
-			</div>
-			<div>
-				{{#posting.career
+		<div class="d-flex justify-content-center">
+			<h5 class="align-self-center">이 공고에 지원한 지원자입니다. :</h5>
+
+			<a href="javascript:void(0);" class="btn btn-info m-2" onclick="openNewWindow('/comp/posting/newWindow/{{posting.id}}')">
+				<div class="">
+					<div class="fw-bold">{{posting.title}}</div>
+					<span class="badge bg-secondary">{{posting.position}}</span>
+					<span class="expiryDate badge bg-black">{{#posting.expiryDate}}{{posting.expiryDate}}{{/posting.expiryDate}}</span>
+				</div>
+				<div class="">
+					{{#posting.postingSkill}}<span class="badge bg-primary me-1">{{skill.skillname}}</span>{{/posting.postingSkill}}
+				</div>
+				<div>
+					{{#posting.career}}<span class="badge bg-success">{{posting.career}}</span>{{/posting.career}}
+					{{#posting.education}}<span class="badge bg-success">{{posting.education}}</span>{{/posting.education}}
+					<span class="badge bg-success">{{posting.region}}</span>
+				</div>
+			</a>
+
+		</div>
+
+			
 
 
+			<table class="table table-bordered border ms-3">
+				<thead>
+				  <tr class="table-secondary">
+					<th class="text-center" scope="col">No.</th>
+					<th class="text-center" scope="col">이름</th>
+					<th class="text-center" scope="col">이력서</th>
+					<th class="text-center" scope="col">경력</th>
+					<th class="text-center" scope="col">상태</th>
+					<th class="text-center" scope="col">응답</th>
+				  </tr>
+				</thead>
+				<tbody>
 
-				}}<span class="badge bg-success">{{ posting.career }}</span
-				>{{/posting.career}}
-				{{#posting.education
 
-
-
-				}}<span class="badge bg-success">{{ posting.education }}</span
-				>{{/posting.education}}
-				<span class="badge bg-success">{{ posting.region }}</span>
-			</div>
-		</a>
-	</div>
-
-	<table class="table table-bordered border ms-3">
-		<thead>
-			<tr class="table-secondary">
-				<th class="text-center" scope="col">No.</th>
-				<th class="text-center" scope="col">이름</th>
-				<th class="text-center" scope="col">이력서</th>
-				<th class="text-center" scope="col">경력</th>
-				<th class="text-center" scope="col">상태</th>
-				<th class="text-center" scope="col">응답</th>
-			</tr>
-		</thead>
-		<tbody>
-			{{#applyList}}
-				<tr>
+				  {{#resumeList}}
+				  <tr>
 					<th class="text-center" scope="row">1</th>
-					<td class="text-center">{{ resume.user.username }}</td>
-					<td class="text-center"><a href="/resume/1" class="">이력서1</a></td>
+					<td class="text-center">홍길동</td>
+					<td class="text-center"><a href="javascript:void(0);" class="" onclick="openNewWindow('/resume/newWindow/{{posting.id}}')">이력서1</a></td>
 					<td class="text-center">신입</td>
 					<td class="text-center">대기중</td>
 					<td class="text-center">
 						<button class="badge bg-success" type="button">합격</button>
 						<button class="badge bg-danger" type="button">불합격</button>
 					</td>
-				</tr>
-			{{/applyList}}
-			<tr>
-				<th class="text-center" scope="row">2</th>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-			</tr>
-			<tr>
-				<th class="text-center" scope="row">3</th>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-			</tr>
-			<tr>
-				<th class="text-center" scope="row">4</th>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-			</tr>
-			<tr>
-				<th class="text-center" scope="row">5</th>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-				<td class="text-center"></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+				  </tr>
+				  {{/resumeList}}
+
+
+				  <tr>
+					<th class="text-center" scope="row">2</th>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+				  </tr>
+				  <tr>
+					<th class="text-center" scope="row">3</th>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+				  </tr>
+				  <tr>
+					<th class="text-center" scope="row">4</th>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+				  </tr>
+				  <tr>
+					<th class="text-center" scope="row">5</th>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+					<td class="text-center"></td>
+				  </tr>
+				</tbody>
+			  </table>
+
+
+		</div>
+
+
+
+
+
+		<script>
+
+
+
+	function openNewWindow(url) {
+	  var width = 600; // 새 창의 가로 크기
+	  var height = 1100; // 새 창의 세로 크기
+	  var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+	  var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
+	
+	  var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+	  window.open(url, '새 창', options);
+	}
+
+
+
+
+			function Ddaycheck(day){
+				if(typeof day === "string"){
+					let day2 = new Date(day);
+					return Ddaycheck(day2);
+				} else{
+					let today = new Date();
+		
+					console.log((day-today) / (1000 * 60 * 60 * 24));
+					let DDay = Math.ceil( (day-today) / (1000 * 60 * 60 * 24));
+		
+					if(DDay==0){
+						console.log("D-Day");
+						return "D-Day";
+					}
+					else if(DDay<0){
+						console.log("만료");
+						return "만료";
+					}
+					else{
+						console.log("D-"+DDay); 
+						return "D-"+DDay;
+					}
+				}
+			}
+		
+		
+		
+			let day = document.querySelectorAll('.expiryDate');
+			day.forEach(element => {
+				element.textContent = Ddaycheck(element.textContent);
+			});
+		
+		
+		</script>
+		
+
+
+
 
 {{> layout/comp2footer}}
 {{> layout/footer}}
