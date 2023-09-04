@@ -2,13 +2,20 @@ package shop.mtcoding.boardproject.resume;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject._core.vo.MyPath;
 import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeDTO;
 import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeUpdateDTO;
 import shop.mtcoding.boardproject.skill.UserSkillRepository;
 import shop.mtcoding.boardproject.user.User;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 
@@ -22,6 +29,17 @@ public class ResumeService {
 
     @Transactional
     public void 이력서등록(ResumeDTO resumeDTO, Integer id) {
+        UUID uuid = UUID.randomUUID(); // 랜덤한 해시값을 만들어줌
+        String fileName = uuid + "_" + resumeDTO.getPto().getOriginalFilename();
+
+        // 프로젝트 실행 파일 변경 -> blogv2-1.0.jar
+        // 해당 실행파일 경로에 images 폴더가 필요함
+        Path filePath = Paths.get(MyPath.IMG_PATH + fileName);
+        try {
+            Files.write(filePath, resumeDTO.getPto().getBytes());
+        } catch (Exception e) {
+            throw new MyException(e.getMessage());
+        }
         Resume resume = Resume.builder()
                 .user(User.builder().id(id).build())
                 .title(resumeDTO.getTitle())
@@ -51,6 +69,18 @@ public class ResumeService {
         // 이력서 ID로 엔티티를 찾습니다.
         Optional<Resume> optionalResume = resumeRepository.findById(id);
 
+        UUID uuid = UUID.randomUUID(); // 랜덤한 해시값을 만들어줌
+        String fileName = uuid + "_" + resumeUpdateDTO.getPto().getOriginalFilename();
+
+        // 프로젝트 실행 파일 변경 -> blogv2-1.0.jar
+        // 해당 실행파일 경로에 images 폴더가 필요함
+        Path filePath = Paths.get(MyPath.IMG_PATH + fileName);
+        try {
+            Files.write(filePath, resumeUpdateDTO.getPto().getBytes());
+        } catch (Exception e) {
+            throw new MyException(e.getMessage());
+        }
+
         if (optionalResume.isPresent()) {
             Resume resume = optionalResume.get();
 
@@ -60,6 +90,7 @@ public class ResumeService {
             user.setTel(resumeUpdateDTO.getTel());
             user.setAddress(resumeUpdateDTO.getAddress());
             user.setBirth(resumeUpdateDTO.getBirth());
+            user.setPhoto(fileName);
 
             resume.setUser(user);
             resume.setTitle(resumeUpdateDTO.getTitle());

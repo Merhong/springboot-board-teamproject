@@ -45,12 +45,6 @@ public class UserController {
         return "user/recommendForm";
     }
 
-    // 14번 이력서 수정 버튼 POST
-
-    // 14번 이력서 삭제 버튼 POST
-
-    // 13번 사진수정 버튼 POST
-
     // 12번 수정하기 버튼 POST
     @PostMapping("/user/update")
     public String userUpdate(UserRequest.UpdateDTO updateDTO) {

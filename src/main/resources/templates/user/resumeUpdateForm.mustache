@@ -7,26 +7,30 @@
    <div class="class col-8 h-auto d-flex border border-info">
       <div class="bg-info col-2">
          <div class="m-2"></div>
-         <a href="updateForm" class="w-100 btn btn-info">마이 페이지</a>
+         <a href="/user/updateForm" class="w-100 btn btn-info">마이 페이지</a>
          <div class="m-2"></div>
-         <a href="resumeForm" class="w-100 btn btn-info">이력서 등록</a>
+         <a href="/user/resumeForm" class="w-100 btn btn-info">이력서 등록</a>
          <div class="m-2"></div>
-         <a href="resumeManage" class="w-100 btn btn-info">이력서 관리</a>
+         <a href="/user/resumeManage" class="w-100 btn btn-info">이력서 관리</a>
          <div class="m-2"></div>
-         <a href="applyList" class="w-100 btn btn-info">지원내역</a>
+         <a href="/user/applyList" class="w-100 btn btn-info">지원내역</a>
          <div class="m-2"></div>
-         <a href="bookmarkForm" class="w-100 btn btn-info">북마크</a>
+         <a href="/user/bookmarkForm" class="w-100 btn btn-info">북마크</a>
          <div class="m-2"></div>
-         <a href="recommendForm" class="w-100 btn btn-info">기업추천</a>
+         <a href="/user/recommendForm" class="w-100 btn btn-info">기업추천</a>
          <div class="m-2"></div>
       </div>
       <div class="col-9 ms-3">
          <h1 class="text-center mt-2">이력서 수정</h1>
-         <form action="/resume/{{id}}/update" method="post">
+         <form action="/resume/{{id}}/update" method="post" enctype="multipart/form-data">
             <div class="d-flex">
-               <div class="m-2 col-4 d-flex flex-column align-items-center">
-                  <img src="../../../images/basic.jpg" class="img-fluid rounded-circle"
+               <div class="m-2 col-4  d-flex flex-column align-items-center">
+                  <img id="preview" src="../../../../../images/{{resume.user.photo}}" class="circle_avatar"
                      style="width:150px; height:150px;" />
+                  <div class="input-group mb-3 mt-3">
+                     <input type="file" class="form-control" placeholder="Enter pto" name="pto"
+                        onchange="changePic(event)">
+                  </div>
                </div>
 
                <div class="col-8 p-2">
@@ -105,8 +109,7 @@
 
             <div class="input-group ms-2 mb-3">
                <span class="input-group-text">자기소개서</span>
-               <textarea class="form-control" rows="5" name="personalStatement"
-                  value="{{resume.personalStatement}}"></textarea>
+               <textarea class="form-control" rows="5" name="personalStatement">{{resume.personalStatement}}</textarea>
             </div>
 
 
@@ -128,5 +131,23 @@
    <div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
 </div>
 
+<script>
+   function changePic(e1) {
+      console.log(e1);
+      let f = e1.srcElement.files[0];
+
+      if (!f.type.match("image.*")) {
+         alert("이미지를 등록해주세요.");
+         return;
+      }
+
+      let reader = new FileReader(); //버퍼를 하나 만듦 ,메모리에 끌어 올릴려고!
+      reader.onload = function (e2) { // 파일이 다 읽어지면 콜백됨
+         let previewEl = document.querySelector("#preview");
+         previewEl.setAttribute("src", e2.target.result);
+      }
+      reader.readAsDataURL(f); // 파일 읽기, 버퍼로 다 읽으면 onload() 발동 -> 파일 다 읽으면 콜백
+   }
+</script>
 
 {{> layout/footer}}

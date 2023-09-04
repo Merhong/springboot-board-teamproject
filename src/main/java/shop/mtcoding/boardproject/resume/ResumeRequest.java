@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Column;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ResumeRequest {
 
@@ -17,6 +18,7 @@ public class ResumeRequest {
     @Setter
     public static class ResumeDTO {
         private Integer id;
+        private MultipartFile pto;
         private String username;
         private String tel;
         private String address;
@@ -40,6 +42,7 @@ public class ResumeRequest {
     @Setter
     public static class ResumeUpdateDTO {
         private Integer id;
+        private MultipartFile pto;
         private String username;
         private String tel;
         private String address;

@@ -95,6 +95,7 @@ public class ResumeController {
     public String userResumeForm(HttpServletRequest request) {
         List<Skill> skillList = skillService.전체기술조회();
         request.setAttribute("skillList", skillList);
+        request.getAttribute("sessionUser");
         return "user/resumeForm";
     }
 
