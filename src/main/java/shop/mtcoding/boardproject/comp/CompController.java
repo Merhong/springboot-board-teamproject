@@ -455,7 +455,9 @@ public class CompController {
         
         // return "redirect:/comp/posting/" + postingId + "/offerList";
         return ResponseEntity.ok("오퍼성공"); // 새창 열린거니까 끄게
-    }
+    } //
+
+
 
 
 
