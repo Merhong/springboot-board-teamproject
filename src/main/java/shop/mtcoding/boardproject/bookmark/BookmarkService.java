@@ -70,7 +70,7 @@ public class BookmarkService {
 
         List<Resume> tempList = new ArrayList<>();
         for (Resume resume : resumeList) {
-            if(resume.getDisclosure()!=true){
+            if (resume.getDisclosure() != true) {
                 tempList.add(resume);
             }
         }
@@ -80,10 +80,11 @@ public class BookmarkService {
         User user = new User();
         user.setId(compId);
         for (Resume resume : resumeList) {
-            // CompBookmark tempBookmark = compBookmarkRepository.findByUserIdAndResumeId(compId, resume.getId());
+            // CompBookmark tempBookmark =
+            // compBookmarkRepository.findByUserIdAndResumeId(compId, resume.getId());
             // System.out.println("테스트"+tempBookmarkList);
 
-            if(compBookmarkRepository.findByUserIdAndResumeId(compId, resume.getId())==null){ // 똑같은거 북마크 안되게
+            if (compBookmarkRepository.findByUserIdAndResumeId(compId, resume.getId()) == null) { // 똑같은거 북마크 안되게
                 // System.out.println("테스트넘어옴");
                 CompBookmark compBookmark = new CompBookmark(user, resume);
                 compBookmarkRepository.save(compBookmark);
@@ -94,19 +95,19 @@ public class BookmarkService {
     @Transactional
     public void 회사북마크추가(Integer compId, Integer resumeId) {
 
-        if((compBookmarkRepository.findByUserIdAndResumeId(compId, resumeId))!=null){ // 똑같은거 북마크 안되게
+        if ((compBookmarkRepository.findByUserIdAndResumeId(compId, resumeId)) != null) { // 똑같은거 북마크 안되게
             throw new MyException("이미 북마크임");
         }
 
         Optional<Resume> resumeOP = resumeRepository.findById(resumeId);
         Resume resume = new Resume();
-        if (resumeOP.isPresent()){
+        if (resumeOP.isPresent()) {
             resume = resumeOP.get();
-        } else{
+        } else {
             throw new MyException(resumeId + "없음");
         }
 
-        if(resume.getDisclosure()==false){ // 이력서 공개여부 체크
+        if (resume.getDisclosure() == false) { // 이력서 공개여부 체크
             return;
         }
 
@@ -117,8 +118,26 @@ public class BookmarkService {
         compBookmarkRepository.save(compBookmark);
     }
 
+    public List<UserBookmark> 유저가북마크한공고(Integer userId) {
 
+        List<UserBookmark> list = userBookmarkRepository.findAllByUserId(userId);
 
+        return list;
 
-    
+    }
+
+    @Transactional
+    public Integer 유저북마크제거(Integer postingId, Integer userId) {
+        Integer sucuess = userBookmarkRepository.deleteByPostingAndUserId(postingId, userId);
+
+        return sucuess;
+    }
+
+    @Transactional
+    public Integer 유저북마크추가(Integer postingId, Integer userId) {
+        Integer sucuess = userBookmarkRepository.saveByPostingAndUserId(postingId, userId);
+
+        return sucuess;
+    }
+
 }
