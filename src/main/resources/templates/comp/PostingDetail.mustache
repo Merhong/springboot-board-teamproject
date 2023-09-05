@@ -2,113 +2,199 @@
 
 <!-- 21번 -->
 
-
-
-
-
 <div class="col-auto container border border-info mb-2">
-	<h1 class="text-center mt-2">공고</h1>
+  <h1 class="text-center mt-2">공고</h1>
 
-	<div class="d-flex">
-		<div class="m-1 col-4 d-flex flex-column img-fluid d-block m-auto" style="width:176px; height:280px;">
-			<img src="../../../images/{{posting.user.photo}}" class="" />
-		</div>
+  <div class="d-flex">
+    <div
+      class="m-1 col-4 d-flex flex-column img-fluid d-block m-auto"
+      style="width: 176px; height: 280px"
+    >
+      <img src="../../../images/{{ posting.user.photo }}" class="" />
+    </div>
 
-		<div class="col-8 p-2">
-			<div class="input-group mb-3">
-				<span class="input-group-text">회사명</span>
-				<input type="text" class="form-control" value="{{posting.user.compname}}" disabled>
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text">사업자번호</span>
-				<input type="text" class="form-control" value="{{posting.user.compRegister}}" disabled>
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text">주소</span>
-				<textarea class="form-control" rows="2" disabled>{{posting.user.address}}</textarea>
-			</div>
-			<div class="input-group mb-3">
-				<span class="input-group-text">전화번호</span>
-				<input type="text" class="form-control" value="{{posting.user.tel}}" disabled>
-			</div>
-			<div class="input-group mb-2">
-				<span class="input-group-text">홈페이지</span>
-				<input type="text" class="form-control"
-					value="{{#posting.user.homepage}}{{posting.user.homepage}}{{/posting.user.homepage}}" disabled>
-			</div>
-		</div>
+    <div class="col-8 p-2">
+      <div class="input-group mb-3">
+        <span class="input-group-text">회사명</span>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ posting.user.compname }}"
+          disabled
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">사업자번호</span>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ posting.user.compRegister }}"
+          disabled
+        />
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">주소</span>
+        <textarea class="form-control" rows="2" disabled>{{
+          posting.user.address
+        }}</textarea>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">전화번호</span>
+        <input
+          type="text"
+          class="form-control"
+          value="{{ posting.user.tel }}"
+          disabled
+        />
+      </div>
+      <div class="input-group mb-2">
+        <span class="input-group-text">홈페이지</span>
+        <input
+          type="text"
+          class="form-control"
+          value="{{#posting.user.homepage}}{{
+            posting.user.homepage
+          }}{{/posting.user.homepage}}"
+          disabled
+        />
+      </div>
+    </div>
+  </div>
 
-	</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">공고명</span>
+    <input
+      type="text"
+      class="form-control"
+      value="{{ posting.title }}"
+      disabled
+    />
+  </div>
 
-	<div class="input-group mb-3">
-		<span class="input-group-text">공고명</span>
-		<input type="text" class="form-control" value="{{posting.title}}" disabled>
-	</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">공고내용</span>
+    <textarea class="form-control" rows="5" disabled>{{
+      posting.desc
+    }}</textarea>
+  </div>
 
-	<div class="input-group mb-3">
-		<span class="input-group-text">공고내용</span>
-		<textarea class="form-control" rows="5" disabled>{{posting.desc}}</textarea>
-	</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">직무</span>
+    <input
+      type="text"
+      class="form-control"
+      value="{{ posting.position }}"
+      disabled
+    />
+  </div>
 
-	<div class="input-group mb-3">
-		<span class="input-group-text">직무</span>
-		<input type="text" class="form-control" value="{{posting.position}}" disabled>
-	</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">기술</span>
+    <input
+      type="text"
+      class="form-control comma"
+      value="{{#posting.postingSkill}}{{
+        skill.skillname
+      }}, {{/posting.postingSkill}}"
+      disabled
+    />
+  </div>
 
-	<div class="input-group mb-3">
-		<span class="input-group-text">기술</span>
-		<input type="text" class="form-control comma"
-			value="{{#posting.postingSkill}}{{skill.skillname}}, {{/posting.postingSkill}}" disabled>
-	</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">학력</span>
+    <input
+      type="text"
+      class="form-control"
+      value="{{#posting.education}}{{
+        posting.education
+      }}{{/posting.education}}"
+      disabled
+    />
+  </div>
 
-	<div class="input-group mb-3">
-		<span class="input-group-text">학력</span>
-		<input type="text" class="form-control"
-			value="{{#posting.education}}{{posting.education}}{{/posting.education}}" disabled>
-	</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">연차</span>
+    <input
+      type="text"
+      class="form-control"
+      value="{{#posting.career}}{{ posting.career }}{{/posting.career}}"
+      disabled
+    />
+  </div>
 
-	<div class="input-group mb-3">
-		<span class="input-group-text">연차</span>
-		<input type="text" class="form-control" value="{{#posting.career}}{{posting.career}}{{/posting.career}}"
-			disabled>
-	</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">지역</span>
+    <input
+      type="text"
+      class="form-control"
+      value="{{#posting.region}}{{ posting.region }}{{/posting.region}}"
+      disabled
+    />
+  </div>
 
-	<div class="input-group mb-3">
-		<span class="input-group-text">지역</span>
-		<input type="text" class="form-control" value="{{#posting.region}}{{posting.region}}{{/posting.region}}"
-			disabled>
-	</div>
+  <div class="input-group mb-3">
+    <span class="input-group-text">종료일</span>
+    <input
+      type="text"
+      class="form-control"
+      value="{{#posting.expiryDate}}{{
+        posting.expiryDate
+      }}{{/posting.expiryDate}}"
+      disabled
+    />
+  </div>
 
-	<div class="input-group mb-3">
-		<span class="input-group-text">종료일</span>
-		<input type="text" class="form-control"
-			value="{{#posting.expiryDate}}{{posting.expiryDate}}{{/posting.expiryDate}}" disabled>
-	</div>
-
-
-
-
-	<div class="d-flex">
-		{{^sessionComp.compname}}<a href="/user/applyForm/{{postingId}}" class="w-50 mb-3 ms-2 btn btn-info">지원하기</a>
-		<button type="button" class="w-50 mb-3 ms-2 btn btn-warning">북마크하기</button>{{/sessionComp.compname}}
-	</div>
-
+  <div class="d-flex">
+    {{^sessionComp.compname
+    }}<a
+      href="/user/applyForm/{{ postingId }}"
+      class="w-50 mb-3 ms-2 btn btn-info"
+      >지원하기</a
+    >
+    <button
+      type="button"
+      action="/user/bookmarkForm/save"
+      method="post"
+      class="btn btn-warning mb-3 bookmark-button"
+      data-posting-id="{{ posting.id }}"
+    >
+      북마크하기</button
+    >{{/sessionComp.compname}}
+  </div>
 </div>
 
-
-
-
 <script>
+  // 북마크하기 버튼 클릭 이벤트 핸들러
+  document.addEventListener("click", function (e) {
+    if (e.target && e.target.classList.contains("bookmark-button")) {
+      var postingId = e.target.getAttribute("data-posting-id"); // 해당 공고의 ID를 가져옴
 
-	let comma = document.querySelector(".comma");
-	console.log(comma.value);
-	comma.value = comma.value.slice(0, -2);
-	console.log(comma.value);
+      fetch("/user/bookmarkForm/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: "postingId=" + postingId, // 공고 ID를 서버로 보냄
+      })
+        .then(function (response) {
+          if (response.ok) {
+            // 북마크 성공
+            alert("북마크에 추가되었습니다.");
+          } else {
+            // 북마크 실패
+            alert("북마크 추가에 실패했습니다.");
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    }
+  });
 
-
+  let comma = document.querySelector(".comma");
+  console.log(comma.value);
+  comma.value = comma.value.slice(0, -2);
+  console.log(comma.value);
 </script>
-
-
-
 
 {{> layout/footer}}
