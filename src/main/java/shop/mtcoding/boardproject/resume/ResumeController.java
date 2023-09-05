@@ -53,7 +53,6 @@ public class ResumeController {
 
 
     // 이력서 수정하기 Post
-
     @PostMapping("/resume/{resumeId}/update")
     public String update(@PathVariable Integer resumeId, ResumeRequest.ResumeUpdateDTO resumeUpdateDTO) {
         // 1. 이력서를 찾는다.
