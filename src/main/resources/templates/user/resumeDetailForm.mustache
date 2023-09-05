@@ -1,9 +1,6 @@
 {{> layout/header}}
-
-
 <div class="d-flex mb-3">
   <div class="col-2"></div>
-
   <div class="card col-8 h-auto d-flex border border-info">
     <h1 class="text-center mt-2">이력서 상세보기</h1>
     <div class="d-flex">
@@ -14,105 +11,138 @@
           style="width: 150px; height: 150px"
         />
       </div>
-
       <div class="col-8 p-2">
-        {{!
         <div class="input-group mb-3">
           <span class="input-group-text"
             ><span class="ms-2 me-4">이름</span></span
           >
-          <div name="username">{{ resume.user.username }}</div>
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            value="{{{resume.user.username}}}"
+            disabled
+          />
         </div>
-        }}
         <div class="input-group mb-3">
           <span class="input-group-text">전화번호</span>
-          <div name="username">{{{resume.user.tel}}}</div>
+          <input
+            type="text"
+            class="form-control"
+            name="tel"
+            value="{{{resume.user.tel}}}"
+            disabled
+          />
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text"
             ><span class="ms-2 me-4">주소</span></span
           >
-          <div name="username">{{{resume.user.address}}}</div>
+          <input
+            type="text"
+            class="form-control"
+            name="address"
+            value="{{{resume.user.address}}}"
+            disabled
+          />
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">생년월일</span>
-          <div name="username">{{{resume.user.birth}}}</div>
+          <input
+            type="text"
+            class="form-control"
+            name="birth"
+            value="{{{resume.user.birth}}}"
+            disabled
+          />
         </div>
       </div>
     </div>
-
     <div class="input-group ms-2 mb-3">
       <div><span class="input-group-text">이력서 제목</span></div>
-      <div>{{{resume.title}}}</div>
+      <input
+        type="text"
+        class="form-control"
+        value="{{{resume.title}}}"
+        disabled
+      />
     </div>
-
     <div class="input-group ms-2 mb-3">
       <span class="input-group-text">학력사항</span>
-      <div>{{{resume.grade}}}</div>
+      <input
+        type="text"
+        class="form-control"
+        value="{{{resume.grade}}}"
+        disabled
+      />
     </div>
-
     <div class="input-group ms-2 mb-3">
       <span class="input-group-text" center>경력사항</span>
-      <div>{{{resume.career}}}</div>
+      <input
+        type="text"
+        class="form-control"
+        value="{{{resume.career}}}"
+        disabled
+      />
     </div>
-
     <div class="card input-group ms-2 mb-3">
       <span class="input-group-text">보유 기술</span>
       <div class="d-flex flex-wrap">
+        {{#skillList}}
         <div class="form-check d-inline-block ms-3 me-2">
-          <input class="form-check-input" type="checkbox" id="" />
-          <label class="form-check-label">Java</label>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="skill{{ id }}"
+            value="{{ id }}"
+            name="skillList"
+            disabled
+          />
+          <label class="form-check-label">{{ skillname }}</label>
         </div>
-        <div class="form-check d-inline-block ms-3 me-2">
-          <input class="form-check-input" type="checkbox" id="" />
-          <label class="form-check-label">DB</label>
-        </div>
-        <div class="form-check d-inline-block ms-3 me-2">
-          <input class="form-check-input" type="checkbox" id="" />
-          <label class="form-check-label">HTML / CSS</label>
-        </div>
-        <div class="form-check d-inline-block ms-3 me-2">
-          <input class="form-check-input" type="checkbox" id="" />
-          <label class="form-check-label">Python</label>
-        </div>
-        <div class="form-check d-inline-block ms-3 me-2">
-          <input class="form-check-input" type="checkbox" id="" />
-          <label class="form-check-label">JavaScript</label>
-        </div>
-        <div class="form-check d-inline-block ms-3 me-2">
-          <input class="form-check-input" type="checkbox" id="" />
-          <label class="form-check-label">Git</label>
-        </div>
-        <div class="form-check d-inline-block ms-3 me-2">
-          <input class="form-check-input" type="checkbox" id="" />
-          <label class="form-check-label">Spring Framework</label>
-        </div>
-        <div class="form-check d-inline-block ms-3 me-2">
-          <input class="form-check-input" type="checkbox" id="" />
-          <label class="form-check-label">C</label>
-        </div>
+        {{/skillList}}
       </div>
     </div>
-
     <div class="input-group ms-2 mb-3">
       <span class="input-group-text">자기소개서</span>
-      <div>{{{resume.personalStatement}}}</div>
+      <textarea class="form-control" rows="5" disabled
+        >{{{resume.personalStatement}}}</textarea
+      >
     </div>
-
     <!-- disabled속성은 입력할 수 없는 input태그를 만든다 -->
     <!-- disabled속성은 적용된 input은 서버로 데이터가 전송되지 않는다-->
     <!-- readonly속성은 읽기전용 input태그를 만든다 -->
     <!-- disabled ="ture"가 생략 된것-->
-
     <!-- <div>
-
             <input class=" btn btn-primary m-2 mb-3 w-20" type="submit" value="닫기">
             <input class=" btn btn-warning m-2 mb-3 w-20" type="submit" value="수정">
             <input class=" btn btn-danger m-2 mb-3 w-20" type="submit" value="삭제">
         </div> -->
-        
   </div>
   <div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
 </div>
 
+{{#userSkillList}}
+<div type="hidden" id="{{ skill.id }}" class="number"></div>
+{{/userSkillList}}
+
+<script>
+  function boxSelect() {
+    let div = document.querySelectorAll(".number");
+
+    for (let index = 0; index < div.length; index++) {
+      const element = div[index].id;
+      console.log(element);
+      boxCheck(element);
+    }
+  }
+
+  function boxCheck(id) {
+    console.log(id);
+    let selectedBox = document.querySelector(`#skill${id}`);
+    selectedBox.checked = true;
+  }
+
+  boxSelect();
+</script>
 {{> layout/footer}}

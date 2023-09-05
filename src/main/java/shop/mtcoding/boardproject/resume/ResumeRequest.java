@@ -50,6 +50,13 @@ public class ResumeRequest {
         private String career;
         private String personalStatement;
 
+        private List<Integer> skillList;
+        private Boolean disclosure;
+
+        public ResumeUpdateDTO() {
+            this.disclosure = false;
+        }
+
     }
 
 }

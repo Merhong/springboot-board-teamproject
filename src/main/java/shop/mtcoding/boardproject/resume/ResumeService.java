@@ -43,7 +43,6 @@ public class ResumeService {
     public Resume 이력서상세보기(Integer id) {
         return resumeRepository.findByResume(id);
     }
-    
 
     @Transactional
     public Resume 이력서찾기(Integer resumeId) {
@@ -51,7 +50,6 @@ public class ResumeService {
         // Optional에서 Resume 객체를 가져오거나, 없을 경우 null을 반환하도록 수정
         return resume.orElse(null);
     }
-
 
     public List<Resume> 이력서목록(Integer id) {
         return resumeRepository.findByResumeUser(id);
@@ -77,9 +75,19 @@ public class ResumeService {
             resume.setGrade(resumeUpdateDTO.getGrade());
             resume.setCareer(resumeUpdateDTO.getCareer());
             resume.setPersonalStatement(resumeUpdateDTO.getPersonalStatement());
+            resume.setDisclosure(resumeUpdateDTO.getDisclosure());
 
             // 수정된 이력서를 저장합니다.
             resumeRepository.save(resume);
+
+            // 기존 스킬 목록을 삭제
+            userSkillRepository.deleteAllByUserId(user.getId());
+
+            // 새로 체크한 스킬 목록을 추가
+            List<Integer> skillList = resumeUpdateDTO.getSkillList();
+            for (Integer integer : skillList) {
+                userSkillRepository.insertUserSkill(integer, user.getId());
+            }
         }
     }
 

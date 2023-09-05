@@ -48,10 +48,10 @@ public class UserController {
     // // 15_개인지원내역 화면
     // @GetMapping("/user/applyList")
     // public String userApplyList(HttpServletRequest request) {
-    //     User user = (User) session.getAttribute("sessionUser");
-    //     List<Apply> applyList = applyService.유저지원내역전체(user.getId());
-    //     request.setAttribute("applyList", applyList);
-    //     return "user/applyList";
+    // User user = (User) session.getAttribute("sessionUser");
+    // List<Apply> applyList = applyService.유저지원내역전체(user.getId());
+    // request.setAttribute("applyList", applyList);
+    // return "user/applyList";
     // }
 
     // 14번 이력서 수정 버튼 POST
@@ -152,9 +152,9 @@ public class UserController {
         if (sessionUser.getRole() == 2) {
             session.setAttribute("CompSession", sessionUser);
         }
+
         if (sessionUser.getCompname() != null) {
             System.out.println("sessionComp 실행");
-
 
             if (sessionUser.getRole() != 1) {
                 CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
@@ -171,6 +171,7 @@ public class UserController {
                 // System.out.println("테스트:"+sessionComp);
                 session.setAttribute("sessionComp", sessionComp);
             }
+
         }
         return "redirect:/";
     }
@@ -178,15 +179,14 @@ public class UserController {
     // 로그아웃
     @GetMapping("/logout")
     public String logout() {
-            User sessionUser = (User) session.getAttribute("sessionUser");
-            CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
-            if (sessionUser == null && sessionComp == null) {
-                return "redirect:/user/loginForm";
-            }
-            session.invalidate(); // 세션 무효화(세션 전체를 비움 - 서랍 비우는 거)
-            return "redirect:/";
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+        if (sessionUser == null && sessionComp == null) {
+            return "redirect:/user/loginForm";
         }
-
+        session.invalidate(); // 세션 무효화(세션 전체를 비움 - 서랍 비우는 거)
+        return "redirect:/";
+    }
 
     // 3_개인회원가입 화면
     @GetMapping("/user/joinForm")
@@ -209,9 +209,9 @@ public class UserController {
 
     // 중복체크
     @GetMapping("/check")
-    public @ResponseBody ApiUtil<String> check(String useremail){
+    public @ResponseBody ApiUtil<String> check(String useremail) {
         User user = userService.이메일중복체크(useremail);
-        if (user != null){
+        if (user != null) {
             return new ApiUtil<String>(false, "이메일이 중복 되었습니다.");
         }
         System.out.println("테스트 3");

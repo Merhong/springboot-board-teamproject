@@ -15,12 +15,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class SkillService {
 
     @Autowired
     private SkillRepository skillRepository;
+
+    @Autowired
+    private UserSkillRepository userSkillRepository;
 
     public List<Skill> 전체기술조회() {
         List<Skill> skillList = skillRepository.findAll();
@@ -29,6 +31,10 @@ public class SkillService {
 
     public List<Skill> 스킬이름전부() {
         return skillRepository.findAll();
+    }
+
+    public List<UserSkill> 유저스킬조회(Integer id) {
+        return userSkillRepository.selectUserSkill(id);
     }
 
 }
