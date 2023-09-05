@@ -161,8 +161,18 @@ public class UserController {
                 System.out.println("x : 기업 로그인");
             }
 
-            // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
-            if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
+        if (sessionUser.getRole() == 0) {
+            session.setAttribute("sessionAdmin", sessionUser);
+        }
+        if (sessionUser.getRole() == 1) {
+            session.setAttribute("sessionUser", sessionUser);
+        }
+        if (sessionUser.getRole() == 2) {
+            session.setAttribute("CompSession", sessionUser);
+        }
+
+        // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
+        if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
                 CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                         .userId(sessionUser.getId())
                         .email(sessionUser.getEmail())

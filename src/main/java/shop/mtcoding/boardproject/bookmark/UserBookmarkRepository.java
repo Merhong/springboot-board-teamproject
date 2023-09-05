@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.skill.PostingSkill;
+import shop.mtcoding.boardproject.user.User;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ public interface UserBookmarkRepository extends JpaRepository<UserBookmark, Inte
     List<UserBookmark> findAllByUserId(@Param("userId") Integer userId);
 
     List<UserBookmark> findByPostingId(@Param("postingId") Integer postingId);
+
 
     @Query(value = "select * from userbookmark_tb where posting_id = :postiongId and user_Id  = :userId", nativeQuery = true)
     List<UserBookmark> findByPostingIdAndUserId(@Param("postiongId") Integer postiongId,
