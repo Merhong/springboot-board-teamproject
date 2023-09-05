@@ -47,7 +47,6 @@ public class UserController {
         }
         return "user/recommendForm";
     }
-
     // 14번 이력서 수정 버튼 POST
 
     // 14번 이력서 삭제 버튼 POST
@@ -167,6 +166,7 @@ public class UserController {
                         .build();
                 session.setAttribute("sessionComp", sessionComp);
             }
+
         }
 
         // 로그인 후 메인 페이지로 리다이렉트합니다.

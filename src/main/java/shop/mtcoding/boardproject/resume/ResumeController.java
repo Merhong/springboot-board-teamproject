@@ -12,6 +12,7 @@ import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillService;
+import shop.mtcoding.boardproject.skill.UserSkill;
 import shop.mtcoding.boardproject.user.User;
 
 import java.util.List;
@@ -44,12 +45,15 @@ public class ResumeController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getId().equals(resume.getUser().getId())) {
             resumeService.이력서삭제(resumeId);
+            return "redirect:/user/resumeManage";
         }
         // 2-2. id가 다르다면, 예외처리
         throw new MyException("권한이 없습니다.");
     }
 
-    // 이력서 수정 POST
+
+    // 이력서 수정하기 Post
+
     @PostMapping("/resume/{resumeId}/update")
     public String update(@PathVariable Integer resumeId, ResumeRequest.ResumeUpdateDTO resumeUpdateDTO) {
         // 1. 이력서를 찾는다.
@@ -57,11 +61,15 @@ public class ResumeController {
         if (resume == null) {
             throw new MyException("없는 이력서 입니다.");
         }
+      
         // 2-1. 세션에 해당하는 유저id와 같은지 체크 후 이력서 수정
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getId().equals(resume.getUser().getId())) {
             resumeService.이력서수정(resumeId, resumeUpdateDTO);
+
+            return "redirect:/user/resume/" + resumeId;
         }
+      
         // 2-2. id가 다르면 예외처리
         throw new MyException("권한이 없습니다.");
     }
@@ -75,9 +83,16 @@ public class ResumeController {
         if (resume != null) {
             User sessionUser = (User) session.getAttribute("sessionUser");
             if (sessionUser.getId().equals(resume.getUser().getId())) {
+
+                List<Skill> skillList = skillService.전체기술조회();
+                List<UserSkill> userSkillList = skillService.유저스킬조회(sessionUser.getId());
+
+                request.setAttribute("userSkillList", userSkillList);
+                request.setAttribute("skillList", skillList);
                 request.setAttribute("resume", resume);
                 return "/user/resumeUpdateForm";
             }
+
         }
         return "redirect:/user/resumeManage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
     }
@@ -94,6 +109,12 @@ public class ResumeController {
         // 4. 이력서가 존재하고 유저와 공고기업 세션이 존재하면 request에 담아서 이력서 상세보기 화면을 보여준다.
         if (resume != null) {
             if (sessionUser != null || sessionComp != null) {
+
+                List<Skill> skillList = skillService.전체기술조회();
+                List<UserSkill> userSkillList = skillService.유저스킬조회(sessionUser.getId());
+
+                request.setAttribute("userSkillList", userSkillList);
+                request.setAttribute("skillList", skillList);
                 request.setAttribute("resume", resume);
                 return "/user/resumeDetailForm";
             }

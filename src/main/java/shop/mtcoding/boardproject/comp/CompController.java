@@ -97,7 +97,6 @@ public class CompController {
         return "comp/postingDetailOnly";
     }
 
-
     // @ResponseBody
     // @GetMapping("/comp/posting/check")
     // public ResponseEntity<String> check(int postingId){
@@ -131,7 +130,7 @@ public class CompController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+      
         return "comp/updateForm";
     }
 
@@ -157,12 +156,12 @@ public class CompController {
 
         request.setAttribute("resumeList", resumeList);
 
-
         return "comp/resumeList";
     }
 
     @GetMapping("/comp/recommend")
-    public String recommend(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
+    public String recommend(@RequestParam(defaultValue = "all") List<String> skillList,
+            @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
         List<Skill> sl = skillService.스킬이름전부();
         request.setAttribute("skillList", sl);
 
@@ -233,7 +232,8 @@ public class CompController {
         throw new MyException("권한이 없습니다.");
 
         // compService.공고수정(postingId, updateDTO);
-        // int id = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
+        // int id =
+        // ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
         // return "redirect:/comp/"+id+"/postingList";
 
     }
@@ -266,7 +266,6 @@ public class CompController {
             return Script.href("/comp/" + userId + "/postingList", "삭제 완료");
         }
 
-
         throw new MyException("권한이 없습니다.");
     }
 
@@ -286,10 +285,9 @@ public class CompController {
 
     // @GetMapping("/comp/test2")
     // public String compTest2() {
-    //     compService.테스트2("Java");
-    //     return "comp/main";
+    // compService.테스트2("Java");
+    // return "comp/main";
     // }
-
 
     // 중복체크
     @GetMapping("/comp/check")
