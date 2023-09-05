@@ -5,10 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.boardproject._core.util.Script;
+
+
+import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.bookmark.BookmarkResponse.CompBookmarkDTO;
 import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.posting.Posting;
@@ -32,10 +36,17 @@ public class BookmarkController {
     // 개인북마크 화면
     @GetMapping("/user/bookmarkForm")
     public String userBookMarkForm(HttpServletRequest request,
-                                   BookmarkResponse.UserBookmarkDTO bookmarkDTO) {
+            BookmarkResponse.UserBookmarkDTO bookmarkDTO) {
+
         User user = (User) session.getAttribute("sessionUser");
-        List<Posting> postingList = bookmarkService.유저북마크전체(user.getId());
+
+        if (user == null) {
+            return "redirect:/user/loginForm";
+        }
+
+        List<Posting> postingList = BookmarkService.유저북마크전체(user.getId());
         request.setAttribute("postingList", postingList);
+      
         return "/user/bookmarkForm";
     }
 

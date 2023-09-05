@@ -44,17 +44,14 @@ public class ResumeService {
         return resumeRepository.findByResume(id);
     }
     
+
+    @Transactional
     public Resume 이력서찾기(Integer resumeId) {
-        Optional<Resume> resumeOP = resumeRepository.findById(resumeId);
-        if (resumeOP.isPresent()) {
-            return resumeOP.get();
-        } else {
-            throw new MyException(resumeId+" 없음");
-        }
+        Optional<Resume> resume = resumeRepository.findById(resumeId);
+        // Optional에서 Resume 객체를 가져오거나, 없을 경우 null을 반환하도록 수정
+        return resume.orElse(null);
     }
 
-
-    
 
     public List<Resume> 이력서목록(Integer id) {
         return resumeRepository.findByResumeUser(id);

@@ -1,11 +1,5 @@
 package shop.mtcoding.boardproject.comp;
 
-import java.sql.Timestamp;
-
-import java.util.*;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +7,15 @@ import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.Image;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyRepository;
+
 import shop.mtcoding.boardproject.bookmark.UserBookmark;
 import shop.mtcoding.boardproject.bookmark.UserBookmarkRepository;
+
+import shop.mtcoding.boardproject.comp.CompRequest.JoinDTO;
+import shop.mtcoding.boardproject.comp.CompRequest.SaveDTO;
+import shop.mtcoding.boardproject.comp.CompRequest.UpdateDTO;
+import shop.mtcoding.boardproject.comp.CompRequest.compUpdateDTO;
+
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
@@ -24,10 +25,12 @@ import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillRepository;
 import shop.mtcoding.boardproject.user.User;
 import shop.mtcoding.boardproject.user.UserRepository;
-import shop.mtcoding.boardproject.comp.CompRequest.JoinDTO;
-import shop.mtcoding.boardproject.comp.CompRequest.SaveDTO;
-import shop.mtcoding.boardproject.comp.CompRequest.UpdateDTO;
-import shop.mtcoding.boardproject.comp.CompRequest.compUpdateDTO;
+
+import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompService {
@@ -82,9 +85,7 @@ public class CompService {
     public void 공고작성(SaveDTO saveDTO) {
         Posting posting = new Posting();
         posting.setUser(new User());
-        posting.getUser().setId(
-                ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId()
-        );
+        posting.getUser().setId(((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId());
         posting.setTitle(saveDTO.getTitle());
         posting.setDesc(saveDTO.getDesc());
         posting.setPosition(saveDTO.getPosition());
@@ -103,13 +104,16 @@ public class CompService {
 
         postingRepository.save(posting);
 
-        int get=0; 
-        while(StringList.size()>0){
+        int get = 0;
+        while (StringList.size() > 0) {
             psList.add(new PostingSkill());
             psList.get(get).setPosting(posting);
 
             for (Skill s : skillList) {
-                if(s.getSkillname().equals(StringList.get(0))){psList.get(get++).setSkill(s); break;}
+                if (s.getSkillname().equals(StringList.get(0))) {
+                    psList.get(get++).setSkill(s);
+                    break;
+                }
             }
             StringList.remove(0);
         }
@@ -127,7 +131,7 @@ public class CompService {
         if (postingOP.isPresent()) {
             return postingOP.get();
         } else {
-            throw new MyException(postingId+" 없음");
+            throw new MyException(postingId + " 없음");
         }
     }
 
@@ -152,20 +156,23 @@ public class CompService {
             posting.setExpiryDate(timestamp);
 
             List<String> StringList = updateDTO.getPostingSkill();
-            
+
             List<Skill> skillList = skillRepository.findAll();
-            
+
             List<PostingSkill> psList = new ArrayList<>();
 
             postingSkillRepository.deleteByPostingId(postingId);
 
-            int get=0;
-            while(StringList.size()>0){
+            int get = 0;
+            while (StringList.size() > 0) {
                 psList.add(new PostingSkill());
                 psList.get(get).setPosting(posting);
-    
+
                 for (Skill s : skillList) {
-                    if(s.getSkillname().equals(StringList.get(0))){psList.get(get++).setSkill(s); break;}
+                    if (s.getSkillname().equals(StringList.get(0))) {
+                        psList.get(get++).setSkill(s);
+                        break;
+                    }
                 }
                 StringList.remove(0);
             }
@@ -175,7 +182,7 @@ public class CompService {
                 postingSkillRepository.save(skill);
             }
 
-        } else{
+        } else {
             throw new MyException(postingId + "공고없음");
         }
     }
@@ -192,7 +199,7 @@ public class CompService {
             user.setAddress(DTO.getAddress());
             user.setTel(DTO.getTel());
             user.setHomepage(DTO.getHomepage());
-            if(fileName != null){ // 사진 안넣으면 기존 사진 유지하게
+            if (fileName != null) { // 사진 안넣으면 기존 사진 유지하게
                 user.setPhoto(fileName);
             }
             CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
@@ -208,7 +215,7 @@ public class CompService {
                     .build();
             session.setAttribute("sessionComp", sessionComp);
 
-        } else{
+        } else {
             throw new MyException(userId + "없음");
         }
     }
@@ -241,10 +248,16 @@ public class CompService {
         }
     }
 
+    public User 이메일중복체크(String email) {
+        User user = userRepository.FindByemail(email);
+        return user;
+    }
+
     public List<Apply> 공고지원신청찾기(Integer postingId) {
 
+
         List<Apply> applyList = applyRepository.findByPostingId(postingId);
-        
+
         // System.out.println("테스트33:"+applyList);
         // System.out.println("테스트33:"+applyList.get(0));
         // System.out.println("테스트33:"+applyList.get(0).getId());
@@ -261,6 +274,7 @@ public class CompService {
 
         return applyList;
     }
+
 
     public List<User> 인재추천검색(List<String> skillList, String position) {
 
@@ -289,10 +303,8 @@ public class CompService {
             userList.removeAll(tempList);
         }
 
-
-
-
         return userList;
+
     }
 
     // public void 테스트2(String string) {

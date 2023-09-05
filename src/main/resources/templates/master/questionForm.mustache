@@ -1,79 +1,98 @@
 {{> layout/header}}
 
 <style>
-	.question {
-		width: 800px;
-	}
+  .question {
+    width: 800px;
+  }
 
-	.type {
-		width: 300px;
-	}
+  .type {
+    width: 300px;
+  }
 </style>
 
 <div class="container p-5 question mb-5">
-	<div class="card" style="box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3)">
-		<div class="card-header"><b>문의 작성</b></div>
-		<div class="card-body">
-			<form action="/board/save" method="post">
-				<div class="mb-3">
-					<div class="mb-2"><b>문의 유형</b></div>
-					<div class="d-flex justify-content-start">
-						<button
-							type="button"
-							class="btn dropdown-toggle border"
-							data-bs-toggle="dropdown"
-						>
-							불만
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">화면 만들기 너 무 힘들어111</a>
-							<a class="dropdown-item" href="#">화면 만들기 너 무 힘들어222</a>
-						</div>
-					</div>
-				</div>
-				<div class="mb-3">
-					<div class="mb-2"><b>이메일 주소</b></div>
-					<input
-						type="text"
-						class="form-control"
-						placeholder="Enter email"
-						name="title"
-					/>
-				</div>
-				<div class="mb-3">
-					<div class="mb-2"><b>제목</b></div>
-					<input
-						type="text"
-						class="form-control"
-						placeholder="Enter title"
-						name="title"
-					/>
-				</div>
-				<div class="mb-3">
-					<div class="mb-2"><b>내용</b></div>
-					<textarea
-						class="form-control"
-						rows="5"
-						name="content"
-						placeholder="내용을 작성하세요"
-					></textarea>
-				</div>
-				<div class="d-flex justify-content-end">
-					<div>
-						<a href="/help">
-							<button
-								type="button"
-								class="btn btn-info form-control"
-								style="box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)"
-							>
-								제출하기
-							</button>
-						</a
-						>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+  <div class="card" style="box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3)">
+    <div class="card-header"><b>문의 작성</b></div>
+    <div class="card-body">
+      <form action="/question/save" method="post">
+        <div class="mb-3">
+          <div class="d-flex justify-content-start"><div class="mb-3">
+            <div class="mb-2"><b>문의 유형</b></div>
+            <select class="form-select" name="category">
+              <option value="불만">불만</option>
+              <option value="선택 1">선택 1</option>
+              <option value="선택 2">선택 2</option>
+            </select>
+          </div>
+            </button>
+            <div class="dropdown-menu">
+              <div
+                id="select1"
+                class="dropdown-item"
+                onclick="selectButton('select1')"
+              >
+                화면 만들기 너 무 힘들어111
+              </div>
+              <div
+                id="select2"
+                class="dropdown-item"
+                onclick="selectButton('select2')"
+              >
+                화면 만들기 너 무 힘들어222
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="mb-2"><b>이메일 주소</b></div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter email"
+            value="{{ user.email }}"
+            disabled
+          />
+        </div>
+        <div class="mb-3">
+          <div class="mb-2"><b>제목</b></div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter title"
+            name="title"
+          />
+        </div>
+        <div class="mb-3">
+          <div class="mb-2"><b>내용</b></div>
+          <textarea
+            class="form-control"
+            rows="5"
+            name="content"
+            placeholder="내용을 작성하세요"
+          ></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+          <div>
+            <button
+              type="submit"
+              class="btn btn-info form-control"
+              style="box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)"
+            >
+              제출하기
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+<script>
+  function selectButton(selectId) {
+    let elementId = document.querySelector(`#${selectId}`);
+    let elementDiv = elementId.innerText;
+    document.querySelector("#selectButton").innerText = elementDiv;
+    document.querySelector("#selectButton").value = elementDiv;
+    console.log(document.querySelector("#selectButton").value);
+  }
+</script>
 {{> layout/footer}}

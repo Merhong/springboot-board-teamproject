@@ -73,8 +73,10 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserSkill> userSkillList = new ArrayList<>();
 
-    // 양방향 매핑 (개인 이력서 리스트)
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+
+    // 이력서 목록
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
     private List<Resume> resumeList = new ArrayList<>();
 
     // Log용 타임스탬프
@@ -104,6 +106,4 @@ public class User {
         this.resumeList = resumeList;
         this.createdAt = createdAt;
     }
-
-
 }
