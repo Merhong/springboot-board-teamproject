@@ -38,10 +38,19 @@ public class ApplyService {
     }
 
     @Transactional
-    public Apply 공고지원합격(Integer applyId) {
+    public Apply 공고지원합격(Integer applyId, Integer compId) {
         Optional<Apply> applyOP = applyRepository.findById(applyId);
+        
         if (applyOP.isPresent()){
             Apply apply = applyOP.get();
+
+            if(apply.getPosting().getUser().getId() != compId){
+                throw new MyException("권한이 없습니다.");
+            }
+            if(!(apply.getStatement().equals("대기"))){
+                throw new MyException("이미 답변했습니다.");
+            }
+
             apply.setStatement("합격");
             return apply;
         } else{
@@ -50,10 +59,19 @@ public class ApplyService {
     }
 
     @Transactional
-    public Apply 공고지원불합격(Integer applyId) {
+    public Apply 공고지원불합(Integer applyId, Integer compId) {
         Optional<Apply> applyOP = applyRepository.findById(applyId);
+        
         if (applyOP.isPresent()){
             Apply apply = applyOP.get();
+
+            if(apply.getPosting().getUser().getId() != compId){
+                throw new MyException("권한이 없습니다.");
+            }
+            if(!(apply.getStatement().equals("대기"))){
+                throw new MyException("이미 답변했습니다.");
+            }
+
             apply.setStatement("불합");
             return apply;
         } else{

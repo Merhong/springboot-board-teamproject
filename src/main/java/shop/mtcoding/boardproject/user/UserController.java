@@ -143,6 +143,8 @@ public class UserController {
     public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
         User sessionUser = userService.로그인(loginDTO);
 
+        session.setAttribute("sessionAllUser", sessionUser);
+
         if (sessionUser.getRole() == 0) {
             session.setAttribute("sessionAdmin", sessionUser);
         }

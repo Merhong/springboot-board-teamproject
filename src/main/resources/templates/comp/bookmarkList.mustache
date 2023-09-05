@@ -6,6 +6,13 @@
 <div class="col-9 m-auto">
 	<h1 class="text-center mt-2">이력서 북마크</h1>
 
+	
+	{{^resumeList}}
+	<h3 class="text-center mt-5 mb-5">
+		북마크한 이력서가 없습니다.
+	</h3>
+	{{/resumeList}}
+
 	{{#resumeList}}
 	<div class="d-flex border border-info m-3 mb-4 p-2 ps-0 justify-content-between bg-info">
 		<div class="container">

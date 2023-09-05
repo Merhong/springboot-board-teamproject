@@ -6,12 +6,11 @@
 
 
 		<div class="col-9 m-auto">
-			<h1 class=" text-center mt-2 mb-2">지원자 내역</h1>
+			<h1 class=" text-center mt-2 mb-2">입사제안 목록</h1>
 
 
 
 		<div class="d-flex justify-content-center mb-2">
-			<h5 class="align-self-center">이 공고에 지원한 지원자입니다. :</h5>
 
 			<a href="javascript:void(0);" class="btn btn-info m-2" onclick="openNewWindow('/comp/posting/newWindow/{{posting.id}}')">
 				<div class="">
@@ -28,6 +27,8 @@
 					<span class="badge bg-success">{{posting.region}}</span>
 				</div>
 			</a>
+			
+			<h5 class="align-self-center"> : 이 공고로 입사제안을 했습니다.</h5>
 
 		</div>
 
@@ -49,7 +50,7 @@
 				</thead>
 				<tbody>
 
-					{{^applyList}}
+					{{^recommendList}}
 					<tr>
 						<th class="text-center" scope="row">없음</th>
 						<td class="text-center border border-0"></td>
@@ -59,9 +60,9 @@
 						<td class="text-center border border-0"></td>
 						<td class="text-center border-start-0"></td>
 					</tr>
-					{{/applyList}}
+					{{/recommendList}}
 					
-					{{#applyList}}
+					{{#recommendList}}
 					<tr class="{{statement}}">
 						<th class="text-center" scope="row"><div class="increNumber"></div></th>
 						<td class="text-center">{{resume.user.username}}</td>
@@ -75,16 +76,12 @@
 						<td class="d-flex justify-content-center statementJS">
 							<input type="hidden" value="{{statement}}">
 							<div class="statementJS2"></div>
-
-							<form action="/comp/posting/apply/{{id}}/pass" method="post">
-								<input class="btn btn-sm btn-success p-0 ps-1 pe-1 me-1 passButton" type="submit" value="합격">
-							</form>
-							<form action="/comp/posting/apply/{{id}}/fail" method="post">
-								<input class="btn btn-sm btn-danger p-0 ps-1 pe-1 failButton" type="submit" value="불합격">
+							<form action="/comp/posting/offer/{{id}}/cancel" method="post" class="ms-1">
+								<input class="btn btn-sm btn-warning p-0 ps-1 pe-1 statementButton" type="submit" value="제안 취소">
 							</form>
 						</td>
 					</tr>
-					{{/applyList}}
+					{{/recommendList}}
 
 
 
@@ -112,22 +109,17 @@
 			statementJS.forEach(element => {
 				let input = element.querySelector("input");
 
-				if(input.value == "대기"){
-					return;
-				}
-
-				let passButton = element.querySelector(".passButton");
-				let failButton = element.querySelector(".failButton");
+				let statementButton = element.querySelector(".statementButton");
 				let statementJS2 = element.querySelector(".statementJS2");
 				
-				if(input.value == "합격"){
-					passButton.style.display = 'none';
-					failButton.style.display = 'none';
-					statementJS2.innerText = "합격";
+				if(input.value == "대기"){
+					statementJS2.innerText = "대기";
+				} else if(input.value == "수락") {
+					statementJS2.innerText = "수락함";
+					statementButton.style.display = 'none';
 				} else {
-					passButton.style.display = 'none';
-					failButton.style.display = 'none';
-					statementJS2.innerText = "불합격";
+					statementJS2.innerText = "거절당함";
+					statementButton.style.display = 'none';
 				}
 			});
 
@@ -198,11 +190,11 @@
 
 			
 			
-			let statementRed = document.querySelectorAll('.불합');
+			let statementRed = document.querySelectorAll('.거절');
 			statementRed.forEach(element => {
 				element.classList.add("table-danger");
 			});
-			let statementGreen = document.querySelectorAll('.합격');
+			let statementGreen = document.querySelectorAll('.수락');
 			statementGreen.forEach(element => {
 				element.classList.add("table-success");
 			});

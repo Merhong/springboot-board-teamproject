@@ -137,6 +137,10 @@
 					<hr class="m-0 mb-1">
 					
 					<div class="ms-1">
+						{{^resumeList}}
+						<div>공개 이력서 없음</div>
+						{{/resumeList}}
+
 						{{#resumeList}}
 						<a href="javascript:void(0);" class="{{disclosure}}" onclick="openNewWindow('/resume/newWindow/{{id}}')">{{title}}</a>
 						{{/resumeList}}
