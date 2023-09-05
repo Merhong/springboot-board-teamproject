@@ -5,11 +5,13 @@
 		flex: 3;
 		padding: 20px;
 	}
+
 	.tg {
 		border-collapse: collapse;
 		border-spacing: 0;
 		width: 100%;
 	}
+
 	.tg th,
 	.tg td {
 		border: 1px solid black;
@@ -17,10 +19,12 @@
 		text-align: left;
 		cursor: pointer;
 	}
+
 	.tg th {
 		font-weight: bold;
 		background-color: #f2f2f2;
 	}
+
 	.tg td.clickable {
 		cursor: pointer;
 		text-decoration: underline;
@@ -63,7 +67,8 @@
 					{{#applyList}}
 						<tr>
 							<td>{{ id }}</td>
-							<td class="clickable" data-type="posting" data-id="{{ posting.id }}">{{ posting.title }}</td>
+							<td class="clickable" data-type="posting"
+							    data-id="{{ posting.id }}">{{ posting.title }}</td>
 							<td class="clickable" data-type="resume" data-id="{{ resume.id }}">{{ resume.title }}</td>
 							<td>{{ posting.position }}</td>
 							<td>{{ statement }}</td>
@@ -88,6 +93,7 @@
 			window.location.href = '/user/resume/' + itemId;
 		}
 	}
+
 	// 모든 클릭 가능한 항목에 클릭 이벤트 핸들러 등록
 	const clickableItems = document.querySelectorAll('.clickable');
 	clickableItems.forEach((item) => {

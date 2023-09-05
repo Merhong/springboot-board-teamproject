@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 
 @Service
 public class ResumeService {
+    /* DI */
     @Autowired
     private ResumeRepository resumeRepository;
 
@@ -24,6 +25,7 @@ public class ResumeService {
 
     @Transactional
     public void 이력서등록(ResumeDTO resumeDTO, Integer id) {
+        // 이력서에 해당하는 필드값을 builder로 담는다.
         Resume resume = Resume.builder()
                 .user(User.builder().id(id).build())
                 .title(resumeDTO.getTitle())
@@ -32,15 +34,20 @@ public class ResumeService {
                 .personalStatement(resumeDTO.getPersonalStatement())
                 .disclosure(resumeDTO.getDisclosure())
                 .build();
+
+        // JPA save
         resumeRepository.save(resume);
 
+        // 이력서(개인) 보유 기술 리스트
         List<Integer> skillList = resumeDTO.getSkillList();
+        // foreach문을 사용해서 개인이 보유중인 기술을 insert한다.
         for (Integer integer : skillList) {
             userSkillRepository.insertUserSkill(integer, id);
         }
     }
 
     public Resume 이력서상세보기(Integer id) {
+        // id에 해당하는 이력서를 찾는다.
         return resumeRepository.findByResume(id);
     }
     

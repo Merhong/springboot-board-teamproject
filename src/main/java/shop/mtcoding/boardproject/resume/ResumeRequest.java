@@ -13,6 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 public class ResumeRequest {
 
+    // 이력서 DTO
     @Getter
     @Setter
     public static class ResumeDTO {
@@ -36,6 +37,7 @@ public class ResumeRequest {
 
     }
 
+    // 이력서 수정 DTO
     @Getter
     @Setter
     public static class ResumeUpdateDTO {

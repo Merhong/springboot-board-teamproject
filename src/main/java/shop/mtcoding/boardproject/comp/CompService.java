@@ -56,9 +56,9 @@ public class CompService {
 
     @Transactional
     public void 회원가입(JoinDTO joinDTO) {
-
+        // 기업 프로필 사진
         String fileName = Image.updateImage(joinDTO);
-
+        // 기업회원에 해당하는 필드값을 builder로 담는다.
         User user = User.builder()
                 .role(joinDTO.getRole())
                 .photo(fileName)
@@ -70,6 +70,7 @@ public class CompService {
                 .homepage(joinDTO.getHomepage())
                 .address(joinDTO.getAddress())
                 .build();
+        // JPA save
         userRepository.save(user);
 
     }
