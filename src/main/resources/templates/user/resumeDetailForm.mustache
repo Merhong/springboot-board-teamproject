@@ -5,99 +5,47 @@
     <h1 class="text-center mt-2">이력서 상세보기</h1>
     <div class="d-flex">
       <div class="m-2 col-4 d-flex flex-column align-items-center">
-        <img
-          src="../../../images/basic.jpg"
-          class="img-fluid rounded-circle"
-          style="width: 150px; height: 150px"
-        />
+        <img src="../../../../../images/{{resume.user.photo}}" class="circle_avatar"
+          style="width: 150px; height: 150px" />
       </div>
       <div class="col-8 p-2">
         <div class="input-group mb-3">
-          <span class="input-group-text"
-            ><span class="ms-2 me-4">이름</span></span
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            value="{{{resume.user.username}}}"
-            disabled
-          />
+          <span class="input-group-text"><span class="ms-2 me-4">이름</span></span>
+          <input type="text" class="form-control" name="username" value="{{{resume.user.username}}}" disabled />
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">전화번호</span>
-          <input
-            type="text"
-            class="form-control"
-            name="tel"
-            value="{{{resume.user.tel}}}"
-            disabled
-          />
+          <input type="text" class="form-control" name="tel" value="{{{resume.user.tel}}}" disabled />
         </div>
         <div class="input-group mb-3">
-          <span class="input-group-text"
-            ><span class="ms-2 me-4">주소</span></span
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="address"
-            value="{{{resume.user.address}}}"
-            disabled
-          />
+          <span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
+          <input type="text" class="form-control" name="address" value="{{{resume.user.address}}}" disabled />
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">생년월일</span>
-          <input
-            type="text"
-            class="form-control"
-            name="birth"
-            value="{{{resume.user.birth}}}"
-            disabled
-          />
+          <input type="text" class="form-control" name="birth" value="{{{resume.user.birth}}}" disabled />
         </div>
       </div>
     </div>
     <div class="input-group ms-2 mb-3">
       <div><span class="input-group-text">이력서 제목</span></div>
-      <input
-        type="text"
-        class="form-control"
-        value="{{{resume.title}}}"
-        disabled
-      />
+      <input type="text" class="form-control" value="{{{resume.title}}}" disabled />
     </div>
     <div class="input-group ms-2 mb-3">
       <span class="input-group-text">학력사항</span>
-      <input
-        type="text"
-        class="form-control"
-        value="{{{resume.grade}}}"
-        disabled
-      />
+      <input type="text" class="form-control" value="{{{resume.grade}}}" disabled />
     </div>
     <div class="input-group ms-2 mb-3">
       <span class="input-group-text" center>경력사항</span>
-      <input
-        type="text"
-        class="form-control"
-        value="{{{resume.career}}}"
-        disabled
-      />
+      <input type="text" class="form-control" value="{{{resume.career}}}" disabled />
     </div>
     <div class="card input-group ms-2 mb-3">
       <span class="input-group-text">보유 기술</span>
       <div class="d-flex flex-wrap">
         {{#skillList}}
         <div class="form-check d-inline-block ms-3 me-2">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="skill{{ id }}"
-            value="{{ id }}"
-            name="skillList"
-            disabled
-          />
+          <input class="form-check-input" type="checkbox" id="skill{{ id }}" value="{{ id }}" name="skillList"
+            disabled />
           <label class="form-check-label">{{ skillname }}</label>
         </div>
         {{/skillList}}
@@ -105,9 +53,7 @@
     </div>
     <div class="input-group ms-2 mb-3">
       <span class="input-group-text">자기소개서</span>
-      <textarea class="form-control" rows="5" disabled
-        >{{{resume.personalStatement}}}</textarea
-      >
+      <textarea class="form-control" rows="5" disabled>{{{resume.personalStatement}}}</textarea>
     </div>
     <!-- disabled속성은 입력할 수 없는 input태그를 만든다 -->
     <!-- disabled속성은 적용된 input은 서버로 데이터가 전송되지 않는다-->
