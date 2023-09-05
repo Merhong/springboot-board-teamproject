@@ -7,13 +7,18 @@ import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.Image;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyRepository;
+
+import shop.mtcoding.boardproject.bookmark.UserBookmark;
+import shop.mtcoding.boardproject.bookmark.UserBookmarkRepository;
+
 import shop.mtcoding.boardproject.comp.CompRequest.JoinDTO;
 import shop.mtcoding.boardproject.comp.CompRequest.SaveDTO;
 import shop.mtcoding.boardproject.comp.CompRequest.UpdateDTO;
 import shop.mtcoding.boardproject.comp.CompRequest.compUpdateDTO;
+
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
-import shop.mtcoding.boardproject.resume.Resume;
+import shop.mtcoding.boardproject.resume.ResumeRepository;
 import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.skill.PostingSkillRepository;
 import shop.mtcoding.boardproject.skill.Skill;
@@ -44,6 +49,9 @@ public class CompService {
 
     @Autowired
     private ApplyRepository applyRepository;
+
+    @Autowired
+    private UserBookmarkRepository userBookmarkRepository;
 
     @Autowired
     private HttpSession session;
@@ -214,12 +222,24 @@ public class CompService {
 
     @Transactional
     public void 공고삭제(Integer postingId) {
-        // TODO : 공고에 지원한 이력서랑 공고를 북마크한것도 처리 해야함
+        // TODO : 공고를 북마크한것도 지우거나 연결끊어야함
+
+        List<UserBookmark> userBookmarkList = userBookmarkRepository.findByPostingId(postingId);
+        for (UserBookmark userbookmark : userBookmarkList) {
+            userbookmark.setPosting(null);
+        }
 
         List<PostingSkill> skillList = postingSkillRepository.findByPostingId(postingId);
         for (PostingSkill skill : skillList) {
             skill.setPosting(null);
         }
+
+        List<Apply> applyList = applyRepository.findByPostingId(postingId);
+        for (Apply apply : applyList) {
+            apply.setPosting(null);
+        }
+
+
 
         try {
             postingRepository.deleteById(postingId);
@@ -233,7 +253,8 @@ public class CompService {
         return user;
     }
 
-    public List<Resume> 공고에지원한이력서찾기(Integer postingId) {
+    public List<Apply> 공고지원신청찾기(Integer postingId) {
+
 
         List<Apply> applyList = applyRepository.findByPostingId(postingId);
 
@@ -244,14 +265,45 @@ public class CompService {
         // System.out.println("테스트33:"+applyList.get(0).getPosting().getTitle());
         // System.out.println("테스트33:"+applyList.get(0).getResume().getTitle());
 
-        List<Resume> resumeList = new ArrayList<>();
+        // List<Resume> resumeList = new ArrayList<>();
 
-        while (applyList.size() > 0) {
-            resumeList.add(applyList.get(0).getResume());
-            applyList.remove(0);
+        // while(applyList.size()>0){
+        //     resumeList.add(applyList.get(0).getResume());
+        //     applyList.remove(0);
+        // }
+
+        return applyList;
+    }
+
+
+    public List<User> 인재추천검색(List<String> skillList, String position) {
+
+        List<User> userList = new ArrayList<>();
+
+        if(skillList.size()==0 || skillList.get(0).equals("all")){
+            userList = userRepository.findByRole(1);
+        } else{
+            Set<User> userSet = new LinkedHashSet<>(); // 중복 제거하려고 Set으로 했다가 List로 변경 
+            for (String s : skillList) {
+                List<User> tempList = userRepository.findBykillResumeReturnUser(s);
+                userSet.addAll(tempList);
+            }
+            userList = new ArrayList<>(userSet);
         }
 
-        return resumeList;
+        if(position==null || position.equals("all")){
+            //
+        }else{
+            List<User> tempList = new ArrayList<>();
+            for (User user : userList) {
+                if(!(user.getPosition().equals(position))){
+                    tempList.add(user);
+                }
+            }
+            userList.removeAll(tempList);
+        }
+
+        return userList;
 
     }
 

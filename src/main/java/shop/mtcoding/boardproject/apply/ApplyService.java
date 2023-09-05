@@ -2,9 +2,13 @@ package shop.mtcoding.boardproject.apply;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApplyService {
@@ -33,7 +37,27 @@ public class ApplyService {
         return applyList;
     }
 
-    public void 지원(Apply apply) {
-        applyRepository.save(apply);
+    @Transactional
+    public Apply 공고지원합격(Integer applyId) {
+        Optional<Apply> applyOP = applyRepository.findById(applyId);
+        if (applyOP.isPresent()){
+            Apply apply = applyOP.get();
+            apply.setStatement("합격");
+            return apply;
+        } else{
+            throw new MyException(applyId + "없음");
+        }
+    }
+
+    @Transactional
+    public Apply 공고지원불합격(Integer applyId) {
+        Optional<Apply> applyOP = applyRepository.findById(applyId);
+        if (applyOP.isPresent()){
+            Apply apply = applyOP.get();
+            apply.setStatement("불합");
+            return apply;
+        } else{
+            throw new MyException(applyId + "없음");
+        }
     }
 }

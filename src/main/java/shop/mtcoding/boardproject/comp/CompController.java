@@ -1,5 +1,6 @@
 package shop.mtcoding.boardproject.comp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -189,17 +191,36 @@ public class CompController {
 
         request.setAttribute("posting", posting);
         
-        List<Resume> resumeList = compService.공고에지원한이력서찾기(postingId);
+        List<Apply> resumeList = compService.공고지원신청찾기(postingId);
+
+        // System.out.println("테스트:" +resumeList.get(0).getTitle());
+
+        request.setAttribute("applyList", applyList);
 
         request.setAttribute("resumeList", resumeList);
+
 
         return "comp/resumeList";
     }
 
     @GetMapping("/comp/recommend")
-    public String recommend(HttpServletRequest request) {
-        List<Skill> skillList = skillService.스킬이름전부();
-        request.setAttribute("skillList", skillList);
+    public String recommend(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
+        List<Skill> sl = skillService.스킬이름전부();
+        request.setAttribute("skillList", sl);
+
+        request.setAttribute("position", position);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(skillList);
+            // System.out.println("테스트"+json);
+            request.setAttribute("json", json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        List<User> userList = compService.인재추천검색(skillList, position);
+        request.setAttribute("userList", userList);
+
         return "comp/recommend";
     }
 
@@ -277,6 +298,21 @@ public class CompController {
     public @ResponseBody String delete(@PathVariable Integer postingId) {
         int userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId();
 
+
+    @PostMapping("/comp/posting/apply/{applyId}/pass")
+    public String applyPass(@PathVariable Integer applyId){
+        Apply apply = applyService.공고지원합격(applyId);
+
+        return "redirect:/comp/posting/"+apply.getPosting().getId()+"/resumeList";
+    }
+
+    @PostMapping("/comp/posting/apply/{applyId}/fail")
+    public String applyFail(@PathVariable Integer applyId){
+        Apply apply = applyService.공고지원불합격(applyId);
+
+        return "redirect:/comp/posting/"+apply.getPosting().getId()+"/resumeList";
+    }
+
         Posting posting = compService.공고찾기(postingId);
 
         if (posting == null) {
@@ -287,6 +323,7 @@ public class CompController {
             compService.공고삭제(postingId);
             return Script.href("/comp/" + userId + "/postingList", "삭제 완료");
         }
+
 
         throw new MyException("권한이 없습니다.");
     }

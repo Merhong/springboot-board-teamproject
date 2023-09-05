@@ -37,6 +37,9 @@ public class User {
     // 생년월일, 기업은 null
     private Date birth;
 
+    // (추가) 개인이 원하는 직무, 기업은 null 
+    private String position;
+
     // 기업이름, 개인은 null
     private String compname;
 
@@ -70,8 +73,10 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserSkill> userSkillList = new ArrayList<>();
 
+
     // 이력서 목록
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
     private List<Resume> resumeList = new ArrayList<>();
 
     // Log용 타임스탬프
@@ -80,11 +85,14 @@ public class User {
 
 
     @Builder
-    public User(Integer id, Integer role, String username, Date birth, String compname, String compRegister, String homepage, String email, String password, String tel, String photo, String address, List<Posting> postingList, List<UserSkill> userSkillList, List<Resume> resumeList, Timestamp createdAt) {
+    public User(Integer id, Integer role, String username, Date birth, String position, String compname, String compRegister,
+                String homepage, String email, String password, String tel, String photo, String address,
+                List<Posting> postingList, List<UserSkill> userSkillList, List<Resume> resumeList, Timestamp createdAt) {
         this.id = id;
         this.role = role;
         this.username = username;
         this.birth = birth;
+        this.position = position;
         this.compname = compname;
         this.compRegister = compRegister;
         this.homepage = homepage;

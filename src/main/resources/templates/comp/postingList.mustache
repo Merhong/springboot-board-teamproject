@@ -5,15 +5,15 @@
 
 
 
-		<div class="col-9 ms-3">
+		<div class="col-9 m-auto">
 			<h1 class="text-center mt-2">공고관리</h1>
 
 			
 
 
 			{{#postingList}}
-			<div class="d-flex border border-info m-3 p-2 justify-content-between">
-				<a href="javascript:void(0);" class="btn btn-info" onclick="openNewWindow('/comp/posting/newWindow/{{id}}')">
+			<div class="d-flex border border-info m-3 mt-4 p-2 justify-content-between bg-info">
+				<a href="javascript:void(0);" class="btn btn-light col-5" onclick="openNewWindow('/comp/posting/newWindow/{{id}}')">
 					<div class="">
 						<div class="fw-bold">{{title}}</div>
 						<span class="badge bg-secondary">{{position}}</span>
@@ -29,7 +29,7 @@
 					</div>
 				</a>
 
-				<div class="col-6">{{desc}}</div>
+				<div class="col-4">{{desc}}</div>
 
 				<div class="d-flex flex-column justify-content-between">
 					<a href="/comp/posting/{{id}}/resumeList" class="btn btn-success btn-sm mb-1">지원자 보기</a>
@@ -73,19 +73,19 @@
 		} else{
 			let today = new Date();
 
-			console.log((day-today) / (1000 * 60 * 60 * 24));
+			// console.log((day-today) / (1000 * 60 * 60 * 24));
 			let DDay = Math.ceil( (day-today) / (1000 * 60 * 60 * 24));
 
 			if(DDay==0){
-				console.log("D-Day");
+				// console.log("D-Day");
 				return "D-Day";
 			}
 			else if(DDay<0){
-				console.log("만료");
+				// console.log("만료");
 				return "만료";
 			}
 			else{
-				console.log("D-"+DDay); 
+				// console.log("D-"+DDay); 
 				return "D-"+DDay;
 			}
 		}
