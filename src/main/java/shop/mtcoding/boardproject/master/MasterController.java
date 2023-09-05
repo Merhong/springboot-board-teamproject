@@ -59,8 +59,8 @@ public class MasterController {
         }
         // 뷰에 뭘 검색한건지 적혀있게
         
-        // TODO List<Posting> postingList = masterService.메인화면검색(skillList, position, region);
-        //request.setAttribute("postingList", postingList);
+        List<Posting> postingList = masterService.메인화면검색(skillList, position, region);
+        request.setAttribute("postingList", postingList);
 
         return "index";
     }
