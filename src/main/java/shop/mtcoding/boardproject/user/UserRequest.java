@@ -12,6 +12,7 @@ public class UserRequest {
     @Getter
     @Setter
     public static class JoinDTO {
+        private Integer role;
         private String email;
         private String password;
         private String username;
