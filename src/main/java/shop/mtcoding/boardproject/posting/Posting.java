@@ -65,7 +65,6 @@ public class Posting {
     @CreationTimestamp
     private Timestamp createdAt;
 
-
     @Builder
     public Posting(Integer id, String title, String desc, String photo, String region, String position, String career,
                    String education, Timestamp expiryDate, List<PostingSkill> postingSkill, User user, Timestamp createdAt) {
@@ -82,6 +81,4 @@ public class Posting {
         this.user = user;
         this.createdAt = createdAt;
     }
-
-
 }
