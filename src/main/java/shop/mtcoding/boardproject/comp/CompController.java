@@ -3,6 +3,7 @@ package shop.mtcoding.boardproject.comp;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
@@ -305,19 +306,23 @@ public class CompController {
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
 
         if (sessionAllUser == null) {
-            return "redirect:/user/loginForm";
+            // return "redirect:/user/loginForm";
+            return Script.href("/user/loginForm");
         }
         if(sessionAllUser.getRole()!=2){
             throw new MyException("기업회원만 가능합니다.");
+            // return Script.back("기업회원만 가능합니다.");
         }
         if(compId != sessionComp.getUserId()){
             throw new MyException("권한이 없습니다.");
+            // return Script.back("권한이 없습니다.");
         }
 
         // compService.기업정보수정(compId, DTO);
         session.setAttribute("sessionComp", compService.기업정보수정(compId, DTO)); // 세션 수정한걸로 변경
 
-        return Script.href("/comp/main", "정보 수정 완료");
+        // return "redirect:/comp/main";
+        return Script.href("/comp/main","정보 수정 완료");
     }
 
     @PostMapping("/comp/posting/{postingId}/delete")
@@ -326,7 +331,8 @@ public class CompController {
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
 
         if (sessionAllUser == null) {
-            return "redirect:/user/loginForm";
+            // return "redirect:/user/loginForm";
+            return Script.href("/user/loginForm"); // ResponseBody라 이거로
         }
         if(sessionAllUser.getRole()!=2){
             throw new MyException("기업회원만 가능합니다.");
@@ -402,16 +408,54 @@ public class CompController {
         return "redirect:/comp/posting/" + postingId + "/offerList";
     }
 
-    @GetMapping("/offer/newWindow/{resumeId}")
+    @GetMapping("/offer/newWindow/{resumeId}") // TODO : 예외처리
     public String offerDetail2(@PathVariable Integer resumeId, HttpServletRequest request) {
+
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+
+        if (sessionAllUser == null) {
+            return "redirect:/user/loginForm";
+        }
+        if(sessionAllUser.getRole()!=2){
+            throw new MyException("기업회원만 가능합니다.");
+        }
+
         Resume resume = resumeService.이력서찾기(resumeId);
         request.setAttribute("resume", resume);
         
-        List<Posting> postingList = compService.모든공고찾기();
+        List<Posting> postingList = compService.회사별공고찾기(sessionComp.getUserId());
         request.setAttribute("postingList", postingList);
 
         return "comp/offerDetailOnly";
-    } // TODO : 예외처리
+    }
+
+    @PostMapping("/offer/save")  // TODO : 예외처리, 중복신청 못하게, view에서 내꺼만 나오게
+    public ResponseEntity<String> offerSave(@RequestParam(name = "selectPosting") Integer postingId , @RequestParam(name = "selectResume") Integer resumeId) {
+
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+
+        if (sessionAllUser == null) {
+            return ResponseEntity.badRequest().body("오류");
+        }
+        if(sessionAllUser.getRole()!=2){
+            return ResponseEntity.badRequest().body("오류");
+        }
+
+        if(postingId == null || resumeId == null){
+            return ResponseEntity.badRequest().body("오류");
+        }
+        
+        Boolean isOk = recommendService.입사제안하기(postingId, resumeId, sessionComp.getUserId());
+        
+        if(isOk != true){
+            return ResponseEntity.badRequest().body("오류");
+        }
+        
+        // return "redirect:/comp/posting/" + postingId + "/offerList";
+        return ResponseEntity.ok("오퍼성공"); // 새창 열린거니까 끄게
+    }
 
 
 

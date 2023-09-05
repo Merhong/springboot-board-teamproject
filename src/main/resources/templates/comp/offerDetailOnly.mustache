@@ -45,113 +45,137 @@
 
 
 		<div class="container border border-info">
-			<h1 class="text-center mt-2">이력서 상세보기</h1>
+			<h1 class="text-center mt-2">입사 제안 보내기</h1>
+			<h5 class="text-center mt-1 mb-3">보낼 공고를 선택하세요.</h5>
 
 
+			<form id="selectForm" method="post" action="/offer/save" enctype="multipart/form-data" class="d-flex flex-wrap justify-content-between">
 
-			{{#postingList}}
-			<a href="javascript:void(0);" class="btn btn-info m-2" onclick="openNewWindow('/comp/posting/newWindow/{{posting.id}}')">
-				<div class="">
-					<div class="fw-bold">{{title}}</div>
-					<span class="badge bg-secondary">{{position}}</span>
-					<span class="expiryDate badge bg-black">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
-				</div>
-				<div class="">
-					{{#postingSkill}}<span class="badge bg-primary me-1">{{skillname}}</span>{{/postingSkill}}
-				</div>
-				<div>
-					{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
-					{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
-					<span class="badge bg-success">{{region}}</span>
-				</div>
-			</a>
-			{{/postingList}}
+				<input type="hidden" value="{{resume.id}}" name="selectResume" id="selectResume">
 
+				{{#postingList}}
 
-
-
-			<div class="d-flex">
-				<div class="m-1 col-4 d-flex flex-column img-fluid d-block m-auto" style="width:178px; height:165px;">
-					<img src="../../../images/{{resume.user.photo}}" class="rounded-circle"/>
-				</div>
-
-				<div class="col-8 p-2">
-						<div class="input-group mb-3">
-							<span class="input-group-text">이름</span>
-							<input type="text" class="form-control" value="{{#resume.user.username}}{{resume.user.username}}{{/resume.user.username}}" disabled>
+				<div class="col-4">
+					<a href="javascript:void(0);" class="btn btn-info m-2 mb-0" onclick="openNewWindow('/comp/posting/newWindow/{{id}}')" style="width:210px; height: 130px">
+						<div class="">
+							<div class="fw-bold">{{title}}</div>
+							<span class="badge bg-secondary">{{position}}</span>
+							<span class="expiryDate badge bg-black">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
 						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control" value="{{#resume.user.tel}}{{resume.user.tel}}{{/resume.user.tel}}" disabled>
+						<div class="">
+							{{#postingSkill}}<span class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
 						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">주소</span>
-							<textarea class="form-control" rows="2" disabled>{{#resume.user.address}}{{resume.user.address}}{{/resume.user.address}}</textarea>
+						<div>
+							{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
+							{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
+							<span class="badge bg-success">{{region}}</span>
 						</div>
-						<div class="input-group mb-2">
-							<span class="input-group-text">생년월일</span>
-							<input type="text" class="form-control" value="{{#resume.user.birth}}{{resume.user.birth}}{{/resume.user.birth}}" disabled>
-						</div>
+					</a>
+
+					<div class="text-center mt-0 mb-3">
+
+						<label class="form-check-label mt-1 me-2">
+							<input class="form-check-input" type="radio" id="selectPosting{{id}}" name="selectPosting" value="{{id}}">
+						선택하기</label>
+
+					</div>
+
 				</div>
+				{{/postingList}}
 
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text">학력사항</span>
-				<input type="text" class="form-control" value="{{resume.grade}}" disabled>
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text">경력사항</span>
-				<input type="text" class="form-control" value="{{resume.career}}" disabled>
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text">보유기술</span>
-				<input type="text" class="form-control comma" value="{{#resume.user.userSkillList}}{{skill.skillname}}, {{/resume.user.userSkillList}}" disabled>
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text">제목</span>
-				<input type="text" class="form-control" value="{{resume.title}}" disabled>
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text">내용</span>
-				<textarea class="form-control" rows="5" disabled>{{resume.personalStatement}}</textarea>
-			</div>
+			</form>
 
 
-			<div class="d-flex justify-content-center me-1">
+			<div class="d-flex justify-content-center mt-2 mb-2 me-1">
+				
 				<div class="w-100 mb-2">
-					<button type="button" class="w-100 btn btn-success me-1 ms-0">입사 제안</button>
+					<button type="button" class="w-100 btn btn-success me-1 ms-0" onclick="submitForm()">입사 제안</button>
 				</div>
 
 				<form action="/comp/bookmarkList/save" method="post" class="w-100">
-					{{#resume}}
-					<input type="hidden" name="ResumeId" value="{{id}}">
-					{{/resume}}
-					<input class="w-100 btn btn-warning ms-1 me-0" type="submit" value="북마크">
+					<button class="w-100 btn btn-danger ms-1 me-0" onclick="closeWindow()">제안 취소</button>
 				</form>
 
 			</div>
-			<button class="w-100 btn btn-danger mb-3" onclick="closeWindow()">새 창 닫기</button>
+
 		</div>
 
 
 
-
 		<script>
+
+			function Ddaycheck(day){
+				if(typeof day === "string"){
+					let day2 = new Date(day);
+					return Ddaycheck(day2);
+				} else{
+					let today = new Date();
+		
+					// console.log((day-today) / (1000 * 60 * 60 * 24));
+					let DDay = Math.ceil( (day-today) / (1000 * 60 * 60 * 24));
+		
+					if(DDay==0){
+						// console.log("D-Day");
+						return "D-Day";
+					}
+					else if(DDay<0){
+						// console.log("만료");
+						return "만료";
+					}
+					else{
+						// console.log("D-"+DDay); 
+						return "D-"+DDay;
+					}
+				}
+			}
+			let day = document.querySelectorAll('.expiryDate');
+			day.forEach(element => {
+				element.textContent = Ddaycheck(element.textContent);
+			});
+
+
+			function openNewWindow(url) {
+				var width = 800; // 새 창의 가로 크기
+				var height = 1100; // 새 창의 세로 크기
+				var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+				var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
+				
+				var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+				window.open(url, '새 창', options);
+			}
+
+
 			
-			let comma = document.querySelector(".comma");
-			console.log(comma.value);
-			comma.value = comma.value.slice(0, -2);
-			console.log(comma.value);
-
-
 			function closeWindow() {
 				window.close();
 			}
+
+
+
+			
+			function submitForm() {
+				fetch('/offer/save', {
+					method: 'POST',
+					body: new FormData(document.querySelector("#selectForm")),
+				})
+				.then(response => {
+					// 서버 응답을 받은 후에 실행될 코드
+					if (response.ok) {
+					// 응답이 성공인 경우 새 창 닫기
+					window.close();
+					} else {
+					// 응답이 실패인 경우 에러 처리
+					window.alert("오류");
+					window.close();
+					}
+				})
+				.catch(error => {
+					// 에러 처리
+					console.error('에러 발생:', error);
+				});
+			}
+
+
 
 		</script>
 

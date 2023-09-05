@@ -59,7 +59,7 @@ public class MasterController {
         }
         // 뷰에 뭘 검색한건지 적혀있게
         
-        List<Posting> postingList = masterService.메인화면검색V2(skillList, position, region);
+        List<Posting> postingList = masterService.메인화면검색(skillList, position, region);
         request.setAttribute("postingList", postingList);
 
         return "index";

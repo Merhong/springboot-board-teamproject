@@ -5,6 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingRepository;
+import shop.mtcoding.boardproject.resume.Resume;
+import shop.mtcoding.boardproject.resume.ResumeRepository;
 
 import java.util.Optional;
 
@@ -13,6 +17,12 @@ public class RecommendService {
 
     @Autowired
     private RecommendRepository recommendRepository;
+
+    @Autowired
+    private PostingRepository postingRepository;
+
+    @Autowired
+    private ResumeRepository resumeRepository;
 
 
     @Transactional
@@ -38,7 +48,38 @@ public class RecommendService {
             throw new MyException(recommendId + "없음");
         }
     }
-
+    
+    @Transactional
+    public Boolean 입사제안하기(Integer postingId, Integer resumeId, Integer compId) {
+        
+        Recommend recommend = new Recommend();
+        recommend.setStatement("대기");
+        
+        Posting posting;
+        Optional<Posting> postingOP = postingRepository.findById(postingId);
+        if (postingOP.isPresent()){
+            posting = postingOP.get();
+            if(posting.getUser().getId() != compId){
+                return false;
+            }
+        } else{
+            return false;
+        }
+        recommend.setPosting(posting);
+        
+        Resume resume;
+        Optional<Resume> resumeOP = resumeRepository.findById(resumeId);
+        if (resumeOP.isPresent()){
+            resume = resumeOP.get();
+        } else{
+            return false;
+        }
+        recommend.setResume(resume);
+        
+        recommendRepository.save(recommend);
+        
+        return true;
+    }
 
 
 
