@@ -14,6 +14,7 @@ import lombok.ToString;
 public class PostingRequest {
 
 
+    // 기업회원의 세션을 가지는 DTO
     @Getter
     @Setter
     @ToString
@@ -28,7 +29,6 @@ public class PostingRequest {
         private String address;
         private String homepage;
         private Integer role;
-
 
         @Builder
         public SessionCompDTO(Integer userId, String email, String compname, String compRegister, String tel,
@@ -45,7 +45,7 @@ public class PostingRequest {
         }
     } 
 
-
+    // 사진을 담은 DTO
     @Getter
     @Setter
     @ToString
@@ -53,6 +53,7 @@ public class PostingRequest {
         private MultipartFile photo;
     }
 
+    // 기업회원 가입 DTO
     @Getter
     @Setter
     @ToString
@@ -71,6 +72,7 @@ public class PostingRequest {
         }
     } 
 
+    // 공고 등록(저장) DTO
     @Getter
     @Setter
     @NoArgsConstructor
@@ -87,6 +89,7 @@ public class PostingRequest {
         private List<String> postingSkill;
     }
 
+    // 공고 수정 DTO
     @Getter
     @Setter
     @NoArgsConstructor
@@ -103,6 +106,7 @@ public class PostingRequest {
         private List<String> postingSkill;
     } 
 
+    // 기업회원 정보 수정 DTO
     @Getter
     @Setter
     @NoArgsConstructor
@@ -111,7 +115,5 @@ public class PostingRequest {
         private String address;
         private String tel;
         private String homepage;
-    } 
-
-
+    }
 }

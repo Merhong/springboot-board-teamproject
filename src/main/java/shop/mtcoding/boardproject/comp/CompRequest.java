@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CompRequest {
 
-
+    // 기업회원 세션 DTO
     @Getter
     @Setter
     @ToString
@@ -40,7 +40,7 @@ public class CompRequest {
         }
     }
 
-
+    // 프로필 사진 DTO
     @Getter
     @Setter
     @ToString
@@ -48,6 +48,7 @@ public class CompRequest {
         private MultipartFile photo;
     }
 
+    // 회원가입 DTO
     @Getter
     @Setter
     @ToString
@@ -66,6 +67,7 @@ public class CompRequest {
         }
     }
 
+    // 공고 등록(저장) DTO
     @Getter
     @Setter
     @NoArgsConstructor
@@ -82,6 +84,7 @@ public class CompRequest {
         private List<String> postingSkill;
     }
 
+    // 공고 수정 DTO
     @Getter
     @Setter
     @NoArgsConstructor
@@ -98,6 +101,7 @@ public class CompRequest {
         private List<String> postingSkill;
     }
 
+    // 기업회원 정보 수정 DTO
     @Getter
     @Setter
     @NoArgsConstructor

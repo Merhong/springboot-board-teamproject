@@ -71,7 +71,6 @@ public class CompController {
 
     @GetMapping("/comp/posting/saveForm")
     public String saveForm(HttpServletRequest request) {
-
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
         if (sessionComp == null) {
             return "redirect:/user/loginForm";
@@ -131,39 +130,7 @@ public class CompController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        // if (position.equals("안드로이드")) {
-        // request.setAttribute("안드로이드", true);
-        // }
-        // if (position.equals("IOS")) {
-        // request.setAttribute("IOS", true);
-        // }
-        // if (position.equals("임베디드")) {
-        // request.setAttribute("임베디드", true);
-        // }
-        // if (position.equals("빅데이터")) {
-        // request.setAttribute("빅데이터", true);
-        // }
-        // if (position.equals("서버")) {
-        // request.setAttribute("서버", true);
-        // }
-        // if (position.equals("머신러닝")) {
-        // request.setAttribute("머신러닝", true);
-        // }
-
-        // List<PostingSkill> sl = posting.getPostingSkill();
-        // for (PostingSkill s : sl) {
-        // if(s.getSkill().getId()==1){request.setAttribute("Java", true); continue;}
-        // if(s.getSkill().getId()==2){request.setAttribute("Spring", true); continue;}
-        // if(s.getSkill().getId()==3){request.setAttribute("DB", true); continue;}
-        // if(s.getSkill().getId()==4){request.setAttribute("HTML", true); continue;}
-        // if(s.getSkill().getId()==5){request.setAttribute("Python", true); continue;}
-        // if(s.getSkill().getId()==6){request.setAttribute("JavaScript", true);
-        // continue;}
-        // if(s.getSkill().getId()==7){request.setAttribute("Git", true); continue;}
-        // if(s.getSkill().getId()==8){request.setAttribute("C", true); continue;}
-        // }
-
+      
         return "comp/updateForm";
     }
 

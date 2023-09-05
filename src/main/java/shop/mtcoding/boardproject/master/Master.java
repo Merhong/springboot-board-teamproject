@@ -48,7 +48,6 @@ public class Master {
 
     @Builder
     public Master(Integer id, String category, String title, String content, User user) {
-
         this.id = id;
         this.category = category;
         this.title = title;
