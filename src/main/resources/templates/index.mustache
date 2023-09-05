@@ -196,9 +196,9 @@
 							</div>
 						</a>
 						<div class="d-flex justify-content-between">
-							<button type="button" class="border-0 bg-white mt-1">
-								<h3>❤️</h3>
-							</button>
+							<div class="border-0 bg-white mt-1 like-button">
+								<h3>🤍</h3>
+							</div>
 							<!-- <button type="button" class="border-0 bg-white mt-2"><h3>🤍</h3></button> -->
 							<span
 								class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
@@ -224,11 +224,25 @@
 <input type="hidden" value="{{region}}" name="regionSet" id="regionSet">
 
 <script>
-	document.addEventListener("click", function (event) {
-		if (event.target.classList.contains("like-button")) {
-			const postId = event.target.getAttribute("data-postid");
-			toggleLike(postId);
-		}
+
+	document.addEventListener("DOMContentLoaded", function () {
+		const likeButtons = document.querySelectorAll(".like-button");
+
+		// 각각의 좋아요 버튼에 클릭 이벤트 리스너 추가
+		likeButtons.forEach(button => {
+			button.addEventListener("click", function () {
+				// 버튼의 클래스를 토글 (liked 클래스 추가/제거)
+				button.classList.toggle("liked");
+
+				// 버튼의 하트 아이콘 변경
+				const heartIcon = button.querySelector("h3");
+				if (button.classList.contains("liked")) {
+					heartIcon.textContent = "❤️";
+				} else {
+					heartIcon.textContent = "🤍";
+				}
+			});
+		});
 	});
 
 	function toggleLike(postId) {
