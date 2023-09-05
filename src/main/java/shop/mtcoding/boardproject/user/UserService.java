@@ -24,6 +24,7 @@ public class UserService {
     public void 회원가입(UserRequest.JoinDTO joinDTO) {
         // 개인회원에 해당하는 필드값을 builder로 담는다.
         User user = User.builder()
+                .role(joinDTO.getRole())
                 .email(joinDTO.getEmail())
                 .password(joinDTO.getPassword())
                 .username(joinDTO.getUsername())
@@ -33,7 +34,6 @@ public class UserService {
         // JPA save
         userRepository.save(user);
     }
-
 
     public User 로그인(LoginDTO loginDTO) {
         // 아이디(이메일)를 찾는다.
@@ -49,7 +49,6 @@ public class UserService {
         // 위의 검증들을 통과하면 user 리턴
         return user;
     }
-
 
     @Transactional
     public User 회원수정(UpdateDTO updateDTO, Integer id) {
