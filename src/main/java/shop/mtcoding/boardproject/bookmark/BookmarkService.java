@@ -95,7 +95,7 @@ public class BookmarkService {
     public void 회사북마크추가(Integer compId, Integer resumeId) {
 
         if((compBookmarkRepository.findByUserIdAndResumeId(compId, resumeId))!=null){ // 똑같은거 북마크 안되게
-            return;
+            throw new MyException("이미 북마크임");
         }
 
         Optional<Resume> resumeOP = resumeRepository.findById(resumeId);
@@ -115,7 +115,6 @@ public class BookmarkService {
 
         CompBookmark compBookmark = new CompBookmark(user, resume);
         compBookmarkRepository.save(compBookmark);
-        System.out.println("테스트 북마크성공");
     }
 
 

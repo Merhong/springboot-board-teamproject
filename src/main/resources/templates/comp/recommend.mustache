@@ -6,15 +6,16 @@
 
 
 
-		<div class="col-9 ms-3">
+		<div class="col-9 m-auto">
+			
 			<h1 class="text-center mt-2">인재 찾기</h1>
 
 			
 
 
-			<form action="/comp/recommend" method="get" id="selectform" class="d-flex justify-content-around m-2">
+			<form action="/comp/recommend" method="get" id="selectform" class="d-flex justify-content-around m-1">
 
-				<div class="m-2 border border-info">
+				<div class="w-50 m-1 me-2 mb-2 border border-info">
 					<h4 class="mt-2 text-center">기술별</h4>
 	
 					<div class="form-check d-inline-block ms-3 me-2">
@@ -34,14 +35,10 @@
 						</div>
 						{{/skillList}}
 
-
 					</div>
-	
-					
 				</div>
-				
 
-				<div class="m-2 border border-info">
+				<div class="w-50 m-1 ms-2 mb-2 border border-info">
 					<h4 class="mt-2 text-center">직무별</h4>
 	
 					<div class="form-check d-inline-block ms-3 me-2">
@@ -99,52 +96,59 @@
 							머신러닝</label>
 						</div>
 					</div>
-		
-	
 				</div>
+
 			</form>
 
-			<div class="m-2 ms-3 me-3">
+			<div class="m-2 ms-2 me-2">
 				<div class="btn btn-success w-100" onclick="searchAll()">검색하기</div>
 			</div>
 
 
+			<div class="d-flex flex-wrap">
 
 			{{#userList}}
-			<div class="d-flex border border-info m-3 p-2 mt-4 justify-content-between bg-info">
-				<div>
+			<div class="w-50">
+				<div class="border border-info m-2 p-1 bg-info">
 
-					<div>
-						<span class="badge bg-danger">{{position}}</span>
-						{{#userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/userSkillList}}
+					<div class="d-flex justify-content-between">
+						<div>
+							<div class="m-auto">
+								<span class="badge bg-danger">{{position}}</span>
+								{{#userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/userSkillList}}
+							</div>
+
+							<div class="d-flex mb-1">
+								<div>'<b>{{username}}</b>'님의 공개 이력서 모음</div>
+							</div>
+
+						</div>
+						
+						<div class="align-self-center mb-1">
+							<form class="" action="/comp/bookmarkList/saveAll" method="post">
+								{{#resumeList}}
+								<input type="hidden" name="ResumeIdList" value="{{id}}">
+								{{/resumeList}}
+								<input class="btn btn-warning btn-sm" type="submit" value="모두 북마크">
+							</form>
+						</div>
 					</div>
 
-					<div class="mb-1">
-						<div>'<b>{{username}}</b>'님의 공개 이력서 모음입니다.</div>
-					</div>
+					<hr class="m-0 mb-1">
 					
-					<div class="">
+					<div class="ms-1">
 						{{#resumeList}}
 						<a href="javascript:void(0);" class="{{disclosure}}" onclick="openNewWindow('/resume/newWindow/{{id}}')">{{title}}</a>
 						{{/resumeList}}
 					</div>
 
-				</div>
 
-				<div class="d-flex flex-column justify-content-between">
-					<form action="" method="post">
-						<input class="btn btn-primary btn-sm w-100 mb-1" type="submit" value="연락하기">
-					</form>
-					<form action="/comp/bookmarkList/saveAll" method="post">
-						{{#resumeList}}
-						<input type="hidden" name="ResumeIdList" value="{{id}}">
-						{{/resumeList}}
-						<input class="btn btn-warning btn-sm w-100 mb-1" type="submit" value="전체 북마크">
-					</form>
+
 				</div>
 			</div>
 			{{/userList}}
 
+			</div>
 
 		</div>
 
