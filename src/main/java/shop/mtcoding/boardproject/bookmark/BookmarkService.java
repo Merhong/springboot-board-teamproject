@@ -1,12 +1,14 @@
 package shop.mtcoding.boardproject.bookmark;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 import shop.mtcoding.boardproject.user.User;
@@ -30,6 +32,10 @@ public class BookmarkService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired 
+    private PostingRepository postingRepository;
+
 
     public List<Posting> 유저북마크전체(Integer id) {
         Optional<User> user = userRepository.findById(id);
@@ -117,8 +123,33 @@ public class BookmarkService {
         compBookmarkRepository.save(compBookmark);
     }
 
+    /**
+     * @param userId
+     * @param postingId
+     */
+    @Transactional
+public void 개인북마크추가(Integer userId, Integer postingId) {
+    // 이미 북마크가 있는지 확인합니다.
+    if (userBookmarkRepository.findByUserIdAndPostingId(userId, postingId) != null) {
+        throw new MyException("이미 북마크된 공고입니다.");
+    }
+
+    // User 객체를 생성하고 ID를 설정합니다.
+    User user = userRepository.findById(userId)
+            .orElseThrow(() -> new MyException("사용자를 찾을 수 없습니다."));
+
+    // Posting 객체를 데이터베이스에서 가져옵니다.
+    Posting posting = postingRepository.findById(postingId)
+            .orElseThrow(() -> new MyException("공고를 찾을 수 없습니다."));
+
+    // 북마크를 생성하고 저장합니다.
+    UserBookmark userBookmark = new UserBookmark(user, posting);
+    userBookmarkRepository.save(userBookmark);
+}
+    
+    }
+
 
 
 
     
-}

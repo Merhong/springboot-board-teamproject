@@ -97,4 +97,13 @@ public class BookmarkController {
         return "redirect:/resume/newWindow/"+ResumeId;
         // return Script.href("/resume/newWindow/"+ResumeId, "북마크 성공");
     }
+
+    @PostMapping("/user/bookmarkForm/save")
+    public String userbookmarkSave(@RequestParam(defaultValue = "") Integer postingId) {
+        Integer userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId(); // 현재 로그인한 사용자의 ID를 가져옴
+        bookmarkService.개인북마크추가(userId, postingId);
+        
+        return "redirect:/resume/newWindow/"+postingId; // 개인 북마크 추가 후 개인 프로필 페이지로 리다이렉트
+    }
+
 }
