@@ -145,8 +145,7 @@ public class CompController {
             // System.out.println("테스트"+json);
             request.setAttribute("json", json);
         } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new MyException("오류");
         }
         
         return "comp/updateForm";
@@ -205,7 +204,7 @@ public class CompController {
         request.setAttribute("recommendList", recommendList);
         
         return "comp/offerList";
-    } // TODO //
+    }
 
 
 
@@ -402,6 +401,17 @@ public class CompController {
 
         return "redirect:/comp/posting/" + postingId + "/offerList";
     }
+
+    @GetMapping("/offer/newWindow/{resumeId}")
+    public String offerDetail2(@PathVariable Integer resumeId, HttpServletRequest request) {
+        Resume resume = resumeService.이력서찾기(resumeId);
+        request.setAttribute("resume", resume);
+        
+        List<Posting> postingList = compService.모든공고찾기();
+        request.setAttribute("postingList", postingList);
+
+        return "comp/offerDetailOnly";
+    } // TODO : 예외처리
 
 
 

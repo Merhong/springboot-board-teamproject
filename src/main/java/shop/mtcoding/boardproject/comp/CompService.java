@@ -27,7 +27,6 @@ import shop.mtcoding.boardproject.skill.SkillRepository;
 import shop.mtcoding.boardproject.user.User;
 import shop.mtcoding.boardproject.user.UserRepository;
 
-import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -56,8 +55,7 @@ public class CompService {
     private RecommendRepository recommendRepository;
 
 
-    @Autowired
-    private HttpSession session;
+
 
     @Transactional
     public void 회원가입(JoinDTO joinDTO) {
@@ -205,7 +203,7 @@ public class CompService {
             if (fileName != null) { // 사진 안넣으면 기존 사진 유지하게
                 user.setPhoto(fileName);
             }
-            
+
             CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                     .userId(user.getId())
                     .email(user.getEmail())
