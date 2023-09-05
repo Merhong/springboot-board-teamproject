@@ -31,6 +31,7 @@ import shop.mtcoding.boardproject.skill.SkillService;
 @Controller
 public class MasterController {
 
+    /* DI */
     @Autowired
     private MasterService masterService;
 
@@ -40,6 +41,7 @@ public class MasterController {
     @Autowired
     private HttpSession session;
 
+    // 인덱스(홈) 페이지
     @GetMapping("/")
     public String index(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, @RequestParam(defaultValue = "all") String region, HttpServletRequest request) {
 
@@ -47,8 +49,10 @@ public class MasterController {
         request.setAttribute("skillList", sl);
         // 뷰에서 기술목록 뿌릴때 사용
 
+        // request에 담아서 전달
         request.setAttribute("position", position);
         request.setAttribute("region", region);
+        
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(skillList);
@@ -58,18 +62,19 @@ public class MasterController {
             e.printStackTrace();
         }
         // 뷰에 뭘 검색한건지 적혀있게
-        
         List<Posting> postingList = masterService.메인화면검색(skillList, position, region);
         request.setAttribute("postingList", postingList);
 
         return "index";
     }
 
+    // 고객센터 페이지
     @GetMapping("/master/help")
     public String qna(HttpServletRequest request) {
-        return "/master/qna";
+        return "/master/help";
     }
 
+    //
     @GetMapping("/question/Form")
     public String questionForm(HttpServletRequest request) {
         User user = null;

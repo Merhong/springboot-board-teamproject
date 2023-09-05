@@ -90,6 +90,7 @@ public class CompController {
     public String saveForm(HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         if (sessionAllUser == null) {
+
             return "redirect:/user/loginForm";
         }
         if(sessionAllUser.getRole()!=2){
@@ -116,6 +117,7 @@ public class CompController {
         request.setAttribute("posting", posting);
         return "comp/postingDetailOnly";
     }
+
 
     @GetMapping("/comp/posting/{postingId}/updateForm")
     public String updateForm(@PathVariable Integer postingId, HttpServletRequest request) {
@@ -148,7 +150,7 @@ public class CompController {
         } catch (JsonProcessingException e) {
             throw new MyException("오류");
         }
-        
+
         return "comp/updateForm";
     }
 
@@ -180,7 +182,7 @@ public class CompController {
         request.setAttribute("applyList", applyList);
         
         request.setAttribute("resumeList", resumeList);
-        
+
         return "comp/resumeList";
     }
     
@@ -298,6 +300,7 @@ public class CompController {
         
         compService.공고수정(postingId, updateDTO);
         return "redirect:/comp/" + compId + "/postingList";
+
     }
 
     @PostMapping("/comp/main/{compId}/update")
@@ -350,7 +353,6 @@ public class CompController {
             return Script.href("/comp/" + compId + "/postingList", "삭제 완료");
         }
 
-
         throw new MyException("권한이 없습니다.");
     }
 
@@ -390,6 +392,7 @@ public class CompController {
         return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
     }
 
+  
     @PostMapping("/comp/posting/offer/{recommendId}/cancel")
     public String recommendCancel(@PathVariable Integer recommendId) {
 
@@ -456,11 +459,6 @@ public class CompController {
         // return "redirect:/comp/posting/" + postingId + "/offerList";
         return ResponseEntity.ok("오퍼성공"); // 새창 열린거니까 끄게
     } //
-
-
-
-
-
 
 
     // 중복체크

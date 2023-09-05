@@ -3,30 +3,28 @@
 <!-- 로그인 화면 -->
 <div class="d-flex my-5">
 	<div class="mx-auto card p-5 bg-info">
-
 		<div>
 			<h3 class="text-center mb-3">로그인</h3>
 			<div class="d-flex">
-				<a href="" class="mx-auto text-decoration-none text-black">로그인</a>
-				<a href="/selectJoinForm" class="mx-auto text-decoration-none text-black">회원가입</a>
+				<a href="" id="loginLink" class="mx-auto text-decoration-none text-black">로그인</a>
+				<a href="/selectJoinForm" id="joinLink" class="mx-auto text-decoration-none text-black">회원가입</a>
 			</div>
 		</div>
 
 		<div class="mt-3"></div>
 
-		<form action="/login" method="post" onsubmit="">
+		<form action="/login" method="post" onsubmit="changeLoginLinksAndButton()">
 			<div class="d-flex form-group mt-2 mb-2">
 				<input type="email" name="email" class="form-control" placeholder="아이디(이메일)" id="email"
-				       value="love@nate.com">
+					value="love@nate.com">
 			</div>
 
 			<div class="mb-2">
 				<input type="password" name="password" class="form-control" placeholder="비밀번호" id="password"
-				       value="1234">
+					value="1234">
 			</div>
 
 			<div class="mt-4"></div>
-
 
 			<div class="form-check mb-3">
 				<input class="form-check-input" type="checkbox" id="">
@@ -34,34 +32,51 @@
 			</div>
 
 			<div class="d-grid mb-2">
-				<input id="button" class=" btn btn-primary" type="submit" value="로그인">
+				<input id="loginButton" class=" btn btn-primary" type="submit" value="로그인">
 			</div>
 		</form>
 	</div>
 </div>
 
 <script>
-	let sessionUser = "{{#sessionUser}}{{.}}{{/sessionUser}}"; // 세션에 저장된 사용자의 이메일 정보
-	function changeLoginLinks() {
-		let joinLink = document.querySelector('a[href="/selectJoinForm"]');
-		let loginLink = document.querySelector('a[href="/loginForm"]');
-		if (sessionUser) {
+	// 페이지 로드 시 초기 세션 상태에 따라 링크 텍스트 변경
+	function changeLoginLinksAndButton() {
+		let joinLink = document.querySelector('#joinLink');
+		let loginLink = document.querySelector('#loginLink');
+		let sessionUser = "{{#sessionUser.role}}{{.}}{{/sessionUser.role}}";
+		let CompSession = "{{#CompSession.role}}{{.}}{{/CompSession.role}}";
+
+		if (sessionUser === "1" || CompSession === "2") {
 			joinLink.textContent = "로그아웃";
 			joinLink.href = "/logout";
-			loginLink.textContent = "마이페이지";
-			loginLink.href = "/user/updateForm";
+
+			if (sessionUser === "1") {
+				loginLink.textContent = "마이페이지";
+				loginLink.href = "/user/updateForm";
+			} else if (CompSession === "2") {
+				loginLink.textContent = "기업정보보기";
+				loginLink.href = "/comp/main";
+			}
 		} else {
 			joinLink.textContent = "회원가입";
 			joinLink.href = "/selectJoinForm";
 			loginLink.textContent = "로그인";
-			loginLink.href = "/loginForm";
+			loginLink.href = "/user/loginForm";
 		}
 	}
 
+	// 페이지 로드 시 초기 세션 상태에 따라 링크 텍스트 변경
 	document.addEventListener("DOMContentLoaded", function () {
-		let loginButton = document.querySelector("#button");
-		loginButton.addEventListener("click", changeLoginLinks);
-		changeLoginLinks(); // 페이지 로드 시 초기 세션 상태에 따라 링크 텍스트 변경
+		changeLoginLinksAndButton();
 	});
+
+	// 로그인 버튼 클릭 시 세션 상태에 따라 링크 텍스트 변경
+	let loginButton = document.querySelector("#loginButton");
+	if (loginButton) {
+		loginButton.addEventListener("click", function () {
+			setTimeout(changeLoginLinksAndButton, 1000); // 로그인 처리 후 잠시 후에 변경 적용
+		});
+	}
 </script>
+
 {{> layout/footer}}

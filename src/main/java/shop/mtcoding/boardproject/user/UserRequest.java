@@ -8,17 +8,18 @@ import java.sql.Date;
 
 public class UserRequest {
 
+    // 회원가입 DTO
     @Getter
     @Setter
     public static class JoinDTO {
-
+        private Integer role;
         private String email;
         private String password;
         private String username;
         private String tel;
-
     }
 
+    // 로그인 DTO
     @Getter
     @Setter
     public static class LoginDTO {
@@ -26,6 +27,7 @@ public class UserRequest {
         private String password;
     }
 
+    // 회원정보수정 DTO
     @Getter
     @Setter
     public static class UpdateDTO {
@@ -35,5 +37,4 @@ public class UserRequest {
         private Date birth;
         private MultipartFile pto;
     }
-
 }

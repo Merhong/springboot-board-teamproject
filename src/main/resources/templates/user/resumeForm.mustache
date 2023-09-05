@@ -1,104 +1,113 @@
 {{> layout/header}}
-
-
 <div class="d-flex mb-3">
-	<div class="col-2"></div>
+  <div class="col-2"></div>
+  <div class="class col-8 h-auto d-flex border border-info">
+    <div class="bg-info col-2">
+      <div class="m-2"></div>
+      <a href="/user/updateForm" class="w-100 btn btn-info">마이 페이지</a>
+      <div class="m-2"></div>
+      <a href="/user/resumeForm" class="w-100 btn btn-info">이력서 등록</a>
+      <div class="m-2"></div>
+      <a href="/user/resumeManage" class="w-100 btn btn-info">이력서 관리</a>
+      <div class="m-2"></div>
+      <a href="/user/applyList" class="w-100 btn btn-info">지원내역</a>
+      <div class="m-2"></div>
+      <a href="/user/bookmarkForm" class="w-100 btn btn-info">북마크</a>
+      <div class="m-2"></div>
+      <a href="/user/recommendForm" class="w-100 btn btn-info">기업추천</a>
+      <div class="m-2"></div>
+    </div>
+    <div class="col-9 ms-3">
+      <h1 class="text-center mt-2">이력서 등록</h1>
+      <form action="/user/resumeSave" method="post" enctype="multipart/form-data">
+        <div class="d-flex">
+          <div class="m-2 col-4 d-flex flex-column align-items-center">
+            <img id="preview" src="../../../../../images/{{sessionUser.photo}}" class="img-fluid rounded-circle"
+              style="width:150px; height:150px;" />
+            <div class="input-group mb-3 mt-3">
+              <input type="file" class="form-control" placeholder="Enter pto" name="pto" onchange="changePic(event)">
+            </div>
+          </div>
 
-	<div class="class col-8 h-auto d-flex border border-info">
-		<div class="bg-info col-2">
-			<div class="m-2"></div>
-			<a href="updateForm" class="w-100 btn btn-info">마이 페이지</a>
-			<div class="m-2"></div>
-			<a href="resumeForm" class="w-100 btn btn-info">이력서 등록</a>
-			<div class="m-2"></div>
-			<a href="resumeManage" class="w-100 btn btn-info">이력서 관리</a>
-			<div class="m-2"></div>
-			<a href="applyList" class="w-100 btn btn-info">지원내역</a>
-			<div class="m-2"></div>
-			<a href="bookmarkForm" class="w-100 btn btn-info">북마크</a>
-			<div class="m-2"></div>
-			<a href="recommendForm" class="w-100 btn btn-info">기업추천</a>
-			<div class="m-2"></div>
-		</div>
-		<div class="col-9 ms-3">
-			<h1 class="text-center mt-2">이력서 등록</h1>
-			<form action="/user/resumeSave" method="post">
-				<div class="d-flex">
-					<div class="m-2 col-4 d-flex flex-column align-items-center">
-						<img src="../../../images/basic.jpg" class="img-fluid rounded-circle"
-						     style="width:150px; height:150px;"/>
-					</div>
+          <div class="col-8 p-2">
+            <div class="input-group mb-3">
+              <span class="input-group-text"><span class="ms-2 me-4">이름</span></span>
+              <input type="text" class="form-control" name="username">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">전화번호</span>
+              <input type="tel" class="form-control" name="tel">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
+              <input type="text" class="form-control" name="address">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">생년월일</span>
+              <input type="date" class="form-control" name="birth">
+            </div>
+          </div>
+        </div>
+        <div class="input-group ms-2 mb-3">
+          <span class="input-group-text">이력서 제목</span>
+          <input type="text" class="form-control" name="title">
+        </div>
+        <div class="input-group ms-2 mb-3">
+          <span class="input-group-text">학력사항</span>
+          <input type="text" class="form-control" name="grade">
+        </div>
+        <div class="input-group ms-2 mb-3">
+          <span class="input-group-text" center>경력사항</span>
+          <input type="text" class="form-control" name="career">
+        </div>
+        <div class="card input-group ms-2 mb-3">
+          <span class="input-group-text">보유 기술</span>
+          <div class="d-flex flex-wrap">
+            {{#skillList}}
+            <div class="form-check d-inline-block ms-3 me-2">
+              <input class="form-check-input" type="checkbox" id="skill{{ id }}" value="{{ id }}" name="skillList"
+                checked />
+              <label class="form-check-label">{{ skillname }}</label>
+            </div>
+            {{/skillList}}
+          </div>
+        </div>
 
-					<div class="col-8 p-2">
-						<div class="input-group mb-3">
-							<span class="input-group-text"><span class="ms-2 me-4">이름</span></span>
-							<input type="text" class="form-control" name="username">
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<input type="tel" class="form-control" name="tel">
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
-							<input type="text" class="form-control" name="address">
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">생년월일</span>
-							<input type="date" class="form-control" name="birth">
-						</div>
-					</div>
-
-				</div>
-
-				<div class="input-group ms-2 mb-3">
-					<span class="input-group-text">이력서 제목</span>
-					<input type="text" class="form-control" name="title">
-				</div>
-
-				<div class="input-group ms-2 mb-3">
-					<span class="input-group-text">학력사항</span>
-					<input type="text" class="form-control" name="grade">
-				</div>
-
-				<div class="input-group ms-2 mb-3">
-					<span class="input-group-text" center>경력사항</span>
-					<input type="text" class="form-control" name="career">
-				</div>
-
-				<div class="card input-group ms-2 mb-3">
-					<span class="input-group-text">보유 기술</span>
-					<div class="d-flex flex-wrap">
-					{{#skillList}}
-						<div class="form-check d-inline-block ms-3 me-2">
-							<input class="form-check-input" type="checkbox" id="" value="{{id}}" name="skillList">
-							<label class="form-check-label">{{skillname}}</label>
-						</div>
-					{{/skillList}}
-					</div>
-				</div>
-
-				<div class="input-group ms-2 mb-3">
-					<span class="input-group-text">자기소개서</span>
-					<textarea class="form-control" rows="5" name="personalStatement"></textarea>
-				</div>
+        <div class="input-group ms-2 mb-3">
+          <span class="input-group-text">자기소개서</span>
+          <textarea class="form-control" rows="5" name="personalStatement"></textarea>
+        </div>
 
 
-				<input type="checkbox" name="disclosure" value="true"/> 이력서 공개 여부
-				<br/>
-				<!-- disabled속성은 입력할 수 없는 input태그를 만든다 -->
-				<!-- disabled속성은 적용된 input은 서버로 데이터가 전송되지 않는다-->
-				<!-- readonly속성은 읽기전용 input태그를 만든다 -->
-				<!-- disabled ="ture"가 생략 된것-->
-
-
-				<div>
-					<input id="button" class=" btn btn-primary m-2 mb-3 w-100" type="submit" value="이력서 등록">
-				</div>
-			</form>
-		</div>
-	</div>
-	<div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
+        <input type="checkbox" name="disclosure" value="true" /> 이력서 공개 여부
+        <br />
+        <!-- disabled속성은 입력할 수 없는 input태그를 만든다 -->
+        <!-- disabled속성은 적용된 input은 서버로 데이터가 전송되지 않는다-->
+        <!-- readonly속성은 읽기전용 input태그를 만든다 -->
+        <!-- disabled ="ture"가 생략 된것-->
+        <div>
+          <input id="button" class=" btn btn-primary m-2 mb-3 w-100" type="submit" value="이력서 등록">
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
 </div>
 
-
+<script>
+  function changePic(e1) {
+    console.log(e1);
+    let f = e1.srcElement.files[0];
+    if (!f.type.match("image.*")) {
+      alert("이미지를 등록해주세요.");
+      return;
+    }
+    let reader = new FileReader(); //버퍼를 하나 만듦 ,메모리에 끌어 올릴려고!
+    reader.onload = function (e2) { // 파일이 다 읽어지면 콜백됨
+      let previewEl = document.querySelector("#preview");
+      previewEl.setAttribute("src", e2.target.result);
+    }
+    reader.readAsDataURL(f); // 파일 읽기, 버퍼로 다 읽으면 onload() 발동 -> 파일 다 읽으면 콜백
+  }
+</script>
 {{> layout/footer}}
