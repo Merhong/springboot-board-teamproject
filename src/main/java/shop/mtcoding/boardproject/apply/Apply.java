@@ -10,6 +10,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
 import shop.mtcoding.boardproject.user.User;
 
 import java.sql.Timestamp;
