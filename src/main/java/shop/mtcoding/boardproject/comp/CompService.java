@@ -28,9 +28,7 @@ import shop.mtcoding.boardproject.user.UserRepository;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CompService {
@@ -283,7 +281,7 @@ public class CompService {
         if(skillList.size()==0 || skillList.get(0).equals("all")){
             userList = userRepository.findByRole(1);
         } else{
-            Set<User> userSet = new LinkedHashSet<>(); // 중복 제거하려고 Set으로 했다가 List로 변경 
+            Set<User> userSet = new LinkedHashSet<>(); // 중복 제거하려고 Set으로 했다가 List로 변경
             for (String s : skillList) {
                 List<User> tempList = userRepository.findBykillResumeReturnUser(s);
                 userSet.addAll(tempList);

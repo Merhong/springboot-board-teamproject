@@ -44,7 +44,7 @@ public class BookmarkController {
             return "redirect:/user/loginForm";
         }
 
-        List<Posting> postingList = BookmarkService.유저북마크전체(user.getId());
+        List<Posting> postingList = bookmarkService.유저북마크전체(user.getId());
         request.setAttribute("postingList", postingList);
       
         return "/user/bookmarkForm";

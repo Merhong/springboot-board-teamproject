@@ -1,25 +1,12 @@
 package shop.mtcoding.boardproject.comp;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-
-import shop.mtcoding.boardproject._core.util.ApiUtil;
-import shop.mtcoding.boardproject._core.error.ex.MyException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyService;
@@ -29,6 +16,10 @@ import shop.mtcoding.boardproject.resume.ResumeService;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillService;
 import shop.mtcoding.boardproject.user.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class CompController {
@@ -85,7 +76,7 @@ public class CompController {
         if (sessionComp == null) {
             return "redirect:/user/loginForm";
         }
-      
+
         List<Skill> skillList = skillService.스킬이름전부();
 
         request.setAttribute("skillList", skillList);
@@ -119,7 +110,7 @@ public class CompController {
 
     @GetMapping("/comp/posting/{postingId}/updateForm")
     public String updateForm(@PathVariable Integer postingId, HttpServletRequest request) {
-      
+
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
         if (sessionComp == null) {
             throw new MyException("권한이 없습니다.");
@@ -128,10 +119,10 @@ public class CompController {
         List<Skill> skillList = skillService.스킬이름전부();
 
         request.setAttribute("skillList", skillList);
-        
+
         Posting posting = compService.공고찾기(postingId);
         request.setAttribute("posting", posting);
-        
+
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(posting);
@@ -190,7 +181,7 @@ public class CompController {
         Posting posting = compService.공고찾기(postingId);
 
         request.setAttribute("posting", posting);
-        
+
         List<Apply> resumeList = compService.공고지원신청찾기(postingId);
 
         // System.out.println("테스트:" +resumeList.get(0).getTitle());
@@ -250,10 +241,10 @@ public class CompController {
         // System.out.println("테스트saveDTO:"+saveDTO);
 
         compService.공고작성(saveDTO);
-        int id = ((CompRequest.SessionCompDTO)session.getAttribute("sessionComp")).getUserId();
-        return "redirect:/comp/"+id+"/postingList";
+        int id = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId();
+        return "redirect:/comp/" + id + "/postingList";
     }
-    
+
     @PostMapping("/comp/posting/{postingId}/update")
     public String postingUpdate(@PathVariable Integer postingId, CompRequest.UpdateDTO updateDTO) {
         // System.out.println("테스트updateDTO:"+updateDTO);
@@ -289,7 +280,7 @@ public class CompController {
         }
 
         compService.기업정보수정(userId, DTO);
-      
+
         return Script.href("/comp/main", "정보 수정 완료");
 
     }
@@ -297,22 +288,6 @@ public class CompController {
     @PostMapping("/comp/posting/{postingId}/delete")
     public @ResponseBody String delete(@PathVariable Integer postingId) {
         int userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId();
-
-
-    @PostMapping("/comp/posting/apply/{applyId}/pass")
-    public String applyPass(@PathVariable Integer applyId){
-        Apply apply = applyService.공고지원합격(applyId);
-
-        return "redirect:/comp/posting/"+apply.getPosting().getId()+"/resumeList";
-    }
-
-    @PostMapping("/comp/posting/apply/{applyId}/fail")
-    public String applyFail(@PathVariable Integer applyId){
-        Apply apply = applyService.공고지원불합격(applyId);
-
-        return "redirect:/comp/posting/"+apply.getPosting().getId()+"/resumeList";
-    }
-
         Posting posting = compService.공고찾기(postingId);
 
         if (posting == null) {
@@ -328,6 +303,20 @@ public class CompController {
         throw new MyException("권한이 없습니다.");
     }
 
+    @PostMapping("/comp/posting/apply/{applyId}/pass")
+    public String applyPass(@PathVariable Integer applyId) {
+        Apply apply = applyService.공고지원합격(applyId);
+
+        return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
+    }
+
+    @PostMapping("/comp/posting/apply/{applyId}/fail")
+    public String applyFail(@PathVariable Integer applyId) {
+        Apply apply = applyService.공고지원불합격(applyId);
+
+        return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
+    }
+
     // @GetMapping("/comp/test2")
     // public String compTest2() {
     //     compService.테스트2("Java");
@@ -335,11 +324,11 @@ public class CompController {
     // }
 
 
-     //중복체크
+    // 중복체크
     @GetMapping("/comp/check")
-    public @ResponseBody ApiUtil<String> check(String useremail){
+    public @ResponseBody ApiUtil<String> check(String useremail) {
         User user = compService.이메일중복체크(useremail);
-        if (user != null){
+        if (user != null) {
             return new ApiUtil<String>(false, "이메일이 중복 되었습니다.");
         }
         System.out.println("테스트 3");
