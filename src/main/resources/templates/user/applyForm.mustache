@@ -9,51 +9,54 @@
 		<div class="d-flex m-2">
 			<div class="col-5">
 				<a href="#"><img src="../../../images/basic.jpg" class="img-fluid"
-				                 style="width:300px; height:200px;"/></a>
+						style="width:300px; height:200px;" /></a>
 			</div>
+
 			<form action="/user/apply" method="post">
 
 				<div class="col-7 p-3">
 					<div class="input-group mb-3">
 						<span class="input-group-text">공고명</span>
-						<input type="text" class="form-control w-50" name="postingTitle" value="{{posting.title}}"
-						       readonly>
+						<input type="text" class="form-control" name="postingTitle" value="{{posting.title}}" readonly>
 					</div>
 					<div class="input-group mb-3">
 						<span class="input-group-text">회사명</span>
 						<input type="text" class="form-control" nane="compname" value="{{posting.user.compname}}"
-						       readonly>
+							readonly>
 					</div>
 					<div class="input-group mb-3">
 						<span class="input-group-text">홈페이지</span>
 						<input type="text" class="form-control" value="http://aasdasd.com" readonly>
 					</div>
 				</div>
+		</div>
 
-				<div class="ms-2 me-2">
-					<a href="/user/resumeForm" class="w-100 btn btn-success">이력서 등록하기</a>
-				</div>
+		<div class="ms-2 me-2">
+			<a href="/user/resumeForm" class="w-100 btn btn-success">이력서 등록하기</a>
+		</div>
 
-				<div class="p-3 m-3 d-flex flex-column align-items-center">
-					{{#resumes}} {{! 이력서 목록 }}
-						<div class="input-group mb-3">
-							<label class="form-check-label">
-								<input class="form-check-input" type="radio" name="selectedResume" value="{{id}}">
-								{{title}}</label>
-						</div>
-					{{/resumes}}
+		<div class="p-3 m-3 d-flex flex-column align-items-center">
+			{{#resumes}} {{! 이력서 목록 }}
+			<div class="input-group mb-3">
+				<label class="form-check-label">
+					<input class="form-check-input" type="radio" name="selectedResume" value="{{id}}">
+					{{title}}</label>
+			</div>
+			{{/resumes}}
 
 
-					<div class="ms-2 me-2 mb-2">
-						<input type="hidden" name="postingId" value="{{posting.id}}">
-						<input id="button" class=" btn btn-primary w-100" type="submit" value="지원하기">
-					</div>
+			<div class="ms-2 me-2 mb-2">
+				<input type="hidden" name="postingId" value="{{posting.id}}">
+				<input id="button" class=" btn btn-primary w-100" type="submit" value="지원하기">
+			</div>
 
 			</form>
 		</div>
 
 		<div class="col-xl-3 col-lg-2 col-md-1"></div>
 	</div>
+
+
 </div>
 
 {{> layout/footer}}
