@@ -155,6 +155,7 @@
 				joinLink.textContent = "로그아웃";
 				joinLink.href = "/logout";
 
+
 				if (sessionUser === "1") {
 					// 역할이 1인 경우 (개인 사용자)
 					loginLink.textContent = "마이페이지";
@@ -164,6 +165,7 @@
 					loginLink.textContent = "기업 정보 보기";
 					loginLink.href = "/comp/main";
 				}
+
 			} else {
 				// 로그아웃 상태일 때
 				joinLink.textContent = "회원가입";
