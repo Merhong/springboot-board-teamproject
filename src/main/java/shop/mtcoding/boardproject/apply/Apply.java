@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.user.User;
@@ -28,7 +30,7 @@ public class Apply {
     private Integer id;
 
     // 지원 상태
-    private String statement;
+    private String statement = "대기";
 
     // Log용 타임스탬프
     private Timestamp createdAt;
