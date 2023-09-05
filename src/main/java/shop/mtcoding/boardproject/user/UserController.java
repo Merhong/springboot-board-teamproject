@@ -48,10 +48,10 @@ public class UserController {
     // // 15_개인지원내역 화면
     // @GetMapping("/user/applyList")
     // public String userApplyList(HttpServletRequest request) {
-    //     User user = (User) session.getAttribute("sessionUser");
-    //     List<Apply> applyList = applyService.유저지원내역전체(user.getId());
-    //     request.setAttribute("applyList", applyList);
-    //     return "user/applyList";
+    // User user = (User) session.getAttribute("sessionUser");
+    // List<Apply> applyList = applyService.유저지원내역전체(user.getId());
+    // request.setAttribute("applyList", applyList);
+    // return "user/applyList";
     // }
 
     // 14번 이력서 수정 버튼 POST
@@ -142,21 +142,24 @@ public class UserController {
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
         User sessionUser = userService.로그인(loginDTO);
+        System.out.println("세션 " + sessionUser.getRole());
+        // 로그인 사용자의 역할(role)에 따라 세션을 구분합니다.
+        if (sessionUser != null) {
+            if (sessionUser.getRole() == 0) {
+                // 관리자의 경우 sessionAdmin 세션을 설정합니다.
+                session.setAttribute("sessionAdmin", sessionUser);
+            } else if (sessionUser.getRole() == 1) {
+                // 개인 사용자의 경우 sessionUser 세션을 설정합니다.
+                session.setAttribute("sessionUser", sessionUser);
+                System.out.println("x : 유저 로그인");
+            } else if (sessionUser.getRole() == 2) {
+                // 기업 사용자의 경우 CompSession 세션을 설정합니다.
+                session.setAttribute("CompSession", sessionUser);
+                System.out.println("x : 기업 로그인");
+            }
 
-        if (sessionUser.getRole() == 0) {
-            session.setAttribute("sessionAdmin", sessionUser);
-        }
-        if (sessionUser.getRole() == 1) {
-            session.setAttribute("sessionUser", sessionUser);
-        }
-        if (sessionUser.getRole() == 2) {
-            session.setAttribute("CompSession", sessionUser);
-        }
-        if (sessionUser.getCompname() != null) {
-            System.out.println("sessionComp 실행");
-
-
-            if (sessionUser.getRole() != 1) {
+            // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
+            if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
                 CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                         .userId(sessionUser.getId())
                         .email(sessionUser.getEmail())
@@ -168,25 +171,26 @@ public class UserController {
                         .homepage(sessionUser.getHomepage())
                         .role(sessionUser.getRole())
                         .build();
-                // System.out.println("테스트:"+sessionComp);
                 session.setAttribute("sessionComp", sessionComp);
             }
         }
+
+        // 로그인 후 메인 페이지로 리다이렉트합니다.
+
         return "redirect:/";
     }
 
     // 로그아웃
     @GetMapping("/logout")
     public String logout() {
-            User sessionUser = (User) session.getAttribute("sessionUser");
-            CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
-            if (sessionUser == null && sessionComp == null) {
-                return "redirect:/user/loginForm";
-            }
-            session.invalidate(); // 세션 무효화(세션 전체를 비움 - 서랍 비우는 거)
-            return "redirect:/";
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+        if (sessionUser == null && sessionComp == null) {
+            return "redirect:/user/loginForm";
         }
-
+        session.invalidate(); // 세션 무효화(세션 전체를 비움 - 서랍 비우는 거)
+        return "redirect:/";
+    }
 
     // 3_개인회원가입 화면
     @GetMapping("/user/joinForm")
@@ -209,9 +213,9 @@ public class UserController {
 
     // 중복체크
     @GetMapping("/check")
-    public @ResponseBody ApiUtil<String> check(String useremail){
+    public @ResponseBody ApiUtil<String> check(String useremail) {
         User user = userService.이메일중복체크(useremail);
-        if (user != null){
+        if (user != null) {
             return new ApiUtil<String>(false, "이메일이 중복 되었습니다.");
         }
         System.out.println("테스트 3");
