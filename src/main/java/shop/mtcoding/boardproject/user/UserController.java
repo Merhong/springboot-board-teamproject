@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import shop.mtcoding.boardproject._core.util.ApiUtil;
+import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.comp.CompService;
@@ -80,12 +82,21 @@ public class UserController {
 
     // 11번 지원하기 버튼 POST
     @PostMapping("/user/apply")
-    public String userApply() {
+    public String userApply(@RequestParam("selectedResume") Integer selectedResumeId,
+            @RequestParam("postingId") Integer postingId) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+
         if (sessionUser == null) {
             return "redirect:/user/loginForm";
         }
 
+        Posting posting = compService.공고찾기(postingId);
+        Resume selectedResume = resumeService.이력서찾기(selectedResumeId); // 선택한 이력서를 ID로 조회
+        Apply apply = new Apply();
+        apply.setUser(sessionUser);
+        apply.setResume(selectedResume);
+        apply.setPosting(posting); // Apply 엔티티에 공고 설정
+        applyService.지원(apply); // Apply 엔티티 저장
         return "redirect:/";
     }
 
@@ -98,7 +109,6 @@ public class UserController {
         }
         return "redirect:/";
     }
-
 
     @GetMapping("/user/applyForm/{postingId}")
     public String userApplyForm(Model model, @PathVariable("postingId") Integer postingId) {

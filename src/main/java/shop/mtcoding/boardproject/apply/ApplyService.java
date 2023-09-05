@@ -40,11 +40,11 @@ public class ApplyService {
     @Transactional
     public Apply 공고지원합격(Integer applyId) {
         Optional<Apply> applyOP = applyRepository.findById(applyId);
-        if (applyOP.isPresent()){
+        if (applyOP.isPresent()) {
             Apply apply = applyOP.get();
             apply.setStatement("합격");
             return apply;
-        } else{
+        } else {
             throw new MyException(applyId + "없음");
         }
     }
@@ -52,12 +52,16 @@ public class ApplyService {
     @Transactional
     public Apply 공고지원불합격(Integer applyId) {
         Optional<Apply> applyOP = applyRepository.findById(applyId);
-        if (applyOP.isPresent()){
+        if (applyOP.isPresent()) {
             Apply apply = applyOP.get();
             apply.setStatement("불합");
             return apply;
-        } else{
+        } else {
             throw new MyException(applyId + "없음");
         }
+    }
+
+    public void 지원(Apply apply) {
+        applyRepository.save(apply);
     }
 }
