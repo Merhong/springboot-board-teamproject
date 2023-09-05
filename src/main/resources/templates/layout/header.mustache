@@ -71,13 +71,9 @@
 
 				<div class="col-4 d-flex justify-content-end">
 
-					{{^sessionAllUser}}<a class="btn btn-white fw-bold align-self-center" href="/selectJoinForm">회원가입</a>{{/sessionAllUser}}
-					{{^sessionAllUser}}<a class="btn btn-white fw-bold align-self-center" href="/user/loginForm">로그인</a>{{/sessionAllUser}}
-					
-					{{#sessionAllUser}}<a class="btn btn-white fw-bold align-self-center" href="/logout">로그아웃</a>{{/sessionAllUser}}
+					<a class="btn btn-white fw-bold align-self-center" href="/selectJoinForm">회원가입</a>
+					<a class="btn btn-white fw-bold align-self-center" href="/user/loginForm">로그인</a>
 
-					{{#sessionUser}}<a class="btn btn-white fw-bold align-self-center" href="/user/updateForm">마이페이지</a>{{/sessionUser}}
-					{{#sessionComp}}<a class="btn btn-white fw-bold align-self-center" href="/comp/main">내 회사 정보</a>{{/sessionComp}}
 
 				</div>
 

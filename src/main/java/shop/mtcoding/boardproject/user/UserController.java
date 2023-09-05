@@ -161,9 +161,6 @@ public class UserController {
                 System.out.println("x : 기업 로그인");
             }
 
-
-        session.setAttribute("sessionAllUser", sessionUser);
-
         if (sessionUser.getRole() == 0) {
             session.setAttribute("sessionAdmin", sessionUser);
         }
