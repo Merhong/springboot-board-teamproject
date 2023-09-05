@@ -101,7 +101,7 @@
 
 			<div class="d-flex justify-content-center me-1">
 				<div class="w-100 mb-2">
-					<button type="button" class="w-100 btn btn-success me-1 ms-0">입사 제안</button>
+					<a href="javascript:void(0);" class="w-100 btn btn-success me-1 ms-0" onclick="openNewWindow2('/offer/newWindow/{{resume.id}}')">입사 제안</a>
 				</div>
 
 				<form action="/comp/bookmarkList/save" method="post" class="w-100">
@@ -128,6 +128,18 @@
 
 			function closeWindow() {
 				window.close();
+			}
+
+
+			
+			function openNewWindow2(url) {
+				var width = 800; // 새 창의 가로 크기
+				var height = 1100; // 새 창의 세로 크기
+				var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+				var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
+				
+				var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+				window.open(url, '새 창', options);
 			}
 
 		</script>
