@@ -136,7 +136,6 @@ public class BookmarkService {
     @Transactional
     public Integer 유저북마크추가(Integer postingId, Integer userId) {
         Integer sucuess = userBookmarkRepository.saveByPostingAndUserId(postingId, userId);
-
         return sucuess;
     }
 

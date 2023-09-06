@@ -209,4 +209,9 @@ public class MasterController {
             return new ApiUtil<String>(false, "북마크 제거 실패");
         }
     }
+
+    @GetMapping("/zzz")
+    public String zzz() {
+        return "/user/zzz";
+    }
 }

@@ -1,8 +1,70 @@
 {{> layout/header}}
 
+<style>
+	/* .modal { */
+	  /* display: none;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background-color: rgba(0, 0, 0, 0.7); */
+	/* } */
+  
+
+	.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+	height: 150px;
+    position: relative;
+    left: 0%;
+    top: -15%;
+    max-height: calc(80% - 100px); /* 화면 높이에서 40px 제외 */
+    max-width: calc(80% - 40px); /* 화면 높이에서 40px 제외 */
+    overflow-y: auto;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .modal-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 1; /* 모달보다 위에 표시되도록 설정 */
+}
+
+/* 모달 활성화 시 백드롭 표시 */
+.modal.active + .modal-backdrop {
+  display: block;
+}
+  
+</style>
+
 <!-- 메인페이지(인덱스) 화면-->
 <!-- 1, 6, 7, 8, 9 화면 연관-->
 <!-- TODO 로그인전, 후 NavBar 설정 필요  -->
+
+
+
 <div class="d-flex justify-content-center align-items-center">
 	
 	<div class="col-auto"></div>
@@ -206,6 +268,17 @@
 </div>
 
 
+<div id="customModal" class="modal" onclick="closeModal()">
+	<div class="d-flex modal-content">
+	  <div class="d-flex justify-content-between align-content-center">
+		<div id="print" class="d-inline text align-self-center">
+		  모달 내용을 여기에 입력하세요. </div>
+		<div class="close d-inline" onclick="closeModal()">X</div> 
+	  </div>
+	</div>
+</div>
+
+<div id="modalBackdrop" class="modal-backdrop"></div>
 
 
 <input type="hidden" value="{{json}}" name="json" id="json">
@@ -373,6 +446,8 @@
 
 	let bookmarked = '<h3>❤️</h3>';
 	let noBookmark = '<h3>🤍</h3>';
+	let customModal = document.querySelector("#customModal");
+	let modalBackdrop = document.querySelector("#modalBackdrop");
 
 	async function bookmarkPoint() {
 // console.log('bookmarkPoint실행')
@@ -413,11 +488,18 @@
 			let body = await response.json();
 			
 			if(body.sucuess == false){
-				alert(body.data)}
+				// alert(body.data);
+				openModal(body.data);
+				customModal.focus();
+				postingNum.blur();
+}
 			if(body.sucuess == true){
-				alert(body.data)
-			currentValue = false;
-			postingNum.innerHTML = noBookmark;
+				// alert(body.data);
+				openModal(body.data);
+				customModal.focus();
+				postingNum.blur();
+				currentValue = false;
+				postingNum.innerHTML = noBookmark;
 			}
 
 
@@ -428,9 +510,17 @@
 			let body = await response.json();
 
 			if(body.sucuess == false){
-				alert(body.data)}
+				
+				// alert(body.data);
+				openModal(body.data);
+				customModal.focus();
+				postingNum.blur();
+			}
 			if(body.sucuess == true){
-				alert(body.data)
+				// alert(body.data);
+				openModal(body.data);
+				customModal.focus();
+				postingNum.blur();
 			currentValue = true;
 			postingNum.innerHTML = bookmarked;
 			}
@@ -441,6 +531,34 @@
 		postingNum.setAttribute('data-value', currentValue);
 
 	}
+
+
+function openModal(string) {
+	
+  customModal.style.display = "block";
+	let text = document.querySelector("#print");
+	text.innerText = string;
+ 	 customModal.classList.add("active");
+}
+
+function closeModal() {
+	console.log('closeModal 실행')
+  customModal.classList.remove("active");
+  customModal.style.display = "none";
+}
+
+
+function closeBackdrop() {
+    closeModal();
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && customModal.style.display === "block") {
+
+    closeModal();
+  }
+});
+
 </script>
 
 

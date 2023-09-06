@@ -1,7 +1,80 @@
 {{> layout/header}}
+<style>
+  /* .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  } */
 
+  .modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 500px;
+    position: relative;
+    left: 0%;
+    top: -30%;
+    max-height: calc(80% - 40px); /* 화면 높이에서 40px 제외 */
+    max-width: calc(80% - 40px); /* 화면 높이에서 40px 제외 */
+    overflow-y: auto;
+  }
 
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
 
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
 
+<button id="showModalBtn">모달 열기</button>
 
+<div id="customModal" class="modal">
+  <div class="modal-content">
+    <div class="d-flex justify-content-between">
+      <div class="d-inline text align-self-center">
+        모달 내용을 여기에 입력하세요.
+      </div>
+      <div class="close d-inline">X</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 모달 열기 버튼 찾기
+  const showModalBtn = document.getElementById("showModalBtn");
+
+  // 모달 및 닫기 버튼 찾기
+  const customModal = document.getElementById("customModal");
+  const closeBtn = document.querySelector(".close");
+
+  // 모달 열기 버튼 클릭 이벤트
+  showModalBtn.addEventListener("click", () => {
+    customModal.style.display = "block";
+  });
+
+  // 모달 닫기 버튼 클릭 이벤트
+  closeBtn.addEventListener("click", () => {
+    customModal.style.display = "none";
+  });
+
+  // 모달 외부 클릭 시 모달 닫기
+  window.addEventListener("click", (event) => {
+    if (event.target === customModal) {
+      customModal.style.display = "none";
+    }
+  });
+</script>
 {{> layout/footer}}
