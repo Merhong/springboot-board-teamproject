@@ -12,6 +12,7 @@ public interface RecommendRepository extends JpaRepository<Recommend, Integer> {
 
     Recommend findByPostingIdAndResumeId(@Param("postingId") Integer postingId, @Param("resumeId") Integer resumeId);
 
+    
     @Query(value = "SELECT recommend_tb.* FROM recommend_tb "+
                     "JOIN resume_tb ON recommend_tb.resume_id = resume_tb.id "+
                     "WHERE recommend_tb.posting_id = :postingId "+
