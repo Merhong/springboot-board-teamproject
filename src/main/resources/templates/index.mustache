@@ -385,6 +385,7 @@
 		let body = await response.json();
 
 		let dataArray = body.data;
+		if(dataArray != null){
 		for(let item of dataArray){
 
 			let postingNum = document.querySelector(`#posting${item.id}`);
@@ -392,7 +393,7 @@
 			currentValue = true;
 			postingNum.innerHTML = bookmarked;
 			postingNum.setAttribute('data-value', currentValue);
-		}
+		}}
 	}
 	// let response = await fetch("/api/tech?categoryId=" + categoryId);
 		bookmarkPoint();
