@@ -111,6 +111,14 @@ public class CompController {
         return "comp/postingDetail";
     }
 
+    @GetMapping("/comp/company/{compId}")
+    public String findComp(@PathVariable Integer compId, HttpServletRequest request) {
+
+        User company = compService.기업찾기(compId);
+        request.setAttribute("company", company);
+        return "comp/compDetail";
+    }
+
     @GetMapping("/comp/posting/newWindow/{postingId}")
     public String detail2(@PathVariable Integer postingId, HttpServletRequest request) {
         Posting posting = compService.공고찾기(postingId);
@@ -244,8 +252,10 @@ public class CompController {
     public String resumeDetail(@PathVariable Integer resumeId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
 
-        Resume resume = resumeService.이력서찾기(resumeId, sessionAllUser.getId()
-        );
+        Integer userId=0;
+        if(sessionAllUser!=null){userId=sessionAllUser.getId();}
+        Resume resume = resumeService.이력서찾기(resumeId, userId);
+
         request.setAttribute("resume", resume);
         return "comp/resumeDetail";
     }

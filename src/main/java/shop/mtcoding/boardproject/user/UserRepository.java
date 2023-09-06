@@ -22,4 +22,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "select user_tb.* from skill_tb join userSkill_tb on skill_tb.id = userSkill_tb.skill_id inner join user_tb on userSkill_tb.user_id = user_tb.id where skill_tb.skillname = :skillname", nativeQuery = true)
     List<User> findBykillResumeReturnUser(@Param("skillname") String skillname);
 
+    // List<User> findByCompname(@Param("compname") String compname);
+
+    // List<User> findByUsername(@Param("username") String username);
+
+    List<User> findByUsernameContainingOrCompnameContaining(@Param("username") String username, @Param("compname") String compname);
 }

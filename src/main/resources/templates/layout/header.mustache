@@ -132,12 +132,12 @@
 				</div>
 
 				<div class="col-auto align-self-center me-1">
-					<form class="d-flex">
+					<form class="d-flex" method="get" action="/search">
 						<div class="me-1 w-75">
-							<input class="form-control" type="text" placeholder="검색어를 입력하세요." />
+							<input class="form-control" type="text" placeholder="검색어를 입력하세요." name="keyword" value="{{#keyword}}{{keyword}}{{/keyword}}"/>
 						</div>
 						<div class="">
-							<button class="btn btn-secondary" type="button">검색</button>
+							<button class="btn btn-secondary" type="submit">검색</button>
 						</div>
 					</form>
 				</div>
