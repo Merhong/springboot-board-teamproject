@@ -104,15 +104,33 @@ public class UserService {
         return user;
     }
 
-    public List<Posting> 기업추천검색(UserRequest.SearchDTO searchDTO) {
 
-        List<String> skillList = searchDTO.getSkillName();
-        String position = searchDTO.getPosition();
-        HashSet<Posting> postingSet = new HashSet<Posting>();
+    public List<Posting> 기업추천검색(List<String> skillList, String position) {
+        List<Posting> compList = new ArrayList<>();
 
-        List<Posting> listSkillPosting = postingQueryRepository.joinSkillPosting(skillList);
-        for (Posting posting : listSkillPosting) {
-            postingSet.add(posting);
+        if (skillList.size() == 0 || skillList.get(0).equals("all")) {
+            // compList = postingRepository.findAll();
+        } else {
+            Set<Posting> postingSet = new LinkedHashSet<>();
+            for (String skill : skillList) {
+                List<Posting> tempList = postingRepository.joinSkillPosting(skill);
+                postingSet.addAll(tempList);
+            }
+            compList = new ArrayList<>(postingSet);
+        }
+
+        // 모든 포지션 또는 특정 포지션으로 필터링
+        if (position == null || position.equals("all")) {
+            //
+        } else {
+            List<Posting> tempList = new ArrayList<>();
+            for (Posting posting : compList) {
+                if (!(posting.getPosition().equals(position))) {
+                    tempList.add(posting);
+                }
+            }
+            compList.removeAll(tempList);
+
         }
         List<Posting> listPositionPosting = postingRepository.findByPosition(position);
         for (Posting posting : listPositionPosting) {
@@ -128,4 +146,5 @@ public class UserService {
         }
         return PostingList;
     }
+
 }
