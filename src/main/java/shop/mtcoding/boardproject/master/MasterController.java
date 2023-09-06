@@ -2,11 +2,16 @@ package shop.mtcoding.boardproject.master;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject._core.util.ApiUtil;
+import shop.mtcoding.boardproject.bookmark.BookmarkRequset;
+import shop.mtcoding.boardproject.bookmark.BookmarkService;
+import shop.mtcoding.boardproject.bookmark.UserBookmark;
 import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.comp.CompService;
 import shop.mtcoding.boardproject.master.MasterResponse.MasterListDTO;
@@ -22,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,11 +45,16 @@ public class MasterController {
     private SkillService skillService;
 
     @Autowired
+    private BookmarkService bookmarkService;
+
+    @Autowired
     private HttpSession session;
 
     // 인덱스(홈) 페이지
     @GetMapping("/")
-    public String index(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, @RequestParam(defaultValue = "all") String region, HttpServletRequest request) {
+    public String index(@RequestParam(defaultValue = "all") List<String> skillList,
+            @RequestParam(defaultValue = "all") String position, @RequestParam(defaultValue = "all") String region,
+            HttpServletRequest request) {
 
         List<Skill> sl = skillService.스킬이름전부();
         request.setAttribute("skillList", sl);
@@ -52,7 +63,7 @@ public class MasterController {
         // request에 담아서 전달
         request.setAttribute("position", position);
         request.setAttribute("region", region);
-        
+
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(skillList);
@@ -153,4 +164,49 @@ public class MasterController {
         return "/master/question";
     }
 
+    @GetMapping("api/user/bookmark")
+    public @ResponseBody ApiUtil<List<Posting>> checkBookmark() {
+        User user = (User) session.getAttribute("sessionUser");
+        if (user == null) {
+            return new ApiUtil<List<Posting>>(false, null);
+        }
+        List<Posting> list = bookmarkService.유저북마크전체(user.getId());
+        if (list != null) {
+            return new ApiUtil<List<Posting>>(true, list);
+        } else {
+            return new ApiUtil<List<Posting>>(false, null);
+        }
+    }
+
+    @GetMapping("api/user/bookmark/{id}/save")
+    public @ResponseBody ApiUtil<String> userBookmarkSave(@PathVariable Integer id) {
+        User user = (User) session.getAttribute("sessionUser");
+        if (user == null) {
+            return new ApiUtil<String>(false, "로그인 안됨");
+        }
+        Integer sucuess = bookmarkService.유저북마크추가(id, user.getId());
+
+        System.out.println("테스트" + sucuess);
+        if (sucuess == 1) {
+            return new ApiUtil<String>(true, "북마크 성공");
+        } else {
+            return new ApiUtil<String>(false, "북마크 실패");
+        }
+    }
+
+    @GetMapping("/api/user/bookmark/{id}/delete")
+    public @ResponseBody ApiUtil<String> userBookmarkDelete(@PathVariable Integer id) {
+        System.out.println("id: " + id);
+        User user = (User) session.getAttribute("sessionUser");
+        if (user == null) {
+            return new ApiUtil<String>(false, "로그인 안됨");
+        }
+        Integer sucuess = bookmarkService.유저북마크제거(id, user.getId());
+        System.out.println("테스트" + sucuess);
+        if (sucuess == 1) {
+            return new ApiUtil<String>(true, "북마크 제거 성공");
+        } else {
+            return new ApiUtil<String>(false, "북마크 제거 실패");
+        }
+    }
 }

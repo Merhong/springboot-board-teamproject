@@ -1,12 +1,14 @@
 package shop.mtcoding.boardproject.bookmark;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 import shop.mtcoding.boardproject.user.User;
@@ -30,6 +32,10 @@ public class BookmarkService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired 
+    private PostingRepository postingRepository;
+
 
     public List<Posting> 유저북마크전체(Integer id) {
         Optional<User> user = userRepository.findById(id);
@@ -116,6 +122,28 @@ public class BookmarkService {
 
         CompBookmark compBookmark = new CompBookmark(user, resume);
         compBookmarkRepository.save(compBookmark);
+    }
+
+    public List<UserBookmark> 유저가북마크한공고(Integer userId) {
+
+        List<UserBookmark> list = userBookmarkRepository.findAllByUserId(userId);
+
+        return list;
+
+    }
+
+    @Transactional
+    public Integer 유저북마크제거(Integer postingId, Integer userId) {
+        Integer sucuess = userBookmarkRepository.deleteByPostingAndUserId(postingId, userId);
+
+        return sucuess;
+    }
+
+    @Transactional
+    public Integer 유저북마크추가(Integer postingId, Integer userId) {
+        Integer sucuess = userBookmarkRepository.saveByPostingAndUserId(postingId, userId);
+
+        return sucuess;
     }
 
 }

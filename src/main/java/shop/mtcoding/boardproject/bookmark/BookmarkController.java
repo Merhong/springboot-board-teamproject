@@ -52,6 +52,19 @@ public class BookmarkController {
     // 기업북마크 화면
     @GetMapping("/comp/{compId}/bookmarkList")
     public String bookmarkList(@PathVariable Integer compId, HttpServletRequest request) {
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+
+        if (sessionAllUser == null) {
+            return "redirect:/user/loginForm";
+        }
+        if(sessionAllUser.getRole()!=2){
+            throw new MyException("기업회원만 가능합니다.");
+        }
+
+        if(compId != sessionComp.getUserId()){
+            throw new MyException("내꺼만볼수있음");
+        }
 
         // List<CompBookmark> compBookmarkList = BookmarkService.기업북마크전체(5);
         // List<CompBookmarkDTO> compBookmarkDTOList = new ArrayList<CompBookmarkDTO>();
@@ -72,26 +85,62 @@ public class BookmarkController {
 
     @PostMapping("/comp/bookmarkList/delete")
     public String bookmarkDelete(Integer hiddenResumeId) {
-        Integer compId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId();
-        bookmarkService.회사별북마크삭제(compId, hiddenResumeId);
-        return "redirect:/comp/" + compId + "/bookmarkList";
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+
+        if (sessionAllUser == null) {
+            return "redirect:/user/loginForm";
+        }
+        if(sessionAllUser.getRole()!=2){
+            throw new MyException("기업회원만 가능합니다.");
+        }
+
+        bookmarkService.회사별북마크삭제(sessionComp.getUserId(), hiddenResumeId);
+        return "redirect:/comp/" + sessionComp.getUserId() + "/bookmarkList";
     }
 
     @PostMapping("/comp/bookmarkList/saveAll")
     public String bookmarkSaveALL(@RequestParam(defaultValue = "") List<Integer> ResumeIdList) {
-        // System.out.println("테스트"+ResumeIdList);
-        Integer compId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId();
-        bookmarkService.회사북마크추가(compId, ResumeIdList);
-        return "redirect:/comp/" + compId + "/bookmarkList";
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+
+        if (sessionAllUser == null) {
+            return "redirect:/user/loginForm";
+        }
+        if(sessionAllUser.getRole()!=2){
+            throw new MyException("기업회원만 가능합니다.");
+        }
+
+        bookmarkService.회사북마크추가(sessionComp.getUserId(), ResumeIdList);
+        
+        return "redirect:/comp/" + sessionComp.getUserId() + "/bookmarkList";
     }
 
     // @ResponseBody
     @PostMapping("/comp/bookmarkList/save")
     public String bookmarkSave(@RequestParam(defaultValue = "") Integer ResumeId) {
-        Integer compId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId();
-        bookmarkService.회사북마크추가(compId, ResumeId);
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+
+        if (sessionAllUser == null) {
+            return "redirect:/user/loginForm";
+        }
+        if(sessionAllUser.getRole()!=2){
+            throw new MyException("기업회원만 가능합니다.");
+        }
+
+        bookmarkService.회사북마크추가(sessionComp.getUserId(), ResumeId);
 
         return "redirect:/resume/newWindow/" + ResumeId;
         // return Script.href("/resume/newWindow/"+ResumeId, "북마크 성공");
     }
+
+    @PostMapping("/user/bookmarkForm/save")
+    public String userbookmarkSave(@RequestParam(defaultValue = "") Integer postingId) {
+        Integer userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId(); // 현재 로그인한 사용자의 ID를 가져옴
+        bookmarkService.유저북마크추가(postingId, userId);
+        
+        return "redirect:/resume/newWindow/"+postingId; // 개인 북마크 추가 후 개인 프로필 페이지로 리다이렉트
+    }
+
 }
