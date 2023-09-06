@@ -34,6 +34,7 @@ import java.util.*;
 @Service
 public class CompService {
 
+    /* DI */
     @Autowired
     private PostingSkillRepository postingSkillRepository;
 
