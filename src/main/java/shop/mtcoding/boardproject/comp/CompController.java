@@ -242,15 +242,20 @@ public class CompController {
 
     @GetMapping("/resume/{resumeId}")
     public String resumeDetail(@PathVariable Integer resumeId, HttpServletRequest request) {
-        Resume resume = resumeService.이력서찾기(resumeId);
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+
+        Resume resume = resumeService.이력서찾기(resumeId, sessionAllUser.getId()
+        );
         request.setAttribute("resume", resume);
         return "comp/resumeDetail";
     }
 
     @GetMapping("/resume/newWindow/{resumeId}")
     public String resumeDetail2(@PathVariable Integer resumeId, HttpServletRequest request) {
-        Resume resume = resumeService.이력서찾기(resumeId);
-        // System.out.println("테스트"+resume.getUser().getUsername());
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        
+        Resume resume = resumeService.이력서찾기(resumeId, sessionAllUser.getId());
+
         request.setAttribute("resume", resume);
         return "comp/resumeDetailOnly";
     }
@@ -424,7 +429,7 @@ public class CompController {
             throw new MyException("기업회원만 가능합니다.");
         }
 
-        Resume resume = resumeService.이력서찾기(resumeId);
+        Resume resume = resumeService.이력서찾기(resumeId, sessionAllUser.getId());
         request.setAttribute("resume", resume);
         
         List<Posting> postingList = compService.회사별공고찾기(sessionComp.getUserId());
@@ -433,27 +438,27 @@ public class CompController {
         return "comp/offerDetailOnly";
     }
 
-    @PostMapping("/offer/save")  // TODO : 예외처리, 중복신청 못하게, view에서 내꺼만 나오게
+    @PostMapping("/offer/save")
     public ResponseEntity<String> offerSave(@RequestParam(name = "selectPosting") Integer postingId , @RequestParam(name = "selectResume") Integer resumeId) {
 
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
 
         if (sessionAllUser == null) {
-            return ResponseEntity.badRequest().body("오류");
+            return ResponseEntity.badRequest().body("로그인안함");
         }
         if(sessionAllUser.getRole()!=2){
-            return ResponseEntity.badRequest().body("오류");
+            return ResponseEntity.badRequest().body("기업유저아님");
         }
 
         if(postingId == null || resumeId == null){
             return ResponseEntity.badRequest().body("오류");
         }
         
-        Boolean isOk = recommendService.입사제안하기(postingId, resumeId, sessionComp.getUserId());
+        String recommendSaveTest = recommendService.입사제안하기(postingId, resumeId, sessionComp.getUserId());
         
-        if(isOk != true){
-            return ResponseEntity.badRequest().body("오류");
+        if(!(recommendSaveTest.equals("진행시켜"))){
+            return ResponseEntity.badRequest().body(recommendSaveTest);
         }
         
         // return "redirect:/comp/posting/" + postingId + "/offerList";

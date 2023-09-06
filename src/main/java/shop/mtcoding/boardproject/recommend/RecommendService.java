@@ -10,6 +10,7 @@ import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,8 +51,28 @@ public class RecommendService {
     }
     
     @Transactional
-    public Boolean 입사제안하기(Integer postingId, Integer resumeId, Integer compId) {
-        
+    public String 입사제안하기(Integer postingId, Integer resumeId, Integer compId) {
+
+        Optional<Resume> resumeOP =  resumeRepository.findById(resumeId);
+        Resume resume;
+        if (resumeOP.isPresent()){
+            resume = resumeOP.get();
+        } else{
+            return resumeId+"없음";
+        }
+        if(resume.getDisclosure()==false){
+            return "비공개이력서";
+        }
+
+        List<Recommend> tempRecommendList = recommendRepository.findByPostingIdAndResumeUserId(postingId, resume.getUser().getId());
+        if(tempRecommendList.size() != 0){
+            return "이미똑같은유저에게오퍼보냄";
+        }
+
+        // if(recommendRepository.findByPostingIdAndResumeId(postingId, resumeId) != null){
+        //     return "이미오퍼보냄";
+        // }
+
         Recommend recommend = new Recommend();
         recommend.setStatement("대기");
         
@@ -60,25 +81,17 @@ public class RecommendService {
         if (postingOP.isPresent()){
             posting = postingOP.get();
             if(posting.getUser().getId() != compId){
-                return false;
+                return "내공고아님";
             }
         } else{
-            return false;
+            return postingId+"없음";
         }
         recommend.setPosting(posting);
-        
-        Resume resume;
-        Optional<Resume> resumeOP = resumeRepository.findById(resumeId);
-        if (resumeOP.isPresent()){
-            resume = resumeOP.get();
-        } else{
-            return false;
-        }
         recommend.setResume(resume);
         
         recommendRepository.save(recommend);
         
-        return true;
+        return "진행시켜";
     }
 
 

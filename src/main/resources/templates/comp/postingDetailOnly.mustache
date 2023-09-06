@@ -114,7 +114,7 @@
 
 			<div class="input-group mb-3">
 				<span class="input-group-text">종료일</span>
-				<input type="text" class="form-control" value="{{#posting.expiryDate}}{{posting.expiryDate}}{{/posting.expiryDate}}" disabled>
+				<input type="text" class="form-control" id="dateNew" value="{{#posting.expiryDate}}{{posting.expiryDate}}{{/posting.expiryDate}}" disabled>
 			</div>
 
 
@@ -139,6 +139,10 @@
 			function closeWindow() {
 				window.close();
 			}
+
+			let dateNew = document.querySelector("#dateNew");
+			// console.log(typeof dateNew.value)
+			dateNew.value = dateNew.value.split(' ')[0];
 
 		</script>
 

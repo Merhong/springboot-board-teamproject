@@ -48,6 +48,8 @@
 			<h1 class="text-center mt-2">입사 제안 보내기</h1>
 			<h5 class="text-center mt-1 mb-3">보낼 공고를 선택하세요.</h5>
 
+			{{^postingList}} <div class="text-center">공고 없음</div> {{/postingList}}
+
 
 			<form id="selectForm" method="post" action="/offer/save" enctype="multipart/form-data" class="d-flex flex-wrap justify-content-between">
 
@@ -55,7 +57,7 @@
 
 				{{#postingList}}
 
-				<div class="col-4">
+				<div class="col-4 m-auto">
 					<a href="javascript:void(0);" class="btn btn-info m-2 mb-0" onclick="openNewWindow('/comp/posting/newWindow/{{id}}')" style="width:210px; height: 130px">
 						<div class="">
 							<div class="fw-bold">{{title}}</div>
@@ -87,7 +89,7 @@
 
 
 			<div class="d-flex justify-content-center mt-2 mb-2 me-1">
-				
+
 				<div class="w-100 mb-2">
 					<button type="button" class="w-100 btn btn-success me-1 ms-0" onclick="submitForm()">입사 제안</button>
 				</div>
@@ -152,28 +154,22 @@
 
 
 
-			
 			function submitForm() {
 				fetch('/offer/save', {
 					method: 'POST',
 					body: new FormData(document.querySelector("#selectForm")),
 				})
-				.then(response => {
-					// 서버 응답을 받은 후에 실행될 코드
-					if (response.ok) {
-					// 응답이 성공인 경우 새 창 닫기
+				.then(response => response.text()) // 응답 데이터를 텍스트로 변환
+				.then(data => {
+					window.alert(data);
 					window.close();
-					} else {
-					// 응답이 실패인 경우 에러 처리
-					window.alert("오류");
-					window.close();
-					}
 				})
 				.catch(error => {
-					// 에러 처리
-					console.error('에러 발생:', error);
+					window.alert("공고를 선택하세요.");
+					window.close();
 				});
 			}
+
 
 
 
