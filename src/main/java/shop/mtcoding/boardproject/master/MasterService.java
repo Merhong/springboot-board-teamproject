@@ -25,6 +25,7 @@ import shop.mtcoding.boardproject.skill.SkillRepository;
 @Service
 public class MasterService {
 
+    /* DI */
     @Autowired
     private MasterRepository masterRepository;
 
@@ -121,8 +122,6 @@ public class MasterService {
             }
             postingList.removeAll(tempList);
         }
-        
-        
 
         return postingList;
     }
@@ -158,7 +157,6 @@ public class MasterService {
         List<Master> masterList = masterRepository.findByUserId(Id);
         return masterList;
     }
-
 
 
     public void 스킬추가(String skillName) {

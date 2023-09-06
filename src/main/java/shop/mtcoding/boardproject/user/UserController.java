@@ -56,11 +56,6 @@ public class UserController {
         }
         return "user/recommendForm";
     }
-    // 14번 이력서 수정 버튼 POST
-
-    // 14번 이력서 삭제 버튼 POST
-
-    // 13번 사진수정 버튼 POST
 
     // 12번 수정하기 버튼 POST
     @PostMapping("/user/update")
@@ -108,16 +103,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    // 11_개인지원하기 화면
-    @GetMapping("/user/applyForm")
-    public String userApplyForm() {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/user/loginForm";
-        }
-        return "redirect:/";
-    }
-
+    // 개인_지원하기 페이지
     @GetMapping("/user/applyForm/{postingId}")
     public String userApplyForm(Model model, @PathVariable("postingId") Integer postingId) {
         Posting posting = compService.공고찾기(postingId);
@@ -126,21 +112,11 @@ public class UserController {
         Integer user = sessionUser.getId();
         List<Resume> resumes = resumeService.이력서목록(user);
 
-        model.addAttribute("resumes", resumes); // 목록 추가
+        model.addAttribute("resumes", resumes); // 이력서 목록 모델에 추가
         model.addAttribute("user", user); // 유저 아이디를 모델에 추가
-        model.addAttribute("posting", posting); // 유저 아이디를 모델에 추가
+        model.addAttribute("posting", posting); // 공고를 모델에 추가
 
         return "user/applyForm";
-    }
-
-    // 10_개인공고상세보기 화면 (사용안함)
-    @GetMapping("/user/postingDetail")
-    public String userPostingDetail() {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/user/loginForm";
-        }
-        return "user/postingDetail";
     }
 
     // 5_로그인 화면
@@ -166,11 +142,10 @@ public class UserController {
         User sessionUser = userService.로그인(loginDTO);
         System.out.println("세션 " + sessionUser.getRole());
 
-        // 기업 로그인 세션 관리용 sessionAllUser
+        // 로그인 세션 관리용 sessionAllUser
         session.setAttribute("sessionAllUser", sessionUser); // 개인/기업/관리자 모두 가지고있는거
 
         // 로그인 사용자의 역할(role)에 따라 세션을 구분합니다.
-        
         if (sessionUser != null) {
             if (sessionUser.getRole() == 0) {
                 // 관리자의 경우 sessionAdmin 세션을 설정합니다.
@@ -184,16 +159,6 @@ public class UserController {
                 session.setAttribute("CompSession", sessionUser);
                 System.out.println("x : 기업 로그인");
             }
-
-        if (sessionUser.getRole() == 0) {
-            session.setAttribute("sessionAdmin", sessionUser);
-        }
-        if (sessionUser.getRole() == 1) {
-            session.setAttribute("sessionUser", sessionUser);
-        }
-        if (sessionUser.getRole() == 2) {
-            session.setAttribute("CompSession", sessionUser);
-        }
 
         // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
         if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
@@ -210,11 +175,8 @@ public class UserController {
                         .build();
                 session.setAttribute("sessionComp", sessionComp);
             }
-
         }
-
         // 로그인 후 메인 페이지로 리다이렉트합니다.
-
         return "redirect:/";
     }
 
@@ -260,54 +222,57 @@ public class UserController {
 
         return new ApiUtil<String>(true, "이메일을 사용 할 수 있습니다.");
     }
-    
+
+    // 개인 이력서를 보고 기업에서 입사제안 하는 페이지
     @GetMapping("/user/resume/{resumeId}/offerList")
     public String offerListUser(@PathVariable Integer resumeId, HttpServletRequest request) {
-        
+        // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
-
+        // 이력서를 찾는다.
         Resume resume = resumeService.이력서찾기(resumeId, sessionAllUser.getId());
+        // 세션id와 이력서의 유저id가 같은지 비교한다.
         if (sessionAllUser.getId() != resume.getUser().getId()) {
             throw new MyException("내 이력서가 아닙니다.");
         }
+        // id가 동일하다면 request에 이력서를 담는다.
         request.setAttribute("resume", resume);
-        
+        // 리스트에 찾은 이력서를 넣는다.
         List<Recommend> recommendList = recommendService.이력서받은오퍼찾기(resumeId);
+        // request에 추천리스트를 담는다.
         request.setAttribute("recommendList", recommendList);
-        
+        // 입사 제안 보기 페이지로 이동
         return "user/offerList";
     }
 
+    // 입사제안에 대한 거절 POST
     @PostMapping("/user/resume/offer/{recommendId}/fail")
     public String offerFail(@PathVariable Integer recommendId) {
-
+        // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
-
+        // 세션이 없다면 로그인 화면 이동시킨다.
         if (sessionAllUser == null) {
             return "redirect:/user/loginForm";
         }
-
+        // 세션의id와 추천id를 비교해서 거절
         Integer resumeId = recommendService.오퍼거절(recommendId, sessionAllUser.getId());
-
+        // 입사제안 화면으로 리다이렉트
         return "redirect:/user/resume/" + resumeId + "/offerList";
     }
 
+    // 입사제안에 대한 수락 POST
     @PostMapping("/user/resume/offer/{recommendId}/pass")
     public String offerPass(@PathVariable Integer recommendId) {
-
+        // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
-
+        // 세션이 없다면 로그인 화면 이동시킨다.
         if (sessionAllUser == null) {
             return "redirect:/user/loginForm";
         }
-
+        // 세션의id와 추천id를 비교해서 수락
         Integer resumeId = recommendService.오퍼수락(recommendId, sessionAllUser.getId());
-
+        // 입사제안 화면으로 리다이렉트
         return "redirect:/user/resume/" + resumeId + "/offerList";
     }
-
-
-
 
 
 }

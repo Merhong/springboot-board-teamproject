@@ -23,10 +23,12 @@ public class PostingSkill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // 공고 테이블 ORM
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     private Posting posting;
 
+    // 기술 테이블 ORM
     @ManyToOne(fetch = FetchType.LAZY)
     private Skill skill;
 }

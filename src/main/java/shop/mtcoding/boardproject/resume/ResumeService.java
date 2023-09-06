@@ -28,6 +28,7 @@ public class ResumeService {
     @Autowired
     private UserSkillRepository userSkillRepository;
 
+
     @Transactional
     public void 이력서등록(ResumeDTO resumeDTO, Integer id) {
         UUID uuid = UUID.randomUUID(); // 랜덤한 해시값을 만들어줌
@@ -148,6 +149,5 @@ public class ResumeService {
     @Transactional
     public void 이력서삭제(Integer resumeId) {
         resumeRepository.deleteById(resumeId);
-
     }
 }
