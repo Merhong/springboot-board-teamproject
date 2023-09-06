@@ -146,6 +146,9 @@ public class UserController {
     public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
         User sessionUser = userService.로그인(loginDTO);
         System.out.println("세션 " + sessionUser.getRole());
+
+        session.setAttribute("sessionAllUser", sessionUser);
+
         // 로그인 사용자의 역할(role)에 따라 세션을 구분합니다.
         if (sessionUser != null) {
             if (sessionUser.getRole() == 0) {
