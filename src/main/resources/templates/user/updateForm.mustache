@@ -26,8 +26,9 @@
 			<form action="/user/update" method="post" enctype="multipart/form-data">
 				<div class="d-flex">
 					<div class="m-2 col-4 d-flex flex-column align-items-center">
-						<img id="preview" src="../../../../../images/{{user.photo}}" class="img-fluid rounded-circle"
-							style="width:150px; height:150px;" />
+						<img id="preview"
+							src="{{#user.photo}}{{user.photo}}{{/user.photo}}{{^user.photo}}../../../../../images/basic.jpg{{/user.photo}}"
+							class="img-fluid rounded-circle" style="width:150px; height:150px;" />
 						<div class="input-group mb-3 mt-1">
 							<input type="file" class="form-control" placeholder="Enter pto" name="pto"
 								onchange="changePic(event)">
@@ -45,11 +46,16 @@
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
-							<input type="text" class="form-control" value="{{user.address}}" name="address">
+							<input type="text" class="form-control"
+								value="{{#user.address}}{{user.address}}{{/user.address}}{{^user.address}}{{/user.address}}"
+								name="address">
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">생년월일</span>
-							<input type="date" class="form-control" value="{{user.birth}}" name="birth">
+
+							<input type="date" class="form-control"
+								value="{{#user.birth}}{{user.birth}}{{/user.birth}}{{^user.birth}}{{/user.birth}}"
+								name="birth">
 						</div>
 					</div>
 

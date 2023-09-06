@@ -6,6 +6,8 @@ import lombok.Setter;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
 
+import java.sql.Timestamp;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.OnDelete;
@@ -33,5 +35,10 @@ public class Recommend {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Resume resume;
+    
+    // 대기/수락/거절
+    private String statement;
+
+    private Timestamp createdAt;
 
 }

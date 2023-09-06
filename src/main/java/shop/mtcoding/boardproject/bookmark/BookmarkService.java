@@ -125,7 +125,23 @@ public class BookmarkService {
         compBookmarkRepository.save(compBookmark);
     }
 
-    /**
+
+    public List<UserBookmark> 유저가북마크한공고(Integer userId) {
+
+        List<UserBookmark> list = userBookmarkRepository.findAllByUserId(userId);
+
+        return list;
+
+    }
+
+    @Transactional
+    public Integer 유저북마크제거(Integer postingId, Integer userId) {
+        Integer sucuess = userBookmarkRepository.deleteByPostingAndUserId(postingId, userId);
+
+        return sucuess;
+    }
+  
+      /**
      * @param userId
      * @param postingId
      */
@@ -140,4 +156,5 @@ public class BookmarkService {
             userBookmarkRepository.saveByPostingAndUserId(postingId, userId);
         }
     }
+
 }

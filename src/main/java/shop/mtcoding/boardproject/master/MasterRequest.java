@@ -18,4 +18,5 @@ public class MasterRequest {
         private String content;
 
     }
+
 }
