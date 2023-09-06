@@ -165,6 +165,7 @@ public class UserController {
         User sessionUser = userService.로그인(loginDTO);
         System.out.println("세션 " + sessionUser.getRole());
 
+        // 기업 로그인 세션 관리용 sessionAllUser
         session.setAttribute("sessionAllUser", sessionUser);
 
         // 로그인 사용자의 역할(role)에 따라 세션을 구분합니다.

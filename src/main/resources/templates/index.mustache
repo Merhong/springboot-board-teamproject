@@ -14,7 +14,6 @@
 			<div class="d-flex justify-content-around ps-4 pe-4">
 
 
-
 				<div class="order-2 m-2 border border-info col-4">
 					<h4 class="mt-2 text-center">기술별</h4>
 
@@ -22,7 +21,7 @@
 						<div class="form-check d-inline-block ms-3 me-2 align-self-end">
 							<label class="form-check-label">
 								<input class="form-check-input" type="checkbox" name="skillList" id="all" value="all"
-									onclick="skillCheck(this)">
+								       onclick="skillCheck(this)">
 								모두</label>
 						</div>
 						<div class="btn btn-primary me-3 m-1 btn-sm" onclick="searchOnlySkill()">기술만 검색</div>
@@ -32,17 +31,16 @@
 					<div class="d-flex flex-wrap">
 
 						{{#skillList}}
-						<div class="form-check d-inline-block ms-3 me-2">
-							<label class="form-check-label">
-								<input class="skillFind form-check-input" type="checkbox" name="skillList"
-									value="{{skillname}}" id="{{skillname}}" onclick='skillAllCheck()'>
-								{{skillname}}</label>
-						</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="skillFind form-check-input" type="checkbox" name="skillList"
+									       value="{{skillname}}" id="{{skillname}}" onclick='skillAllCheck()'>
+									{{skillname}}</label>
+							</div>
 						{{/skillList}}
 
 					</div>
 				</div>
-
 
 
 				<div class="order-1 m-2 border border-info col-4">
@@ -52,7 +50,7 @@
 						<div class="form-check d-inline-block ms-3 me-2 align-self-end">
 							<label class="form-check-label">
 								<input class="form-check-input all3checkbox" type="checkbox" name="" id="" value=""
-									onclick="regionCheck(this)">
+								       onclick="regionCheck(this)">
 								모두</label>
 						</div>
 						<div class="btn btn-primary me-3 m-1 btn-sm" onclick="searchOnlyRegion()">지역만 검색</div>
@@ -88,8 +86,6 @@
 					</div>
 
 				</div>
-
-
 
 
 				<div class="order-3 m-2 border border-info col-4">
@@ -167,41 +163,24 @@
 		</form>
 
 
-
-
-
 		<div class="mb-4 d-flex flex-wrap">
 
 
 			{{#postingList}}
-			<div class="col-lg-3 col-md-4 col-sm-6">
-				<div class="border border-info m-2 ps-2 pe-2 pt-1">
-					<h4 class="text-center fw-bold">{{user.compname}}</h4>
-					{{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="border border-info m-2 ps-2 pe-2 pt-1">
+						<h4 class="text-center fw-bold">{{user.compname}}</h4>
+						{{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
 							src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto"
 							style="height: 120px;">{{/user.photo}}
 						{{^user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
-								src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
-								style="height: 120px;">{{/user.photo}}
-							<h5 class="mt-1 fw-bold">{{title}}</h5>
-							<div class="mb-1 fst-italic">{{position}}</div>
-							<div class="mb-1">
-								{{#postingSkill}}<span
-									class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
-							</div>
-							<div>
-								{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
-								{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
-								<span class="badge bg-success">{{region}}</span>
-							</div>
-						</a>
-						<div class="d-flex justify-content-between">
-							<button type="button" class="border-0 bg-white mt-1">
-								<h3>❤️</h3>
-							</button>
-							<!-- <button type="button" class="border-0 bg-white mt-2"><h3>🤍</h3></button> -->
-							<span
-								class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
+							src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
+							style="height: 120px;">{{/user.photo}}
+						<h5 class="mt-1 fw-bold">{{title}}</h5>
+						<div class="mb-1 fst-italic">{{position}}</div>
+						<div class="mb-1">
+							{{#postingSkill}}<span
+								class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
 						</div>
 						<div>
 							{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
@@ -209,13 +188,22 @@
 							<span class="badge bg-success">{{region}}</span>
 						</div>
 					</a>
-					<div class="d-flex justify-content-between">
-						<button type="button" class="border-0 bg-white mt-1 like-button" id="posting{{id}}" onclick="bookmarkChange(`{{id}}`)"><h3>🤍</h3></button>
-						<!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
-						<span class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
+
+						<div>
+							{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
+							{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
+							<span class="badge bg-success">{{region}}</span>
+						</div>
+					</a>
+						<div class="d-flex justify-content-between">
+							<button type="button" class="border-0 bg-white mt-1 like-button" id="posting{{id}}"
+							        onclick="bookmarkChange(`{{id}}`)"><h3>🤍</h3></button>
+							<!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
+							<span
+								class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
+						</div>
 					</div>
 				</div>
-			</div>
 			{{/postingList}}
 
 
@@ -226,8 +214,6 @@
 
 	<div class="col-auto"></div>
 </div>
-
-
 
 
 <input type="hidden" value="{{json}}" name="json" id="json">
@@ -267,8 +253,6 @@
 	}
 
 
-
-
 	function Ddaycheck(day) {
 		if (typeof day === "string") {
 			let day2 = new Date(day);
@@ -282,23 +266,22 @@
 			if (DDay == 0) {
 				// console.log("D-Day");
 				return "D-Day";
-			}
-			else if (DDay < 0) {
+			} else if (DDay < 0) {
 				// console.log("만료");
 				return "만료";
-			}
-			else {
+			} else {
 				// console.log("D-"+DDay); 
 				return "D-" + DDay;
 			}
 		}
 	}
+
 	let day = document.querySelectorAll('.expiryDate');
 	day.forEach(element => {
 		element.textContent = Ddaycheck(element.textContent);
 	});
-	// 날짜 D-Day로 바꾸기
 
+	// 날짜 D-Day로 바꾸기
 
 
 	function skillCheck(selectAll) {
@@ -309,6 +292,7 @@
 			element.checked = selectAll.checked;
 		});
 	}
+
 	function skillAllCheck() {
 		let allCheck = document.querySelector("#all");
 		let skillAll = document.querySelectorAll(".skillFind");
@@ -318,8 +302,10 @@
 			allCheck.checked = true;
 		} else {
 			allCheck.checked = false
-		};
+		}
+		;
 	}
+
 	// 기술 모두 체크박스 작동하게
 
 	//////////
@@ -341,6 +327,7 @@
 			});
 		}
 	}
+
 	check();
 
 	const positionSet = document.querySelector("#positionSet").value;
@@ -356,6 +343,7 @@
 	} else {
 		document.getElementById(regionSet).selected = true;
 	}
+
 	////////// 현재 검색중인거 뷰 다시 불러와도 읽어오게
 
 	function regionCheck(checkbox) {
@@ -363,6 +351,7 @@
 			document.getElementById("all3").selected = true;
 		}
 	}
+
 	function regionCheck2(checkbox) {
 		let select = checkbox.value;
 		if (select == "all") {
@@ -371,6 +360,7 @@
 			document.querySelector(".all3checkbox").checked = false;
 		}
 	}
+
 	// 지역별 선택바-모두체크박스 연동
 
 
@@ -431,58 +421,61 @@
 		let postingNum = document.querySelectorAll(".posting");
 // 		console.log(postingNum);
 
-        let response = await fetch("/api/user/bookmark");
+		let response = await fetch("/api/user/bookmark");
 		// let bookmarkPoint = document.querySelector("#username").value;
 		let body = await response.json();
 
 		let dataArray = body.data;
-		for(let item of dataArray){
+		if (dataArray != null) {
+			for (let item of dataArray) {
 
-			let postingNum = document.querySelector(`#posting${item.id}`);
-			let currentValue = postingNum.getAttribute('data-value');
-			currentValue = true;
-			postingNum.innerHTML = bookmarked;
-			postingNum.setAttribute('data-value', currentValue);
+				let postingNum = document.querySelector(`#posting${item.id}`);
+				let currentValue = postingNum.getAttribute('data-value');
+				currentValue = true;
+				postingNum.innerHTML = bookmarked;
+				postingNum.setAttribute('data-value', currentValue);
+			}
 		}
 	}
+
 	// let response = await fetch("/api/tech?categoryId=" + categoryId);
-		bookmarkPoint();
+	bookmarkPoint();
 
 
-
-	async function bookmarkChange(id){
+	async function bookmarkChange(id) {
 
 		let postingNum = document.querySelector(`#posting${id}`);
 		let currentValue = postingNum.getAttribute('data-value');
-		
 
-		if( currentValue == 'true'){
+
+		if (currentValue == 'true') {
 
 			console.log(id);
 			let response = await fetch(`/api/user/bookmark/${id}/delete`);
 			let body = await response.json();
-			
-			if(body.sucuess == false){
-				alert(body.data)}
-			if(body.sucuess == true){
+
+			if (body.sucuess == false) {
 				alert(body.data)
-			currentValue = false;
-			postingNum.innerHTML = noBookmark;
+			}
+			if (body.sucuess == true) {
+				alert(body.data)
+				currentValue = false;
+				postingNum.innerHTML = noBookmark;
 			}
 
 
-		}
-		else{
+		} else {
 			console.log(id);
 			let response = await fetch(`/api/user/bookmark/${id}/save`);
 			let body = await response.json();
 
-			if(body.sucuess == false){
-				alert(body.data)}
-			if(body.sucuess == true){
+			if (body.sucuess == false) {
 				alert(body.data)
-			currentValue = true;
-			postingNum.innerHTML = bookmarked;
+			}
+			if (body.sucuess == true) {
+				alert(body.data)
+				currentValue = true;
+				postingNum.innerHTML = bookmarked;
 			}
 
 		}
