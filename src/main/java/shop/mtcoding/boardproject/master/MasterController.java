@@ -2,23 +2,16 @@ package shop.mtcoding.boardproject.master;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.ApiUtil;
-import shop.mtcoding.boardproject.bookmark.BookmarkRequset;
 import shop.mtcoding.boardproject.bookmark.BookmarkService;
-import shop.mtcoding.boardproject.bookmark.UserBookmark;
-import shop.mtcoding.boardproject.comp.CompRequest;
-import shop.mtcoding.boardproject.comp.CompService;
 import shop.mtcoding.boardproject.master.MasterResponse.MasterListDTO;
 
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.skill.Skill;
-import shop.mtcoding.boardproject.skill.SkillRepository;
 import shop.mtcoding.boardproject.user.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +43,25 @@ public class MasterController {
     @Autowired
     private HttpSession session;
 
+
+    
+    @GetMapping("/search")
+    public String search(String keyword, HttpServletRequest request) {
+
+        keyword = keyword.trim();
+
+        // if(keyword == null || keyword.isEmpty()){
+        if(keyword == null){
+            return "/master/search";
+        }
+
+        MasterResponse.SearchDTO searchDTO = masterService.전체검색(keyword);
+
+        request.setAttribute("searchDTO", searchDTO);
+        request.setAttribute("keyword", keyword);
+        return "/master/search";
+    }
+
     // 관리자 페이지, 추가할 기술 이름 관리(코드 테이블)
     @GetMapping("/master/admin")
     public String admin() {
@@ -59,7 +71,6 @@ public class MasterController {
     // 코드 테이블 스킬 추가 POST
     @PostMapping("/master/skill")
     public String admin(String skillName) {
-        System.out.println("테스트:"+skillName);
         masterService.스킬추가(skillName);
         return "redirect:/";
     }

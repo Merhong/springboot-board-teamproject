@@ -3,24 +3,21 @@ package shop.mtcoding.boardproject.master;
 
 import java.util.List;
 import java.util.Optional;
-
-import javax.swing.text.html.Option;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject.master.MasterRequest.MasterDTO;
 import shop.mtcoding.boardproject.user.User;
+import shop.mtcoding.boardproject.user.UserRepository;
 import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
+import shop.mtcoding.boardproject.resume.Resume;
+import shop.mtcoding.boardproject.resume.ResumeRepository;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillRepository;
 
@@ -37,6 +34,12 @@ public class MasterService {
 
     @Autowired
     private SkillRepository skillRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ResumeRepository resumeRepository;
 
     @Autowired
     private PostingQueryRepository postingQueryRepository;
@@ -160,5 +163,52 @@ public class MasterService {
         Skill skill = new Skill();
         skill.setSkillname(skillName);
         skillRepository.save(skill);
+    }
+
+
+
+    public MasterResponse.SearchDTO 전체검색(String keyword) {
+        // List<User> userList = userRepository.findByCompname(keyword);
+        // List<User> tempUserList = userRepository.findByUsername(keyword);
+        // userList.addAll(tempUserList);
+        
+        
+        List<User> userList = userRepository.findByUsernameContainingOrCompnameContaining(keyword, keyword);
+        List<Posting> postingList = postingRepository.findByTitleContaining(keyword);
+        List<Resume> resumeList = resumeRepository.findByTitleContaining(keyword);
+
+        // System.out.println("테스트:"+userList);
+        // System.out.println("테스트:"+postingList);
+        // System.out.println("테스트:"+resumeList);
+
+        MasterResponse.SearchDTO searchDTO = new MasterResponse.SearchDTO();
+
+        if(userList.size()==0 && postingList.size()==0 && resumeList.size()==0){
+            return null;
+        }
+
+        if(userList.size() != 0){
+            List<User> normalUserList = new ArrayList<>();
+            List<User> compUserList = new ArrayList<>();
+            for (User user : userList) {
+                if(user.getRole()==1){normalUserList.add(user);} // 개인
+                if(user.getRole()==2){compUserList.add(user);} // 기업
+            }
+            searchDTO.setNormalUserList(normalUserList);
+            searchDTO.setCompUserList(compUserList);
+        }
+        if(resumeList.size() != 0){
+            List<Resume> tempResumeList = new ArrayList<>();
+            for (Resume resume : resumeList) {
+                if(resume.getDisclosure()==false){ // 비공개 이력서 빼기
+                    tempResumeList.add(resume);
+                }
+            }
+            resumeList.removeAll(tempResumeList);
+            searchDTO.setResumeList(resumeList);
+        }
+        if(postingList.size() != 0){searchDTO.setPostingList(postingList);}
+
+        return searchDTO;
     }
 }

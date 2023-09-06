@@ -53,7 +53,7 @@ values (9, '구인공고', '내용10', '대전', '백엔드', '2024-02-21', '5�
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
 values (9, '개발자구인', '내용11', '서울', '임베디드', '2023-12-21', '6년', '석사 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
-values (8, '제목1', '내용12', '서울', '프론트엔드', '2023-09-03', '8년', '대학 졸업');
+values (8, '구인홍보', '내용12', '서울', '프론트엔드', '2023-09-14', '8년', '대학 졸업');
 
 
 -- Resume(이력서) 테이블
