@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.vo.MyPath;
+import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingRepository;
+import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
 import shop.mtcoding.boardproject.user.UserRequest.UpdateDTO;
 
@@ -11,6 +14,10 @@ import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -19,6 +26,9 @@ public class UserService {
     /* DI */
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PostingRepository postingRepository;
 
     @Transactional
     public void 회원가입(UserRequest.JoinDTO joinDTO) {
@@ -86,5 +96,34 @@ public class UserService {
         // 쿼리를 통해 이메일에 해당하는 user 리턴
         User user = userRepository.FindByemail(email);
         return user;
+    }
+
+    public List<Posting> 기업추천검색(List<String> skillList, String position) {
+        List<Posting> compList = new ArrayList<>();
+
+        if (skillList.size() == 0 || skillList.get(0).equals("all")) {
+            // compList = postingRepository.findByUser_Role(2);
+        } else {
+            Set<Posting> compSet = new LinkedHashSet<>(); // 중복 제거하려고 Set으로 했다가 List로 변경
+            for (String s : skillList) {
+                List<Posting> tempList = postingRepository.findBykillResumeReturnComp(s);
+                compSet.addAll(tempList);
+            }
+            compList = new ArrayList<>(compSet);
+        }
+
+        if (position == null || position.equals("all")) {
+            //
+        } else {
+            List<Posting> tempList = new ArrayList<>();
+            for (Posting posting : compList) {
+                if (!(posting.getPosition().equals(position))) {
+                    tempList.add(posting);
+                }
+            }
+            compList.removeAll(tempList);
+        }
+
+        return compList;
     }
 }

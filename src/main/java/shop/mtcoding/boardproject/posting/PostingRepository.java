@@ -15,5 +15,9 @@ public interface PostingRepository extends JpaRepository<Posting, Integer> {
     @Query(value = "select posting_tb.* from skill_tb inner join postingskill_tb on skill_tb.id = postingskill_tb.skill_id inner join posting_tb on postingskill_tb.posting_id = posting_tb.id where skill_tb.skillname = :skillname", nativeQuery = true)
     List<Posting> joinSkillPosting(@Param("skillname") String skillname);
 
-    
+    @Query(value = "select posting_tb.* from skill_tb join postingskill_tb on skill_tb.id = postingskill_tb.skill_id join posting_tb on postingskill_tb.posting_id = posting_tb.id where skill_tb.skillname = :skillname", nativeQuery = true)
+    List<Posting> findBykillResumeReturnComp(@Param("skillname") String skillname);
+
+    List<Posting> findByUser_Role(Integer role);
+
 }

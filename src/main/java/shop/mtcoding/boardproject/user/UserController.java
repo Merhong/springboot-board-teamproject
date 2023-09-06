@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyService;
@@ -20,6 +23,9 @@ import shop.mtcoding.boardproject.recommend.Recommend;
 import shop.mtcoding.boardproject.recommend.RecommendService;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeService;
+import shop.mtcoding.boardproject.skill.PostingSkill;
+import shop.mtcoding.boardproject.skill.Skill;
+import shop.mtcoding.boardproject.skill.SkillService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,24 +49,46 @@ public class UserController {
 
     @Autowired
     private RecommendService recommendService;
+    private SkillService skillService;
 
     @Autowired
     private HttpSession session;
 
     // 17_개인기업추천 화면
     @GetMapping("/user/recommendForm")
-    public String userRecommendForm() {
+    public String userRecommendForm(@RequestParam(defaultValue = "all") List<String> skillList,
+            @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
+
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/user/loginForm";
         }
+
+        List<Skill> sl = skillService.스킬이름전부();
+        request.setAttribute("skillList", sl);
+
+        request.setAttribute("position", position);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(skillList);
+            // System.out.println("테스트"+json);
+            request.setAttribute("json", json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        List<Posting> compList = userService.기업추천검색(skillList, position);
+        request.setAttribute("compList", compList);
+        System.out.println("검색1: " + compList);
+        // 공고에 해당하는 스킬 정보 가져오기
+        for (Posting posting : compList) {
+            List<PostingSkill> postingSkills = skillService.공고별스킬조회(posting.getId());
+            request.setAttribute("postingSkills", postingSkills);
+            System.out.println("검색2: " + postingSkills);
+        }
+
         return "user/recommendForm";
     }
-    // 14번 이력서 수정 버튼 POST
-
-    // 14번 이력서 삭제 버튼 POST
-
-    // 13번 사진수정 버튼 POST
 
     // 12번 수정하기 버튼 POST
     @PostMapping("/user/update")
@@ -170,7 +198,7 @@ public class UserController {
         session.setAttribute("sessionAllUser", sessionUser); // 개인/기업/관리자 모두 가지고있는거
 
         // 로그인 사용자의 역할(role)에 따라 세션을 구분합니다.
-        
+
         if (sessionUser != null) {
             if (sessionUser.getRole() == 0) {
                 // 관리자의 경우 sessionAdmin 세션을 설정합니다.
@@ -185,18 +213,18 @@ public class UserController {
                 System.out.println("x : 기업 로그인");
             }
 
-        if (sessionUser.getRole() == 0) {
-            session.setAttribute("sessionAdmin", sessionUser);
-        }
-        if (sessionUser.getRole() == 1) {
-            session.setAttribute("sessionUser", sessionUser);
-        }
-        if (sessionUser.getRole() == 2) {
-            session.setAttribute("CompSession", sessionUser);
-        }
+            if (sessionUser.getRole() == 0) {
+                session.setAttribute("sessionAdmin", sessionUser);
+            }
+            if (sessionUser.getRole() == 1) {
+                session.setAttribute("sessionUser", sessionUser);
+            }
+            if (sessionUser.getRole() == 2) {
+                session.setAttribute("CompSession", sessionUser);
+            }
 
-        // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
-        if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
+            // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
+            if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
                 CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                         .userId(sessionUser.getId())
                         .email(sessionUser.getEmail())
@@ -260,10 +288,10 @@ public class UserController {
 
         return new ApiUtil<String>(true, "이메일을 사용 할 수 있습니다.");
     }
-    
+
     @GetMapping("/user/resume/{resumeId}/offerList")
     public String offerListUser(@PathVariable Integer resumeId, HttpServletRequest request) {
-        
+
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
 
         Resume resume = resumeService.이력서찾기(resumeId, sessionAllUser.getId());
@@ -271,10 +299,10 @@ public class UserController {
             throw new MyException("내 이력서가 아닙니다.");
         }
         request.setAttribute("resume", resume);
-        
+
         List<Recommend> recommendList = recommendService.이력서받은오퍼찾기(resumeId);
         request.setAttribute("recommendList", recommendList);
-        
+
         return "user/offerList";
     }
 
@@ -305,9 +333,5 @@ public class UserController {
 
         return "redirect:/user/resume/" + resumeId + "/offerList";
     }
-
-
-
-
 
 }
