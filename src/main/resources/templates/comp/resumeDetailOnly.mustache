@@ -108,7 +108,8 @@
 					{{#resume}}
 					<input type="hidden" name="ResumeId" value="{{id}}">
 					{{/resume}}
-					<input class="w-100 btn btn-warning ms-1 me-0" type="submit" value="북마크">
+					{{#boomarkOK}}<input class="w-100 btn btn-primary ms-1 me-0" type="submit" name="bookmark2" value="북마크 하기">{{/boomarkOK}}
+					{{^boomarkOK}}<input class="w-100 btn btn-warning ms-1 me-0" type="submit" name="bookmark2" value="북마크 삭제">{{/boomarkOK}}
 				</form>
 
 			</div>

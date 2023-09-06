@@ -71,8 +71,9 @@
 
 				<div class="col-4 d-flex justify-content-end">
 
-					<a class="btn btn-white fw-bold align-self-center" href="/selectJoinForm">회원가입</a>
-					<a class="btn btn-white fw-bold align-self-center" href="/user/loginForm">로그인</a>
+					{{^sessionAdmin}}<a class="btn btn-white fw-bold align-self-center" href="/selectJoinForm">회원가입</a>{{/sessionAdmin}}
+					{{^sessionAdmin}}<a class="btn btn-white fw-bold align-self-center" href="/user/loginForm">로그인</a>{{/sessionAdmin}}
+					{{#sessionAdmin}}<a class="btn btn-white fw-bold align-self-center" href="/logout">로그아웃</a>{{/sessionAdmin}}
 
 
 				</div>
@@ -123,8 +124,8 @@
 								<a class="nav-link text-white" href="/master/help">고객센터</a>
 							</li>
 							<li class="nav-item">
-								{{#sessionComp}}{{^sessionComp.compname}}<a class="nav-link text-black fw-bold"
-									href="/master/help">관리자전용</a>{{/sessionComp.compname}}{{/sessionComp}}
+								{{#sessionAdmin}}<a class="nav-link text-black fw-bold"
+									href="/master/admin">관리자전용</a>{{/sessionAdmin}}
 							</li>
 						</ul>
 					</div>

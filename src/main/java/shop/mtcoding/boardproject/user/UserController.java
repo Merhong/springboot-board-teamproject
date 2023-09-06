@@ -221,8 +221,9 @@ public class UserController {
     @GetMapping("/logout")
     public String logout() {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        User sessionAdmin = (User) session.getAttribute("sessionAdmin");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
-        if (sessionUser == null && sessionComp == null) {
+        if (sessionUser == null && sessionComp == null && sessionAdmin == null) {
             return "redirect:/user/loginForm";
         }
         session.invalidate(); // 세션 무효화(세션 전체를 비움 - 서랍 비우는 거)

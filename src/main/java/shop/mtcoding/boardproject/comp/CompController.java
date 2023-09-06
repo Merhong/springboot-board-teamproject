@@ -253,7 +253,12 @@ public class CompController {
     @GetMapping("/resume/newWindow/{resumeId}")
     public String resumeDetail2(@PathVariable Integer resumeId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
-        
+                
+        Boolean boomarkBoolean = compService.북마크중복체크(sessionAllUser.getId(), resumeId);
+        if(boomarkBoolean==true){
+            request.setAttribute("boomarkOK", true); // 세션 있으면 중복 아닌거니까 북마크 해도됨
+        }
+
         Resume resume = resumeService.이력서찾기(resumeId, sessionAllUser.getId());
 
         request.setAttribute("resume", resume);
