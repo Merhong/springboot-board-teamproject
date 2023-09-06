@@ -51,7 +51,6 @@ public class ResumeController {
         throw new MyException("권한이 없습니다.");
     }
 
-
     // 이력서 수정하기 Post
     @PostMapping("/resume/{resumeId}/update")
     public String update(@PathVariable Integer resumeId, ResumeRequest.ResumeUpdateDTO resumeUpdateDTO) {
@@ -60,7 +59,7 @@ public class ResumeController {
         if (resume == null) {
             throw new MyException("없는 이력서 입니다.");
         }
-      
+
         // 2-1. 세션에 해당하는 유저id와 같은지 체크 후 이력서 수정
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getId().equals(resume.getUser().getId())) {
@@ -68,7 +67,7 @@ public class ResumeController {
 
             return "redirect:/user/resume/" + resumeId;
         }
-      
+
         // 2-2. id가 다르면 예외처리
         throw new MyException("권한이 없습니다.");
     }

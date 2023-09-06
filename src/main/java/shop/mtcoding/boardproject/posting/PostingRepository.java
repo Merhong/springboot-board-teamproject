@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import shop.mtcoding.boardproject.user.UserRequest.SearchDTO;
+
 import java.util.List;
 
 public interface PostingRepository extends JpaRepository<Posting, Integer> {
@@ -20,4 +22,6 @@ public interface PostingRepository extends JpaRepository<Posting, Integer> {
 
     List<Posting> findByUser_Role(Integer role);
 
+    @Query(value = "select * from posting_tb where position = :position", nativeQuery = true)
+    List<Posting> findByPosition(@Param("position") String position);
 }

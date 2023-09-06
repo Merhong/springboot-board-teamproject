@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.vo.MyPath;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
@@ -15,6 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +32,9 @@ public class UserService {
 
     @Autowired
     private PostingRepository postingRepository;
+
+    @Autowired
+    PostingQueryRepository postingQueryRepository;
 
     @Transactional
     public void 회원가입(UserRequest.JoinDTO joinDTO) {
@@ -98,32 +104,28 @@ public class UserService {
         return user;
     }
 
-    public List<Posting> 기업추천검색(List<String> skillList, String position) {
-        List<Posting> compList = new ArrayList<>();
+    public List<Posting> 기업추천검색(UserRequest.SearchDTO searchDTO) {
 
-        if (skillList.size() == 0 || skillList.get(0).equals("all")) {
-            // compList = postingRepository.findByUser_Role(2);
-        } else {
-            Set<Posting> compSet = new LinkedHashSet<>(); // 중복 제거하려고 Set으로 했다가 List로 변경
-            for (String s : skillList) {
-                List<Posting> tempList = postingRepository.findBykillResumeReturnComp(s);
-                compSet.addAll(tempList);
-            }
-            compList = new ArrayList<>(compSet);
+        List<String> skillList = searchDTO.getSkillName();
+        String position = searchDTO.getPosition();
+        HashSet<Posting> postingSet = new HashSet<Posting>();
+
+        List<Posting> listSkillPosting = postingQueryRepository.joinSkillPosting(skillList);
+        for (Posting posting : listSkillPosting) {
+            postingSet.add(posting);
+        }
+        List<Posting> listPositionPosting = postingRepository.findByPosition(position);
+        for (Posting posting : listPositionPosting) {
+            postingSet.add(posting);
         }
 
-        if (position == null || position.equals("all")) {
-            //
-        } else {
-            List<Posting> tempList = new ArrayList<>();
-            for (Posting posting : compList) {
-                if (!(posting.getPosition().equals(position))) {
-                    tempList.add(posting);
-                }
-            }
-            compList.removeAll(tempList);
-        }
+        List<Posting> PostingList = new ArrayList<>();
 
-        return compList;
+        Iterator<Posting> iterator = postingSet.iterator();
+        while (iterator.hasNext()) {
+            Posting posting = iterator.next();
+            PostingList.add(posting);
+        }
+        return PostingList;
     }
 }
