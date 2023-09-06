@@ -101,16 +101,17 @@ public class UserService {
         List<Posting> compList = new ArrayList<>();
 
         if (skillList.size() == 0 || skillList.get(0).equals("all")) {
-            // compList = postingRepository.findByUser_Role(2);
+            // compList = postingRepository.findAll();
         } else {
-            Set<Posting> compSet = new LinkedHashSet<>(); // 중복 제거하려고 Set으로 했다가 List로 변경
-            for (String s : skillList) {
-                List<Posting> tempList = postingRepository.findBykillResumeReturnComp(s);
-                compSet.addAll(tempList);
+            Set<Posting> postingSet = new LinkedHashSet<>();
+            for (String skill : skillList) {
+                List<Posting> tempList = postingRepository.joinSkillPosting(skill);
+                postingSet.addAll(tempList);
             }
-            compList = new ArrayList<>(compSet);
+            compList = new ArrayList<>(postingSet);
         }
 
+        // 모든 포지션 또는 특정 포지션으로 필터링
         if (position == null || position.equals("all")) {
             //
         } else {
@@ -125,4 +126,5 @@ public class UserService {
 
         return compList;
     }
+
 }

@@ -10,9 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import shop.mtcoding.boardproject.skill.PostingSkill;
 
 public class PostingRequest {
-
 
     // 기업회원의 세션을 가지는 DTO
     @Getter
@@ -43,13 +43,13 @@ public class PostingRequest {
             this.homepage = homepage;
             this.role = role;
         }
-    } 
+    }
 
     // 사진을 담은 DTO
     @Getter
     @Setter
     @ToString
-    public static class PicDTO{
+    public static class PicDTO {
         private MultipartFile photo;
     }
 
@@ -70,7 +70,7 @@ public class PostingRequest {
         public JoinDTO() {
             this.role = 2;
         }
-    } 
+    }
 
     // 공고 등록(저장) DTO
     @Getter
@@ -104,7 +104,7 @@ public class PostingRequest {
         private Date expiryDate;
 
         private List<String> postingSkill;
-    } 
+    }
 
     // 기업회원 정보 수정 DTO
     @Getter
@@ -115,5 +115,13 @@ public class PostingRequest {
         private String address;
         private String tel;
         private String homepage;
+    }
+
+    @Getter
+    @Setter
+    public static class CompInfoDTO {
+        private String title;
+        private String position;
+        private List<PostingSkill> postingSkills;
     }
 }

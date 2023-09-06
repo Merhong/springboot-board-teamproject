@@ -18,6 +18,7 @@ import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.comp.CompService;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingRequest.CompInfoDTO;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeService;
 import shop.mtcoding.boardproject.skill.PostingSkill;
@@ -26,6 +27,8 @@ import shop.mtcoding.boardproject.skill.SkillService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -74,14 +77,22 @@ public class UserController {
         }
 
         List<Posting> compList = userService.기업추천검색(skillList, position);
-        request.setAttribute("compList", compList);
         System.out.println("검색1: " + compList);
-        // 공고에 해당하는 스킬 정보 가져오기
+
+        // CompInfoDTO 리스트 생성
+        List<CompInfoDTO> compInfoList = new ArrayList<>();
         for (Posting posting : compList) {
+            CompInfoDTO compInfoDTO = new CompInfoDTO();
+            compInfoDTO.setTitle(posting.getTitle());
+            compInfoDTO.setPosition(posting.getPosition());
+            // 공고에 해당하는 스킬 정보 가져오기
             List<PostingSkill> postingSkills = skillService.공고별스킬조회(posting.getId());
-            request.setAttribute("postingSkills", postingSkills);
-            System.out.println("검색2: " + postingSkills);
+            compInfoDTO.setPostingSkills(postingSkills);
+            compInfoList.add(compInfoDTO);
         }
+
+        // compInfoList를 컨트롤러에서 뷰로 전달
+        request.setAttribute("compInfoList", compInfoList);
 
         return "user/recommendForm";
     }
