@@ -34,4 +34,8 @@ public interface UserBookmarkRepository extends JpaRepository<UserBookmark, Inte
     @Query(value = "insert into userbookmark_tb (posting_id,  user_id ) values (:postiongId, :userId)", nativeQuery = true)
     Integer saveByPostingAndUserId(@Param("postiongId") Integer postiongId, @Param("userId") Integer userId);
 
+    @Modifying
+    @Query(value = "insert into userbookmark_tb (posting_id,  user_id ) values (:postiongId, :userId)", nativeQuery = true)
+    Integer saveByPostingAndUserId(@Param("postiongId") Integer postiongId, @Param("userId") Integer userId);
+
 }
