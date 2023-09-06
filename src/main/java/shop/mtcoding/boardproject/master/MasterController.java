@@ -75,7 +75,7 @@ public class MasterController {
 
     // 인덱스(홈) 페이지
     @GetMapping("/")
-    public String index(@RequestParam(defaultValue = "all") List<String> skillList,
+    public String index(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "all") List<String> skillList,
             @RequestParam(defaultValue = "all") String position, @RequestParam(defaultValue = "all") String region,
             HttpServletRequest request) {
 
@@ -97,7 +97,32 @@ public class MasterController {
         }
         // 뷰에 뭘 검색한건지 적혀있게
         List<Posting> postingList = masterService.메인화면검색(skillList, position, region);
-        request.setAttribute("postingList", postingList);
+        
+
+        int PAGESIZE=6; // 한페이지에 보일 공고 개수
+        int totalCount = postingList.size();
+        
+        boolean last = false;
+        if (totalCount <= (page + 1) * PAGESIZE) {
+            last = true;
+        }
+
+        int first = page * PAGESIZE;
+        int second = Math.min(first + PAGESIZE, postingList.size());
+        
+        if (first >= second || page < 0) {
+            request.setAttribute("postingList", List.of()); // 없는 페이지면 0개 리스트 줌
+        }else{
+            request.setAttribute("postingList", postingList.subList(first, second)); // 페이지 맞으면 리스트에서 거기에 맞게 잘라서 줌
+        }
+
+        
+        // request.setAttribute("postingList", postingList);
+        request.setAttribute("prevPage", page - 1);
+        request.setAttribute("nextPage", page + 1);
+        request.setAttribute("first", page <= 0 ? true : false);
+        request.setAttribute("last", last);
+        request.setAttribute("totalCount", totalCount);
 
         return "index";
     }

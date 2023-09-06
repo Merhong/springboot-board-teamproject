@@ -229,7 +229,7 @@
 
 
 			{{#postingList}}
-				<div class="col-lg-3 col-md-4 col-sm-6">
+				<div class="col-lg-4 col-md-4 col-sm-6">
 					<div class="border border-info m-2 ps-2 pe-2 pt-1">
 						<h4 class="text-center fw-bold">{{user.compname}}</h4>
 						{{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
@@ -292,6 +292,23 @@
 <input type="hidden" value="{{json}}" name="json" id="json">
 <input type="hidden" value="{{position}}" name="positionSet" id="positionSet">
 <input type="hidden" value="{{region}}" name="regionSet" id="regionSet">
+
+
+<ul class="pagination d-flex justify-content-center">
+    {{#keyword}}
+    <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-dark" href="?keyword={{keyword}}&page={{prevPage}}">이전 페이지</a></li>
+    <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-dark" href="?keyword={{keyword}}&page={{nextPage}}">다음 페이지</a></li>
+    {{/keyword}}
+
+    {{^keyword}}
+    <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-dark" href="?page={{prevPage}}">이전 페이지</a></li>
+    <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-dark" href="?page={{nextPage}}">다음 페이지</a></li>
+    {{/keyword}}
+  </ul>
+
+
+
+
 
 <script>
 

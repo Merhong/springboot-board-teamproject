@@ -54,6 +54,8 @@ insert into posting_tb(user_id, title, desc, region, position, expiry_date, care
 values (9, '개발자구인', '내용11', '서울', '임베디드', '2023-12-21', '6년', '석사 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
 values (8, '구인홍보', '내용12', '서울', '프론트엔드', '2023-09-14', '8년', '대학 졸업');
+insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
+values (6, '구인홍보2', '내용13', '서울', '백엔드', '2023-09-22', '6년', '학력무관');
 
 
 -- Resume(이력서) 테이블
