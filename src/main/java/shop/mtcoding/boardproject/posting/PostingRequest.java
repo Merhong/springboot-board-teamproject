@@ -120,6 +120,7 @@ public class PostingRequest {
     @Getter
     @Setter
     public static class CompInfoDTO {
+        private Integer id;
         private String title;
         private String position;
         private List<PostingSkill> postingSkills;

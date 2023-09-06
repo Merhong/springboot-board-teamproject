@@ -83,6 +83,8 @@ public class UserController {
         List<CompInfoDTO> compInfoList = new ArrayList<>();
         for (Posting posting : compList) {
             CompInfoDTO compInfoDTO = new CompInfoDTO();
+            compInfoDTO.setId(posting.getId());
+            System.out.println("검색" + posting.getId());
             compInfoDTO.setTitle(posting.getTitle());
             compInfoDTO.setPosition(posting.getPosition());
             // 공고에 해당하는 스킬 정보 가져오기
