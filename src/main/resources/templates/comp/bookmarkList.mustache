@@ -6,23 +6,30 @@
 <div class="col-9 m-auto">
 	<h1 class="text-center mt-2">이력서 북마크</h1>
 
+	
+	{{^resumeList}}
+	<h3 class="text-center mt-5 mb-5">
+		북마크한 이력서가 없습니다.
+	</h3>
+	{{/resumeList}}
+
 	{{#resumeList}}
 	<div class="d-flex border border-info m-3 mb-4 p-2 ps-0 justify-content-between bg-info">
 		<div class="container">
-			<div class="">'<b class="fs-5">{{user.username}}</b>'님의 '<b class="fs-5">{{title}}</b>'입니다.</div>
+			<div class="">'<b class="fs-5">{{#user.username}}{{user.username}}{{/user.username}}</b>'님의 '<b class="fs-5">{{#title}}{{title}}{{/title}}</b>'입니다.</div>
 			<hr class="m-0 mb-2">
 
 			<div class="d-flex align-items-center">
 
 				<a href="javascript:void(0);" class="align-self-start col-6 btn btn-light" onclick="openNewWindow('/resume/newWindow/{{id}}')">
 					<div>
-						<span class="badge bg-success">{{career}}</span>
-						<span class="badge bg-success">{{grade}}</span>
-						<span class="badge bg-success">{{user.address}}</span>
+						<span class="badge bg-success">{{#career}}{{career}}{{/career}}</span>
+						<span class="badge bg-success">{{#grade}}{{grade}}{{/grade}}</span>
+						<span class="badge bg-success">{{#user.address}}{{user.address}}{{/user.address}}</span>
 					</div>
 					<div>
-						<span class="badge bg-primary">{{user.position}}</span>
-						<span class="badge bg-warning">{{user.birth}}</span>
+						<span class="badge bg-primary">{{#user.position}}{{user.position}}{{/user.position}}</span>
+						<span class="badge bg-warning">{{#user.birth}}{{user.birth}}{{/user.birth}}</span>
 					</div>
 					<div>
 						{{#user.userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/user.userSkillList}}
@@ -30,7 +37,7 @@
 				</a>
 
 				<div class="text-break ps-3 pe-3">
-					{{personalStatement}}
+					{{#personalStatement}}{{personalStatement}}{{/personalStatement}}
 				</div>
 
 			</div>
@@ -40,7 +47,7 @@
 		</div>
 		<div class="d-flex flex-column justify-content-around col-auto">
 			<a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="openNewWindow('/resume/newWindow/{{id}}')">자세히 보기</a>
-			<a href="" class="btn btn-primary btn-sm">입사 제안</a>
+			<a href="javascript:void(0);" class="btn btn-primary btn-sm" onclick="openNewWindow('/offer/newWindow/{{id}}')">입사 제안</a>
 			<form action="/comp/bookmarkList/delete" method="post">
 				<input type="hidden" name="hiddenResumeId" value="{{id}}">
 				<input class="btn btn-danger btn-sm w-100" type="submit" value="북마크 삭제">
@@ -56,7 +63,7 @@
 	
 
 	function openNewWindow(url) {
-	  var width = 600; // 새 창의 가로 크기
+	  var width = 800; // 새 창의 가로 크기
 	  var height = 1100; // 새 창의 세로 크기
 	  var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
 	  var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치

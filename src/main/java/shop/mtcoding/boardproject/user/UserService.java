@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.vo.MyPath;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
@@ -15,6 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +33,9 @@ public class UserService {
     @Autowired
     private PostingRepository postingRepository;
 
+    @Autowired
+    PostingQueryRepository postingQueryRepository;
+
     @Transactional
     public void 회원가입(UserRequest.JoinDTO joinDTO) {
         // 개인회원에 해당하는 필드값을 builder로 담는다.
@@ -39,6 +45,7 @@ public class UserService {
                 .password(joinDTO.getPassword())
                 .username(joinDTO.getUsername())
                 .tel(joinDTO.getTel())
+                .position(joinDTO.getPosition())
                 .build();
 
         // JPA save
@@ -97,6 +104,7 @@ public class UserService {
         return user;
     }
 
+
     public List<Posting> 기업추천검색(List<String> skillList, String position) {
         List<Posting> compList = new ArrayList<>();
 
@@ -122,9 +130,21 @@ public class UserService {
                 }
             }
             compList.removeAll(tempList);
+
+        }
+        List<Posting> listPositionPosting = postingRepository.findByPosition(position);
+        for (Posting posting : listPositionPosting) {
+            postingSet.add(posting);
         }
 
-        return compList;
+        List<Posting> PostingList = new ArrayList<>();
+
+        Iterator<Posting> iterator = postingSet.iterator();
+        while (iterator.hasNext()) {
+            Posting posting = iterator.next();
+            PostingList.add(posting);
+        }
+        return PostingList;
     }
 
 }

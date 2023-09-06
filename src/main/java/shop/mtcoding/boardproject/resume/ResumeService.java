@@ -28,6 +28,7 @@ public class ResumeService {
     @Autowired
     private UserSkillRepository userSkillRepository;
 
+
     @Transactional
     public void 이력서등록(ResumeDTO resumeDTO, Integer id) {
         UUID uuid = UUID.randomUUID(); // 랜덤한 해시값을 만들어줌
@@ -68,10 +69,28 @@ public class ResumeService {
     }
 
     @Transactional
-    public Resume 이력서찾기(Integer resumeId) {
+    public Resume 이력서찾기(Integer resumeId) { // 이력서 비공개라도 봐진다 밑에꺼 쓰면 못봄
         Optional<Resume> resume = resumeRepository.findById(resumeId);
         // Optional에서 Resume 객체를 가져오거나, 없을 경우 null을 반환하도록 수정
         return resume.orElse(null);
+    }
+
+    @Transactional
+    public Resume 이력서찾기(Integer resumeId, Integer userId) { // 비공개 이력서는 못보게
+        Optional<Resume> resumeOp = resumeRepository.findById(resumeId);
+        if (resumeOp.isPresent()) {
+            Resume resume = resumeOp.get();
+            
+            if(resume.getDisclosure() == false){
+                if(resume.getUser().getId() != userId){
+                    throw new MyException(resumeId + "비공개임");
+                }
+            }
+
+            return resume;
+        } else {
+            throw new MyException(resumeId + " 없음");
+        }
     }
 
     public List<Resume> 이력서목록(Integer id) {
@@ -130,6 +149,5 @@ public class ResumeService {
     @Transactional
     public void 이력서삭제(Integer resumeId) {
         resumeRepository.deleteById(resumeId);
-
     }
 }

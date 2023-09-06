@@ -152,69 +152,115 @@
 
 
 <script>
+  function skillCheck(selectAll) {
+    let skillAll = document.querySelectorAll(".skillFind");
+    // let allCheck=document.querySelector("#all");
 
-	function skillCheck(selectAll) {
-		let skillAll = document.querySelectorAll(".skillFind");
-		// let allCheck=document.querySelector("#all");
+    skillAll.forEach((element) => {
+      element.checked = selectAll.checked;
+    });
+  }
+  function skillAllCheck() {
+    let allCheck = document.querySelector("#skillAll");
+    let skillAll = document.querySelectorAll(".skillFind");
+    let skillAllCheck = document.querySelectorAll(".skillFind:checked");
 
-		skillAll.forEach(element => {
-			element.checked = selectAll.checked;
-		});
-	}
-	function skillAllCheck() {
-		let allCheck = document.querySelector("#skillAll");
-		let skillAll = document.querySelectorAll(".skillFind");
-		let skillAllCheck = document.querySelectorAll(".skillFind:checked");
+    if (skillAll.length == skillAllCheck.length) {
+      allCheck.checked = true;
+    } else {
+      allCheck.checked = false;
+    }
+  }
 
-		if (skillAll.length == skillAllCheck.length) {
-			allCheck.checked = true;
-		} else {
-			allCheck.checked = false
-		};
-	}
+  function searchAll() {
+    if (document.querySelector("#skillAll").checked) {
+      let skillfind = document.querySelectorAll(".skillFind");
+      skillfind.forEach((element) => {
+        element.checked = false;
+      });
+    }
+    let submit = document.getElementById("selectform");
+    submit.submit();
+  }
 
+  function check() {
+    const json = JSON.parse(document.querySelector("#json").value);
 
-	function searchAll() {
-		if (document.querySelector("#skillAll").checked) {
-			let skillfind = document.querySelectorAll(".skillFind")
-			skillfind.forEach(element => {
-				element.checked = false;
-			});
-		}
-		let submit = document.getElementById("selectform");
-		submit.submit();
-	}
+    let skillCheckBoxAll = document.getElementById("skillAll");
 
+    if (json[0] != skillCheckBoxAll.value) {
+      json.forEach((element) => {
+        document.getElementById(element).checked = true;
+      });
+      skillCheckBoxAll.checked = false;
+    } else {
+      skillCheckBoxAll.checked = true;
+      let skillFind2 = document.querySelectorAll(".skillFind");
+      skillFind2.forEach((element) => {
+        element.checked = true;
+      });
+    }
+  }
+  check();
 
+  const positionSet = document.querySelector("#positionSet").value;
+  if (positionSet == "all") {
+    document.getElementById("all2").checked = true;
+  } else {
+    document.getElementById(positionSet).checked = true;
+  }
 
-	function check() {
-		const json = JSON.parse(document.querySelector("#json").value);
+  async function select() {
+    let skillList = document.querySelectorAll(".skillFind:checked");
+    let position = document.querySelector(
+      'input[name="position"]:checked'
+    ).value;
+    // let skillListJson = await skillList.JSON();
+    let skillArray = Array.from(skillList);
+    console.log(skillArray);
+    console.log(position);
 
-		let skillCheckBoxAll = document.getElementById("skillAll");
+    let skillName = [];
+    for (var skill of skillList) {
+      console.log(skill.id);
+      skillName.push(skill.id);
+    }
+    console.log("skillName : " + skillName);
 
-		if (json[0] != skillCheckBoxAll.value) {
-			json.forEach(element => {
-				document.getElementById(element).checked = true;
-			});
-			skillCheckBoxAll.checked = false;
-		} else {
-			skillCheckBoxAll.checked = true;
-			let skillFind2 = document.querySelectorAll(".skillFind")
-			skillFind2.forEach(element => {
-				element.checked = true;
-			});
-		}
-	}
-	check();
+    let requestBody = {
+      skillName: skillName,
+      position: position,
+    };
 
-	const positionSet = document.querySelector("#positionSet").value;
-	if (positionSet == "all") {
-		document.getElementById("all2").checked = true;
-	} else {
-		document.getElementById(positionSet).checked = true;
-	}
+    let response = await fetch("/api/user/recommend", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
 
+    let result = await response.json();
+    console.log(result);
 
+    let techEl = document.querySelector("#result");
+    techEl.innerHTML = "";
 
+    for (let i = 0; i < result.data.length; i++) {
+      let item = result.data[i];
+      console.log("Item " + i + ": " + item.title);
+      let optionEl = document.createElement("div");
+      optionEl.value = item.title;
+      optionEl.innerHTML =
+        '<div class="border border-info m-2 ps-2 pe-2 pt-1">' +
+        item.title +
+        "<div>" +
+        item.desc +
+        "</div><div>" +
+        item.position +
+        "</div></div>";
+      techEl.append(optionEl);
+    }
+  }
 </script>
 {{> layout/footer}}

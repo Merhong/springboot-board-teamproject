@@ -62,14 +62,20 @@
 				<div class="col-4"></div>
 
 				<div class="col-4">
-					<a class="text-center flex-grow-1 fw-bold text-decoration-none text-black" href="/">
-						<h1>플랫폼명</h1>
-					</a>
+					<div class="d-flex justify-content-center">
+						<a class="text-center flex-grow-1 fw-bold text-decoration-none text-black" href="/">
+							<img src="../../../../../images/goople.png" class="img-thumbnail" alt="구플" width="170px"/>
+						</a>
+					</div>
 				</div>
 
 				<div class="col-4 d-flex justify-content-end">
-					<a class="btn btn-white fw-bold align-self-center" id="joinLink" href="/selectJoinForm">회원가입</a>
-					<a class="btn btn-white fw-bold align-self-center" id="loginLink" href="/user/loginForm">로그인</a>
+
+					{{^sessionAdmin}}<a class="btn btn-white fw-bold align-self-center" href="/selectJoinForm">회원가입</a>{{/sessionAdmin}}
+					{{^sessionAdmin}}<a class="btn btn-white fw-bold align-self-center" href="/user/loginForm">로그인</a>{{/sessionAdmin}}
+					{{#sessionAdmin}}<a class="btn btn-white fw-bold align-self-center" href="/logout">로그아웃</a>{{/sessionAdmin}}
+
+
 				</div>
 
 			</div>
@@ -81,7 +87,7 @@
 
 				<div class="m-1">
 					<a href="/">
-						<img src="../../../../../images/brand.png" class="img-thumbnail" alt="브랜드 로고" width="90px" />
+						<img src="../../../../../images/brand.png" class="img-thumbnail" alt="구플 로고" width="50px" />
 					</a>
 				</div>
 
@@ -118,20 +124,20 @@
 								<a class="nav-link text-white" href="/master/help">고객센터</a>
 							</li>
 							<li class="nav-item">
-								{{#sessionComp}}{{^sessionComp.compname}}<a class="nav-link text-black fw-bold"
-									href="/master/help">관리자전용</a>{{/sessionComp.compname}}{{/sessionComp}}
+								{{#sessionAdmin}}<a class="nav-link text-black fw-bold"
+									href="/master/admin">관리자전용</a>{{/sessionAdmin}}
 							</li>
 						</ul>
 					</div>
 				</div>
 
 				<div class="col-auto align-self-center me-1">
-					<form class="d-flex">
+					<form class="d-flex" method="get" action="/search">
 						<div class="me-1 w-75">
-							<input class="form-control" type="text" placeholder="검색어를 입력하세요." />
+							<input class="form-control" type="text" placeholder="검색어를 입력하세요." name="keyword" value="{{#keyword}}{{keyword}}{{/keyword}}"/>
 						</div>
 						<div class="">
-							<button class="btn btn-secondary" type="button">검색</button>
+							<button class="btn btn-secondary" type="submit">검색</button>
 						</div>
 					</form>
 				</div>
@@ -153,6 +159,7 @@
 				joinLink.textContent = "로그아웃";
 				joinLink.href = "/logout";
 
+
 				if (sessionUser === "1") {
 					// 역할이 1인 경우 (개인 사용자)
 					loginLink.textContent = "마이페이지";
@@ -162,6 +169,7 @@
 					loginLink.textContent = "기업 정보 보기";
 					loginLink.href = "/comp/main";
 				}
+
 			} else {
 				// 로그아웃 상태일 때
 				joinLink.textContent = "회원가입";
@@ -175,6 +183,7 @@
 		document.addEventListener("DOMContentLoaded", function () {
 			changeLoginLinksAndButton();
 		});
+
 	</script>
 
 </html>

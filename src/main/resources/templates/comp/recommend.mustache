@@ -114,12 +114,12 @@
 					<div class="d-flex justify-content-between">
 						<div>
 							<div class="m-auto">
-								<span class="badge bg-danger">{{position}}</span>
+								<span class="badge bg-danger">{{#position}}{{position}}{{/position}}</span>
 								{{#userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/userSkillList}}
 							</div>
 
 							<div class="d-flex mb-1">
-								<div>'<b>{{username}}</b>'님의 공개 이력서 모음</div>
+								<div>'<b>{{#username}}{{username}}{{/username}}</b>'님의 공개 이력서 모음</div>
 							</div>
 
 						</div>
@@ -137,6 +137,10 @@
 					<hr class="m-0 mb-1">
 					
 					<div class="ms-1">
+						{{^resumeList}}
+						<div>공개 이력서 없음</div>
+						{{/resumeList}}
+
 						{{#resumeList}}
 						<a href="javascript:void(0);" class="{{disclosure}}" onclick="openNewWindow('/resume/newWindow/{{id}}')">{{title}}</a>
 						{{/resumeList}}
@@ -193,7 +197,7 @@
 			}
 
 			function openNewWindow(url) {
-				var width = 600; // 새 창의 가로 크기
+				var width = 800; // 새 창의 가로 크기
 				var height = 1100; // 새 창의 세로 크기
 				var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
 				var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치

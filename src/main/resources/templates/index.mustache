@@ -1,8 +1,70 @@
 {{> layout/header}}
 
+<style>
+	/* .modal { */
+	  /* display: none;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background-color: rgba(0, 0, 0, 0.7); */
+	/* } */
+  
+
+	.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+	height: 150px;
+    position: relative;
+    left: 0%;
+    top: -15%;
+    max-height: calc(80% - 100px); /* 화면 높이에서 40px 제외 */
+    max-width: calc(80% - 40px); /* 화면 높이에서 40px 제외 */
+    overflow-y: auto;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .modal-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 1; /* 모달보다 위에 표시되도록 설정 */
+}
+
+/* 모달 활성화 시 백드롭 표시 */
+.modal.active + .modal-backdrop {
+  display: block;
+}
+  
+</style>
+
 <!-- 메인페이지(인덱스) 화면-->
 <!-- 1, 6, 7, 8, 9 화면 연관-->
 <!-- TODO 로그인전, 후 NavBar 설정 필요  -->
+
+
+
 <div class="d-flex justify-content-center align-items-center">
 
 	<div class="col-auto"></div>
@@ -14,7 +76,6 @@
 			<div class="d-flex justify-content-around ps-4 pe-4">
 
 
-
 				<div class="order-2 m-2 border border-info col-4">
 					<h4 class="mt-2 text-center">기술별</h4>
 
@@ -22,7 +83,7 @@
 						<div class="form-check d-inline-block ms-3 me-2 align-self-end">
 							<label class="form-check-label">
 								<input class="form-check-input" type="checkbox" name="skillList" id="all" value="all"
-									onclick="skillCheck(this)">
+								       onclick="skillCheck(this)">
 								모두</label>
 						</div>
 						<div class="btn btn-primary me-3 m-1 btn-sm" onclick="searchOnlySkill()">기술만 검색</div>
@@ -32,17 +93,16 @@
 					<div class="d-flex flex-wrap">
 
 						{{#skillList}}
-						<div class="form-check d-inline-block ms-3 me-2">
-							<label class="form-check-label">
-								<input class="skillFind form-check-input" type="checkbox" name="skillList"
-									value="{{skillname}}" id="{{skillname}}" onclick='skillAllCheck()'>
-								{{skillname}}</label>
-						</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="skillFind form-check-input" type="checkbox" name="skillList"
+									       value="{{skillname}}" id="{{skillname}}" onclick='skillAllCheck()'>
+									{{skillname}}</label>
+							</div>
 						{{/skillList}}
 
 					</div>
 				</div>
-
 
 
 				<div class="order-1 m-2 border border-info col-4">
@@ -52,7 +112,7 @@
 						<div class="form-check d-inline-block ms-3 me-2 align-self-end">
 							<label class="form-check-label">
 								<input class="form-check-input all3checkbox" type="checkbox" name="" id="" value=""
-									onclick="regionCheck(this)">
+								       onclick="regionCheck(this)">
 								모두</label>
 						</div>
 						<div class="btn btn-primary me-3 m-1 btn-sm" onclick="searchOnlyRegion()">지역만 검색</div>
@@ -88,8 +148,6 @@
 					</div>
 
 				</div>
-
-
 
 
 				<div class="order-3 m-2 border border-info col-4">
@@ -167,44 +225,45 @@
 		</form>
 
 
-
-
-
 		<div class="mb-4 d-flex flex-wrap">
 
 
 			{{#postingList}}
-			<div class="col-lg-3 col-md-4 col-sm-6">
-				<div class="border border-info m-2 ps-2 pe-2 pt-1">
-					<h4 class="text-center fw-bold">{{user.compname}}</h4>
-					{{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<div class="border border-info m-2 ps-2 pe-2 pt-1">
+						<h4 class="text-center fw-bold">{{user.compname}}</h4>
+						{{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
 							src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto"
 							style="height: 120px;">{{/user.photo}}
 						{{^user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
-								src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
-								style="height: 120px;">{{/user.photo}}
-							<h5 class="mt-1 fw-bold">{{title}}</h5>
-							<div class="mb-1 fst-italic">{{position}}</div>
-							<div class="mb-1">
-								{{#postingSkill}}<span
-									class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
-							</div>
-							<div>
-								{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
-								{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
-								<span class="badge bg-success">{{region}}</span>
-							</div>
-						</a>
+							src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
+							style="height: 120px;">{{/user.photo}}
+						<h5 class="mt-1 fw-bold">{{title}}</h5>
+						<div class="mb-1 fst-italic">{{position}}</div>
+						<div class="mb-1">
+							{{#postingSkill}}<span
+								class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
+						</div>
+						<div>
+							{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
+							{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
+							<span class="badge bg-success">{{region}}</span>
+						</div>
+					</a>
+
+					</a>
 						<div class="d-flex justify-content-between">
-							<div class="border-0 bg-white mt-1 like-button">
-								<h3>🤍</h3>
-							</div>
-							<!-- <button type="button" class="border-0 bg-white mt-2"><h3>🤍</h3></button> -->
+							{{^sessionComp.compname}}<button type="button" class="border-0 bg-white mt-1 like-button" id="posting{{id}}"
+									onclick="bookmarkChange(`{{id}}`)"><h3>🤍</h3></button>{{/sessionComp.compname}}
+							<!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
+							<!-- 기업 유저는 북마크 못하게 -->
+							{{#sessionComp.compname}}<button type="button" class="invisible"><h3>🤍</h3></button>{{/sessionComp.compname}}
+
 							<span
 								class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
 						</div>
+					</div>
 				</div>
-			</div>
 			{{/postingList}}
 
 
@@ -218,6 +277,17 @@
 
 
 
+<div id="customModal" class="modal" onclick="closeModal()">
+	<div class="d-flex modal-content">
+	  <div class="d-flex justify-content-between align-content-center">
+		<div id="print" class="d-inline text align-self-center">
+		  모달 내용을 여기에 입력하세요. </div>
+		<div class="close d-inline" onclick="closeModal()">X</div> 
+	  </div>
+	</div>
+</div>
+
+<div id="modalBackdrop" class="modal-backdrop"></div>
 
 <input type="hidden" value="{{json}}" name="json" id="json">
 <input type="hidden" value="{{position}}" name="positionSet" id="positionSet">
@@ -270,8 +340,6 @@
 	}
 
 
-
-
 	function Ddaycheck(day) {
 		if (typeof day === "string") {
 			let day2 = new Date(day);
@@ -285,23 +353,22 @@
 			if (DDay == 0) {
 				// console.log("D-Day");
 				return "D-Day";
-			}
-			else if (DDay < 0) {
+			} else if (DDay < 0) {
 				// console.log("만료");
 				return "만료";
-			}
-			else {
+			} else {
 				// console.log("D-"+DDay); 
 				return "D-" + DDay;
 			}
 		}
 	}
+
 	let day = document.querySelectorAll('.expiryDate');
 	day.forEach(element => {
 		element.textContent = Ddaycheck(element.textContent);
 	});
-	// 날짜 D-Day로 바꾸기
 
+	// 날짜 D-Day로 바꾸기
 
 
 	function skillCheck(selectAll) {
@@ -312,6 +379,7 @@
 			element.checked = selectAll.checked;
 		});
 	}
+
 	function skillAllCheck() {
 		let allCheck = document.querySelector("#all");
 		let skillAll = document.querySelectorAll(".skillFind");
@@ -321,8 +389,10 @@
 			allCheck.checked = true;
 		} else {
 			allCheck.checked = false
-		};
+		}
+		;
 	}
+
 	// 기술 모두 체크박스 작동하게
 
 	//////////
@@ -344,6 +414,7 @@
 			});
 		}
 	}
+
 	check();
 
 	const positionSet = document.querySelector("#positionSet").value;
@@ -359,6 +430,7 @@
 	} else {
 		document.getElementById(regionSet).selected = true;
 	}
+
 	////////// 현재 검색중인거 뷰 다시 불러와도 읽어오게
 
 	function regionCheck(checkbox) {
@@ -366,6 +438,7 @@
 			document.getElementById("all3").selected = true;
 		}
 	}
+
 	function regionCheck2(checkbox) {
 		let select = checkbox.value;
 		if (select == "all") {
@@ -374,6 +447,7 @@
 			document.querySelector(".all3checkbox").checked = false;
 		}
 	}
+
 	// 지역별 선택바-모두체크박스 연동
 
 
@@ -425,6 +499,119 @@
 		submit.submit();
 	}
 
+	let bookmarked = '<h3>❤️</h3>';
+	let noBookmark = '<h3>🤍</h3>';
+	let customModal = document.querySelector("#customModal");
+	let modalBackdrop = document.querySelector("#modalBackdrop");
+
+	async function bookmarkPoint(id) {
+// console.log('bookmarkPoint실행')
+		// let response = await fetch(`/check?username=${username}`);
+		let postingNum = document.querySelectorAll(".posting");
+// 		console.log(postingNum);
+
+		let response = await fetch("/api/user/bookmark");
+		// let bookmarkPoint = document.querySelector("#username").value;
+		let body = await response.json();
+
+		let dataArray = body.data;
+		if(dataArray != null){
+		for(let item of dataArray){
+
+			let postingNum = document.querySelector(`#posting${item.id}`);
+			let currentValue = postingNum.getAttribute('data-value');
+			currentValue = true;
+			postingNum.innerHTML = bookmarked;
+			postingNum.setAttribute('data-value', currentValue);
+		}}
+	}
+
+	// let response = await fetch("/api/tech?categoryId=" + categoryId);
+	bookmarkPoint();
+
+
+	async function bookmarkChange(id) {
+
+		let postingNum = document.querySelector(`#posting${id}`);
+		let currentValue = postingNum.getAttribute('data-value');
+
+
+		if (currentValue == 'true') {
+
+			console.log(id);
+			let response = await fetch(`/api/user/bookmark/${id}/delete`);
+			let body = await response.json();
+			
+			if(body.sucuess == false){
+				// alert(body.data);
+				openModal(body.data);
+				customModal.focus();
+				postingNum.blur();
+}
+			if(body.sucuess == true){
+				// alert(body.data);
+				openModal(body.data);
+				customModal.focus();
+				postingNum.blur();
+				currentValue = false;
+				postingNum.innerHTML = noBookmark;
+			}
+
+
+		} else {
+			console.log(id);
+			let response = await fetch(`/api/user/bookmark/${id}/save`);
+			let body = await response.json();
+
+			if(body.sucuess == false){
+				
+				// alert(body.data);
+				openModal(body.data);
+				customModal.focus();
+				postingNum.blur();
+			}
+			if(body.sucuess == true){
+				// alert(body.data);
+				openModal(body.data);
+				customModal.focus();
+				postingNum.blur();
+			currentValue = true;
+			postingNum.innerHTML = bookmarked;
+			}
+
+		}
+
+
+		postingNum.setAttribute('data-value', currentValue);
+
+	}
+
+
+function openModal(string) {
+	
+  customModal.style.display = "block";
+	let text = document.querySelector("#print");
+	text.innerText = string;
+ 	 customModal.classList.add("active");
+}
+
+function closeModal() {
+	console.log('closeModal 실행')
+  customModal.classList.remove("active");
+  customModal.style.display = "none";
+}
+
+
+function closeBackdrop() {
+    closeModal();
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && customModal.style.display === "block") {
+
+    closeModal();
+  }
+});
 
 </script>
 
