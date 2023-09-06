@@ -226,23 +226,18 @@ public class CompService {
 
     @Transactional
     public void 공고삭제(Integer postingId) {
-        // TODO : 공고를 북마크한것도 지우거나 연결끊어야함
 
         List<UserBookmark> userBookmarkList = userBookmarkRepository.findByPostingId(postingId);
-        for (UserBookmark userbookmark : userBookmarkList) {
-            userbookmark.setPosting(null);
-        }
+        userBookmarkRepository.deleteAll(userBookmarkList);
 
         List<PostingSkill> skillList = postingSkillRepository.findByPostingId(postingId);
-        for (PostingSkill skill : skillList) {
-            skill.setPosting(null);
-        }
+        postingSkillRepository.deleteAll(skillList);
 
         List<Apply> applyList = applyRepository.findByPostingId(postingId);
-        for (Apply apply : applyList) {
-            apply.setPosting(null);
-        }
-
+        applyRepository.deleteAll(applyList);
+        
+        List<Recommend> recommendList = recommendRepository.findByPostingId(postingId);
+        recommendRepository.deleteAll(recommendList);
 
 
         try {
