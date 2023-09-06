@@ -1,5 +1,6 @@
 package shop.mtcoding.boardproject.bookmark;
 
+import org.aspectj.apache.bcel.generic.RET;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class BookmarkService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired 
+    @Autowired
     private PostingRepository postingRepository;
 
 
@@ -140,21 +141,24 @@ public class BookmarkService {
 
         return sucuess;
     }
-  
-      /**
+
+    /**
      * @param userId
      * @param postingId
      */
     @Transactional
-    public void 유저북마크추가(Integer userId, Integer postingId) {
+    public Integer 유저북마크추가(Integer postingId, Integer userId) {
+        int success = 0;
         // 이미 북마크가 있는지 확인합니다.
-        if (userBookmarkRepository.findByUserIdAndPostingId(userId, postingId) != null) {
+        if (userBookmarkRepository.findByUserIdAndPostingId(postingId, userId) != null) {
             // 이미 북마크된 경우 409 (Conflict) 응답을 반환합니다.
             throw new MyException("이미 북마크된 공고입니다.", HttpStatus.CONFLICT);
         } else {
             // 북마크가 없으면 저장한다.
-            userBookmarkRepository.saveByPostingAndUserId(postingId, userId);
+            success = userBookmarkRepository.saveByPostingAndUserId(postingId, userId);
         }
+
+        return success;
     }
 
 }
