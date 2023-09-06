@@ -17,6 +17,7 @@ public class UserRequest {
         private String password;
         private String username;
         private String tel;
+        private String position;
     }
 
     // 로그인 DTO

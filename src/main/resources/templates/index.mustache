@@ -191,10 +191,11 @@
 
 					</a>
 						<div class="d-flex justify-content-between">
-
-							<button type="button" class="border-0 bg-white mt-1 like-button" id="posting{{id}}"
-							        onclick="bookmarkChange(`{{id}}`)"><h3>🤍</h3></button>
+							{{^sessionComp.compname}}<button type="button" class="border-0 bg-white mt-1 like-button" id="posting{{id}}"
+									onclick="bookmarkChange(`{{id}}`)"><h3>🤍</h3></button>{{/sessionComp.compname}}
 							<!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
+							<!-- 기업 유저는 북마크 못하게 -->
+							{{#sessionComp.compname}}<button type="button" class="invisible"><h3>🤍</h3></button>{{/sessionComp.compname}}
 
 							<span
 								class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
