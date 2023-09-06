@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.posting.Posting;
@@ -30,7 +32,7 @@ public class BookmarkController {
     // 개인북마크 화면
     @GetMapping("/user/bookmarkForm")
     public String userBookMarkForm(HttpServletRequest request,
-                                   BookmarkResponse.UserBookmarkDTO bookmarkDTO) {
+            BookmarkResponse.UserBookmarkDTO bookmarkDTO) {
 
         User user = (User) session.getAttribute("sessionUser");
 
@@ -130,7 +132,6 @@ public class BookmarkController {
         // return Script.href("/resume/newWindow/"+ResumeId, "북마크 성공");
     }
 
-
     @PostMapping("/user/bookmarkForm/save")
     public ResponseEntity<String> userbookmarkSave(@RequestParam(defaultValue = "") Integer postingId) {
         Integer userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId(); // 현재 로그인한 사용자의
@@ -141,6 +142,18 @@ public class BookmarkController {
             return ResponseEntity.ok("북마크에 추가되었습니다.");
         } catch (MyException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/user/bookmarkForm/delete")
+    public ResponseEntity<String> deleteUserBookmark(@RequestParam Integer postingId) {
+        Integer userId = ((User) session.getAttribute("sessionUser")).getId(); // 현재 로그인한 사용자의
+                                                                                                         // ID를 가져옴
+        try {
+            bookmarkService.유저북마크제거(postingId, userId);
+            return ResponseEntity.ok("북마크가 삭제되었습니다.");
+        } catch (MyException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
