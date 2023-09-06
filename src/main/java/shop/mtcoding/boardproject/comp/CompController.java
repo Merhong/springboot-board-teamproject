@@ -27,6 +27,7 @@ import java.util.List;
 @Controller
 public class CompController {
 
+    /* DI */
     @Autowired
     private SkillService skillService;
 
@@ -53,72 +54,104 @@ public class CompController {
     }
 
 
+    // 기업페이지
     @GetMapping("/comp/main")
     public String Main() {
-        // CompRequest.SessionCompDTO sessionUser = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+        // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        // 세션이 없다면 로그인 화면으로 이동시킴
         if (sessionAllUser == null) {
             return "redirect:/user/loginForm";
         }
+        // 회원유형(role)이 2일때만 통과
         if(sessionAllUser.getRole()!=2){
             throw new MyException("기업회원만 가능합니다.");
         }
-
+        // 페이지를 보여준다.
         return "comp/main";
     }
 
+    // 기업 공고 관리 페이지
     @GetMapping("/comp/{compId}/postingList")
     public String listView(@PathVariable Integer compId, HttpServletRequest request) {
+        // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        // 세션 없으면 로그인 화면으로 이동
         if (sessionAllUser == null) {
             return "redirect:/user/loginForm";
         }
+        // 기업회원이 아니면 예외처리
         if(sessionAllUser.getRole()!=2){
             throw new MyException("기업회원만 가능합니다.");
         }
+        // 세션에서 sessionComp 속성을 가져와서 DTO에 담는다.
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+        // sessionComp의 유저id와 기업id를 비교
         if (sessionComp.getUserId() != compId) {
             throw new MyException("내 공고가 아닙니다.");
         }
-
+        // 기업id를 통해 공고 리스트를 찾아서 담는다.
         List<Posting> postingList = compService.회사별공고찾기(compId);
+        // 찾은 리스트를 request에 담는다.
         request.setAttribute("postingList", postingList);
+        // 담은 리스트를 화면에 보여준다.
         return "comp/postingList";
     }
 
+    // 기업 공고 등록 페이지
     @GetMapping("/comp/posting/saveForm")
     public String saveForm(HttpServletRequest request) {
+        // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        // 세션이 없다면 로그인 화면으로 이동시킴
         if (sessionAllUser == null) {
-
             return "redirect:/user/loginForm";
         }
+        // 기업회원이 아니면 예외처리
         if(sessionAllUser.getRole()!=2){
             throw new MyException("기업회원만 가능합니다.");
         }
-
+        // 스킬 이름 전부를 리스트에 넣는다.
         List<Skill> skillList = skillService.스킬이름전부();
-
+        // request에 리스트를 담는다.
         request.setAttribute("skillList", skillList);
+        // 공고 등록 화면을 보여준다.
         return "comp/saveForm";
     }
 
+    // 공고 상세보기 페이지
     @GetMapping("/comp/posting/{postingId}")
     public String detail(@PathVariable Integer postingId, HttpServletRequest request) {
-
+        // 공고id로 공고를 찾는다.
         Posting posting = compService.공고찾기(postingId);
+        // 찾은 공고를 request에 담는다.
         request.setAttribute("posting", posting);
+        // 상세보기 화면을 보여준다.
         return "comp/postingDetail";
     }
 
-    @GetMapping("/comp/posting/newWindow/{postingId}")
-    public String detail2(@PathVariable Integer postingId, HttpServletRequest request) {
-        Posting posting = compService.공고찾기(postingId);
-        request.setAttribute("posting", posting);
-        return "comp/postingDetailOnly";
+
+    @GetMapping("/comp/company/{compId}")
+    public String findComp(@PathVariable Integer compId, HttpServletRequest request) {
+
+        User company = compService.기업찾기(compId);
+        request.setAttribute("company", company);
+        return "comp/compDetail";
     }
 
 
+    // 공고관리 페이지에서 공고를 눌렀을때 새창으로 뜨는 페이지(JavaScript 사용)
+    @GetMapping("/comp/posting/newWindow/{postingId}")
+    public String detail2(@PathVariable Integer postingId, HttpServletRequest request) {
+        // 공고id로 공고를 찾는다.
+        Posting posting = compService.공고찾기(postingId);
+        // 찾은 공고를 request에 담는다.
+        request.setAttribute("posting", posting);
+        // 상세보기 화면을 새창으로 보여준다. onclick="openNewWindow('/comp/posting/newWindow/{{id}}')"
+        return "comp/postingDetailOnly";
+    }
+    
+    // 공고관리 > 공고 수정 페이지
     @GetMapping("/comp/posting/{postingId}/updateForm")
     public String updateForm(@PathVariable Integer postingId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -154,6 +187,7 @@ public class CompController {
         return "comp/updateForm";
     }
 
+    // 공고관리 > 지원자 보기 페이지
     @GetMapping("/comp/posting/{postingId}/resumeList")
     public String resumeList(@PathVariable Integer postingId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -185,7 +219,8 @@ public class CompController {
 
         return "comp/resumeList";
     }
-    
+
+    // 공고관리 > 입사 제안 보기
     @GetMapping("/comp/posting/{postingId}/offerList")
     public String offerList(@PathVariable Integer postingId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -209,8 +244,7 @@ public class CompController {
         return "comp/offerList";
     }
 
-
-
+    // 기업 인재찾기 페이지
     @GetMapping("/comp/recommend")
     public String recommend(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -240,16 +274,20 @@ public class CompController {
         return "comp/recommend";
     }
 
+    //
     @GetMapping("/resume/{resumeId}")
     public String resumeDetail(@PathVariable Integer resumeId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
 
-        Resume resume = resumeService.이력서찾기(resumeId, sessionAllUser.getId()
-        );
+        Integer userId=0;
+        if(sessionAllUser!=null){userId=sessionAllUser.getId();}
+        Resume resume = resumeService.이력서찾기(resumeId, userId);
+
         request.setAttribute("resume", resume);
         return "comp/resumeDetail";
     }
 
+    // 인재찾기 > 이력서 보기 페이지
     @GetMapping("/resume/newWindow/{resumeId}")
     public String resumeDetail2(@PathVariable Integer resumeId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -265,12 +303,14 @@ public class CompController {
         return "comp/resumeDetailOnly";
     }
 
+    // 기업 회원가입 페이지
     @PostMapping("/comp/join")
     public String join(CompRequest.JoinDTO joinDTO) {
         compService.회원가입(joinDTO);
         return "redirect:/user/loginForm";
     }
 
+    // 기업 공고 등록 POST
     @PostMapping("/comp/posting/save")
     public String postingSave(CompRequest.SaveDTO saveDTO) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -286,6 +326,7 @@ public class CompController {
         return "redirect:/comp/" + sessionComp.getUserId() + "/postingList";
     }
 
+    // 기업 공고 수정 POST
     @PostMapping("/comp/posting/{postingId}/update")
     public String postingUpdate(@PathVariable Integer postingId, CompRequest.UpdateDTO updateDTO) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -313,6 +354,7 @@ public class CompController {
 
     }
 
+    // 기업페이지 수정 POST
     @PostMapping("/comp/main/{compId}/update")
     public @ResponseBody String compUpdate(@PathVariable Integer compId, CompRequest.compUpdateDTO DTO) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -338,6 +380,7 @@ public class CompController {
         return Script.href("/comp/main","정보 수정 완료");
     }
 
+    // 기업 공고 삭제 POST
     @PostMapping("/comp/posting/{postingId}/delete")
     public @ResponseBody String delete(@PathVariable Integer postingId) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -366,6 +409,7 @@ public class CompController {
         throw new MyException("권한이 없습니다.");
     }
 
+    // 공고관리 > 지원자보기 > 합격 POST 
     @PostMapping("/comp/posting/apply/{applyId}/pass")
     public String applyPass(@PathVariable Integer applyId) {
         
@@ -384,6 +428,7 @@ public class CompController {
         return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
     }
 
+    // 공고관리 > 지원자보기 > 불합격 POST
     @PostMapping("/comp/posting/apply/{applyId}/fail")
     public String applyFail(@PathVariable Integer applyId) {
 
@@ -402,7 +447,7 @@ public class CompController {
         return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
     }
 
-  
+    // 공고관리 > 입사제안 > 제안 취소 POST
     @PostMapping("/comp/posting/offer/{recommendId}/cancel")
     public String recommendCancel(@PathVariable Integer recommendId) {
 
@@ -421,6 +466,7 @@ public class CompController {
         return "redirect:/comp/posting/" + postingId + "/offerList";
     }
 
+    // 공고관리 > 지원자보기 > 이력서 상세보기
     @GetMapping("/offer/newWindow/{resumeId}") // TODO : 예외처리
     public String offerDetail2(@PathVariable Integer resumeId, HttpServletRequest request) {
 
@@ -443,6 +489,7 @@ public class CompController {
         return "comp/offerDetailOnly";
     }
 
+    // 공고관리 > 지원자보기 > 이력서 상세보기 > 입사 제안 POST
     @PostMapping("/offer/save")
     public ResponseEntity<String> offerSave(@RequestParam(name = "selectPosting") Integer postingId , @RequestParam(name = "selectResume") Integer resumeId) {
 
@@ -471,7 +518,7 @@ public class CompController {
     } //
 
 
-    // 중복체크
+    // 이메일(아이디) 중복체크
     @GetMapping("/comp/check")
     public @ResponseBody ApiUtil<String> check(String useremail) {
         User user = compService.이메일중복체크(useremail);

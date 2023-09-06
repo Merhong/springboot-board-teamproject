@@ -2,23 +2,16 @@ package shop.mtcoding.boardproject.master;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.ApiUtil;
-import shop.mtcoding.boardproject.bookmark.BookmarkRequset;
 import shop.mtcoding.boardproject.bookmark.BookmarkService;
-import shop.mtcoding.boardproject.bookmark.UserBookmark;
-import shop.mtcoding.boardproject.comp.CompRequest;
-import shop.mtcoding.boardproject.comp.CompService;
 import shop.mtcoding.boardproject.master.MasterResponse.MasterListDTO;
 
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.skill.Skill;
-import shop.mtcoding.boardproject.skill.SkillRepository;
 import shop.mtcoding.boardproject.user.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,14 +45,32 @@ public class MasterController {
 
 
     
+    @GetMapping("/search")
+    public String search(String keyword, HttpServletRequest request) {
+
+        keyword = keyword.trim();
+
+        // if(keyword == null || keyword.isEmpty()){
+        if(keyword == null){
+            return "/master/search";
+        }
+
+        MasterResponse.SearchDTO searchDTO = masterService.전체검색(keyword);
+
+        request.setAttribute("searchDTO", searchDTO);
+        request.setAttribute("keyword", keyword);
+        return "/master/search";
+    }
+
+    // 관리자 페이지, 추가할 기술 이름 관리(코드 테이블)
     @GetMapping("/master/admin")
     public String admin() {
         return "/master/admin";
     }
 
+    // 코드 테이블 스킬 추가 POST
     @PostMapping("/master/skill")
     public String admin(String skillName) {
-        System.out.println("테스트:"+skillName);
         masterService.스킬추가(skillName);
         return "redirect:/";
     }
@@ -99,7 +110,7 @@ public class MasterController {
         return "/master/help";
     }
 
-    //
+    // 고객센터의 문의하기 페이지
     @GetMapping("/question/Form")
     public String questionForm(HttpServletRequest request) {
         User user = null;
@@ -113,16 +124,19 @@ public class MasterController {
         if (session.getAttribute("CompSession") != null) {
             user = (User) session.getAttribute("CompSession");
         }
+        // 세션 유저가 없다면 로그인 화면으로 이동
         if (user.equals(null)) {
             return "redirect:/user/loginForm";
         }
+        // request에 user를 담는다.
         request.setAttribute("user", user);
+        // 리다이렉트
         return "/master/questionForm";
     }
 
+    // 문의 제출하기 POST
     @PostMapping("/question/save")
     public String questionSave(MasterRequest.MasterDTO masterDTO) {
-
         User user = null;
         if (session.getAttribute("sessionUser") != null) {
             user = (User) session.getAttribute("sessionUser");
@@ -136,10 +150,12 @@ public class MasterController {
         if (user.equals(null)) {
             return "redirect:/user/loginForm";
         }
+
         masterService.문의등록(masterDTO, user);
         return "redirect:/question/List";
     }
 
+    // 문의 리스트 페이지
     @GetMapping("/question/List")
     public String questionList(HttpServletRequest request) {
 
@@ -171,6 +187,7 @@ public class MasterController {
         return "/master/questionList";
     }
 
+    // 문의 상세보기 페이지
     @GetMapping("/question/{id}")
     public String questionForm(@PathVariable Integer id, HttpServletRequest request) {
         Master master = masterService.문의넘버로찾기(id);
@@ -178,51 +195,8 @@ public class MasterController {
         return "/master/question";
     }
 
-    @GetMapping("api/user/bookmark")
-    public @ResponseBody ApiUtil<List<Posting>> checkBookmark() {
-        User user = (User) session.getAttribute("sessionUser");
-        if (user == null) {
-            return new ApiUtil<List<Posting>>(false, null);
-        }
-        List<Posting> list = bookmarkService.유저북마크전체(user.getId());
-        if (list != null) {
-            return new ApiUtil<List<Posting>>(true, list);
-        } else {
-            return new ApiUtil<List<Posting>>(false, null);
-        }
-    }
 
-    @GetMapping("api/user/bookmark/{id}/save")
-    public @ResponseBody ApiUtil<String> userBookmarkSave(@PathVariable Integer id) {
-        User user = (User) session.getAttribute("sessionUser");
-        if (user == null) {
-            return new ApiUtil<String>(false, "로그인 안됨");
-        }
-        Integer sucuess = bookmarkService.유저북마크추가(id, user.getId());
 
-        System.out.println("테스트" + sucuess);
-        if (sucuess == 1) {
-            return new ApiUtil<String>(true, "북마크 성공");
-        } else {
-            return new ApiUtil<String>(false, "북마크 실패");
-        }
-    }
-
-    @GetMapping("/api/user/bookmark/{id}/delete")
-    public @ResponseBody ApiUtil<String> userBookmarkDelete(@PathVariable Integer id) {
-        System.out.println("id: " + id);
-        User user = (User) session.getAttribute("sessionUser");
-        if (user == null) {
-            return new ApiUtil<String>(false, "로그인 안됨");
-        }
-        Integer sucuess = bookmarkService.유저북마크제거(id, user.getId());
-        System.out.println("테스트" + sucuess);
-        if (sucuess == 1) {
-            return new ApiUtil<String>(true, "북마크 제거 성공");
-        } else {
-            return new ApiUtil<String>(false, "북마크 제거 실패");
-        }
-    }
 
     @GetMapping("/zzz")
     public String zzz() {
