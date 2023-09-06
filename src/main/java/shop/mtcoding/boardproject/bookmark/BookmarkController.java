@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
@@ -21,6 +19,7 @@ import java.util.List;
 @Controller
 public class BookmarkController {
 
+    /* DI */
     @Autowired
     private BookmarkService bookmarkService;
 
@@ -78,6 +77,7 @@ public class BookmarkController {
         return "comp/bookmarkList";
     }
 
+    // 기업 이력서 북마크 삭제 POST
     @PostMapping("/comp/bookmarkList/delete")
     public String bookmarkDelete(Integer hiddenResumeId) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -94,6 +94,7 @@ public class BookmarkController {
         return "redirect:/comp/" + sessionComp.getUserId() + "/bookmarkList";
     }
 
+    // 인재찾기 > 모두 북마크 POST
     @PostMapping("/comp/bookmarkList/saveAll")
     public String bookmarkSaveALL(@RequestParam(defaultValue = "") List<Integer> ResumeIdList) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -111,10 +112,10 @@ public class BookmarkController {
         return "redirect:/comp/" + sessionComp.getUserId() + "/bookmarkList";
     }
 
-    // @ResponseBody
+    // 공고관리 > 지원자보기 > 이력서 > 북마크 하기 POST
     @PostMapping("/comp/bookmarkList/save")
     public String bookmarkSave(@RequestParam(defaultValue = "") Integer ResumeId, String bookmark2) {
-        System.out.println("테스트a:"+bookmark2);
+        System.out.println("테스트a:" + bookmark2);
 
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
@@ -126,14 +127,18 @@ public class BookmarkController {
             throw new MyException("기업회원만 가능합니다.");
         }
 
-        if(bookmark2.equals("북마크 하기")){bookmarkService.회사북마크추가(sessionComp.getUserId(), ResumeId);}
-        if(bookmark2.equals("북마크 삭제")){bookmarkService.회사별북마크삭제(sessionComp.getUserId(), ResumeId);}
+        if (bookmark2.equals("북마크 하기")) {
+            bookmarkService.회사북마크추가(sessionComp.getUserId(), ResumeId);
+        }
+        if (bookmark2.equals("북마크 삭제")) {
+            bookmarkService.회사별북마크삭제(sessionComp.getUserId(), ResumeId);
+        }
 
         return "redirect:/resume/newWindow/" + ResumeId;
         // return Script.href("/resume/newWindow/"+ResumeId, "북마크 성공");
     }
 
-
+    // 개인 공고 북마크하기 POST
     @PostMapping("/user/bookmarkForm/save")
     public ResponseEntity<String> userbookmarkSave(@RequestParam(defaultValue = "") Integer postingId) {
         Integer userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId(); // 현재 로그인한 사용자의
@@ -147,5 +152,52 @@ public class BookmarkController {
         }
     }
 
+    // 북마크 API, 북마크 (하트)
+    @GetMapping("api/user/bookmark")
+    public @ResponseBody ApiUtil<List<Posting>> checkBookmark() {
+        User user = (User) session.getAttribute("sessionUser");
+        if (user == null) {
+            return new ApiUtil<List<Posting>>(false, null);
+        }
+        List<Posting> list = bookmarkService.유저북마크전체(user.getId());
+        if (list != null) {
+            return new ApiUtil<List<Posting>>(true, list);
+        } else {
+            return new ApiUtil<List<Posting>>(false, null);
+        }
+    }
 
+    // 북마크 API, 북마크 하기 (하트)
+    @GetMapping("api/user/bookmark/{id}/save")
+    public @ResponseBody ApiUtil<String> userBookmarkSave(@PathVariable Integer id) {
+        User user = (User) session.getAttribute("sessionUser");
+        if (user == null) {
+            return new ApiUtil<String>(false, "로그인 안됨");
+        }
+        Integer sucuess = bookmarkService.유저북마크추가(id, user.getId());
+
+        System.out.println("테스트" + sucuess);
+        if (sucuess == 1) {
+            return new ApiUtil<String>(true, "북마크 성공");
+        } else {
+            return new ApiUtil<String>(false, "북마크 실패");
+        }
+    }
+
+    // 북마크 API, 북마크 취소 (하트)
+    @GetMapping("/api/user/bookmark/{id}/delete")
+    public @ResponseBody ApiUtil<String> userBookmarkDelete(@PathVariable Integer id) {
+        System.out.println("id: " + id);
+        User user = (User) session.getAttribute("sessionUser");
+        if (user == null) {
+            return new ApiUtil<String>(false, "로그인 안됨");
+        }
+        Integer sucuess = bookmarkService.유저북마크제거(id, user.getId());
+        System.out.println("테스트" + sucuess);
+        if (sucuess == 1) {
+            return new ApiUtil<String>(true, "북마크 제거 성공");
+        } else {
+            return new ApiUtil<String>(false, "북마크 제거 실패");
+        }
+    }
 }

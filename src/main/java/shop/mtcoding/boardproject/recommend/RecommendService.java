@@ -17,6 +17,7 @@ import java.util.Optional;
 @Service
 public class RecommendService {
 
+    /* DI */
     @Autowired
     private RecommendRepository recommendRepository;
 
