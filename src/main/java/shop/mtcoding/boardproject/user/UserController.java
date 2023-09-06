@@ -83,6 +83,7 @@ public class UserController {
             return "redirect:/user/loginForm";
         }
         User user = userService.회원정보보기(sessionUser.getId());
+
         request.setAttribute("user", user);
         return "user/updateForm";
     }
