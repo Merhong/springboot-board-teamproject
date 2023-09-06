@@ -335,14 +335,14 @@ public class UserController {
         return "redirect:/user/resume/" + resumeId + "/offerList";
     }
 
-    // 11번 지원하기 버튼 POST
-    @PostMapping("/api/user/recommend")
-    public @ResponseBody ApiUtil<List<Posting>> userRecommend(@RequestBody UserRequest.SearchDTO searchDTO,
-            HttpServletResponse response) {
-        List<Posting> postingList = userService.기업추천검색(searchDTO);
-        System.out.println("postingList : " + postingList.size());
-        return new ApiUtil<List<Posting>>(true, postingList);
-
-    }
+    // // 기업추천 검색 POST
+    // @PostMapping("/api/user/recommend")
+    // public @ResponseBody ApiUtil<List<Posting>> userRecommend(@RequestBody UserRequest.SearchDTO searchDTO,
+    //         HttpServletResponse response) {
+    //     List<Posting> postingList = userService.기업추천검색(searchDTO);
+    //     System.out.println("postingList : " + postingList.size());
+    //     return new ApiUtil<List<Posting>>(true, postingList);
+    //
+    // }
   
 }

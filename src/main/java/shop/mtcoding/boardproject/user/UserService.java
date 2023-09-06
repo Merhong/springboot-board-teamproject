@@ -7,7 +7,6 @@ import shop.mtcoding.boardproject._core.vo.MyPath;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.PostingRepository;
-import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
 import shop.mtcoding.boardproject.user.UserRequest.UpdateDTO;
 
@@ -15,13 +14,7 @@ import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -107,18 +100,18 @@ public class UserService {
 
     public List<Posting> 기업추천검색(List<String> skillList, String position) {
         List<Posting> compList = new ArrayList<>();
+        Set<Posting> postingSet = new HashSet<Posting>();
 
         if (skillList.size() == 0 || skillList.get(0).equals("all")) {
             // compList = postingRepository.findAll();
         } else {
-            Set<Posting> postingSet = new LinkedHashSet<>();
+             postingSet = new LinkedHashSet<>();
             for (String skill : skillList) {
                 List<Posting> tempList = postingRepository.joinSkillPosting(skill);
                 postingSet.addAll(tempList);
             }
             compList = new ArrayList<>(postingSet);
         }
-
         // 모든 포지션 또는 특정 포지션으로 필터링
         if (position == null || position.equals("all")) {
             //
@@ -136,9 +129,7 @@ public class UserService {
         for (Posting posting : listPositionPosting) {
             postingSet.add(posting);
         }
-
         List<Posting> PostingList = new ArrayList<>();
-
         Iterator<Posting> iterator = postingSet.iterator();
         while (iterator.hasNext()) {
             Posting posting = iterator.next();
@@ -146,5 +137,4 @@ public class UserService {
         }
         return PostingList;
     }
-
 }
