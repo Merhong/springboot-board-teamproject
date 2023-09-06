@@ -145,51 +145,50 @@
   </div>
 
   <div class="d-flex">
-    {{^sessionComp.compname
-    }}<a
+    {{^sessionComp.compname}}<a
       href="/user/applyForm/{{ postingId }}"
       class="w-50 mb-3 ms-2 btn btn-info"
-      >지원하기</a
-    >
-    <button
-      type="button"
-      action="/user/bookmarkForm/save"
-      method="post"
-      class="btn btn-warning mb-3 bookmark-button"
-      data-posting-id="{{ posting.id }}"
-    >
-      북마크하기</button
-    >{{/sessionComp.compname}}
+      >지원하기</a>
+	  <button type="submit" action="/user/bookmarkForm/save" method="post" class="btn btn-warning mb-3 bookmark-button"
+      data-posting-id="{{ posting.id }}" >
+      북마크하기</button>
+	  {{/sessionComp.compname}}
   </div>
 </div>
 
 <script>
-  // 북마크하기 버튼 클릭 이벤트 핸들러
-  document.addEventListener("click", function (e) {
+	// 북마크하기 버튼 클릭 이벤트 핸들러
+document.addEventListener("click", function (e) {
     if (e.target && e.target.classList.contains("bookmark-button")) {
-      var postingId = e.target.getAttribute("data-posting-id"); // 해당 공고의 ID를 가져옴
-
-      fetch("/user/bookmarkForm/save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: "postingId=" + postingId, // 공고 ID를 서버로 보냄
-      })
+        var postingId = e.target.getAttribute("data-posting-id");
+        fetch("/user/bookmarkForm/save", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: "postingId=" + postingId,
+        })
         .then(function (response) {
-          if (response.ok) {
-            // 북마크 성공
-            alert("북마크에 추가되었습니다.");
-          } else {
-            // 북마크 실패
-            alert("북마크 추가에 실패했습니다.");
-          }
+            if (response.status === 409) {
+                // 이미 북마크된 경우
+                alert("이미 북마크된 공고입니다.");
+            } else if (response.ok) {
+                // 북마크 성공
+                alert("북마크에 추가되었습니다.");
+            } else {
+                // 북마크 실패
+                alert("북마크 추가에 실패했습니다.");
+            }
         })
         .catch(function (error) {
-          console.error("Error:", error);
+            console.error("Error:", error);
         });
     }
-  });
+});
+
+
+
+
 
   let comma = document.querySelector(".comma");
   console.log(comma.value);

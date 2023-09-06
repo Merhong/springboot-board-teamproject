@@ -1,6 +1,7 @@
 package shop.mtcoding.boardproject.bookmark;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,9 @@ public interface UserBookmarkRepository extends JpaRepository<UserBookmark, Inte
     Object findByUserAndPosting(User user, Posting posting);
 
     UserBookmark findByUserIdAndPostingId(@Param("userId") Integer userId, @Param("postingId") Integer postingId);
+
+    @Modifying
+    @Query(value = "insert into userbookmark_tb (posting_id,  user_id ) values (:postiongId, :userId)", nativeQuery = true)
+    Integer saveByPostingAndUserId(@Param("postiongId") Integer postiongId, @Param("userId") Integer userId);
 
 }

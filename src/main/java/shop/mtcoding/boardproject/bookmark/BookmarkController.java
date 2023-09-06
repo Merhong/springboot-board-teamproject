@@ -1,6 +1,8 @@
 package shop.mtcoding.boardproject.bookmark;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -95,12 +97,18 @@ public class BookmarkController {
         // return Script.href("/resume/newWindow/"+ResumeId, "북마크 성공");
     }
 
-    @PostMapping("/user/bookmarkForm/save")
-    public String userbookmarkSave(@RequestParam(defaultValue = "") Integer postingId) {
-        Integer userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId(); // 현재 로그인한 사용자의 ID를 가져옴
-        bookmarkService.개인북마크추가(userId, postingId);
-        
-        return "redirect:/resume/newWindow/"+postingId; // 개인 북마크 추가 후 개인 프로필 페이지로 리다이렉트
-    }
+    
+ @PostMapping("/user/bookmarkForm/save")
+public ResponseEntity<String> userbookmarkSave(@RequestParam(defaultValue = "") Integer postingId) {
+    Integer userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId(); // 현재 로그인한 사용자의 ID를 가져옴
 
+    try {
+        bookmarkService.유저북마크추가(userId, postingId);
+        return ResponseEntity.ok("북마크에 추가되었습니다.");
+    } catch (MyException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
+}
+
+    
 }
