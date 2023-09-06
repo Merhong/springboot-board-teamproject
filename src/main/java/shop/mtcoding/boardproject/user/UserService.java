@@ -29,6 +29,7 @@ public class UserService {
                 .password(joinDTO.getPassword())
                 .username(joinDTO.getUsername())
                 .tel(joinDTO.getTel())
+                .position(joinDTO.getPosition())
                 .build();
 
         // JPA save

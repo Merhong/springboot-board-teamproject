@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface RecommendRepository extends JpaRepository<Recommend, Integer> {
 
-    List<Recommend> findByPostingId(@Param("postingId") Integer postingId);   
+    List<Recommend> findByPostingId(@Param("postingId") Integer postingId);
+
+    List<Recommend> findByResumeId(@Param("resumeId") Integer resumeId);
 
     Recommend findByPostingIdAndResumeId(@Param("postingId") Integer postingId, @Param("resumeId") Integer resumeId);
 

@@ -7,7 +7,8 @@ import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.Image;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyRepository;
-
+import shop.mtcoding.boardproject.bookmark.CompBookmark;
+import shop.mtcoding.boardproject.bookmark.CompBookmarkRepository;
 import shop.mtcoding.boardproject.bookmark.UserBookmark;
 import shop.mtcoding.boardproject.bookmark.UserBookmarkRepository;
 
@@ -54,7 +55,8 @@ public class CompService {
     @Autowired
     private RecommendRepository recommendRepository;
 
-
+    @Autowired
+    private CompBookmarkRepository compBookmarkRepository;
 
 
     @Transactional
@@ -291,6 +293,17 @@ public class CompService {
         }
 
         return userList;
+
+    }
+
+    public Boolean 북마크중복체크(Integer compId, Integer resumeId) {
+
+        if(compBookmarkRepository.findByUserIdAndResumeId(compId, resumeId) == null){
+            // System.out.println("테스트: 기업:"+compId+"  이력서:"+resumeId);
+            return true;
+        } else{
+            return false;
+        }
 
     }
 

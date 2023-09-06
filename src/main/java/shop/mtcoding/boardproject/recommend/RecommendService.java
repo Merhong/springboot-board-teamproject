@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.Resume;
@@ -94,7 +95,51 @@ public class RecommendService {
         return "진행시켜";
     }
 
+    public List<Recommend> 이력서받은오퍼찾기(Integer resumeId) {
+        List<Recommend> recommendList = recommendRepository.findByResumeId(resumeId);
+        return recommendList;
+    }
 
+    @Transactional
+    public Integer 오퍼수락(Integer recommendId, Integer userId) {
+        Optional<Recommend> recommendOP = recommendRepository.findById(recommendId);
+        if (recommendOP.isPresent()) {
+          
+            Recommend recommend = recommendOP.get();
 
+            if(recommend.getResume().getUser().getId() != userId){
+                throw new MyException("권한이 없습니다.");
+            }
+            if(!(recommend.getStatement().equals("대기"))){
+                throw new MyException("이미 답변했습니다.");
+            }
+
+            recommend.setStatement("수락");
+            return recommend.getResume().getId();
+        } else {
+            throw new MyException(recommendId + "없음");
+        }
+    }
+
+    @Transactional
+    public Integer 오퍼거절(Integer recommendId, Integer userId) {
+        Optional<Recommend> recommendOP = recommendRepository.findById(recommendId);
+        if (recommendOP.isPresent()) {
+          
+            Recommend recommend = recommendOP.get();
+
+            if(recommend.getResume().getUser().getId() != userId){
+                throw new MyException("권한이 없습니다.");
+            }
+            if(!(recommend.getStatement().equals("대기"))){
+                throw new MyException("이미 답변했습니다.");
+            }
+
+            recommend.setStatement("거절");
+            return recommend.getResume().getId();
+        } else {
+            throw new MyException(recommendId + "없음");
+        }
+    }
 
 }

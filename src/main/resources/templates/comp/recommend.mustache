@@ -114,12 +114,12 @@
 					<div class="d-flex justify-content-between">
 						<div>
 							<div class="m-auto">
-								<span class="badge bg-danger">{{position}}</span>
+								<span class="badge bg-danger">{{#position}}{{position}}{{/position}}</span>
 								{{#userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/userSkillList}}
 							</div>
 
 							<div class="d-flex mb-1">
-								<div>'<b>{{username}}</b>'님의 공개 이력서 모음</div>
+								<div>'<b>{{#username}}{{username}}{{/username}}</b>'님의 공개 이력서 모음</div>
 							</div>
 
 						</div>

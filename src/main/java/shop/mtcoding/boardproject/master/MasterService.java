@@ -21,6 +21,8 @@ import shop.mtcoding.boardproject.user.User;
 import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
+import shop.mtcoding.boardproject.skill.Skill;
+import shop.mtcoding.boardproject.skill.SkillRepository;
 
 
 @Service
@@ -31,6 +33,9 @@ public class MasterService {
 
     @Autowired
     private PostingRepository postingRepository;
+
+    @Autowired
+    private SkillRepository skillRepository;
 
     @Autowired
     private PostingQueryRepository postingQueryRepository;
@@ -149,5 +154,13 @@ public class MasterService {
 
         List<Master> masterList = masterRepository.findByUserId(Id);
         return masterList;
+    }
+
+
+
+    public void 스킬추가(String skillName) {
+        Skill skill = new Skill();
+        skill.setSkillname(skillName);
+        skillRepository.save(skill);
     }
 }

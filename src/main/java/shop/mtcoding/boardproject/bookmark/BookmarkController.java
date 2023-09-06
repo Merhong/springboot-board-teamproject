@@ -113,7 +113,9 @@ public class BookmarkController {
 
     // @ResponseBody
     @PostMapping("/comp/bookmarkList/save")
-    public String bookmarkSave(@RequestParam(defaultValue = "") Integer ResumeId) {
+    public String bookmarkSave(@RequestParam(defaultValue = "") Integer ResumeId, String bookmark2) {
+        System.out.println("테스트a:"+bookmark2);
+
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
 
@@ -124,7 +126,8 @@ public class BookmarkController {
             throw new MyException("기업회원만 가능합니다.");
         }
 
-        bookmarkService.회사북마크추가(sessionComp.getUserId(), ResumeId);
+        if(bookmark2.equals("북마크 하기")){bookmarkService.회사북마크추가(sessionComp.getUserId(), ResumeId);}
+        if(bookmark2.equals("북마크 삭제")){bookmarkService.회사별북마크삭제(sessionComp.getUserId(), ResumeId);}
 
         return "redirect:/resume/newWindow/" + ResumeId;
         // return Script.href("/resume/newWindow/"+ResumeId, "북마크 성공");

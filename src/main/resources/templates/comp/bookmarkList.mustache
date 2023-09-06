@@ -16,20 +16,20 @@
 	{{#resumeList}}
 	<div class="d-flex border border-info m-3 mb-4 p-2 ps-0 justify-content-between bg-info">
 		<div class="container">
-			<div class="">'<b class="fs-5">{{user.username}}</b>'님의 '<b class="fs-5">{{title}}</b>'입니다.</div>
+			<div class="">'<b class="fs-5">{{#user.username}}{{user.username}}{{/user.username}}</b>'님의 '<b class="fs-5">{{#title}}{{title}}{{/title}}</b>'입니다.</div>
 			<hr class="m-0 mb-2">
 
 			<div class="d-flex align-items-center">
 
 				<a href="javascript:void(0);" class="align-self-start col-6 btn btn-light" onclick="openNewWindow('/resume/newWindow/{{id}}')">
 					<div>
-						<span class="badge bg-success">{{career}}</span>
-						<span class="badge bg-success">{{grade}}</span>
-						<span class="badge bg-success">{{user.address}}</span>
+						<span class="badge bg-success">{{#career}}{{career}}{{/career}}</span>
+						<span class="badge bg-success">{{#grade}}{{grade}}{{/grade}}</span>
+						<span class="badge bg-success">{{#user.address}}{{user.address}}{{/user.address}}</span>
 					</div>
 					<div>
-						<span class="badge bg-primary">{{user.position}}</span>
-						<span class="badge bg-warning">{{user.birth}}</span>
+						<span class="badge bg-primary">{{#user.position}}{{user.position}}{{/user.position}}</span>
+						<span class="badge bg-warning">{{#user.birth}}{{user.birth}}{{/user.birth}}</span>
 					</div>
 					<div>
 						{{#user.userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/user.userSkillList}}
@@ -37,7 +37,7 @@
 				</a>
 
 				<div class="text-break ps-3 pe-3">
-					{{personalStatement}}
+					{{#personalStatement}}{{personalStatement}}{{/personalStatement}}
 				</div>
 
 			</div>

@@ -16,6 +16,8 @@ import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.comp.CompService;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.recommend.Recommend;
+import shop.mtcoding.boardproject.recommend.RecommendService;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeService;
 
@@ -38,6 +40,9 @@ public class UserController {
 
     @Autowired
     private CompService compService;
+
+    @Autowired
+    private RecommendService recommendService;
 
     @Autowired
     private HttpSession session;
@@ -162,11 +167,9 @@ public class UserController {
         System.out.println("세션 " + sessionUser.getRole());
 
         // 기업 로그인 세션 관리용 sessionAllUser
-        session.setAttribute("sessionAllUser", sessionUser);
+        session.setAttribute("sessionAllUser", sessionUser); // 개인/기업/관리자 모두 가지고있는거
 
         // 로그인 사용자의 역할(role)에 따라 세션을 구분합니다.
-
-        session.setAttribute("sessionAllUser", sessionUser); // 개인/기업/관리자 모두 가지고있는거
         
         if (sessionUser != null) {
             if (sessionUser.getRole() == 0) {
@@ -219,8 +222,9 @@ public class UserController {
     @GetMapping("/logout")
     public String logout() {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        User sessionAdmin = (User) session.getAttribute("sessionAdmin");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
-        if (sessionUser == null && sessionComp == null) {
+        if (sessionUser == null && sessionComp == null && sessionAdmin == null) {
             return "redirect:/user/loginForm";
         }
         session.invalidate(); // 세션 무효화(세션 전체를 비움 - 서랍 비우는 거)
@@ -256,4 +260,54 @@ public class UserController {
 
         return new ApiUtil<String>(true, "이메일을 사용 할 수 있습니다.");
     }
+    
+    @GetMapping("/user/resume/{resumeId}/offerList")
+    public String offerListUser(@PathVariable Integer resumeId, HttpServletRequest request) {
+        
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+
+        Resume resume = resumeService.이력서찾기(resumeId, sessionAllUser.getId());
+        if (sessionAllUser.getId() != resume.getUser().getId()) {
+            throw new MyException("내 이력서가 아닙니다.");
+        }
+        request.setAttribute("resume", resume);
+        
+        List<Recommend> recommendList = recommendService.이력서받은오퍼찾기(resumeId);
+        request.setAttribute("recommendList", recommendList);
+        
+        return "user/offerList";
+    }
+
+    @PostMapping("/user/resume/offer/{recommendId}/fail")
+    public String offerFail(@PathVariable Integer recommendId) {
+
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+
+        if (sessionAllUser == null) {
+            return "redirect:/user/loginForm";
+        }
+
+        Integer resumeId = recommendService.오퍼거절(recommendId, sessionAllUser.getId());
+
+        return "redirect:/user/resume/" + resumeId + "/offerList";
+    }
+
+    @PostMapping("/user/resume/offer/{recommendId}/pass")
+    public String offerPass(@PathVariable Integer recommendId) {
+
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+
+        if (sessionAllUser == null) {
+            return "redirect:/user/loginForm";
+        }
+
+        Integer resumeId = recommendService.오퍼수락(recommendId, sessionAllUser.getId());
+
+        return "redirect:/user/resume/" + resumeId + "/offerList";
+    }
+
+
+
+
+
 }

@@ -50,6 +50,20 @@ public class MasterController {
     @Autowired
     private HttpSession session;
 
+
+    
+    @GetMapping("/master/admin")
+    public String admin() {
+        return "/master/admin";
+    }
+
+    @PostMapping("/master/skill")
+    public String admin(String skillName) {
+        System.out.println("테스트:"+skillName);
+        masterService.스킬추가(skillName);
+        return "redirect:/";
+    }
+
     // 인덱스(홈) 페이지
     @GetMapping("/")
     public String index(@RequestParam(defaultValue = "all") List<String> skillList,
