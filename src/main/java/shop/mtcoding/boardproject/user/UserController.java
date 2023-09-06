@@ -166,11 +166,9 @@ public class UserController {
         System.out.println("세션 " + sessionUser.getRole());
 
         // 기업 로그인 세션 관리용 sessionAllUser
-        session.setAttribute("sessionAllUser", sessionUser);
+        session.setAttribute("sessionAllUser", sessionUser); // 개인/기업/관리자 모두 가지고있는거
 
         // 로그인 사용자의 역할(role)에 따라 세션을 구분합니다.
-
-        session.setAttribute("sessionAllUser", sessionUser); // 개인/기업/관리자 모두 가지고있는거
         
         if (sessionUser != null) {
             if (sessionUser.getRole() == 0) {
