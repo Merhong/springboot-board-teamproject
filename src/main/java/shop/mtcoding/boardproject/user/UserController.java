@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyService;
@@ -16,6 +20,9 @@ import shop.mtcoding.boardproject.comp.CompService;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeService;
+import shop.mtcoding.boardproject.skill.PostingSkill;
+import shop.mtcoding.boardproject.skill.Skill;
+import shop.mtcoding.boardproject.skill.SkillService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,22 +45,46 @@ public class UserController {
     private CompService compService;
 
     @Autowired
+    private SkillService skillService;
+
+    @Autowired
     private HttpSession session;
 
     // 17_개인기업추천 화면
     @GetMapping("/user/recommendForm")
-    public String userRecommendForm() {
+    public String userRecommendForm(@RequestParam(defaultValue = "all") List<String> skillList,
+            @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
+
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/user/loginForm";
         }
+
+        List<Skill> sl = skillService.스킬이름전부();
+        request.setAttribute("skillList", sl);
+
+        request.setAttribute("position", position);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(skillList);
+            // System.out.println("테스트"+json);
+            request.setAttribute("json", json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        List<Posting> compList = userService.기업추천검색(skillList, position);
+        request.setAttribute("compList", compList);
+        System.out.println("검색1: " + compList);
+        // 공고에 해당하는 스킬 정보 가져오기
+        for (Posting posting : compList) {
+            List<PostingSkill> postingSkills = skillService.공고별스킬조회(posting.getId());
+            request.setAttribute("postingSkills", postingSkills);
+            System.out.println("검색2: " + postingSkills);
+        }
+
         return "user/recommendForm";
     }
-    // 14번 이력서 수정 버튼 POST
-
-    // 14번 이력서 삭제 버튼 POST
-
-    // 13번 사진수정 버튼 POST
 
     // 12번 수정하기 버튼 POST
     @PostMapping("/user/update")
