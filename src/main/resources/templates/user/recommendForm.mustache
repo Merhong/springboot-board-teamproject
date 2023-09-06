@@ -30,7 +30,7 @@
             <div class="form-check d-inline-block ms-3 me-2">
               <label class="form-check-label">
                 <input
-                  class="form-check-input"
+                  class="skillFind form-check-input"
                   type="checkbox"
                   name="skillList"
                   id="skillAll"
@@ -53,7 +53,7 @@
                     id="{{ skillname }}"
                     name="skillList"
                     value="{{ skillname }}"
-                    onclick="skillAllCheck()"
+                    onclick="skillAllCheckAndSelect()"
                   />
                   {{ skillname }}</label
                 >
@@ -193,21 +193,7 @@
           </div>
         </div>
         <div id="result" class="mb-12 d-flex flex-wrap">
-          <div class="border border-info m-2 ps-2 pe-2 pt-1">
-            1
-            <div>11</div>
-            <div>11</div>
-          </div>
-          <div class="border border-info m-2 ps-2 pe-2 pt-1">
-            2
-            <div>22</div>
-            <div>22</div>
-          </div>
-          <div class="border border-info m-2 ps-2 pe-2 pt-1">
-            3
-            <div>33</div>
-            <div>33</div>
-          </div>
+
         </div>
 
         <div class="col-lg-3 col-md-4 col-sm-6">
@@ -253,6 +239,8 @@
 </div>
 
 <script>
+
+
   function skillCheck(selectAll) {
     let skillAll = document.querySelectorAll(".skillFind");
     // let allCheck=document.querySelector("#all");
@@ -260,7 +248,9 @@
     skillAll.forEach((element) => {
       element.checked = selectAll.checked;
     });
+	select(); 
   }
+
   function skillAllCheck() {
     let allCheck = document.querySelector("#skillAll");
     let skillAll = document.querySelectorAll(".skillFind");
@@ -363,5 +353,23 @@
       techEl.append(optionEl);
     }
   }
+
+  
+function skillAllCheckAndSelect(){
+skillAllCheck();
+select();
+}
+
+{{! function skillCheckAndSelect(select){
+skillCheck(select);
+select();
+} }}
+
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+
+	radioButtons.forEach(radioButton => {
+        radioButton.addEventListener('change', select);
+    });
+
 </script>
 {{> layout/footer}}

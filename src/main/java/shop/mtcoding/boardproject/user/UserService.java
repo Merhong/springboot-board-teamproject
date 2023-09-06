@@ -108,17 +108,28 @@ public class UserService {
 
         List<String> skillList = searchDTO.getSkillName();
         String position = searchDTO.getPosition();
+        System.out.println("skillList : " + skillList);
+        System.out.println("position : " + position);
+
         HashSet<Posting> postingSet = new HashSet<Posting>();
-
-        List<Posting> listSkillPosting = postingQueryRepository.joinSkillPosting(skillList);
-        for (Posting posting : listSkillPosting) {
-            postingSet.add(posting);
-        }
         List<Posting> listPositionPosting = postingRepository.findByPosition(position);
-        for (Posting posting : listPositionPosting) {
-            postingSet.add(posting);
-        }
+        List<Posting> listSkillPosting = postingQueryRepository.joinSkillPosting(skillList);
 
+        if (position.equals("all")) {
+            for (Posting posting : listSkillPosting) {
+                postingSet.add(posting);
+            }
+        }
+        if (!position.equals("all")) {
+            for (Posting posting : listSkillPosting) {
+                System.out.println("posting.getPosition() : " + posting.getPosition());
+                System.out.println("position : " + position);
+                if (posting.getPosition().equals(position)) {
+                    postingSet.add(posting);
+                }
+            }
+            System.out.println("postingSet size" + postingSet.size());
+        }
         List<Posting> PostingList = new ArrayList<>();
 
         Iterator<Posting> iterator = postingSet.iterator();
