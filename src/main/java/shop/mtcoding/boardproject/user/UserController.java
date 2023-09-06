@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyService;
@@ -20,9 +24,16 @@ import shop.mtcoding.boardproject.recommend.Recommend;
 import shop.mtcoding.boardproject.recommend.RecommendService;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeService;
+import shop.mtcoding.boardproject.skill.PostingSkill;
+import shop.mtcoding.boardproject.skill.Skill;
+import shop.mtcoding.boardproject.skill.SkillService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -45,15 +56,47 @@ public class UserController {
     private RecommendService recommendService;
 
     @Autowired
+    private SkillService skillService;
+
+    @Autowired
     private HttpSession session;
 
     // 17_개인기업추천 화면
     @GetMapping("/user/recommendForm")
-    public String userRecommendForm() {
+    public String userRecommendForm(
+            @RequestParam(defaultValue = "all") List<String> skillList,
+            @RequestParam(defaultValue = "all") String position,
+            HttpServletRequest request) {
+
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/user/loginForm";
         }
+
+        List<Skill> sl = skillService.스킬이름전부();
+
+        request.setAttribute("skillList", sl);
+
+        request.setAttribute("position", position);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(skillList);
+            // System.out.println("테스트"+json);
+            request.setAttribute("json", json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        // List<Posting> compList = userService.기업추천검색(User);
+
+        // request.setAttribute("compList", compList);
+        // // 공고에 해당하는 스킬 정보 가져오기
+        // for (Posting posting : compList) {
+
+        // List<PostingSkill> postingSkills = skillService.공고별스킬조회(posting.getId());
+        // request.setAttribute("postingSkills", postingSkills);
+        // }
+
         return "user/recommendForm";
     }
 
@@ -146,6 +189,7 @@ public class UserController {
         session.setAttribute("sessionAllUser", sessionUser); // 개인/기업/관리자 모두 가지고있는거
 
         // 로그인 사용자의 역할(role)에 따라 세션을 구분합니다.
+
         if (sessionUser != null) {
             if (sessionUser.getRole() == 0) {
                 // 관리자의 경우 sessionAdmin 세션을 설정합니다.
@@ -159,6 +203,7 @@ public class UserController {
                 session.setAttribute("CompSession", sessionUser);
                 System.out.println("x : 기업 로그인");
             }
+
 
         // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
         if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
@@ -223,6 +268,7 @@ public class UserController {
         return new ApiUtil<String>(true, "이메일을 사용 할 수 있습니다.");
     }
 
+
     // 개인 이력서를 보고 기업에서 입사제안 하는 페이지
     @GetMapping("/user/resume/{resumeId}/offerList")
     public String offerListUser(@PathVariable Integer resumeId, HttpServletRequest request) {
@@ -274,5 +320,14 @@ public class UserController {
         return "redirect:/user/resume/" + resumeId + "/offerList";
     }
 
+    // 11번 지원하기 버튼 POST
+    @PostMapping("/api/user/recommend")
+    public @ResponseBody ApiUtil<List<Posting>> userRecommend(@RequestBody UserRequest.SearchDTO searchDTO,
+            HttpServletResponse response) {
+        List<Posting> postingList = userService.기업추천검색(searchDTO);
+        System.out.println("postingList : " + postingList.size());
+        return new ApiUtil<List<Posting>>(true, postingList);
 
+    }
+  
 }

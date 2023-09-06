@@ -1,10 +1,13 @@
 package shop.mtcoding.boardproject.user;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.sql.Date;
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.Date;
+import lombok.Getter;
+import lombok.Setter;
+import shop.mtcoding.boardproject.skill.Skill;
 
 public class UserRequest {
 
@@ -37,5 +40,13 @@ public class UserRequest {
         private String address;
         private Date birth;
         private MultipartFile pto;
+    }
+
+    @Getter
+    @Setter
+    public static class SearchDTO {
+
+        private List<String> skillName;
+        private String position;
     }
 }

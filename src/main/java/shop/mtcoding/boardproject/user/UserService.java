@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.vo.MyPath;
+import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingQueryRepository;
+import shop.mtcoding.boardproject.posting.PostingRepository;
+import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
 import shop.mtcoding.boardproject.user.UserRequest.UpdateDTO;
 
@@ -11,6 +15,12 @@ import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -19,6 +29,12 @@ public class UserService {
     /* DI */
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PostingRepository postingRepository;
+
+    @Autowired
+    PostingQueryRepository postingQueryRepository;
 
     @Transactional
     public void 회원가입(UserRequest.JoinDTO joinDTO) {
@@ -86,5 +102,30 @@ public class UserService {
         // 쿼리를 통해 이메일에 해당하는 user 리턴
         User user = userRepository.FindByemail(email);
         return user;
+    }
+
+    public List<Posting> 기업추천검색(UserRequest.SearchDTO searchDTO) {
+
+        List<String> skillList = searchDTO.getSkillName();
+        String position = searchDTO.getPosition();
+        HashSet<Posting> postingSet = new HashSet<Posting>();
+
+        List<Posting> listSkillPosting = postingQueryRepository.joinSkillPosting(skillList);
+        for (Posting posting : listSkillPosting) {
+            postingSet.add(posting);
+        }
+        List<Posting> listPositionPosting = postingRepository.findByPosition(position);
+        for (Posting posting : listPositionPosting) {
+            postingSet.add(posting);
+        }
+
+        List<Posting> PostingList = new ArrayList<>();
+
+        Iterator<Posting> iterator = postingSet.iterator();
+        while (iterator.hasNext()) {
+            Posting posting = iterator.next();
+            PostingList.add(posting);
+        }
+        return PostingList;
     }
 }
