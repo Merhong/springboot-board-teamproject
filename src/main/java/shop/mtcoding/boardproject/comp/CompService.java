@@ -18,7 +18,8 @@ import shop.mtcoding.boardproject.comp.CompRequest.compUpdateDTO;
 
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
-import shop.mtcoding.boardproject.resume.ResumeRepository;
+import shop.mtcoding.boardproject.recommend.Recommend;
+import shop.mtcoding.boardproject.recommend.RecommendRepository;
 import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.skill.PostingSkillRepository;
 import shop.mtcoding.boardproject.skill.Skill;
@@ -26,7 +27,6 @@ import shop.mtcoding.boardproject.skill.SkillRepository;
 import shop.mtcoding.boardproject.user.User;
 import shop.mtcoding.boardproject.user.UserRepository;
 
-import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -50,9 +50,12 @@ public class CompService {
 
     @Autowired
     private UserBookmarkRepository userBookmarkRepository;
-
+    
     @Autowired
-    private HttpSession session;
+    private RecommendRepository recommendRepository;
+
+
+
 
     @Transactional
     public void 회원가입(JoinDTO joinDTO) {
@@ -81,10 +84,10 @@ public class CompService {
     }
 
     @Transactional
-    public void 공고작성(SaveDTO saveDTO) {
+    public void 공고작성(SaveDTO saveDTO, Integer compId) {
         Posting posting = new Posting();
         posting.setUser(new User());
-        posting.getUser().setId(((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId());
+        posting.getUser().setId(compId);
         posting.setTitle(saveDTO.getTitle());
         posting.setDesc(saveDTO.getDesc());
         posting.setPosition(saveDTO.getPosition());
@@ -188,7 +191,7 @@ public class CompService {
 
 
     @Transactional
-    public void 기업정보수정(Integer userId, compUpdateDTO DTO) {
+    public CompRequest.SessionCompDTO 기업정보수정(Integer userId, compUpdateDTO DTO) {
         Optional<User> userOP = userRepository.findById(userId);
 
         String fileName = Image.updateImage(DTO);
@@ -201,6 +204,7 @@ public class CompService {
             if (fileName != null) { // 사진 안넣으면 기존 사진 유지하게
                 user.setPhoto(fileName);
             }
+
             CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                     .userId(user.getId())
                     .email(user.getEmail())
@@ -212,7 +216,8 @@ public class CompService {
                     .homepage(user.getHomepage())
                     .role(user.getRole())
                     .build();
-            session.setAttribute("sessionComp", sessionComp);
+            
+            return sessionComp;
 
         } else {
             throw new MyException(userId + "없음");
@@ -221,23 +226,18 @@ public class CompService {
 
     @Transactional
     public void 공고삭제(Integer postingId) {
-        // TODO : 공고를 북마크한것도 지우거나 연결끊어야함
 
         List<UserBookmark> userBookmarkList = userBookmarkRepository.findByPostingId(postingId);
-        for (UserBookmark userbookmark : userBookmarkList) {
-            userbookmark.setPosting(null);
-        }
+        userBookmarkRepository.deleteAll(userBookmarkList);
 
         List<PostingSkill> skillList = postingSkillRepository.findByPostingId(postingId);
-        for (PostingSkill skill : skillList) {
-            skill.setPosting(null);
-        }
+        postingSkillRepository.deleteAll(skillList);
 
         List<Apply> applyList = applyRepository.findByPostingId(postingId);
-        for (Apply apply : applyList) {
-            apply.setPosting(null);
-        }
-
+        applyRepository.deleteAll(applyList);
+        
+        List<Recommend> recommendList = recommendRepository.findByPostingId(postingId);
+        recommendRepository.deleteAll(recommendList);
 
 
         try {
@@ -253,25 +253,13 @@ public class CompService {
     }
 
     public List<Apply> 공고지원신청찾기(Integer postingId) {
-
-
         List<Apply> applyList = applyRepository.findByPostingId(postingId);
-
-        // System.out.println("테스트33:"+applyList);
-        // System.out.println("테스트33:"+applyList.get(0));
-        // System.out.println("테스트33:"+applyList.get(0).getId());
-        // System.out.println("테스트33:"+applyList.get(0).getStatement());
-        // System.out.println("테스트33:"+applyList.get(0).getPosting().getTitle());
-        // System.out.println("테스트33:"+applyList.get(0).getResume().getTitle());
-
-        // List<Resume> resumeList = new ArrayList<>();
-
-        // while(applyList.size()>0){
-        //     resumeList.add(applyList.get(0).getResume());
-        //     applyList.remove(0);
-        // }
-
         return applyList;
+    }
+
+    public List<Recommend> 공고로제안한목록찾기(Integer postingId) {
+        List<Recommend> recommendList = recommendRepository.findByPostingId(postingId);
+        return recommendList;
     }
 
 

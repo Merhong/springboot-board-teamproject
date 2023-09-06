@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.apply.ApplyService;
@@ -76,6 +78,7 @@ public class UserController {
             return "redirect:/user/loginForm";
         }
         User user = userService.회원정보보기(sessionUser.getId());
+
         request.setAttribute("user", user);
         return "user/updateForm";
     }
@@ -138,15 +141,33 @@ public class UserController {
     // 5_로그인 화면
     @GetMapping("/user/loginForm")
     public String loginForm() {
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        if (sessionAllUser != null) {
+            return "redirect:/";
+        } // 동시 로그인 방지
+
         return "user/loginForm"; // view 파일 호출 user/loginForm 파일 호출
     }
 
     // 로그인
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO loginDTO, HttpSession session) {
+
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        if (sessionAllUser != null) {
+            throw new MyException("이미 로그인 상태임");
+        } // 동시 로그인 방지
+
         User sessionUser = userService.로그인(loginDTO);
         System.out.println("세션 " + sessionUser.getRole());
+
+        // 기업 로그인 세션 관리용 sessionAllUser
+        session.setAttribute("sessionAllUser", sessionUser);
+
         // 로그인 사용자의 역할(role)에 따라 세션을 구분합니다.
+
+        session.setAttribute("sessionAllUser", sessionUser); // 개인/기업/관리자 모두 가지고있는거
+        
         if (sessionUser != null) {
             if (sessionUser.getRole() == 0) {
                 // 관리자의 경우 sessionAdmin 세션을 설정합니다.
@@ -161,8 +182,18 @@ public class UserController {
                 System.out.println("x : 기업 로그인");
             }
 
-            // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
-            if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
+        if (sessionUser.getRole() == 0) {
+            session.setAttribute("sessionAdmin", sessionUser);
+        }
+        if (sessionUser.getRole() == 1) {
+            session.setAttribute("sessionUser", sessionUser);
+        }
+        if (sessionUser.getRole() == 2) {
+            session.setAttribute("CompSession", sessionUser);
+        }
+
+        // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
+        if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
                 CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                         .userId(sessionUser.getId())
                         .email(sessionUser.getEmail())

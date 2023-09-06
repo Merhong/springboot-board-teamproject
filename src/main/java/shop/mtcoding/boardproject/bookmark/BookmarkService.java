@@ -1,12 +1,16 @@
 package shop.mtcoding.boardproject.bookmark;
 
+import org.aspectj.apache.bcel.generic.RET;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 import shop.mtcoding.boardproject.user.User;
@@ -30,6 +34,10 @@ public class BookmarkService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PostingRepository postingRepository;
+
 
     public List<Posting> 유저북마크전체(Integer id) {
         Optional<User> user = userRepository.findById(id);
@@ -118,6 +126,7 @@ public class BookmarkService {
         compBookmarkRepository.save(compBookmark);
     }
 
+
     public List<UserBookmark> 유저가북마크한공고(Integer userId) {
 
         List<UserBookmark> list = userBookmarkRepository.findAllByUserId(userId);
@@ -133,10 +142,23 @@ public class BookmarkService {
         return sucuess;
     }
 
+    /**
+     * @param userId
+     * @param postingId
+     */
     @Transactional
     public Integer 유저북마크추가(Integer postingId, Integer userId) {
-        Integer sucuess = userBookmarkRepository.saveByPostingAndUserId(postingId, userId);
-        return sucuess;
+        int success = 0;
+        // 이미 북마크가 있는지 확인합니다.
+        if (userBookmarkRepository.findByUserIdAndPostingId(postingId, userId) != null) {
+            // 이미 북마크된 경우 409 (Conflict) 응답을 반환합니다.
+            throw new MyException("이미 북마크된 공고입니다.", HttpStatus.CONFLICT);
+        } else {
+            // 북마크가 없으면 저장한다.
+            success = userBookmarkRepository.saveByPostingAndUserId(postingId, userId);
+        }
+
+        return success;
     }
 
 }

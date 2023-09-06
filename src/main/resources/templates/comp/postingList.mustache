@@ -9,6 +9,11 @@
 			<h1 class="text-center mt-2">공고관리</h1>
 
 			
+			{{^postingList}}
+			<h3 class="text-center mt-5 mb-5">
+				등록한 공고가 없습니다.
+			</h3>
+			{{/postingList}}
 
 
 			{{#postingList}}
@@ -33,6 +38,7 @@
 
 				<div class="d-flex flex-column justify-content-between">
 					<a href="/comp/posting/{{id}}/resumeList" class="btn btn-success btn-sm mb-1">지원자 보기</a>
+					<a href="/comp/posting/{{id}}/offerList" class="btn btn-primary btn-sm mb-1">입사 제안 보기</a>
 					<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning btn-sm mb-1">수정하기</a>
 					<form action="/comp/posting/{{id}}/delete" method="post">
 						<input class="btn btn-danger btn-sm w-100" type="submit" value="삭제하기">
@@ -53,7 +59,7 @@
 
 
 	function openNewWindow(url) {
-	  var width = 600; // 새 창의 가로 크기
+	  var width = 800; // 새 창의 가로 크기
 	  var height = 1100; // 새 창의 세로 크기
 	  var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
 	  var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치

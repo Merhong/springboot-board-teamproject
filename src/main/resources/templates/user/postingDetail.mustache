@@ -13,9 +13,12 @@
 
 			<div class="col-5 p-4 ms-4 bg-info">
 				<div>
-					<button type="button" class="btn btn-warning mb-3">
+					<form action="user/bookmarkForm/save" method="POST" id="bookmarkForm"></form>
+					<button type="button" class="btn btn-warning mb-3 bookmark-button" data-posting-id="{{ posting.id }}">
 						북마크하기
 					</button>
+						
+					</form>
 				</div>
 				<div>
 					<button type="button" class="btn btn-warning mb-3">
@@ -40,6 +43,5 @@
 
 	<div class="col-xl-3 col-lg-2 col-md-1"></div>
 </div>
-
 
 {{> layout/footer}}
