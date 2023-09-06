@@ -17,7 +17,7 @@ public class PostingQueryRepository {
     private EntityManager em;
 
     public List<Posting> joinSkillPosting(List<String> skillnameList) {
-        String sql = "select posting_tb.* from skill_tb " +
+        String sql = "select DISTINCT posting_tb.* from skill_tb " +
                 "inner join postingskill_tb on skill_tb.id = postingskill_tb.skill_id " +
                 "inner join posting_tb on postingskill_tb.posting_id = posting_tb.id ";
 
