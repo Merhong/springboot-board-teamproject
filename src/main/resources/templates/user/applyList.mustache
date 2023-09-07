@@ -69,7 +69,7 @@
 						<td class="clickable" data-type="posting" data-id="{{ posting.id }}">{{ posting.title }}</td>
 						<td class="clickable" data-type="resume" data-id="{{ resume.id }}">{{ resume.title }}</td>
 						<td>{{ posting.position }}</td>
-						<td>{{ statement }}</td>
+						<td class="apply-status" data-statement="{{ statement }}">{{ statement }}</td>
 					</tr>
 					{{/applyList}}
 				</tbody>
@@ -94,6 +94,23 @@
 	const clickableItems = document.querySelectorAll('.clickable');
 	clickableItems.forEach((item) => {
 		item.addEventListener('click', handleItemClick);
+	});
+
+
+	document.addEventListener('DOMContentLoaded', function () {
+		const applyStatusCells = document.querySelectorAll('.apply-status');
+
+		applyStatusCells.forEach(function (cell) {
+			const statement = cell.getAttribute('data-statement');
+
+			if (statement === '대기') {
+				cell.style.color = 'orange'; // 대기 상태일 때 글자 색상을 노랑으로 변경
+			} else if (statement === '합격') {
+				cell.style.color = 'red'; // 합격 상태일 때 글자 색상을 빨강으로 변경
+			} else if (statement === '불합') {
+				cell.style.color = 'blue'; // 불합격 상태일 때 글자 색상을 파랑으로 변경
+			}
+		});
 	});
 </script>
 {{> layout/footer}}
