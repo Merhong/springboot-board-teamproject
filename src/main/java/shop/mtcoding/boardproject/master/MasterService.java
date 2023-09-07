@@ -65,7 +65,6 @@ public class MasterService {
     //     }else{
     //         List<Posting> tempList = new ArrayList<>();
     //         for (Posting posting : postingList) {
-    //             if(!(posting.getPosition().equals(position))){
     //                 tempList.add(posting);
     //             }
     //         }
