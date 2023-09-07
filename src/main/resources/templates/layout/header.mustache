@@ -3,65 +3,110 @@
 
 <head>
 	<title>구플</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"/>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 	<link rel="icon" href="/images/brand.png">
 
 	<style>
 		@font-face {
-			font-family: 'neurimboGothicRegular';
-			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/neurimboGothicRegular.woff2') format('woff2');
-			font-weight: normal;
+			font-family: 'Giants-Bold';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+			font-weight: 700;
 			font-style: normal;
 		}
-	</style>
 
-	{{^sessionComp}}<style></style>{{/sessionComp}}
-
-	{{#sessionComp}}{{^sessionComp.compname}}<style>
-		.bg-info {
-			background-color: pink !important;
-		}
-
-		.border-info {
-			border-color: pink !important;
-		}
-
-		.btn-info {
-			border-color: pink;
-			background-color: pink !important;
-		}
-
-		.btn-info:hover {
-			border-color: pink !important;
-		}
-	</style>{{/sessionComp.compname}}{{/sessionComp}}
-
-	{{#sessionComp.compname}}<style>
-		.bg-info {
-			background-color: silver !important;
-		}
-
-		.border-info {
-			border-color: silver !important;
-		}
-
-		.btn-info {
-			border-color: silver;
-			background-color: silver !important;
-		}
-
-		.btn-info:hover {
-			border-color: silver !important;
+		div {
+			font-family: Giants-Bold;
 		}
 	</style>
-  {{/sessionComp.compname}}
+
+	{{^sessionComp}}
+		<style>
+			.header_title {
+				color: grey;
+			}
+
+			.bg-info {
+				background-color: grey !important;
+			}
+
+			.title1 {
+				font-size: 50px;
+			}
+
+			.header_search {
+				color: white;
+			}
+
+		</style>
+	{{/sessionComp}}
+	{{#sessionComp}}
+		{{^sessionComp.compname}}
+			<style>
+				.title1 {
+					font-size: 50px;
+					color: pink;
+				}
+
+				.header_search {
+					background-color: pink;
+				}
+
+				.bg-info {
+					background-color: pink !important;
+				}
+
+				.border-info {
+					border-color: pink !important;
+				}
+
+				.btn-info {
+					border-color: pink;
+					background-color: pink !important;
+				}
+
+				.btn-info:hover {
+					border-color: pink !important;
+				}
+			</style>
+		{{/sessionComp.compname}}
+	{{/sessionComp}}
+	{{#sessionComp.compname}}
+		<style>
+			.title1 {
+				font-size: 50px;
+				color: #66e3dd;
+			}
+
+			.header_search {
+				border-style: solid;
+				background-color: #66e3dd;
+			}
+
+			.bg-info {
+				background-color: #66e3dd !important;
+			}
+
+			.border-info {
+				border-color: #66e3dd !important;
+			}
+
+			.btn-info {
+				border-color: #66e3dd;
+				background-color: #66e3dd !important;
+			}
+
+			.btn-info:hover {
+				border-color: #66e3dd !important;
+			}
+		</style>
+	{{/sessionComp.compname}}
 
 </head>
 
@@ -73,8 +118,7 @@
 
 				<div class="col-4">
 					<div class="d-flex justify-content-center">
-						<a class="text-center flex-grow-1 fw-bold text-decoration-none" href="/"
-						style="font-size: 50px; color: #66e3dd">
+						<a class="text-center flex-grow-1 fw-bold title1 header_title" href="/">
 							Goople
 						</a>
 					</div>
@@ -82,9 +126,12 @@
 
 				<div class="col-4 d-flex justify-content-end">
 
-					{{^sessionAdmin}}<a class="btn btn-white fw-bold align-self-center" href="/selectJoinForm">회원가입</a>{{/sessionAdmin}}
-					{{^sessionAdmin}}<a class="btn btn-white fw-bold align-self-center" href="/user/loginForm">로그인</a>{{/sessionAdmin}}
-					{{#sessionAdmin}}<a class="btn btn-white fw-bold align-self-center" href="/logout">로그아웃</a>{{/sessionAdmin}}
+					{{^sessionAdmin}}<a class="btn btn-white fw-bold align-self-center"
+					                    href="/selectJoinForm">회원가입</a>{{/sessionAdmin}}
+					{{^sessionAdmin}}<a class="btn btn-white fw-bold align-self-center"
+					                    href="/user/loginForm">로그인</a>{{/sessionAdmin}}
+					{{#sessionAdmin}}
+						<a class="btn btn-white fw-bold align-self-center" href="/logout">로그아웃</a>{{/sessionAdmin}}
 
 
 				</div>
@@ -98,7 +145,7 @@
 
 				<div class="m-1">
 					<a href="/">
-						<img src="/images/brand.png" class="img-thumbnail" alt="구플 로고" width="50px" />
+						<img src="/images/brand.png" class="img-thumbnail" alt="구플 로고" width="50px"/>
 					</a>
 				</div>
 
@@ -114,21 +161,21 @@
 							<li class="nav-item">
 								{{^sessionComp.compname}}<a class="nav-link text-white"
 
-									href="/user/resumeForm">이력서등록</a>{{/sessionComp.compname}}
+								                            href="/user/resumeForm">이력서등록</a>{{/sessionComp.compname}}
 								{{#sessionComp.compname}}<a class="nav-link text-white"
-									href="/comp/posting/saveForm">채용공고등록</a>{{/sessionComp.compname}}
+								                            href="/comp/posting/saveForm">채용공고등록</a>{{/sessionComp.compname}}
 							</li>
 							<li class="nav-item">
 								{{^sessionComp.compname}}<a class="nav-link text-white"
-									href="/user/resumeManage">이력서관리</a>{{/sessionComp.compname}}
+								                            href="/user/resumeManage">이력서관리</a>{{/sessionComp.compname}}
 								{{#sessionComp.compname}}<a class="nav-link text-white"
-									href="/comp/{{sessionComp.userId}}/postingList">채용공고관리</a>{{/sessionComp.compname}}
+								                            href="/comp/{{sessionComp.userId}}/postingList">채용공고관리</a>{{/sessionComp.compname}}
 							</li>
 							<li class="nav-item">
 								{{^sessionComp.compname}}<a class="nav-link text-white"
-									href="/user/applyList">지원내역</a>{{/sessionComp.compname}}
+								                            href="/user/applyList">지원내역</a>{{/sessionComp.compname}}
 								{{#sessionComp.compname}}<a class="nav-link text-white"
-									href="/comp/recommend">인재찾기</a>{{/sessionComp.compname}}
+								                            href="/comp/recommend">인재찾기</a>{{/sessionComp.compname}}
 
 							</li>
 							<li class="nav-item">
@@ -136,7 +183,7 @@
 							</li>
 							<li class="nav-item">
 								{{#sessionAdmin}}<a class="nav-link text-black fw-bold"
-									href="/master/admin">관리자전용</a>{{/sessionAdmin}}
+								                    href="/master/admin">관리자전용</a>{{/sessionAdmin}}
 							</li>
 						</ul>
 					</div>
@@ -145,11 +192,15 @@
 				<div class="col-auto align-self-center me-1">
 					<form class="d-flex" method="get" action="/search" id="selectPageSearchAllForm">
 						<div class="me-1 w-75">
-							<input class="form-control" type="text" placeholder="비워두면 전체 검색" name="keyword" value="{{#keyword}}{{keyword}}{{/keyword}}"/>
-							<textarea class="visually-hidden" id="pageSearchAllFind" name="pageSearchAll" rows="1" cols="50">{{#pageSearchAll}}{{pageSearchAll}}{{/pageSearchAll}}{{^pageSearchAll}}0{{/pageSearchAll}}</textarea>
+							<input class="form-control" type="text" placeholder="비워두면 전체 검색" name="keyword"
+							       value="{{#keyword}}{{keyword}}{{/keyword}}"/>
+							<textarea class="visually-hidden" id="pageSearchAllFind" name="pageSearchAll" rows="1"
+							          cols="50">{{#pageSearchAll}}{{pageSearchAll}}{{/pageSearchAll}}{{^pageSearchAll}}
+								0{{/pageSearchAll}}</textarea>
 						</div>
 						<div class="">
-							<button class="btn btn-secondary" type="submit">검색</button>
+							<button class="btn btn-secondary header_search" type="submit"
+							">검색</button>
 						</div>
 					</form>
 				</div>
