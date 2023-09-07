@@ -133,9 +133,10 @@
 				</div>
 
 				<div class="col-auto align-self-center me-1">
-					<form class="d-flex" method="get" action="/search">
+					<form class="d-flex" method="get" action="/search" id="selectPageSearchAllForm">
 						<div class="me-1 w-75">
-							<input class="form-control" type="text" placeholder="검색어를 입력하세요." name="keyword" value="{{#keyword}}{{keyword}}{{/keyword}}"/>
+							<input class="form-control" type="text" placeholder="비워두면 전체 검색" name="keyword" value="{{#keyword}}{{keyword}}{{/keyword}}"/>
+							<textarea class="visually-hidden" id="pageSearchAllFind" name="pageSearchAll" rows="1" cols="50">{{#pageSearchAll}}{{pageSearchAll}}{{/pageSearchAll}}{{^pageSearchAll}}0{{/pageSearchAll}}</textarea>
 						</div>
 						<div class="">
 							<button class="btn btn-secondary" type="submit">검색</button>

@@ -34,4 +34,14 @@ public interface ResumeRepository extends JpaRepository<Resume, Integer> {
 
     List<Resume> findByTitleContaining(@Param("title") String keyword);
 
+    @Query(value = "SELECT resume_tb.* " +
+                    "FROM resume_tb " +
+                    "JOIN user_tb ON resume_tb.user_id = user_tb.id " +
+                    "WHERE user_tb.username LIKE %:username% " +
+                    "UNION " +
+                    "SELECT resume_tb.* " +
+                    "FROM resume_tb " +
+                    "WHERE title LIKE %:title% ", nativeQuery = true)
+    List<Resume> findResumeByTitleOrJoinUserUsername(@Param("username") String username, @Param("title") String title);
+
 }
