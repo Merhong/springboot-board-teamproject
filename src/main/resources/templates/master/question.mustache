@@ -165,9 +165,7 @@ async function upload(id){
   async function select(id) {
     let content = document.querySelector("#reply").value;
     let userId = document.querySelector("#userId").value;
-    console.log(content);
-    console.log(id);
-    console.log(userId);
+    console.log(content+"  "+ id+"  "+ userId);
 
     let requestBody = {
       content: content,
