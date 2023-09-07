@@ -125,7 +125,7 @@
 			<div class="d-flex border border-info m-3 p-2">
 				<div class="col-9">
 					<div class="m-auto">
-						<div>{{title}}</div>
+						<div data-id="{{id}}" class="posting-title">{{title}}</div>
 						<span class="badge bg-danger">{{position}}</span>
 						{{#postingSkills}}
 						<span class="badge bg-secondary me-1">{{skill.skillname}}</span>
@@ -152,115 +152,82 @@
 
 
 <script>
-  function skillCheck(selectAll) {
-    let skillAll = document.querySelectorAll(".skillFind");
-    // let allCheck=document.querySelector("#all");
 
-    skillAll.forEach((element) => {
-      element.checked = selectAll.checked;
-    });
-  }
-  function skillAllCheck() {
-    let allCheck = document.querySelector("#skillAll");
-    let skillAll = document.querySelectorAll(".skillFind");
-    let skillAllCheck = document.querySelectorAll(".skillFind:checked");
+	function skillCheck(selectAll) {
+		let skillAll = document.querySelectorAll(".skillFind");
+		// let allCheck=document.querySelector("#all");
 
-    if (skillAll.length == skillAllCheck.length) {
-      allCheck.checked = true;
-    } else {
-      allCheck.checked = false;
-    }
-  }
+		skillAll.forEach(element => {
+			element.checked = selectAll.checked;
+		});
+	}
+	function skillAllCheck() {
+		let allCheck = document.querySelector("#skillAll");
+		let skillAll = document.querySelectorAll(".skillFind");
+		let skillAllCheck = document.querySelectorAll(".skillFind:checked");
 
-  function searchAll() {
-    if (document.querySelector("#skillAll").checked) {
-      let skillfind = document.querySelectorAll(".skillFind");
-      skillfind.forEach((element) => {
-        element.checked = false;
-      });
-    }
-    let submit = document.getElementById("selectform");
-    submit.submit();
-  }
+		if (skillAll.length == skillAllCheck.length) {
+			allCheck.checked = true;
+		} else {
+			allCheck.checked = false
+		};
+	}
 
-  function check() {
-    const json = JSON.parse(document.querySelector("#json").value);
 
-    let skillCheckBoxAll = document.getElementById("skillAll");
+	function searchAll() {
+		if (document.querySelector("#skillAll").checked) {
+			let skillfind = document.querySelectorAll(".skillFind")
+			skillfind.forEach(element => {
+				element.checked = false;
+			});
+		}
+		let submit = document.getElementById("selectform");
+		submit.submit();
+	}
 
-    if (json[0] != skillCheckBoxAll.value) {
-      json.forEach((element) => {
-        document.getElementById(element).checked = true;
-      });
-      skillCheckBoxAll.checked = false;
-    } else {
-      skillCheckBoxAll.checked = true;
-      let skillFind2 = document.querySelectorAll(".skillFind");
-      skillFind2.forEach((element) => {
-        element.checked = true;
-      });
-    }
-  }
-  check();
 
-  const positionSet = document.querySelector("#positionSet").value;
-  if (positionSet == "all") {
-    document.getElementById("all2").checked = true;
-  } else {
-    document.getElementById(positionSet).checked = true;
-  }
 
-  async function select() {
-    let skillList = document.querySelectorAll(".skillFind:checked");
-    let position = document.querySelector(
-      'input[name="position"]:checked'
-    ).value;
-    // let skillListJson = await skillList.JSON();
-    let skillArray = Array.from(skillList);
-    console.log(skillArray);
-    console.log(position);
+	function check() {
+		const json = JSON.parse(document.querySelector("#json").value);
 
-    let skillName = [];
-    for (var skill of skillList) {
-      console.log(skill.id);
-      skillName.push(skill.id);
-    }
-    console.log("skillName : " + skillName);
+		let skillCheckBoxAll = document.getElementById("skillAll");
 
-    let requestBody = {
-      skillName: skillName,
-      position: position,
-    };
+		if (json[0] != skillCheckBoxAll.value) {
+			json.forEach(element => {
+				document.getElementById(element).checked = true;
+			});
+			skillCheckBoxAll.checked = false;
+		} else {
+			skillCheckBoxAll.checked = true;
+			let skillFind2 = document.querySelectorAll(".skillFind")
+			skillFind2.forEach(element => {
+				element.checked = true;
+			});
+		}
+	}
+	check();
 
-    let response = await fetch("/api/user/recommend", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    });
+	const positionSet = document.querySelector("#positionSet").value;
+	if (positionSet == "all") {
+		document.getElementById("all2").checked = true;
+	} else {
+		document.getElementById(positionSet).checked = true;
+	}
 
-    let result = await response.json();
-    console.log(result);
 
-    let techEl = document.querySelector("#result");
-    techEl.innerHTML = "";
+	$(document).ready(function () {
+		$(".posting-title").click(function () {
+			// 클릭한 공고의 고유 ID 가져오기
+			var id = $(this).data("id");
 
-    for (let i = 0; i < result.data.length; i++) {
-      let item = result.data[i];
-      console.log("Item " + i + ": " + item.title);
-      let optionEl = document.createElement("div");
-      optionEl.value = item.title;
-      optionEl.innerHTML =
-        '<div class="border border-info m-2 ps-2 pe-2 pt-1">' +
-        item.title +
-        "<div>" +
-        item.desc +
-        "</div><div>" +
-        item.position +
-        "</div></div>";
-      techEl.append(optionEl);
-    }
-  }
+			// 상세보기 페이지 URL 구성
+			var detailPageUrl = "/comp/posting/" + id; // 적절한 URL로 변경
+
+			// 상세보기 페이지로 이동
+			window.location.href = detailPageUrl;
+		});
+	});
+
+
 </script>
 {{> layout/footer}}

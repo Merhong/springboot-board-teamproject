@@ -97,7 +97,6 @@ public class UserService {
         return user;
     }
 
-
     public List<Posting> 기업추천검색(List<String> skillList, String position) {
         List<Posting> compList = new ArrayList<>();
         Set<Posting> postingSet = new HashSet<Posting>();
@@ -105,7 +104,7 @@ public class UserService {
         if (skillList.size() == 0 || skillList.get(0).equals("all")) {
             // compList = postingRepository.findAll();
         } else {
-             postingSet = new LinkedHashSet<>();
+            postingSet = new LinkedHashSet<>();
             for (String skill : skillList) {
                 List<Posting> tempList = postingRepository.joinSkillPosting(skill);
                 postingSet.addAll(tempList);
