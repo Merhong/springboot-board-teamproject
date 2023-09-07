@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.boardproject._core.util.ApiUtil;
+import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.bookmark.BookmarkService;
 import shop.mtcoding.boardproject.master.MasterResponse.MasterListDTO;
 
@@ -180,9 +181,9 @@ public class MasterController {
 
     // 코드 테이블 스킬 추가 POST
     @PostMapping("/master/skill")
-    public String admin(String skillName) {
+    public @ResponseBody String admin(String skillName) {
         masterService.스킬추가(skillName);
-        return "redirect:/";
+        return Script.href("/","스킬 추가 : "+skillName);
     }
 
     // 인덱스(홈) 페이지
@@ -217,7 +218,7 @@ public class MasterController {
         // System.out.println("테스트 전체size:"+postingList.size());
         // System.out.println("테스트 page:"+page);
 
-        final int PAGESIZE=6; // 한페이지에 보여줄 공고 개수
+        final int PAGESIZE=4; // 한페이지에 보여줄 공고 개수
 
         int totalCount = postingList.size(); // 모든 공고 합친 개수
         

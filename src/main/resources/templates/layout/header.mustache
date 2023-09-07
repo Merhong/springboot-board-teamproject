@@ -17,20 +17,20 @@
 
 	{{#sessionComp}}{{^sessionComp.compname}}<style>
 		.bg-info {
-			background-color: pink !important;
+			background-color: rgb(205, 239, 255) !important;
 		}
 
 		.border-info {
-			border-color: pink !important;
+			border-color: rgb(205, 239, 255) !important;
 		}
 
 		.btn-info {
-			border-color: pink;
-			background-color: pink !important;
+			border-color: rgb(205, 239, 255);
+			background-color: rgb(205, 239, 255) !important;
 		}
 
 		.btn-info:hover {
-			border-color: pink !important;
+			border-color: rgb(205, 239, 255) !important;
 		}
 	</style>{{/sessionComp.compname}}{{/sessionComp}}
 
@@ -139,7 +139,7 @@
 							<textarea class="visually-hidden" id="pageSearchAllFind" name="pageSearchAll" rows="1" cols="50">{{#pageSearchAll}}{{pageSearchAll}}{{/pageSearchAll}}{{^pageSearchAll}}0{{/pageSearchAll}}</textarea>
 						</div>
 						<div class="">
-							<button class="btn btn-secondary" type="submit">검색</button>
+							<div class="btn btn-secondary" onclick="searchAllPageZero()">검색</div>
 						</div>
 					</form>
 				</div>
@@ -149,6 +149,23 @@
 	</header>
 
 	<script>
+
+		document.querySelector("#selectPageSearchAllForm").addEventListener("submit", function(event) {
+				event.preventDefault();
+				searchAllPageZero();
+			}); // 엔터키 눌러도 바로 폼태그 안보내고 함수로 보내게
+
+		function searchAllPageZero() {
+				pageSearchAllFind = document.querySelector("#pageSearchAllFind")
+				// console.log(pageSearchAllFind.value);
+				pageSearchAllFind.value=0; 
+				// console.log(pageSearchAllFind.value);
+				
+				let selectPageSearchAllForm = document.getElementById("selectPageSearchAllForm");
+				selectPageSearchAllForm.submit();
+			}
+
+
 		// 페이지 로드 시 초기 세션 상태에 따라 링크 텍스트 변경
 		function changeLoginLinksAndButton() {
 			let joinLink = document.querySelector('a[href="/selectJoinForm"]');

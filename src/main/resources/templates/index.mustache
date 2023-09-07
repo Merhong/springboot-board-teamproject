@@ -225,7 +225,7 @@
 
 			<textarea class="visually-hidden" id="pageFind" name="page" rows="1" cols="50">{{#page}}{{page}}{{/page}}{{^page}}0{{/page}}</textarea>
 
-			<div class="text-center">결과 : 총합 <b>{{totalCount}}</b>개, <b>{{totalPage}}</b>페이지</div>
+			<div class="text-center">구인공고 검색 결과 : 총합 <b>{{totalCount}}</b>개, <b>{{totalPage}}</b>페이지</div>
 			<ul class="pagination d-flex justify-content-center mt-1">
 
 				<li class="page-item {{#first}}disabled{{/first}}"><button class="page-link" onclick="searchAllPageMinus()">이전 페이지</button></li>
@@ -241,7 +241,7 @@
 
 
 			{{#postingList}}
-				<div class="col-lg-4 col-md-4 col-sm-6">
+				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="border border-info m-2 ps-2 pe-2 pt-1">
 						<h4 class="text-center fw-bold">{{user.compname}}</h4>
 						{{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
