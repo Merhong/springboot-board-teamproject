@@ -402,6 +402,8 @@
 
 
 
+
+
           }}<a
             href="/comp/posting/{{ id }}"
             class="text-black text-decoration-none"
@@ -411,6 +413,8 @@
               style="height: 120px"
             />{{/user.photo}}
             {{^user.photo
+
+
 
 
 
@@ -525,6 +529,8 @@
 
 
 
+
+
                 }}<span class="badge bg-primary me-1">{{
                   skill.skillname
                 }}</span
@@ -585,6 +591,8 @@
 
 
 
+
+
                 }}<span class="badge bg-success">{{ education }}</span
                 >{{/education}}
                 <span class="badge bg-success">{{ region }}</span>
@@ -593,6 +601,8 @@
           </a>
           <div class="d-flex justify-content-between">
             {{^sessionComp.compname
+
+
 
 
 
@@ -706,6 +716,8 @@
 
 
 
+
+
             }}<button type="button" class="invisible"><h3>🤍</h3></button
             >{{/sessionComp.compname}}
 
@@ -753,7 +765,6 @@
   name="message"
   id="message"
 />
-<button onclick="messageCheckOut()">체크아웃</button>
 
 {{/sessionUser}}
 <script>
@@ -1118,6 +1129,7 @@
       if (message == "true") {
         console.log("모달 실행  message : " + message);
         openModal("문의에 대한 답변이 달렸습니다.");
+        messageCheckOut();
       }
     }
   }
