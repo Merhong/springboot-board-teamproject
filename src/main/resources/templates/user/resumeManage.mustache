@@ -1,5 +1,20 @@
 {{> layout/header}}
 <!-- 14번 이력서관리 화면-->
+
+<style>
+	.title-link {
+		font-weight: bold;
+		/* 글자 굵게 */
+		font-size: 30px;
+		/*글자크기*/
+		text-decoration: underline;
+		/* 밑줄 추가 */
+		cursor: pointer;
+		/* 클릭 가능한 커서 스타일 */
+	}
+</style>
+
+
 <div class="d-flex mb-3">
 	<div class="col-2"></div>
 	<div class="class col-8 h-auto d-flex border border-info">
@@ -24,8 +39,7 @@
 			</div>
 			{{#resumes}}
 			<div>
-				<span type="text" class="w-50">{{title}}</span>
-				<a href="/user/resume/{{id}}" class="w-20 btn btn-info">상세보기</a>
+				<span type="text" class="w-50 title-link" data-href="/user/resume/{{id}}">{{title}}</span>
 				<a href="/user/resumeUpdateForm/{{id}}" class="w-20 btn btn-info">수정</a>
 				<a href="/user/resume/{{id}}/offerList" class="btn btn-primary btn btn-warning">입사 제안 보기</a>
 
@@ -39,3 +53,18 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const titleLinks = document.querySelectorAll('.title-link');
+
+		titleLinks.forEach(function (titleLink) {
+			titleLink.addEventListener('click', function () {
+				const href = titleLink.getAttribute('data-href');
+				if (href) {
+					window.location.href = href;
+				}
+			});
+		});
+	});
+</script>
