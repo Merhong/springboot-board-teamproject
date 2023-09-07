@@ -20,6 +20,7 @@ import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.comp.CompRequest;
 import shop.mtcoding.boardproject.comp.CompService;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingRequest.CompInfoDTO;
 import shop.mtcoding.boardproject.recommend.Recommend;
 import shop.mtcoding.boardproject.recommend.RecommendService;
 import shop.mtcoding.boardproject.resume.Resume;
@@ -33,6 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+import java.util.ArrayList;
 import java.io.IOException;
 import java.util.List;
 
@@ -87,15 +90,27 @@ public class UserController {
             e.printStackTrace();
         }
 
-        // List<Posting> compList = userService.기업추천검색(User);
+      
+        List<Posting> compList = userService.기업추천검색(skillList, position);
+        System.out.println("검색1: " + compList);
 
-        // request.setAttribute("compList", compList);
-        // // 공고에 해당하는 스킬 정보 가져오기
-        // for (Posting posting : compList) {
+        // CompInfoDTO 리스트 생성
+        List<CompInfoDTO> compInfoList = new ArrayList<>();
+        for (Posting posting : compList) {
+            CompInfoDTO compInfoDTO = new CompInfoDTO();
+            compInfoDTO.setId(posting.getId());
+            System.out.println("검색" + posting.getId());
+            compInfoDTO.setTitle(posting.getTitle());
+            compInfoDTO.setPosition(posting.getPosition());
+            // 공고에 해당하는 스킬 정보 가져오기
+            List<PostingSkill> postingSkills = skillService.공고별스킬조회(posting.getId());
+            compInfoDTO.setPostingSkills(postingSkills);
+            compInfoList.add(compInfoDTO);
+        }
 
-        // List<PostingSkill> postingSkills = skillService.공고별스킬조회(posting.getId());
-        // request.setAttribute("postingSkills", postingSkills);
-        // }
+
+        // compInfoList를 컨트롤러에서 뷰로 전달
+        request.setAttribute("compInfoList", compInfoList);
 
         return "user/recommendForm";
     }
@@ -320,14 +335,14 @@ public class UserController {
         return "redirect:/user/resume/" + resumeId + "/offerList";
     }
 
-    // 11번 지원하기 버튼 POST
-    @PostMapping("/api/user/recommend")
-    public @ResponseBody ApiUtil<List<Posting>> userRecommend(@RequestBody UserRequest.SearchDTO searchDTO,
-            HttpServletResponse response) {
-        List<Posting> postingList = userService.기업추천검색(searchDTO);
-        System.out.println("postingList : " + postingList.size());
-        return new ApiUtil<List<Posting>>(true, postingList);
-
-    }
+    // // 기업추천 검색 POST
+    // @PostMapping("/api/user/recommend")
+    // public @ResponseBody ApiUtil<List<Posting>> userRecommend(@RequestBody UserRequest.SearchDTO searchDTO,
+    //         HttpServletResponse response) {
+    //     List<Posting> postingList = userService.기업추천검색(searchDTO);
+    //     System.out.println("postingList : " + postingList.size());
+    //     return new ApiUtil<List<Posting>>(true, postingList);
+    //
+    // }
   
 }

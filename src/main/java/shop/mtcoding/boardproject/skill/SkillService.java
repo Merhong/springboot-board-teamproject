@@ -47,8 +47,7 @@ public class SkillService {
 
     public List<PostingSkill> 공고별스킬조회(Integer id) {
         System.out.println("검색3: " + id);
-        List<PostingSkill> postingSkills = postingSkillRepository.findByPostingId(id);
-        return postingSkills;
+        return postingSkillRepository.findByPostingId(id);
 
     }
 

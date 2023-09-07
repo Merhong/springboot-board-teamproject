@@ -7,7 +7,6 @@ import shop.mtcoding.boardproject._core.vo.MyPath;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.PostingRepository;
-import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
 import shop.mtcoding.boardproject.user.UserRequest.UpdateDTO;
 
@@ -15,13 +14,7 @@ import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -104,28 +97,28 @@ public class UserService {
         return user;
     }
 
-    public List<Posting> 기업추천검색(UserRequest.SearchDTO searchDTO) {
+    public List<Posting> 기업추천검색(List<String> skillList, String position) {
+        List<Posting> compList;
 
-        List<String> skillList = searchDTO.getSkillName();
-        String position = searchDTO.getPosition();
-        HashSet<Posting> postingSet = new HashSet<Posting>();
-
-        List<Posting> listSkillPosting = postingQueryRepository.joinSkillPosting(skillList);
-        for (Posting posting : listSkillPosting) {
-            postingSet.add(posting);
-        }
-        List<Posting> listPositionPosting = postingRepository.findByPosition(position);
-        for (Posting posting : listPositionPosting) {
-            postingSet.add(posting);
+        if (position == null || position.equals("all")) {
+            // 직무가 "all"이면 모든 공고를 가져옵니다.
+            compList = postingRepository.findAll();
+        } else {
+            // 직무 필터링
+            compList = postingRepository.findByPosition(position);
         }
 
-        List<Posting> PostingList = new ArrayList<>();
+        if (skillList != null && !skillList.isEmpty() && !skillList.contains("all")) {
+            // 스킬 필터링
+            List<Posting> skillFilteredPostings = new ArrayList<>();
+            for (String skill : skillList) {
+                skillFilteredPostings.addAll(postingRepository.joinSkillPosting(skill));
+            }
 
-        Iterator<Posting> iterator = postingSet.iterator();
-        while (iterator.hasNext()) {
-            Posting posting = iterator.next();
-            PostingList.add(posting);
+            // 스킬 필터링 결과와 직무 필터링 결과를 공통으로 가지는 공고를 찾습니다.
+            compList.retainAll(skillFilteredPostings);
         }
-        return PostingList;
+
+        return compList;
     }
 }
