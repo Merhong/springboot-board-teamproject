@@ -55,7 +55,7 @@
 			<table class="table table-hover">
 				<thead>
 					<tr class="table-light">
-						<th>NO</th>
+						<th>회사명</th>
 						<th>공고명</th>
 						<th>이력서</th>
 						<th>포지션</th>
@@ -65,7 +65,7 @@
 				<tbody>
 					{{#applyList}}
 					<tr>
-						<td>{{ id }}</td>
+						<td>{{ posting.user.compname}}</td>
 						<td class="clickable" data-type="posting" data-id="{{ posting.id }}">{{ posting.title }}</td>
 						<td class="clickable" data-type="resume" data-id="{{ resume.id }}">{{ resume.title }}</td>
 						<td>{{ posting.position }}</td>

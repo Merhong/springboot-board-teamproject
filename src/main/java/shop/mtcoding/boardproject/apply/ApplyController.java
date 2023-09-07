@@ -20,15 +20,14 @@ public class ApplyController {
 
     // 15_개인지원내역 화면
     @GetMapping("/user/applyList")
-
     public String userApplyList(HttpServletRequest request) {
         User user = (User) session.getAttribute("sessionUser");
 
         if (user == null) {
             return "redirect:/user/loginForm";
         }
-
         List<Apply> applyList = applyservice.유저지원내역전체(user.getId());
+
         request.setAttribute("applyList", applyList);
 
         return "user/applyList";
