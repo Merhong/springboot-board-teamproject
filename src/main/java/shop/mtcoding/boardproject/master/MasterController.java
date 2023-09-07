@@ -59,12 +59,12 @@ public class MasterController {
     private UserService userService;
 
     @GetMapping("/search")
-    public String search(@RequestParam(defaultValue = "")String keyword, 
+    public String search(@RequestParam(defaultValue = "") String keyword,
             @RequestParam(name = "pageSearchAll", defaultValue = "0") Integer page,
             HttpServletRequest request) {
 
         keyword = keyword.trim();
-        
+
         request.setAttribute("keyword", keyword);
 
         // if(keyword == null || keyword.isEmpty()){
@@ -74,75 +74,75 @@ public class MasterController {
 
         MasterResponse.SearchDTO searchDTO = masterService.전체검색(keyword);
 
-        if(searchDTO == null){
+        if (searchDTO == null) {
             return "/master/search";
         }
 
         searchDTO.setNormalUserList(new ArrayList<User>()); // 일반유저 검색은 제외하기로 함
 
+        final int PAGESIZE = 4;
 
-        
-        final int PAGESIZE=4;
-        
-        int compUserListSize=0;
-        if(searchDTO.getCompUserList() != null){
+        int compUserListSize = 0;
+        if (searchDTO.getCompUserList() != null) {
             compUserListSize = searchDTO.getCompUserList().size();
         }
-        int normalUserListSize=0;
-        if(searchDTO.getNormalUserList() != null){
+        int normalUserListSize = 0;
+        if (searchDTO.getNormalUserList() != null) {
             normalUserListSize = searchDTO.getNormalUserList().size();
         }
-        int postingListSize=0;
-        if(searchDTO.getPostingList() != null){
+        int postingListSize = 0;
+        if (searchDTO.getPostingList() != null) {
             postingListSize = searchDTO.getPostingList().size();
         }
-        int resumeListSize=0;
-        if(searchDTO.getResumeList() != null){
+        int resumeListSize = 0;
+        if (searchDTO.getResumeList() != null) {
             resumeListSize = searchDTO.getResumeList().size();
         }
 
-        // System.out.println("테스트 : compUserListSize :"+compUserListSize+" / normalUserListSize :"+normalUserListSize+" / postingListSize :"+postingListSize+" / resumeListSize :"+resumeListSize);
+        // System.out.println("테스트 : compUserListSize :"+compUserListSize+" /
+        // normalUserListSize :"+normalUserListSize+" / postingListSize
+        // :"+postingListSize+" / resumeListSize :"+resumeListSize);
 
         int totalCount = compUserListSize + normalUserListSize + postingListSize + resumeListSize;
         // 모든 공고 합친 개수
-        
+
         boolean last = false; // 끝페이지인지 확인
-        if(totalCount <= (page + 1)* PAGESIZE){
+        if (totalCount <= (page + 1) * PAGESIZE) {
             last = true;
         }
-        
+
         boolean first = false; // 첫페이지인지 확인
-        if(page <= 0){
+        if (page <= 0) {
             first = true;
-        } else{
+        } else {
             first = false;
         }
-        
+
         int pageStart = page * PAGESIZE;
         int pageEnd = Math.min(pageStart + PAGESIZE, totalCount);
-        
+
         if (pageStart >= pageEnd || page < 0) {
             // request.setAttribute("postingList", null);
             request.setAttribute("searchDTO", new ArrayList<>()); // 범위 벗어난 페이지면 0개리스트 줌
-        }else{
+        } else {
 
             List<Object> allList = new ArrayList<>();
 
-            if(searchDTO.getCompUserList() != null && searchDTO.getCompUserList().size() != 0){
+            if (searchDTO.getCompUserList() != null && searchDTO.getCompUserList().size() != 0) {
                 allList.addAll(searchDTO.getCompUserList());
             }
-            if(searchDTO.getNormalUserList() != null && searchDTO.getNormalUserList().size() != 0){
+            if (searchDTO.getNormalUserList() != null && searchDTO.getNormalUserList().size() != 0) {
                 allList.addAll(searchDTO.getNormalUserList());
             }
-            if(searchDTO.getPostingList() != null && searchDTO.getPostingList().size() != 0){
+            if (searchDTO.getPostingList() != null && searchDTO.getPostingList().size() != 0) {
                 allList.addAll(searchDTO.getPostingList());
             }
-            if(searchDTO.getResumeList() != null && searchDTO.getResumeList().size() != 0){
+            if (searchDTO.getResumeList() != null && searchDTO.getResumeList().size() != 0) {
                 allList.addAll(searchDTO.getResumeList());
             }
 
             allList = allList.subList(pageStart, pageEnd);
-            
+
             List<User> newCompUserList = new ArrayList<>();
             List<User> newNormalUserList = new ArrayList<>();
             List<Posting> newPostingList = new ArrayList<>();
@@ -150,15 +150,15 @@ public class MasterController {
 
             for (Object object : allList) {
                 if (object instanceof User) {
-                    if(  ( (User)object ).getRole()==2  ){
-                        newCompUserList.add( (User)object );
-                    } else{
-                        newNormalUserList.add( (User)object );
+                    if (((User) object).getRole() == 2) {
+                        newCompUserList.add((User) object);
+                    } else {
+                        newNormalUserList.add((User) object);
                     }
                 } else if (object instanceof Posting) {
-                    newPostingList.add( (Posting)object );
+                    newPostingList.add((Posting) object);
                 } else if (object instanceof Resume) {
-                    newResumeList.add( (Resume)object );
+                    newResumeList.add((Resume) object);
                 }
             }
 
@@ -175,9 +175,9 @@ public class MasterController {
         request.setAttribute("first", first);
         request.setAttribute("last", last);
         request.setAttribute("totalCount", totalCount);
-        
+
         int totalPage = totalCount / PAGESIZE;
-        if(totalCount % PAGESIZE != 0){
+        if (totalCount % PAGESIZE != 0) {
             totalPage++;
         }
         request.setAttribute("totalPage", totalPage);
@@ -194,7 +194,7 @@ public class MasterController {
     @PostMapping("/master/skill")
     public @ResponseBody String admin(String skillName) {
         masterService.스킬추가(skillName);
-        return Script.href("/","스킬 추가 : "+skillName);
+        return Script.href("/", "스킬 추가 : " + skillName);
     }
 
     // 인덱스(홈) 페이지
@@ -223,12 +223,11 @@ public class MasterController {
         }
         // 뷰에 뭘 검색한건지 적혀있게
 
-
         List<Posting> postingList = masterService.메인화면검색한방쿼리(skillList, position, region); // 핵심기능
         // System.out.println("테스트 전체size:"+postingList.size());
         // System.out.println("테스트 page:"+page);
 
-        final int PAGESIZE=6; // 한페이지에 보여줄 공고 개수
+        final int PAGESIZE = 6; // 한페이지에 보여줄 공고 개수
 
         int totalCount = postingList.size(); // 모든 공고 합친 개수
 
@@ -250,7 +249,7 @@ public class MasterController {
         if (pageStart >= pageEnd || page < 0) {
             // request.setAttribute("postingList", null);
             request.setAttribute("postingList", new ArrayList<>()); // 범위 벗어난 페이지면 0개리스트 줌
-        }else{
+        } else {
             request.setAttribute("postingList", postingList.subList(pageStart, pageEnd)); // 페이지 맞으면 리스트에서 거기에 맞게 잘라서 줌
         }
 
@@ -387,6 +386,13 @@ public class MasterController {
             return new ApiUtil<List<Reply>>(true, replyList);
         }
         throw new MyApiException("댓글 작성 실패");
+    }
+
+    @GetMapping("/api/master/{id}/reply")
+    public @ResponseBody ApiUtil<List<Reply>> replyUpload(@PathVariable Integer id) {
+
+        List<Reply> replyList = replyServiece.문의넘버로찾기(id);
+        return new ApiUtil<List<Reply>>(true, replyList);
     }
 
     @GetMapping("/zzz")

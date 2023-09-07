@@ -107,5 +107,6 @@ public class User {
         this.userSkillList = userSkillList;
         this.resumeList = resumeList;
         this.createdAt = createdAt;
+        this.message = false;
     }
 }

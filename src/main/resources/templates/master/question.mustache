@@ -113,6 +113,8 @@
       />
       <div>
         <button
+          id="masterId"
+          value="{{master.id}}"
           type="submit"
           class="btn btn-info form-control m-1"
           style="box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)"
@@ -130,6 +132,36 @@
 </div>
 
 <script>
+
+async function upload(id){
+
+  let response = await fetch(`/api/master/${id}/reply`)
+
+  let result = await response.json();
+    console.log(result);
+
+
+    let techEl = document.querySelector("#list");
+
+
+
+
+    for (let i = 0; i < result.data.length; i++) {
+      let item = result.data[i];
+      console.log(item.content);
+      
+    let inputElement = document.createElement("input");
+        inputElement.setAttribute("type", "text");
+        inputElement.setAttribute("class", "form-control m-1");
+        inputElement.setAttribute("placeholder", "Enter title");
+        inputElement.setAttribute("name", "title");
+        inputElement.setAttribute("disabled", "");
+        inputElement.setAttribute("value", item.content);
+        techEl.append(inputElement);
+    }
+
+}
+
   async function select(id) {
     let content = document.querySelector("#reply").value;
     let userId = document.querySelector("#userId").value;
@@ -158,11 +190,11 @@
 
 
     let inputElement = document.createElement("input");
-inputElement.setAttribute("type", "text");
-inputElement.setAttribute("class", "form-control m-1");
-inputElement.setAttribute("placeholder", "Enter title");
-inputElement.setAttribute("name", "title");
-inputElement.setAttribute("disabled", "");
+        inputElement.setAttribute("type", "text");
+        inputElement.setAttribute("class", "form-control m-1");
+        inputElement.setAttribute("placeholder", "Enter title");
+        inputElement.setAttribute("name", "title");
+        inputElement.setAttribute("disabled", "");
 
 
     for (let i = 0; i < result.data.length; i++) {
@@ -185,6 +217,11 @@ inputElement.setAttribute("disabled", "");
     //     "</div></div>";
     //   techEl.append(optionEl);
     // }
+    
+
+    let masterId =  document.querySelector("#masterId").value;
+    upload(masterId);
+
 
 </script>
 {{> layout/footer}}
