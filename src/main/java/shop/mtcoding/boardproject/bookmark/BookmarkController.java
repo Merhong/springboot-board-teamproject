@@ -150,7 +150,7 @@ public class BookmarkController {
         Integer userId = ((User) session.getAttribute("sessionUser")).getId(); // 현재 로그인한 사용자의
                                                                                                          // ID를 가져옴
         try {
-            bookmarkService.유저북마크제거(postingId, userId);
+            bookmarkService.유저북마크삭제(postingId, userId);
             return ResponseEntity.ok("북마크가 삭제되었습니다.");
         } catch (MyException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

@@ -161,21 +161,6 @@ public class BookmarkService {
         return success;
     }
 
-	@Transactional
-public Integer 유저북마크삭제(Integer postingId, Integer userId) {
-    // 해당 사용자의 북마크를 찾습니다.
-    int success = 0;
-    UserBookmark userBookmark = userBookmarkRepository.findByUserIdAndPostingId(userId, postingId);
 
-    if (userBookmark != null) {
-        // 북마크가 존재하면 삭제합니다.
-        userBookmarkRepository.delete(userBookmark);
-    } else {
-        // 북마크가 없는 경우 예외를 던집니다.
-        throw new MyException("북마크를 찾을 수 없습니다.");
-    }
-
-    return success;
-}
 
 }
