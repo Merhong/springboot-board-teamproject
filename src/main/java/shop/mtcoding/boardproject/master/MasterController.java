@@ -11,6 +11,7 @@ import shop.mtcoding.boardproject.bookmark.BookmarkService;
 import shop.mtcoding.boardproject.master.MasterResponse.MasterListDTO;
 
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.user.User;
 
@@ -46,11 +47,13 @@ public class MasterController {
 
     
     @GetMapping("/search")
-    public String search(String keyword, 
-            @RequestParam(defaultValue = "0") Integer page,
+    public String search(@RequestParam(defaultValue = "")String keyword, 
+            @RequestParam(name = "pageSearchAll", defaultValue = "0") Integer page,
             HttpServletRequest request) {
 
         keyword = keyword.trim();
+        
+        request.setAttribute("keyword", keyword);
 
         // if(keyword == null || keyword.isEmpty()){
         if(keyword == null){
@@ -59,17 +62,43 @@ public class MasterController {
 
         MasterResponse.SearchDTO searchDTO = masterService.전체검색(keyword);
 
-        final int PAGESIZE=8;
+        if(searchDTO == null){
+            return "/master/search";
+        }
 
-        int totalCount = searchDTO.getCompUserList().size() + searchDTO.getNormalUserList().size() +
-                 searchDTO.getPostingList().size() + searchDTO.getResumeList().size();
+        searchDTO.setNormalUserList(new ArrayList<User>()); // 일반유저 검색은 제외하기로 함
+
+
+        
+        final int PAGESIZE=4;
+        
+        int compUserListSize=0;
+        if(searchDTO.getCompUserList() != null){
+            compUserListSize = searchDTO.getCompUserList().size();
+        }
+        int normalUserListSize=0;
+        if(searchDTO.getNormalUserList() != null){
+            normalUserListSize = searchDTO.getNormalUserList().size();
+        }
+        int postingListSize=0;
+        if(searchDTO.getPostingList() != null){
+            postingListSize = searchDTO.getPostingList().size();
+        }
+        int resumeListSize=0;
+        if(searchDTO.getResumeList() != null){
+            resumeListSize = searchDTO.getResumeList().size();
+        }
+
+        // System.out.println("테스트 : compUserListSize :"+compUserListSize+" / normalUserListSize :"+normalUserListSize+" / postingListSize :"+postingListSize+" / resumeListSize :"+resumeListSize);
+
+        int totalCount = compUserListSize + normalUserListSize + postingListSize + resumeListSize;
         // 모든 공고 합친 개수
         
         boolean last = false; // 끝페이지인지 확인
         if(totalCount <= (page + 1)* PAGESIZE){
             last = true;
         }
-
+        
         boolean first = false; // 첫페이지인지 확인
         if(page <= 0){
             first = true;
@@ -79,25 +108,67 @@ public class MasterController {
         
         int pageStart = page * PAGESIZE;
         int pageEnd = Math.min(pageStart + PAGESIZE, totalCount);
-
+        
         if (pageStart >= pageEnd || page < 0) {
             // request.setAttribute("postingList", null);
             request.setAttribute("searchDTO", new ArrayList<>()); // 범위 벗어난 페이지면 0개리스트 줌
         }else{
 
+            List<Object> allList = new ArrayList<>();
 
+            if(searchDTO.getCompUserList() != null && searchDTO.getCompUserList().size() != 0){
+                allList.addAll(searchDTO.getCompUserList());
+            }
+            if(searchDTO.getNormalUserList() != null && searchDTO.getNormalUserList().size() != 0){
+                allList.addAll(searchDTO.getNormalUserList());
+            }
+            if(searchDTO.getPostingList() != null && searchDTO.getPostingList().size() != 0){
+                allList.addAll(searchDTO.getPostingList());
+            }
+            if(searchDTO.getResumeList() != null && searchDTO.getResumeList().size() != 0){
+                allList.addAll(searchDTO.getResumeList());
+            }
 
+            allList = allList.subList(pageStart, pageEnd);
+            
+            List<User> newCompUserList = new ArrayList<>();
+            List<User> newNormalUserList = new ArrayList<>();
+            List<Posting> newPostingList = new ArrayList<>();
+            List<Resume> newResumeList = new ArrayList<>();
 
-            request.setAttribute("searchDTO", postingList.subList(pageStart, pageEnd)); // 페이지 맞으면 리스트에서 거기에 맞게 잘라서 줌
+            for (Object object : allList) {
+                if (object instanceof User) {
+                    if(  ( (User)object ).getRole()==2  ){
+                        newCompUserList.add( (User)object );
+                    } else{
+                        newNormalUserList.add( (User)object );
+                    }
+                } else if (object instanceof Posting) {
+                    newPostingList.add( (Posting)object );
+                } else if (object instanceof Resume) {
+                    newResumeList.add( (Resume)object );
+                }
+            }
+
+            MasterResponse.SearchDTO newSearchDTO = new MasterResponse.SearchDTO();
+            newSearchDTO.setCompUserList(newCompUserList);
+            newSearchDTO.setNormalUserList(newNormalUserList);
+            newSearchDTO.setPostingList(newPostingList);
+            newSearchDTO.setResumeList(newResumeList);
+
+            request.setAttribute("searchDTO", newSearchDTO);
         }
 
-
-
-
-
-
-        request.setAttribute("searchDTO", searchDTO);
-        request.setAttribute("keyword", keyword);
+        request.setAttribute("pageSearchAll", page);
+        request.setAttribute("first", first);
+        request.setAttribute("last", last);
+        request.setAttribute("totalCount", totalCount);
+        
+        int totalPage = totalCount / PAGESIZE;
+        if(totalCount % PAGESIZE != 0){
+            totalPage++;
+        }
+        request.setAttribute("totalPage", totalPage);
         return "/master/search";
     }
 

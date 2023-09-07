@@ -174,8 +174,8 @@ public class MasterService {
         
         
         List<User> userList = userRepository.findByUsernameContainingOrCompnameContaining(keyword, keyword);
-        List<Posting> postingList = postingRepository.findByTitleContaining(keyword);
-        List<Resume> resumeList = resumeRepository.findByTitleContaining(keyword);
+        List<Posting> postingList = postingRepository.findPostingByTitleOrJoinUserCompname(keyword, keyword);
+        List<Resume> resumeList = resumeRepository.findResumeByTitleOrJoinUserUsername(keyword, keyword);
 
         // System.out.println("테스트:"+userList);
         // System.out.println("테스트:"+postingList);
