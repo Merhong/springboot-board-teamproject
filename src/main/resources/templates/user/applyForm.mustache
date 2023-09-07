@@ -14,7 +14,7 @@
 
 			<form action="/user/apply" method="post">
 
-				<div class="col-7 p-3">
+				<div class="col-7 p-3 w-100">
 					<div class="input-group mb-3">
 						<span class="input-group-text">공고명</span>
 						<input type="text" class="form-control" name="postingTitle" value="{{posting.title}}" readonly>
@@ -26,7 +26,7 @@
 					</div>
 					<div class="input-group mb-3">
 						<span class="input-group-text">홈페이지</span>
-						<input type="text" class="form-control" value="http://aasdasd.com" readonly>
+						<input type="text" class="form-control" value="{{posting.user.homepage}}" readonly>
 					</div>
 				</div>
 		</div>

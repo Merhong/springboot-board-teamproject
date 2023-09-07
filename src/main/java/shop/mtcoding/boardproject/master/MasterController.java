@@ -228,7 +228,7 @@ public class MasterController {
         // System.out.println("테스트 전체size:"+postingList.size());
         // System.out.println("테스트 page:"+page);
 
-        final int PAGESIZE=4; // 한페이지에 보여줄 공고 개수
+        final int PAGESIZE=6; // 한페이지에 보여줄 공고 개수
 
         int totalCount = postingList.size(); // 모든 공고 합친 개수
 
