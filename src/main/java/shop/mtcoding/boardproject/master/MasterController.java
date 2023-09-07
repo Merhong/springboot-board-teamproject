@@ -78,7 +78,9 @@ public class MasterController {
     // 인덱스(홈) 페이지
     @GetMapping("/")
     public String index(@RequestParam(defaultValue = "all") List<String> skillList,
-            @RequestParam(defaultValue = "all") String position, @RequestParam(defaultValue = "all") String region,
+            @RequestParam(defaultValue = "all") String position, 
+            @RequestParam(defaultValue = "all") String region, 
+            @RequestParam(defaultValue = "0") Integer page,
             HttpServletRequest request) {
 
         List<Skill> sl = skillService.스킬이름전부();
@@ -98,8 +100,52 @@ public class MasterController {
             e.printStackTrace();
         }
         // 뷰에 뭘 검색한건지 적혀있게
-        List<Posting> postingList = masterService.메인화면검색(skillList, position, region);
-        request.setAttribute("postingList", postingList);
+
+
+        List<Posting> postingList = masterService.메인화면검색(skillList, position, region); // 핵심기능
+        
+        // System.out.println("테스트 전체size:"+postingList.size());
+        // System.out.println("테스트 page:"+page);
+
+        final int PAGESIZE=6; // 한페이지에 보여줄 공고 개수
+
+        int totalCount = postingList.size(); // 모든 공고 합친 개수
+        
+        boolean last = false; // 끝페이지인지 확인
+        if(totalCount <= (page + 1)* PAGESIZE){
+            last = true;
+        }
+
+        boolean first = false; // 첫페이지인지 확인
+        if(page <= 0){
+            first = true;
+        } else{
+            first = false;
+        }
+
+
+        int pageStart = page * PAGESIZE;
+        int pageEnd = Math.min(pageStart + PAGESIZE, totalCount);
+
+        if (pageStart >= pageEnd || page < 0) {
+            // request.setAttribute("postingList", null);
+            request.setAttribute("postingList", new ArrayList<Posting>()); // 범위 벗어난 페이지면 0개리스트 줌
+        }else{
+            request.setAttribute("postingList", postingList.subList(pageStart, pageEnd)); // 페이지 맞으면 리스트에서 거기에 맞게 잘라서 줌
+        }
+
+        
+        // request.setAttribute("postingList", postingList);
+        request.setAttribute("page", page);
+        request.setAttribute("first", first);
+        request.setAttribute("last", last);
+        request.setAttribute("totalCount", totalCount);
+        
+        int totalPage = totalCount / PAGESIZE;
+        if(totalCount % PAGESIZE != 0){
+            totalPage++;
+        }
+        request.setAttribute("totalPage", totalPage);
 
         return "index";
     }
