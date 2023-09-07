@@ -1,5 +1,25 @@
 {{> layout/header}}
 
+<style>
+	.compname {
+		font-size: 25px;
+	}
+
+	.posting-title {
+		font-size: 30px;
+		/* 원하는 크기로 조절 */
+		text-decoration: underline;
+		/* 밑줄 추가 */
+		cursor: pointer;
+		/* 클릭 가능한 커서 스타일 */
+	}
+
+	.badge {
+		font-size: 18px;
+		/* 원하는 크기로 조절 */
+	}
+</style>
+
 <!--17번 개인기업추천보기 화면-->
 <div class="d-flex mb-3">
 	<div class="col-2"></div>
@@ -125,14 +145,13 @@
 			<div class="d-flex border border-info m-3 p-2">
 				<div class="col-9">
 					<div class="m-auto">
+						<span class="compname">{{this.compname}}</span>
 						<div data-id="{{id}}" class="posting-title">{{title}}</div>
 						<span class="badge bg-danger">{{position}}</span>
 						{{#postingSkills}}
 						<span class="badge bg-secondary me-1">{{skill.skillname}}</span>
 						{{/postingSkills}}
-						<div class="mt-3">
-							<a href="/user/applyForm/{{id}}" class="mb-3 ms-2 btn btn-info">지원하기</a>
-						</div>
+
 					</div>
 				</div>
 			</div>
