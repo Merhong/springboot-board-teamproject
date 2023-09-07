@@ -212,7 +212,7 @@ public class MasterController {
         // 뷰에 뭘 검색한건지 적혀있게
 
 
-        List<Posting> postingList = masterService.메인화면검색(skillList, position, region); // 핵심기능
+        List<Posting> postingList = masterService.메인화면검색한방쿼리(skillList, position, region); // 핵심기능
         
         // System.out.println("테스트 전체size:"+postingList.size());
         // System.out.println("테스트 page:"+page);

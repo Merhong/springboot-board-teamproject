@@ -89,8 +89,14 @@ public class MasterService {
     //     return postingList;
     // }
 
-    public List<Posting> 메인화면검색(List<String> skillList, String position, String region) {
 
+    public List<Posting> 메인화면검색한방쿼리(List<String> skillList, String position, String region) {
+        List<Posting> postingList = postingQueryRepository.joinSkillPostingOneHitQuery(skillList, position, region);
+        return postingList;
+    }
+
+
+    public List<Posting> 메인화면검색(List<String> skillList, String position, String region) {
         List<Posting> postingList = new ArrayList<>();
 
         if(skillList.size()==0 || skillList.get(0).equals("all")){
@@ -98,7 +104,7 @@ public class MasterService {
         } else{
             postingList = postingQueryRepository.joinSkillPosting(skillList);
         }
-        
+
         if(position==null || position.equals("all")){
             //
         }else{
