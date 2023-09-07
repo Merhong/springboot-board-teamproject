@@ -68,6 +68,57 @@
         </div>
 
         <div class="card input-group ms-2 mb-3">
+          <span class="input-group-text">직무 선택</span>
+          <div class="d-flex flex-wrap">
+            <div class="form-check d-inline-block ms-3 me-2">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" id="백엔드" name="position" value="백엔드">
+                백엔드</label>
+            </div>
+            <div class="form-check d-inline-block ms-3 me-2">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" id="프론트엔드" name="position" value="프론트엔드">
+                프론트엔드</label>
+            </div>
+            <div class="form-check d-inline-block ms-3 me-2">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" id="풀스택" name="position" value="풀스택">
+                풀스택</label>
+            </div>
+            <div class="form-check d-inline-block ms-3 me-2">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" id="안드로이드" name="position" value="안드로이드">
+                안드로이드</label>
+            </div>
+            <div class="form-check d-inline-block ms-3 me-2">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" id="IOS" name="position" value="IOS">
+                IOS</label>
+            </div>
+            <div class="form-check d-inline-block ms-3 me-2">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" id="임베디드" name="position" value="임베디드">
+                임베디드</label>
+            </div>
+            <div class="form-check d-inline-block ms-3 me-2">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" id="빅데이터" name="position" value="빅데이터">
+                빅데이터</label>
+            </div>
+            <div class="form-check d-inline-block ms-3 me-2">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" id="서버" name="position" value="서버">
+                서버</label>
+            </div>
+            <div class="form-check d-inline-block ms-3 me-2">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" id="머신러닝" name="position" value="머신러닝">
+                머신러닝</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card input-group ms-2 mb-3">
           <span class="input-group-text">보유 기술</span>
           <div class="d-flex flex-wrap">
             {{#skillList}}
@@ -140,5 +191,38 @@
     }
     reader.readAsDataURL(f); // 파일 읽기, 버퍼로 다 읽으면 onload() 발동 -> 파일 다 읽으면 콜백
   }
+
+  const position = "{{ resume.user.position }}"; // 이력서의 직무 정보를 가져옴
+
+  if (position === "백엔드") {
+    document.getElementById("백엔드").checked = true;
+  }
+  if (position === "프론트엔드") {
+    document.getElementById("프론트엔드").checked = true;
+  }
+  if (position === "풀스택") {
+    document.getElementById("풀스택").checked = true;
+  }
+  if (position === "안드로이드") {
+    document.getElementById("안드로이드").checked = true;
+  }
+  if (position === "IOS") {
+    document.getElementById("IOS").checked = true;
+  }
+  if (position === "임베디드") {
+    document.getElementById("임베디드").checked = true;
+  }
+  if (position === "빅데이터") {
+    document.getElementById("빅데이터").checked = true;
+  }
+  if (position === "서버") {
+    document.getElementById("서버").checked = true;
+  }
+  if (position === "머신러닝") {
+    document.getElementById("머신러닝").checked = true;
+  }
+
+
+
 </script>
 {{> layout/footer}}

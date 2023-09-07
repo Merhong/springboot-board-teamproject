@@ -38,7 +38,6 @@ public class UserService {
                 .password(joinDTO.getPassword())
                 .username(joinDTO.getUsername())
                 .tel(joinDTO.getTel())
-                .position(joinDTO.getPosition())
                 .build();
 
         // JPA save
@@ -135,6 +134,9 @@ public class UserService {
             System.out.println("테스트 : 0");
             return 0;
         }
+
+    public User 회원정보업데이트(User sessionUser) {
+        return userRepository.save(sessionUser);
 
     }
 }

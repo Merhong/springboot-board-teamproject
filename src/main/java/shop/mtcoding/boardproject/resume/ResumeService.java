@@ -28,7 +28,6 @@ public class ResumeService {
     @Autowired
     private UserSkillRepository userSkillRepository;
 
-
     @Transactional
     public void 이력서등록(ResumeDTO resumeDTO, Integer id) {
         UUID uuid = UUID.randomUUID(); // 랜덤한 해시값을 만들어줌
@@ -61,6 +60,7 @@ public class ResumeService {
         for (Integer integer : skillList) {
             userSkillRepository.insertUserSkill(integer, id);
         }
+
     }
 
     public Resume 이력서상세보기(Integer id) {
@@ -80,9 +80,9 @@ public class ResumeService {
         Optional<Resume> resumeOp = resumeRepository.findById(resumeId);
         if (resumeOp.isPresent()) {
             Resume resume = resumeOp.get();
-            
-            if(resume.getDisclosure() == false){
-                if(resume.getUser().getId() != userId){
+
+            if (resume.getDisclosure() == false) {
+                if (resume.getUser().getId() != userId) {
                     throw new MyException(resumeId + "비공개임");
                 }
             }

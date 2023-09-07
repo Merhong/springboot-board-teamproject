@@ -97,7 +97,7 @@ public class UserController {
         for (Posting posting : compList) {
             CompInfoDTO compInfoDTO = new CompInfoDTO();
             compInfoDTO.setId(posting.getId());
-            System.out.println("검색" + posting.getId());
+            compInfoDTO.setCompname(posting.getUser().getCompname());
             compInfoDTO.setTitle(posting.getTitle());
             compInfoDTO.setPosition(posting.getPosition());
             // 공고에 해당하는 스킬 정보 가져오기
@@ -342,6 +342,7 @@ public class UserController {
     //
     // }
 
+
     @GetMapping("/api/user/{userId}/ismessage")
     public String messageCheckOut(@PathVariable Integer userId) {
         System.out.println("메시지 삭제 컨트롤러 실행");
@@ -353,5 +354,5 @@ public class UserController {
         }
         return "redirect:/";
     }
-
+  
 }
