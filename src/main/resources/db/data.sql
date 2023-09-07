@@ -75,13 +75,13 @@ values (2, '지원서3', '대졸', '신입', '반갑습니다', false);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
 values (10, '홍길동지원서1', '대졸', '신입', '반갑습니다1', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (10, '홍길동지원서2', '대졸', '신입', '반갑습니다2', true);
+values (10, '이력서1', '대졸', '신입', '반갑습니다2', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
 values (11, '임지원서1', '고졸', '3년', '반갑습니다3', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
 values (11, '임지원서2', '고졸', '3년', '반갑습니다4', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (11, '임지원서3', '고졸', '3년', '반갑습니다4', true);
+values (11, '이력서2', '고졸', '3년', '반갑습니다4', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
 values (12, '장보고지원서2', '대졸', '2년', '반갑습니다5', true);
 
@@ -184,6 +184,10 @@ insert into postingSkill_tb(skill_id, posting_id)
 values (7, 11);
 insert into postingSkill_tb(skill_id, posting_id)
 values (7, 12);
+insert into postingSkill_tb(skill_id, posting_id)
+values (3, 13);
+insert into postingSkill_tb(skill_id, posting_id)
+values (6, 13);
 
 
 -- Apply 테이블 (중간 테이블)

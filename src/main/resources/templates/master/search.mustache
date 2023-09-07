@@ -5,7 +5,10 @@
 
 	<div class="col-xxl-7 col-xl-9 col-lg-10 col-md-11 col-sm-12">
 
-    {{#searchDTO}}
+
+        <div class="text-center m-1"><h3>통합검색</h3></div>
+        
+        {{#searchDTO}}
 
 
         
@@ -17,7 +20,7 @@
 
 
 
-        {{#postingList}}
+            {{#postingList}}
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="border border-info m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: #bebebe;">
                     <h4 class="text-center fw-bold mt-1">{{user.compname}}</h4>
@@ -54,13 +57,13 @@
                 </div>
                 <div class="text-center">구인공고</div>
             </div>
-        {{/postingList}}
+            {{/postingList}}
             
 
 
 
             
-        {{#resumeList}}
+            {{#resumeList}}
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="border border-info m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: #1bc9ed;">
                     </span><h4 class="text-center fw-bold mt-1">{{user.username}}</h4>
@@ -94,12 +97,12 @@
                 </div>
                 <div class="text-center">이력서</div>
             </div>
-        {{/resumeList}}
+            {{/resumeList}}
 
 
 
             
-        {{#compUserList}}
+            {{#compUserList}}
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="border border-info m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: bisque;">
                     <h4 class="text-center fw-bold">{{compname}}</h4>
@@ -142,7 +145,7 @@
                 </div>
                 <div class="text-center">기업</div>
             </div>
-        {{/compUserList}}
+            {{/compUserList}}
 
 
 
@@ -150,7 +153,10 @@
 
 
 
-    {{/searchDTO}}
+        {{/searchDTO}}
+
+
+
 
         {{^searchDTO}}
         <h1 class="text-center">검색 결과 없음.</h1>

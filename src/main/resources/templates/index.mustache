@@ -219,9 +219,21 @@
 
 
 			</div>
-			<div class="m-2">
+			<div class="m-2 mb-3">
 				<div class="btn btn-success w-100" onclick="searchAll()">검색하기</div>
 			</div>
+
+			<textarea class="visually-hidden" id="pageFind" name="page" rows="1" cols="50">{{#page}}{{page}}{{/page}}{{^page}}0{{/page}}</textarea>
+
+			<div class="text-center">결과 : 총합 <b>{{totalCount}}</b>개, <b>{{totalPage}}</b>페이지</div>
+			<ul class="pagination d-flex justify-content-center mt-1">
+
+				<li class="page-item {{#first}}disabled{{/first}}"><button class="page-link" onclick="searchAllPageMinus()">이전 페이지</button></li>
+				<li class="page-item"><div class="page-link">{{#page}}{{page}}{{/page}}{{^page}}0{{/page}}</div></li>
+				<li class="page-item {{#last}}disabled{{/last}}"><button class="page-link" onclick="searchAllPagePlus()">다음 페이지</button></li>
+
+			  </ul>
+			  
 		</form>
 
 
@@ -294,18 +306,7 @@
 <input type="hidden" value="{{region}}" name="regionSet" id="regionSet">
 
 
-<ul class="pagination d-flex justify-content-center">
-    {{#keyword}}
-    <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-dark" href="?keyword={{keyword}}&page={{prevPage}}">이전 페이지</a></li>
-    <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-dark" href="?keyword={{keyword}}&page={{nextPage}}">다음 페이지</a></li>
-    {{/keyword}}
 
-	
-    {{^keyword}}
-    <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-dark" href="?page={{prevPage}}">이전 페이지</a></li>
-    <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-dark" href="?page={{nextPage}}">다음 페이지</a></li>
-    {{/keyword}}
-  </ul>
 
 
 
@@ -470,6 +471,8 @@
 
 
 	function searchOnlyPosition() {
+		document.querySelector("#pageFind").value=0;
+
 		document.querySelector(".all3checkbox").checked = true;
 		document.getElementById("all3").selected = true;
 
@@ -484,6 +487,8 @@
 	}
 
 	function searchOnlyRegion() {
+		document.querySelector("#pageFind").value=0;
+
 		document.getElementById("all2").checked = true;
 
 		let skillfind = document.querySelectorAll(".skillFind")
@@ -497,6 +502,15 @@
 	}
 
 	function searchOnlySkill() {
+		document.querySelector("#pageFind").value=0;
+
+		if (document.querySelector("#all").checked) {
+			let skillfind = document.querySelectorAll(".skillFind")
+			skillfind.forEach(element => {
+				element.checked = false;
+			});
+		}
+
 		document.querySelector(".all3checkbox").checked = true;
 		document.getElementById("all3").selected = true;
 
@@ -507,6 +521,8 @@
 	}
 
 	function searchAll() {
+		document.querySelector("#pageFind").value=0;
+
 		if (document.querySelector("#all").checked) {
 			let skillfind = document.querySelectorAll(".skillFind")
 			skillfind.forEach(element => {
@@ -516,6 +532,43 @@
 		let submit = document.getElementById("selectform");
 		submit.submit();
 	}
+
+	function searchAllPagePlus() {
+		pageFind = document.querySelector("#pageFind")
+		// console.log(pageFind.value);
+		pageFind.value++; 
+		// console.log(pageFind.value);
+
+		if (document.querySelector("#all").checked) {
+			let skillfind = document.querySelectorAll(".skillFind")
+			skillfind.forEach(element => {
+				element.checked = false;
+			});
+		}
+		let submit = document.getElementById("selectform");
+		submit.submit();
+	}
+
+	function searchAllPageMinus() {
+		pageFind = document.querySelector("#pageFind")
+		// console.log(pageFind.value);
+		pageFind.value--; 
+		// console.log(pageFind.value);
+
+		if (document.querySelector("#all").checked) {
+			let skillfind = document.querySelectorAll(".skillFind")
+			skillfind.forEach(element => {
+				element.checked = false;
+			});
+		}
+		let submit = document.getElementById("selectform");
+		submit.submit();
+	}
+
+
+
+
+
 
 	let bookmarked = '<h3>❤️</h3>';
 	let noBookmark = '<h3>🤍</h3>';
