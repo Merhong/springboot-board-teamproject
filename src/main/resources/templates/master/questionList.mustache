@@ -53,7 +53,7 @@
         <div class="question shadow contentWrapper card p-5">
           <div>
             <div class="d-flex justify-content-between">
-              <h3 class="m-2">질문 목록</h3>
+              <h3 class="m-2">Question</h3>
               <div class="btn-group">
                 <button
                   id="selectButton"
@@ -82,10 +82,14 @@
               </div>
             </div>
             <ul class="list-group list-group-flush mt-2">
+              <li class="list-group-item mb-2"><h3>작성 목록</h3></li>
               {{#DTOList}}
-              <a class="list-group-item" href="/question/{{ id }}">{{
-                title
-              }}</a>
+              <li
+                class="list-group-item"
+                onclick="location.href='/question/{{ id }}'"
+              >
+                {{ title }}
+              </li>
               {{/DTOList}}
             </ul>
           </div>

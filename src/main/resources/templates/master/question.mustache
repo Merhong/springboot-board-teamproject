@@ -9,65 +9,182 @@
     width: 300px;
   }
 </style>
-
 <div class="container p-5 question mb-5">
   <div class="card" style="box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3)">
     <div class="card-header"><b>문의</b></div>
     <div class="card-body">
-      <form action="/board/save" method="post">
-        <div class="mb-3">
-          <div class="mb-2"><b>문의 유형</b></div>
-          <div class="d-flex justify-content-start">
-            <button
-              type="button"
-              class="btn dropdown-toggle border"
-              data-bs-toggle="dropdown"
-            >
-              {{ master.category }}
-            </button>
-            <div></div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="mb-2"><b>이메일 주소</b></div>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter email"
-            name="title"
-            value="{{ master.user.email }}"
-            disabled
-          />
-        </div>
-        <div class="mb-3">
-          <div class="mb-2"><b>제목</b></div>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter title"
-            name="title"
-            value="{{ master.title }}"
-            disabled
-          />
-        </div>
-        <div class="mb-3">
-          <div class="mb-2"><b>내용</b></div>
-          <textarea
-            class="form-control"
-            rows="5"
-            name="content"
-            placeholder="내용을 작성하세요"
-            disabled
-            >{{ master.content }}</textarea
+      <div class="mb-3">
+        <div class="mb-2"><b>문의 유형</b></div>
+        <div class="d-flex justify-content-start">
+          <button
+            type="button"
+            class="btn dropdown-toggle border"
+            data-bs-toggle="dropdown"
           >
+            {{ master.category }}
+          </button>
+          <div></div>
         </div>
-        <div class="d-flex justify-content-end">
-          <div>
-            <a href="/help"> </a>
-          </div>
+      </div>
+      <div class="mb-3">
+        <div class="mb-2"><b>이메일 주소</b></div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter email"
+          name="title"
+          value="{{ master.user.email }}"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <div class="mb-2"><b>제목</b></div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter title"
+          name="title"
+          value="{{ master.title }}"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <div class="mb-2"><b>내용</b></div>
+        <textarea
+          class="form-control"
+          rows="5"
+          name="content"
+          placeholder="내용을 작성하세요"
+          disabled
+          >{{ master.content }}</textarea
+        >
+      </div>
+      <div class="d-flex justify-content-end">
+        <div>
+          <a href="/help"> </a>
         </div>
-      </form>
+      </div>
+      <div  class="mb-2"><b>답변</b></div>
+      <div id="list">
+      <input
+        type="text"
+        class="form-control m-1"
+        placeholder="Enter title"
+        name="title"
+        value="탈퇴 하세요"
+        disabled
+      />
+      <input
+        type="text"
+        class="form-control m-1"
+        placeholder="Enter title"
+        name="title"
+        value="집에 가세요"
+        disabled
+      /> 
     </div>
+      {{! <input
+        type="text"
+        class="form-control"
+        placeholder="Enter title"
+        name="title"
+        value=""
+        disabled
+      /> 
+    }}
+      
+      {{#admin}}
+    <input
+    id="userId"
+    type="text"
+    class="form-control"
+    placeholder="Enter email"
+    name="title"
+    value="{{ master.user.id  }}"
+    disabled
+    style="display: none;"
+  />
+      <input
+      id="reply"
+        type="text"
+        class="form-control m-1 mt-4 mb-2"
+        placeholder="Enter Reply"
+        name="reply"
+      />
+      <div>
+        <button
+          type="submit"
+          class="btn btn-info form-control m-1"
+          style="box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)"
+          onclick="select(`{{master.id}}`)"
+        >
+          답변하기
+        </button>
+      </div>
+    
+      {{/admin}}
+    </div>
+    
+  </div>
   </div>
 </div>
+
+<script>
+  async function select(id) {
+    let content = document.querySelector("#reply").value;
+    let userId = document.querySelector("#userId").value;
+    console.log(content);
+    console.log(id);
+    console.log(userId);
+
+    let requestBody = {
+      content: content,
+      userId : userId,
+    };
+
+    let response = await fetch(`/api/master/${id}/saveReply`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    let result = await response.json();
+    console.log(result);
+
+
+    let techEl = document.querySelector("#list");
+
+
+    let inputElement = document.createElement("input");
+inputElement.setAttribute("type", "text");
+inputElement.setAttribute("class", "form-control m-1");
+inputElement.setAttribute("placeholder", "Enter title");
+inputElement.setAttribute("name", "title");
+inputElement.setAttribute("disabled", "");
+
+
+    for (let i = 0; i < result.data.length; i++) {
+      let item = result.data[i];
+  inputElement.setAttribute("value", item.content);
+  techEl.append(inputElement);
+    }
+
+    document.querySelector("#reply").value = "";
+    
+    }
+    //   optionEl.value = item.title;
+    //   optionEl.innerHTML =
+    //     '<div class="border border-info m-2 ps-2 pe-2 pt-1">' +
+    //     item.title +
+    //     "<div>" +
+    //     item.desc +
+    //     "</div><div>" +
+    //     item.position +
+    //     "</div></div>";
+    //   techEl.append(optionEl);
+    // }
+
+</script>
 {{> layout/footer}}

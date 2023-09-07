@@ -1,7 +1,18 @@
 package shop.mtcoding.boardproject.user;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.vo.MyPath;
 import shop.mtcoding.boardproject.posting.Posting;
@@ -9,12 +20,6 @@ import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
 import shop.mtcoding.boardproject.user.UserRequest.UpdateDTO;
-
-import javax.transaction.Transactional;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
 
 @Service
 public class UserService {
@@ -121,7 +126,32 @@ public class UserService {
         return compList;
     }
 
+    @Transactional
+    public Integer 받은메시지조회(Boolean isMessage, Integer userId) {
+
+        System.out.println("받은 메시지 여부 조회 isMessage : " + isMessage);
+        System.out.println("받은 메시지 여부 조회 userId : " + userId);
+        Integer suc = userRepository.message(isMessage, userId);
+        if (suc == 1) {
+            System.out.println("테스트 suc : " + suc);
+            return suc;
+        } else {
+            System.out.println("테스트 : 0");
+            return 0;
+        }
+    }
+
     public User 회원정보업데이트(User sessionUser) {
         return userRepository.save(sessionUser);
+
+    }
+
+    public User 회원조회(Integer userId) {
+        Optional<User> userop = userRepository.findById(userId);
+        User user = null;
+        if (userop != null) {
+            user = userop.get();
+        }
+        return user;
     }
 }

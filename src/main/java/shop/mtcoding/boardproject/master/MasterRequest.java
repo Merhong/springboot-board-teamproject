@@ -19,4 +19,13 @@ public class MasterRequest {
 
     }
 
+    @Getter
+    @Setter
+    public static class ReplyDTO {
+
+        private Integer userId;
+        private String content;
+
+    }
+
 }
