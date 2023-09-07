@@ -14,6 +14,7 @@ import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillService;
 import shop.mtcoding.boardproject.skill.UserSkill;
 import shop.mtcoding.boardproject.user.User;
+import shop.mtcoding.boardproject.user.UserService;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public class ResumeController {
 
     @Autowired
     private SkillService skillService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private HttpSession session;
@@ -147,6 +151,11 @@ public class ResumeController {
         }
         // 2. 이력서 등록
         resumeService.이력서등록(resumeDTO, sessionUser.getId());
+
+        // 3. 유저 테이블에 직무 정보 업데이트
+        sessionUser.setPosition(resumeDTO.getPosition()); // 직무 정보 업데이트
+        userService.회원정보업데이트(sessionUser); // 유저 정보 업데이트
+
         return "redirect:/";
     }
 

@@ -1,12 +1,10 @@
 package shop.mtcoding.boardproject.user;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
 import java.util.List;
-
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,7 +23,6 @@ public class UserRequest {
         private String password;
         private String username;
         private String tel;
-        private String position;
     }
 
     // 로그인 DTO
@@ -46,7 +43,6 @@ public class UserRequest {
         private Date birth;
         private MultipartFile pto;
     }
-
 
     @Getter
     @Setter
