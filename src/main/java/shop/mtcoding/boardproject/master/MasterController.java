@@ -46,7 +46,9 @@ public class MasterController {
 
     
     @GetMapping("/search")
-    public String search(String keyword, HttpServletRequest request) {
+    public String search(String keyword, 
+            @RequestParam(defaultValue = "0") Integer page,
+            HttpServletRequest request) {
 
         keyword = keyword.trim();
 
@@ -56,6 +58,43 @@ public class MasterController {
         }
 
         MasterResponse.SearchDTO searchDTO = masterService.전체검색(keyword);
+
+        final int PAGESIZE=8;
+
+        int totalCount = searchDTO.getCompUserList().size() + searchDTO.getNormalUserList().size() +
+                 searchDTO.getPostingList().size() + searchDTO.getResumeList().size();
+        // 모든 공고 합친 개수
+        
+        boolean last = false; // 끝페이지인지 확인
+        if(totalCount <= (page + 1)* PAGESIZE){
+            last = true;
+        }
+
+        boolean first = false; // 첫페이지인지 확인
+        if(page <= 0){
+            first = true;
+        } else{
+            first = false;
+        }
+        
+        int pageStart = page * PAGESIZE;
+        int pageEnd = Math.min(pageStart + PAGESIZE, totalCount);
+
+        if (pageStart >= pageEnd || page < 0) {
+            // request.setAttribute("postingList", null);
+            request.setAttribute("searchDTO", new ArrayList<>()); // 범위 벗어난 페이지면 0개리스트 줌
+        }else{
+
+
+
+
+            request.setAttribute("searchDTO", postingList.subList(pageStart, pageEnd)); // 페이지 맞으면 리스트에서 거기에 맞게 잘라서 줌
+        }
+
+
+
+
+
 
         request.setAttribute("searchDTO", searchDTO);
         request.setAttribute("keyword", keyword);
@@ -129,7 +168,7 @@ public class MasterController {
 
         if (pageStart >= pageEnd || page < 0) {
             // request.setAttribute("postingList", null);
-            request.setAttribute("postingList", new ArrayList<Posting>()); // 범위 벗어난 페이지면 0개리스트 줌
+            request.setAttribute("postingList", new ArrayList<>()); // 범위 벗어난 페이지면 0개리스트 줌
         }else{
             request.setAttribute("postingList", postingList.subList(pageStart, pageEnd)); // 페이지 맞으면 리스트에서 거기에 맞게 잘라서 줌
         }
