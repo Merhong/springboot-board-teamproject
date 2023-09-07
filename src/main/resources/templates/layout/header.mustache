@@ -199,8 +199,12 @@
 								0{{/pageSearchAll}}</textarea>
 						</div>
 						<div class="">
+
+							<div class="btn btn-secondary header_search" onclick="searchAllPageZero()">검색</div>
+
 							<button class="btn btn-secondary header_search" type="submit"
 							">검색</button>
+
 						</div>
 					</form>
 				</div>
@@ -210,6 +214,23 @@
 	</header>
 
 	<script>
+
+		document.querySelector("#selectPageSearchAllForm").addEventListener("submit", function(event) {
+				event.preventDefault();
+				searchAllPageZero();
+			}); // 엔터키 눌러도 바로 폼태그 안보내고 함수로 보내게
+
+		function searchAllPageZero() {
+				pageSearchAllFind = document.querySelector("#pageSearchAllFind")
+				// console.log(pageSearchAllFind.value);
+				pageSearchAllFind.value=0; 
+				// console.log(pageSearchAllFind.value);
+				
+				let selectPageSearchAllForm = document.getElementById("selectPageSearchAllForm");
+				selectPageSearchAllForm.submit();
+			}
+
+
 		// 페이지 로드 시 초기 세션 상태에 따라 링크 텍스트 변경
 		function changeLoginLinksAndButton() {
 			let joinLink = document.querySelector('a[href="/selectJoinForm"]');

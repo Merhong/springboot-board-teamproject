@@ -322,7 +322,7 @@
       >
 
       <div class="text-center">
-        결과 : 총합 <b>{{ totalCount }}</b
+        구인공고 검색 결과 : 총합 <b>{{ totalCount }}</b
         >개, <b>{{ totalPage }}</b
         >페이지
       </div>
@@ -350,61 +350,7 @@
       <div class="col-lg-4 col-md-4 col-sm-6">
         <div class="border border-info m-2 ps-2 pe-2 pt-1">
           <h4 class="text-center fw-bold">{{ user.compname }}</h4>
-          {{#user.photo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          }}<a
+          {{#user.photo}}<a
             href="/comp/posting/{{ id }}"
             class="text-black text-decoration-none"
             ><img
@@ -412,61 +358,7 @@
               class="img-fluid d-block m-auto"
               style="height: 120px"
             />{{/user.photo}}
-            {{^user.photo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }}<a
+            {{^user.photo}}<a
               href="/comp/posting/{{ id }}"
               class="text-black text-decoration-none"
               ><img
@@ -477,61 +369,7 @@
               <h5 class="mt-1 fw-bold">{{ title }}</h5>
               <div class="mb-1 fst-italic">{{ position }}</div>
               <div class="mb-1">
-                {{#postingSkill
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }}<span class="badge bg-primary me-1">{{
+                {{#postingSkill}}<span class="badge bg-primary me-1">{{
                   skill.skillname
                 }}</span
                 >{{/postingSkill}}
@@ -539,122 +377,14 @@
               <div>
                 {{#career}}<span class="badge bg-success">{{ career }}</span
                 >{{/career}}
-                {{#education
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }}<span class="badge bg-success">{{ education }}</span
+                {{#education}}<span class="badge bg-success">{{ education }}</span
                 >{{/education}}
                 <span class="badge bg-success">{{ region }}</span>
               </div>
             </a>
           </a>
           <div class="d-flex justify-content-between">
-            {{^sessionComp.compname
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }}<button
+            {{^sessionComp.compname}}<button
               type="button"
               class="border-0 bg-white mt-1 like-button"
               id="posting{{ id }}"
@@ -664,61 +394,7 @@
             >{{/sessionComp.compname}}
             <!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
             <!-- 기업 유저는 북마크 못하게 -->
-            {{#sessionComp.compname
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }}<button type="button" class="invisible"><h3>🤍</h3></button
+            {{#sessionComp.compname}}<button type="button" class="invisible"><h3>🤍</h3></button
             >{{/sessionComp.compname}}
 
             <span class="expiryDate fw-bold align-self-center me-2"

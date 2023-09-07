@@ -150,6 +150,9 @@ public class UserController {
 
         Posting posting = compService.공고찾기(postingId);
         Resume selectedResume = resumeService.이력서찾기(selectedResumeId); // 선택한 이력서를 ID로 조회
+        if(selectedResume.getDisclosure() == false){
+            throw new MyException("비공개 이력서로 지원 못함");
+        }
         Apply apply = new Apply();
         apply.setUser(sessionUser);
         apply.setResume(selectedResume);
