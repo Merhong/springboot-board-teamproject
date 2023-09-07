@@ -121,4 +121,20 @@ public class UserService {
 
         return compList;
     }
+
+    @Transactional
+    public Integer 받은메시지조회(Boolean isMessage, Integer userId) {
+
+        System.out.println("받은 메시지 여부 조회 isMessage : " + isMessage);
+        System.out.println("받은 메시지 여부 조회 userId : " + userId);
+        Integer suc = userRepository.message(isMessage, userId);
+        if (suc == 1) {
+            System.out.println("테스트 suc : " + suc);
+            return suc;
+        } else {
+            System.out.println("테스트 : 0");
+            return 0;
+        }
+
+    }
 }

@@ -34,7 +34,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import java.util.ArrayList;
 import java.io.IOException;
 import java.util.List;
@@ -90,7 +89,6 @@ public class UserController {
             e.printStackTrace();
         }
 
-      
         List<Posting> compList = userService.기업추천검색(skillList, position);
         System.out.println("검색1: " + compList);
 
@@ -107,7 +105,6 @@ public class UserController {
             compInfoDTO.setPostingSkills(postingSkills);
             compInfoList.add(compInfoDTO);
         }
-
 
         // compInfoList를 컨트롤러에서 뷰로 전달
         request.setAttribute("compInfoList", compInfoList);
@@ -209,6 +206,7 @@ public class UserController {
             if (sessionUser.getRole() == 0) {
                 // 관리자의 경우 sessionAdmin 세션을 설정합니다.
                 session.setAttribute("sessionAdmin", sessionUser);
+                System.out.println("x : 관리자 로그인");
             } else if (sessionUser.getRole() == 1) {
                 // 개인 사용자의 경우 sessionUser 세션을 설정합니다.
                 session.setAttribute("sessionUser", sessionUser);
@@ -219,9 +217,8 @@ public class UserController {
                 System.out.println("x : 기업 로그인");
             }
 
-
-        // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
-        if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
+            // 개인 및 기업 사용자의 경우 세부 정보를 SessionCompDTO에 저장하여 세션에 추가합니다.
+            if (sessionUser.getRole() == 1 || sessionUser.getRole() == 2) {
                 CompRequest.SessionCompDTO sessionComp = CompRequest.SessionCompDTO.builder()
                         .userId(sessionUser.getId())
                         .email(sessionUser.getEmail())
@@ -283,7 +280,6 @@ public class UserController {
         return new ApiUtil<String>(true, "이메일을 사용 할 수 있습니다.");
     }
 
-
     // 개인 이력서를 보고 기업에서 입사제안 하는 페이지
     @GetMapping("/user/resume/{resumeId}/offerList")
     public String offerListUser(@PathVariable Integer resumeId, HttpServletRequest request) {
@@ -337,12 +333,25 @@ public class UserController {
 
     // // 기업추천 검색 POST
     // @PostMapping("/api/user/recommend")
-    // public @ResponseBody ApiUtil<List<Posting>> userRecommend(@RequestBody UserRequest.SearchDTO searchDTO,
-    //         HttpServletResponse response) {
-    //     List<Posting> postingList = userService.기업추천검색(searchDTO);
-    //     System.out.println("postingList : " + postingList.size());
-    //     return new ApiUtil<List<Posting>>(true, postingList);
+    // public @ResponseBody ApiUtil<List<Posting>> userRecommend(@RequestBody
+    // UserRequest.SearchDTO searchDTO,
+    // HttpServletResponse response) {
+    // List<Posting> postingList = userService.기업추천검색(searchDTO);
+    // System.out.println("postingList : " + postingList.size());
+    // return new ApiUtil<List<Posting>>(true, postingList);
     //
     // }
-  
+
+    @GetMapping("/api/user/{userId}/ismessage")
+    public String messageCheckOut(@PathVariable Integer userId) {
+        System.out.println("메시지 삭제 컨트롤러 실행");
+        Integer sucsess = userService.받은메시지조회(false, userId);
+        if (sucsess == 1) {
+            System.out.println("메시지 삭제 성공");
+        } else {
+            System.out.println("메시지 삭제 실패");
+        }
+        return "redirect:/";
+    }
+
 }
