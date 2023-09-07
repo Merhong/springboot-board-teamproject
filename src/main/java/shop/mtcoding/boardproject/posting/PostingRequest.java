@@ -121,6 +121,7 @@ public class PostingRequest {
     @Setter
     public static class CompInfoDTO {
         private Integer id;
+        private String compname;
         private String title;
         private String position;
         private List<PostingSkill> postingSkills;
