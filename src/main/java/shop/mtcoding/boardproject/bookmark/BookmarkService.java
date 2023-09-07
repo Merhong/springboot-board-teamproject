@@ -152,6 +152,7 @@ public class BookmarkService {
         return success;
     }
 
+
     @Transactional
     public Integer 유저북마크삭제(Integer postingId, Integer userId) {
         // 해당 사용자의 북마크를 찾습니다.

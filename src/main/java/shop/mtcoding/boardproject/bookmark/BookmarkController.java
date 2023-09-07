@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.*;
+
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject.comp.CompRequest;
@@ -29,7 +31,7 @@ public class BookmarkController {
     // 개인북마크 화면
     @GetMapping("/user/bookmarkForm")
     public String userBookMarkForm(HttpServletRequest request,
-                                   BookmarkResponse.UserBookmarkDTO bookmarkDTO) {
+            BookmarkResponse.UserBookmarkDTO bookmarkDTO) {
 
         User user = (User) session.getAttribute("sessionUser");
 
@@ -138,6 +140,7 @@ public class BookmarkController {
         // return Script.href("/resume/newWindow/"+ResumeId, "북마크 성공");
     }
 
+
     // 개인 공고 북마크하기 POST
     @PostMapping("/user/bookmarkForm/save")
     public ResponseEntity<String> userbookmarkSave(@RequestParam(defaultValue = "") Integer postingId) {
@@ -152,6 +155,19 @@ public class BookmarkController {
         }
     }
 
+
+    @PostMapping("/user/bookmarkForm/delete")
+    public ResponseEntity<String> deleteUserBookmark(@RequestParam Integer postingId) {
+        Integer userId = ((User) session.getAttribute("sessionUser")).getId(); // 현재 로그인한 사용자의
+                                                                                                         // ID를 가져옴
+        try {
+            bookmarkService.유저북마크삭제(postingId, userId);
+            return ResponseEntity.ok("북마크가 삭제되었습니다.");
+        } catch (MyException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+  
     // 북마크 API, 북마크 (하트)
     @GetMapping("api/user/bookmark")
     public @ResponseBody ApiUtil<List<Posting>> checkBookmark() {
