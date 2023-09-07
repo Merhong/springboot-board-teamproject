@@ -98,42 +98,27 @@ public class UserService {
     }
 
     public List<Posting> 기업추천검색(List<String> skillList, String position) {
-        List<Posting> compList = new ArrayList<>();
-        Set<Posting> postingSet = new HashSet<Posting>();
+        List<Posting> compList;
 
-        if (skillList.size() == 0 || skillList.get(0).equals("all")) {
-            // compList = postingRepository.findAll();
-        } else {
-            postingSet = new LinkedHashSet<>();
-            for (String skill : skillList) {
-                List<Posting> tempList = postingRepository.joinSkillPosting(skill);
-                postingSet.addAll(tempList);
-            }
-            compList = new ArrayList<>(postingSet);
-        }
-        // 모든 포지션 또는 특정 포지션으로 필터링
         if (position == null || position.equals("all")) {
-            //
+            // 직무가 "all"이면 모든 공고를 가져옵니다.
+            compList = postingRepository.findAll();
         } else {
-            List<Posting> tempList = new ArrayList<>();
-            for (Posting posting : compList) {
-                if (!(posting.getPosition().equals(position))) {
-                    tempList.add(posting);
-                }
-            }
-            compList.removeAll(tempList);
+            // 직무 필터링
+            compList = postingRepository.findByPosition(position);
+        }
 
+        if (skillList != null && !skillList.isEmpty() && !skillList.contains("all")) {
+            // 스킬 필터링
+            List<Posting> skillFilteredPostings = new ArrayList<>();
+            for (String skill : skillList) {
+                skillFilteredPostings.addAll(postingRepository.joinSkillPosting(skill));
+            }
+
+            // 스킬 필터링 결과와 직무 필터링 결과를 공통으로 가지는 공고를 찾습니다.
+            compList.retainAll(skillFilteredPostings);
         }
-        List<Posting> listPositionPosting = postingRepository.findByPosition(position);
-        for (Posting posting : listPositionPosting) {
-            postingSet.add(posting);
-        }
-        List<Posting> PostingList = new ArrayList<>();
-        Iterator<Posting> iterator = postingSet.iterator();
-        while (iterator.hasNext()) {
-            Posting posting = iterator.next();
-            PostingList.add(posting);
-        }
-        return PostingList;
+
+        return compList;
     }
 }
