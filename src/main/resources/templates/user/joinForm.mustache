@@ -11,10 +11,17 @@
 
 		<form action="/join" method="post" enctype="multipart/form-data" onsubmit="valid()">
 			<div class="d-flex form-group mt-2 mb-2">
-				<input type="hidden" name="role" value=1 />
+				
+				<div>
+					<input type="hidden" name="role" value=1 />
+				</div>
+				<div>
 				<input type="email" name="email" class="form-control" placeholder="아이디(이메일)" id="email"
 					onchange="useremailChange()" />
-				<button type="button" class="btn btn-warning" onclick="check()">중복체크</button>
+				</div>
+				<div>
+					<button type="button" class="ms-2 ps-1 pe-1 btn btn-warning" onclick="check()">중복체크</button>
+				</div>
 			</div>
 
 			<div class="mt-4"></div>
@@ -36,6 +43,10 @@
 
 			<div class="mb-2">
 				<input type="tel" name="tel" class="form-control" placeholder="전화번호" id="tel" />
+			</div>
+
+			<div class="mb-2">
+				<input type="text" name="position" class="form-control" placeholder="직무" id="position" />
 			</div>
 
 			<div class="mt-4"></div>

@@ -53,7 +53,9 @@ values (9, '구인공고', '내용10', '대전', '백엔드', '2024-02-21', '5�
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
 values (9, '개발자구인', '내용11', '서울', '임베디드', '2023-12-21', '6년', '석사 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
-values (8, '제목1', '내용12', '서울', '프론트엔드', '2023-09-03', '8년', '대학 졸업');
+values (8, '구인홍보', '내용12', '서울', '프론트엔드', '2023-09-14', '8년', '대학 졸업');
+insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
+values (6, '구인홍보2', '내용13', '서울', '백엔드', '2023-09-22', '6년', '학력무관');
 
 
 -- Resume(이력서) 테이블
@@ -73,13 +75,13 @@ values (2, '지원서3', '대졸', '신입', '반갑습니다', false);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
 values (10, '홍길동지원서1', '대졸', '신입', '반갑습니다1', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (10, '홍길동지원서2', '대졸', '신입', '반갑습니다2', true);
+values (10, '이력서1', '대졸', '신입', '반갑습니다2', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
 values (11, '임지원서1', '고졸', '3년', '반갑습니다3', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
 values (11, '임지원서2', '고졸', '3년', '반갑습니다4', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (11, '임지원서3', '고졸', '3년', '반갑습니다4', true);
+values (11, '이력서2', '고졸', '3년', '반갑습니다4', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
 values (12, '장보고지원서2', '대졸', '2년', '반갑습니다5', true);
 
@@ -182,6 +184,10 @@ insert into postingSkill_tb(skill_id, posting_id)
 values (7, 11);
 insert into postingSkill_tb(skill_id, posting_id)
 values (7, 12);
+insert into postingSkill_tb(skill_id, posting_id)
+values (3, 13);
+insert into postingSkill_tb(skill_id, posting_id)
+values (6, 13);
 
 
 -- Apply 테이블 (중간 테이블)

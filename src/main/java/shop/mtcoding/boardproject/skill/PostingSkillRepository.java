@@ -12,4 +12,5 @@ public interface PostingSkillRepository extends JpaRepository<PostingSkill, Inte
     List<PostingSkill> findByPostingId(@Param("postingId") Integer postingId);
 
     List<PostingSkill> findBySkill(@Param("skill") String skill);
+
 }

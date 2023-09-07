@@ -1,0 +1,339 @@
+{{> layout/header}}
+<div class="d-flex justify-content-center align-items-center">
+
+	<div class="col-auto"></div>
+
+	<div class="col-xxl-7 col-xl-9 col-lg-10 col-md-11 col-sm-12">
+
+
+        <div class="text-center m-1"><h3>통합검색</h3></div>
+        
+        {{#searchDTO}}
+
+
+        
+		<div class="mb-4 d-flex flex-wrap">
+            
+
+
+            
+
+
+
+            {{#postingList}}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="border border-info m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: #bebebe;">
+                    <h4 class="text-center fw-bold mt-1">{{user.compname}}</h4>
+                    {{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
+                        src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto"
+                        style="height: 120px;">{{/user.photo}}
+                    {{^user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
+                        src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
+                        style="height: 120px;">{{/user.photo}}
+                    <h5 class="mt-1 fw-bold">{{title}}</h5>
+                    <div class="mb-1 fst-italic">{{position}}</div>
+                    <div class="mb-1">
+                        {{#postingSkill}}<span
+                            class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
+                    </div>
+                    <div>
+                        {{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
+                        {{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
+                        <span class="badge bg-success">{{region}}</span>
+                    </div>
+                </a>
+
+                </a>
+                    <div class="d-flex justify-content-between">
+                        {{^sessionComp.compname}}<button type="button" class="border-0 mt-1 like-button" id="posting{{id}}" style="background-color: #bebebe;"
+                                onclick="bookmarkChange(`{{id}}`)"><h3>🤍</h3></button>{{/sessionComp.compname}}
+                        <!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
+                        <!-- 기업 유저는 북마크 못하게 -->
+                        {{#sessionComp.compname}}<button type="button" class="invisible"><h3>🤍</h3></button>{{/sessionComp.compname}}
+
+                        <span
+                            class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
+                    </div>
+                </div>
+                <div class="text-center">구인공고</div>
+            </div>
+            {{/postingList}}
+            
+
+
+
+            
+            {{#resumeList}}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="border border-info m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: #1bc9ed;">
+                    </span><h4 class="text-center fw-bold mt-1">{{user.username}}</h4>
+                    {{#user.photo}}
+                    <a href="/resume/{{id}}" class="text-black text-decoration-none"><img
+                        src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto"
+                        style="height: 120px;">{{/user.photo}}
+                        {{^user.photo}}
+                        <a href="/resume/{{id}}" class="text-black text-decoration-none"><img
+                            src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
+                            style="height: 120px;">
+                        {{/user.photo}}
+                        <h5 class="mt-1 fw-bold">{{title}}</h5>
+                        <span class="badge bg-warning mt-1 mb-1">{{#user.birth}}{{user.birth}}{{/user.birth}}</span>
+                        <div class="mb-1">
+                            {{#user.userSkillList}}<span class="badge bg-primary me-1">{{skill.skillname}}</span>{{/user.userSkillList}}
+                        </div>
+                        <div>
+                            {{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
+                            {{#grade}}<span class="badge bg-success">{{grade}}</span>{{/grade}}
+                            <span class="badge bg-success">{{#user.address}}{{user.address}}{{/user.address}}</span>
+                        </div>
+                    </a>
+                    
+                </a>
+                <div class="d-flex justify-content-between">
+                
+                        <div class="mt-2 fst-italic">{{user.position}}</div>
+                        <button type="button" class="invisible"><h3>🤍</h3></button>
+                    </div>
+                </div>
+                <div class="text-center">이력서</div>
+            </div>
+            {{/resumeList}}
+
+
+
+            
+            {{#compUserList}}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="border border-info m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: bisque;">
+                    <h4 class="text-center fw-bold">{{compname}}</h4>
+                    {{#photo}}
+                    <a href="/comp/company/{{id}}" class="text-black text-decoration-none"><img
+                        src="../../../images/{{photo}}" class="img-fluid d-block m-auto"
+                        style="height: 120px;">{{/photo}}
+                        {{^photo}}
+                        <a href="/comp/company/{{id}}" class="text-black text-decoration-none"><img
+                            src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
+                            style="height: 120px;">
+                        {{/photo}}
+
+                        <div class="d-flex align-items-center mt-3">
+                            <span>전화번호 : </span>
+                            <span class="ms-1 fw-bold mt-2 mb-1"> {{tel}}</span>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <span>이메일 : </span>
+                            <span class="ms-1 fw-bold mt-2 mb-1">{{email}}</span>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <span>홈페이지 : </span>
+                            <span class="ms-1 fw-bold mt-2 mb-1">{{homepage}}</span>
+                        </div>
+
+                        <div class="d-flex align-items-center mb-2">
+                            <span>주소 : </span>
+                            <span class="ms-1 fw-bold mt-2 mb-1">{{address}}</span>
+                        </div>
+
+                    </a>
+                    
+                </a>
+                    <div class="d-flex justify-content-between">
+                
+                    </div>
+                </div>
+                <div class="text-center">기업</div>
+            </div>
+            {{/compUserList}}
+
+
+
+        </div>
+
+
+
+        {{/searchDTO}}
+
+
+
+
+        {{^searchDTO}}
+        <h1 class="text-center">검색 결과 없음.</h1>
+        <div class="text-center">검색어가 <b>회사명</b>, <b>공고명</b>, <b>이력서명</b>에 포함되면 검색됩니다.</div>
+        {{/searchDTO}}
+
+    </div>
+</div>
+
+<div class="col-auto"></div>
+</div>
+
+
+
+
+<script>
+    
+	function Ddaycheck(day) {
+		if (typeof day === "string") {
+			let day2 = new Date(day);
+			return Ddaycheck(day2);
+		} else {
+			let today = new Date();
+
+			// console.log((day-today) / (1000 * 60 * 60 * 24));
+			let DDay = Math.ceil((day - today) / (1000 * 60 * 60 * 24));
+
+			if (DDay == 0) {
+				// console.log("D-Day");
+				return "D-Day";
+			} else if (DDay < 0) {
+				// console.log("만료");
+				return "만료";
+			} else {
+				// console.log("D-"+DDay); 
+				return "D-" + DDay;
+			}
+		}
+	}
+
+	let day = document.querySelectorAll('.expiryDate');
+	day.forEach(element => {
+		element.textContent = Ddaycheck(element.textContent);
+	});
+
+
+
+
+
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+		const likeButtons = document.querySelectorAll(".like-button");
+
+		// 각각의 좋아요 버튼에 클릭 이벤트 리스너 추가
+		likeButtons.forEach(button => {
+			button.addEventListener("click", function () {
+				// 버튼의 클래스를 토글 (liked 클래스 추가/제거)
+				button.classList.toggle("liked");
+
+				// 버튼의 하트 아이콘 변경
+				const heartIcon = button.querySelector("h3");
+				if (button.classList.contains("liked")) {
+					heartIcon.textContent = "❤️";
+				} else {
+					heartIcon.textContent = "🤍";
+				}
+			});
+		});
+	});
+
+	function toggleLike(postId) {
+		// 이 부분에서 서버로 북마크 추가 또는 제거 요청을 보내고,
+		// 서버에서 처리가 완료되면 success 또는 error 콜백을 처리하여
+		// 클라이언트 측에서 하트 모양을 변경합니다.
+
+		// AJAX 또는 Fetch API를 사용하여 서버와 통신하여 북마크를 추가 또는 제거할 수 있습니다.
+		// 이 예시에서는 서버 요청이 성공하면 클라이언트 측에서 하트 모양을 변경하도록 가정합니다.
+
+		// postId를 사용하여 서버 요청을 구성하고, 북마크 추가 또는 제거 요청을 보냅니다.
+		// 성공적인 응답을 받으면 해당 공고의 하트 모양을 변경합니다.
+
+		const likeButton = document.querySelector(`[data-postid="${postId}"]`);
+
+		// 이 부분에서 서버 요청을 보내고, 성공 또는 실패 시 적절한 처리를 수행합니다.
+		// 서버로 요청을 보내고 응답을 받는 방법은 AJAX 또는 Fetch API를 사용하여 구현할 수 있습니다.
+
+		// 아래 예시에서는 단순히 하트 모양을 토글(toggle)합니다.
+		if (likeButton.classList.contains("liked")) {
+			likeButton.classList.remove("liked");
+		} else {
+			likeButton.classList.add("liked");
+		}
+	}
+
+
+    
+	let bookmarked = '<h3>❤️</h3>';
+	let noBookmark = '<h3>🤍</h3>';
+
+	async function bookmarkPoint() {
+// console.log('bookmarkPoint실행')
+		// let response = await fetch(`/check?username=${username}`);
+		let postingNum = document.querySelectorAll(".posting");
+// 		console.log(postingNum);
+
+		let response = await fetch("/api/user/bookmark");
+		// let bookmarkPoint = document.querySelector("#username").value;
+		let body = await response.json();
+
+		let dataArray = body.data;
+		if (dataArray != null) {
+			for (let item of dataArray) {
+
+				let postingNum = document.querySelector(`#posting${item.id}`);
+				let currentValue = postingNum.getAttribute('data-value');
+				currentValue = true;
+				postingNum.innerHTML = bookmarked;
+				postingNum.setAttribute('data-value', currentValue);
+			}
+		}
+	}
+
+	// let response = await fetch("/api/tech?categoryId=" + categoryId);
+	bookmarkPoint();
+
+
+	async function bookmarkChange(id) {
+
+		let postingNum = document.querySelector(`#posting${id}`);
+		let currentValue = postingNum.getAttribute('data-value');
+
+
+		if (currentValue == 'true') {
+
+			console.log(id);
+			let response = await fetch(`/api/user/bookmark/${id}/delete`);
+			let body = await response.json();
+
+			if (body.sucuess == false) {
+				alert(body.data)
+			}
+			if (body.sucuess == true) {
+				alert(body.data)
+				currentValue = false;
+				postingNum.innerHTML = noBookmark;
+			}
+
+
+		} else {
+			console.log(id);
+			let response = await fetch(`/api/user/bookmark/${id}/save`);
+			let body = await response.json();
+
+			if (body.sucuess == false) {
+				alert(body.data)
+			}
+			if (body.sucuess == true) {
+				alert(body.data)
+				currentValue = true;
+				postingNum.innerHTML = bookmarked;
+			}
+
+		}
+
+
+		postingNum.setAttribute('data-value', currentValue);
+
+	}
+
+
+
+
+    
+</script>
+
+
+
+
+{{> layout/footer}}

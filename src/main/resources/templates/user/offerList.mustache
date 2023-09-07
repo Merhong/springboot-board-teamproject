@@ -1,0 +1,212 @@
+{{> layout/header}}
+
+<!-- 22번 -->
+
+
+	<div class="container border border-info">
+		<div class="col-9 m-auto">
+			<h1 class=" text-center mt-2 mb-2">받은 입사제안 목록</h1>
+
+			<h5 class="text-center">이 이력서에 받은 오퍼입니다.</h5>
+
+			{{#resume}}
+			<div class="d-flex justify-content-center mb-2">
+				<a href="javascript:void(0);" class="col-4 btn btn-info" onclick="openNewWindow('/resume/newWindow/{{id}}')">
+					<div>
+						<span class="badge bg-success">{{career}}</span>
+						<span class="badge bg-success">{{grade}}</span>
+						<span class="badge bg-success">{{user.address}}</span>
+					</div>
+					<div>
+						<span class="badge bg-primary">{{user.position}}</span>
+						<span class="badge bg-warning">{{user.birth}}</span>
+					</div>
+					<div>
+						{{#user.userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/user.userSkillList}}
+					</div>
+				</a>
+			</div>
+			{{/resume}}
+
+			
+
+
+			<table class="table table-bordered">
+				<thead>
+				  <tr class="table-secondary">
+					<th class="text-center" scope="col">No.</th>
+					<th class="text-center" scope="col">기업명</th>
+					<th class="text-center" scope="col">홈페이지</th>
+					<th class="text-center" scope="col">전화번호</th>
+					<!-- <th class="text-center" scope="col">생년월일</th> -->
+					<th class="text-center" scope="col">공고</th>
+					<th class="text-center" scope="col">직무</th>
+					<th class="text-center" scope="col">지역</th>
+					<th class="text-center" scope="col">응답</th>
+				  </tr>
+				</thead>
+				<tbody>
+
+					{{^recommendList}}
+					<tr>
+						<th class="text-center" scope="row">없음</th>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border-start-0"></td>
+					</tr>
+					{{/recommendList}}
+					
+					{{#recommendList}}
+					<tr class="{{statement}}">
+						<th class="text-center" scope="row"><div class="increNumber"></div></th>
+						<td class="text-center">{{posting.user.compname}}</td>
+						<td class="text-center">{{posting.user.homepage}}</td>
+						<td class="text-center">{{posting.user.tel}}</td>
+						<td class="text-center"><a href="javascript:void(0);" class="" onclick="openNewWindow('/comp/posting/newWindow/{{posting.id}}')">{{posting.title}}</a></td>
+						<!-- <td class="text-center">{{resume.user.birth}}</td> -->
+						<td class="text-center">{{posting.position}}</td>
+						<td class="text-center">{{posting.region}}</td>
+						<td class="d-flex justify-content-center statementJS">
+							<input type="hidden" value="{{statement}}">
+							<div class="statementJS2"></div>
+
+							<form action="/user/resume/offer/{{id}}/pass" method="post">
+								<input class="statementButton btn btn-sm btn-success p-0 ps-1 pe-1 me-1 passButton" type="submit" value="수락">
+							</form>
+							<form action="/user/resume/offer/{{id}}/fail" method="post">
+								<input class="statementButton btn btn-sm btn-danger p-0 ps-1 pe-1 failButton" type="submit" value="거절">
+							</form>
+						</td>
+					</tr>
+					{{/recommendList}}
+
+
+
+				</tbody>
+			  </table>
+
+
+		</div>
+
+
+
+
+
+		<script>
+
+
+			let statementJS = document.querySelectorAll(".statementJS");
+			// console.log(typeof statementJS);
+			// console.log(typeof statementJS[0]);
+			// console.log(typeof statementJS[0].value);
+			// console.log(statementJS[0].value);
+			// console.log(statementJS[1].value);
+			// console.log(statementJS[2].value);
+			
+			statementJS.forEach(element => {
+				let input = element.querySelector("input");
+
+				let statementButton = element.querySelector(".statementButton");
+				let passButton = element.querySelector(".passButton");
+				let failButton = element.querySelector(".failButton");
+				let statementJS2 = element.querySelector(".statementJS2");
+				
+				if(input.value == "대기"){
+					//
+				} else if(input.value == "수락") {
+					statementJS2.innerText = "수락";
+					passButton.style.display = 'none';
+					failButton.style.display = 'none';
+				} else {
+					statementJS2.innerText = "거절";
+					passButton.style.display = 'none';
+					failButton.style.display = 'none';
+				}
+			});
+
+
+			
+			let increNumber = document.querySelectorAll(".increNumber");
+			// console.log(increNumber);
+			let count=1;
+			increNumber.forEach(element => {
+				element.innerHTML=count++;
+			});
+
+
+
+
+			let comma = document.querySelectorAll(".comma");
+			comma.forEach(element => {
+				element.innerHTML = element.innerHTML.slice(0, -2);
+			});
+
+
+
+
+	function openNewWindow(url) {
+	  var width = 800; // 새 창의 가로 크기
+	  var height = 1100; // 새 창의 세로 크기
+	  var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+	  var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
+	
+	  var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+	  window.open(url, '새 창', options);
+	}
+
+
+
+
+			function Ddaycheck(day){
+				if(typeof day === "string"){
+					let day2 = new Date(day);
+					return Ddaycheck(day2);
+				} else{
+					let today = new Date();
+		
+					// console.log((day-today) / (1000 * 60 * 60 * 24));
+					let DDay = Math.ceil( (day-today) / (1000 * 60 * 60 * 24));
+		
+					if(DDay==0){
+						// console.log("D-Day");
+						return "D-Day";
+					}
+					else if(DDay<0){
+						// console.log("만료");
+						return "만료";
+					}
+					else{
+						// console.log("D-"+DDay); 
+						return "D-"+DDay;
+					}
+				}
+			}
+		
+		
+		
+			let day = document.querySelectorAll('.expiryDate');
+			day.forEach(element => {
+				element.textContent = Ddaycheck(element.textContent);
+			});
+
+			
+			
+			let statementRed = document.querySelectorAll('.거절');
+			statementRed.forEach(element => {
+				element.classList.add("table-danger");
+			});
+			let statementGreen = document.querySelectorAll('.수락');
+			statementGreen.forEach(element => {
+				element.classList.add("table-success");
+			});
+		
+		</script>
+		
+
+	</div>
+
+
+{{> layout/footer}}

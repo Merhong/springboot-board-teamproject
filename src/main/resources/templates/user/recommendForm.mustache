@@ -23,137 +23,211 @@
 		<div class="col-9 ms-3">
 			<h1 class="text-center mt-2">기업추천</h1>
 
-			<div class="d-flex justify-content-around">
+			<form id="selectform" action="/user/recommendForm" method="GET">
+				<div class="d-flex justify-content-around">
 
-				<div class="border border-info p-2">
-					<h4>기술</h4>
+					<div class="w-50 m-1 me-2 mb-2 border border-info">
+						<h4 class="mt-2 text-center">기술별</h4>
 
-					<div>
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">Java</label>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="checkbox" name="skillList" id="skillAll"
+									value="all" onclick="skillCheck(this)">
+								모두</label>
 						</div>
 
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">Spring</label>
-						</div>
+						<hr class="m-1">
 
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">DB</label>
-						</div>
-					</div>
+						<div class="d-flex flex-wrap">
+							{{#skillList}}
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="skillFind form-check-input" type="checkbox" id="{{skillname}}"
+										name="skillList" value="{{skillname}}" onclick='skillAllCheck()'>
+									{{skillname}}</label>
+							</div>
+							{{/skillList}}
 
-					<div>
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">Python</label>
-						</div>
-
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">html</label>
-						</div>
-
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">css</label>
 						</div>
 					</div>
 
-					<div>
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">JavaScript</label>
+
+					<div class="w-50 m-1 ms-2 mb-2 border border-info">
+						<h4 class="mt-2 text-center">직무별</h4>
+
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="all2" name="position" value="all">
+								모두</label>
 						</div>
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">C</label>
+
+						<hr class="m-1">
+
+						<div class="d-flex flex-wrap">
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="form-check-input" type="radio" id="백엔드" name="position" value="백엔드">
+									백엔드</label>
+							</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="form-check-input" type="radio" id="프론트엔드" name="position"
+										value="프론트엔드">
+									프론트엔드</label>
+							</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="form-check-input" type="radio" id="풀스택" name="position" value="풀스택">
+									풀스택</label>
+							</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="form-check-input" type="radio" id="안드로이드" name="position"
+										value="안드로이드">
+									안드로이드</label>
+							</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="form-check-input" type="radio" id="IOS" name="position" value="IOS">
+									IOS</label>
+							</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="form-check-input" type="radio" id="임베디드" name="position" value="임베디드">
+									임베디드</label>
+							</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="form-check-input" type="radio" id="빅데이터" name="position" value="빅데이터">
+									빅데이터</label>
+							</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="form-check-input" type="radio" id="서버" name="position" value="서버">
+									서버</label>
+							</div>
+							<div class="form-check d-inline-block ms-3 me-2">
+								<label class="form-check-label">
+									<input class="form-check-input" type="radio" id="머신러닝" name="position" value="머신러닝">
+									머신러닝</label>
+							</div>
 						</div>
 					</div>
-
 				</div>
 
-				<div class="border border-info p-2">
-					<h4>직무</h4>
+			</form>
 
-					<div>
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">백엔드</label>
-						</div>
-
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">프런트엔드</label>
-						</div>
-					</div>
-
-					<div>
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">서버</label>
-						</div>
-
-						<div class="form-check d-inline-block ms-2 me-2">
-							<input class="form-check-input" type="checkbox" id="">
-							<label class="form-check-label">임베디드</label>
-						</div>
-					</div>
-
-				</div>
-
+			<div class="m-2 ms-2 me-2">
+				<div class="btn btn-success w-100" onclick="searchAll()">검색하기</div>
 			</div>
 
-
+			{{#compInfoList}}
 			<div class="d-flex border border-info m-3 p-2">
 				<div class="col-9">
-					<img src="../../../images/kakao_logo.png" alt="Apple(서울/프론트엔드/DB)" class="img-thumbnail"
-					     width="100px" height="60px">
-				</div>
-				<div class="mt-3">
-					<button type="button" class="btn btn-success">지원하기</button>
-				</div>
-			</div>
-
-			<div class="d-flex border border-info m-3 p-2">
-				<div class="col-9">
-					<img src="../../../images/kakao_logo.png" alt="Image 2" class="img-thumbnail" width="100px"
-					     height="60px">
-				</div>
-				<div class="mt-3">
-					<button type="button" class="btn btn-success">지원하기</button>
+					<div class="m-auto">
+						<div data-id="{{id}}" class="posting-title">{{title}}</div>
+						<span class="badge bg-danger">{{position}}</span>
+						{{#postingSkills}}
+						<span class="badge bg-secondary me-1">{{skill.skillname}}</span>
+						{{/postingSkills}}
+						<div class="mt-3">
+							<a href="/user/applyForm/{{id}}" class="mb-3 ms-2 btn btn-info">지원하기</a>
+						</div>
+					</div>
 				</div>
 			</div>
-
-			<div class="d-flex border border-info m-3 p-2">
-				<div class="col-9">
-					<img src="../../../images/kakao_logo.png" alt="Image 3" class="img-thumbnail" width="100px"
-					     height="60px">
-				</div>
-				<div class="mt-3">
-					<button type="button" class="btn btn-success">지원하기</button>
-				</div>
-			</div>
-
-			<div class="d-flex border border-info m-3 p-2">
-				<div class="col-9">
-					<img src="../../../images/kakao_logo.png" alt="Image 4" class="img-thumbnail" width="100px"
-					     height="60px">
-				</div>
-				<div class="mt-3">
-					<button type="button" class="btn btn-success">지원하기</button>
-				</div>
-			</div>
-
+			{{/compInfoList}}
 		</div>
+
+
 	</div>
 
-	<div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
 </div>
 
+<div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
+</div>
+
+<input type="hidden" value="{{json}}" name="json" id="json">
+<input type="hidden" value="{{position}}" name="positionSet" id="positionSet">
+
+
+<script>
+
+	function skillCheck(selectAll) {
+		let skillAll = document.querySelectorAll(".skillFind");
+		// let allCheck=document.querySelector("#all");
+
+		skillAll.forEach(element => {
+			element.checked = selectAll.checked;
+		});
+	}
+	function skillAllCheck() {
+		let allCheck = document.querySelector("#skillAll");
+		let skillAll = document.querySelectorAll(".skillFind");
+		let skillAllCheck = document.querySelectorAll(".skillFind:checked");
+
+		if (skillAll.length == skillAllCheck.length) {
+			allCheck.checked = true;
+		} else {
+			allCheck.checked = false
+		};
+	}
+
+
+	function searchAll() {
+		if (document.querySelector("#skillAll").checked) {
+			let skillfind = document.querySelectorAll(".skillFind")
+			skillfind.forEach(element => {
+				element.checked = false;
+			});
+		}
+		let submit = document.getElementById("selectform");
+		submit.submit();
+	}
 
 
 
+	function check() {
+		const json = JSON.parse(document.querySelector("#json").value);
+
+		let skillCheckBoxAll = document.getElementById("skillAll");
+
+		if (json[0] != skillCheckBoxAll.value) {
+			json.forEach(element => {
+				document.getElementById(element).checked = true;
+			});
+			skillCheckBoxAll.checked = false;
+		} else {
+			skillCheckBoxAll.checked = true;
+			let skillFind2 = document.querySelectorAll(".skillFind")
+			skillFind2.forEach(element => {
+				element.checked = true;
+			});
+		}
+	}
+	check();
+
+	const positionSet = document.querySelector("#positionSet").value;
+	if (positionSet == "all") {
+		document.getElementById("all2").checked = true;
+	} else {
+		document.getElementById(positionSet).checked = true;
+	}
+
+
+	$(document).ready(function () {
+		$(".posting-title").click(function () {
+			// 클릭한 공고의 고유 ID 가져오기
+			var id = $(this).data("id");
+
+			// 상세보기 페이지 URL 구성
+			var detailPageUrl = "/comp/posting/" + id; // 적절한 URL로 변경
+
+			// 상세보기 페이지로 이동
+			window.location.href = detailPageUrl;
+		});
+	});
+
+
+</script>
 {{> layout/footer}}

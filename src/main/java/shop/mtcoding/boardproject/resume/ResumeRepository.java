@@ -32,4 +32,6 @@ public interface ResumeRepository extends JpaRepository<Resume, Integer> {
     @Query(value = "select RT.* from compbookmark_tb CT join resume_tb RT on CT.resume_id = RT.id where CT.user_id = :compId", nativeQuery = true)
     List<Resume> findResumeByCompId(@Param("compId") Integer compId);
 
+    List<Resume> findByTitleContaining(@Param("title") String keyword);
+
 }
