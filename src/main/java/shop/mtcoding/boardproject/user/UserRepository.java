@@ -3,6 +3,7 @@ package shop.mtcoding.boardproject.user;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -26,6 +27,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     // List<User> findByUsername(@Param("username") String username);
 
-    List<User> findByUsernameContainingOrCompnameContaining(@Param("username") String username, @Param("compname") String compname);
+    List<User> findByUsernameContainingOrCompnameContaining(@Param("username") String username,
+            @Param("compname") String compname);
 
+    @Modifying
+    @Query(value = "update user_tb set message = :boolean where id = :id", nativeQuery = true)
+    Integer message(@Param("boolean") Boolean message, @Param("id") Integer id);
 }

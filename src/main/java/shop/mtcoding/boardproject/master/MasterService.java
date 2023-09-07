@@ -1,6 +1,5 @@
 package shop.mtcoding.boardproject.master;
 
-
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject.master.MasterRequest.MasterDTO;
+import shop.mtcoding.boardproject.master.MasterRequest.ReplyDTO;
 import shop.mtcoding.boardproject.user.User;
 import shop.mtcoding.boardproject.user.UserRepository;
 import shop.mtcoding.boardproject.posting.PostingQueryRepository;
@@ -20,7 +20,6 @@ import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillRepository;
-
 
 @Service
 public class MasterService {
@@ -127,7 +126,6 @@ public class MasterService {
             // 관계없는 직무를 요구하는 공고를 스킬공고리스트에서 제거한다.
             postingList.removeAll(tempList);
         }
-
         // 지역이 없거나 모두 선택했을때
         if (region == null || region.equals("all")) {
             // 위에서 남은 리스트에서 소거법으로 제거하기 위해 통과
@@ -152,7 +150,6 @@ public class MasterService {
         List<Master> masterList = masterRepository.findAll();
         return masterList;
     }
-
 
     public Master 문의넘버로찾기(Integer id) {
         Optional<Master> master = masterRepository.findById(id);
@@ -179,7 +176,8 @@ public class MasterService {
         List<Master> masterList = masterRepository.findByUserId(Id);
         return masterList;
     }
-    
+   
+  
     // 관리자용, 스킬테이블은 코드테이블이라 관리자가 스킬을 추가해야 하는데 그때 사용하는 메서드
     public void 스킬추가(String skillName) {
         Skill skill = new Skill();
@@ -187,7 +185,7 @@ public class MasterService {
         skillRepository.save(skill);
     }
 
-
+  
     // 검색 메서드
     public MasterResponse.SearchDTO 전체검색(String keyword) {
         // 이름을 검색해서 나온 값들을 담은 유저리스트
@@ -210,6 +208,12 @@ public class MasterService {
             List<User> compUserList = new ArrayList<>();
             // 유저리스트 크기만큼 반복
             for (User user : userList) {
+                if (user.getRole() == 1) {
+                    normalUserList.add(user);
+                } // 개인
+                if (user.getRole() == 2) {
+                    compUserList.add(user);
+                } // 기업
                 // 회원유형이 1일땐 개인유저리스트에 담고
                 if (user.getRole() == 1) {
                     normalUserList.add(user);

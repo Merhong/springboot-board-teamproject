@@ -206,6 +206,7 @@ public class UserController {
             if (sessionUser.getRole() == 0) {
                 // 관리자의 경우 sessionAdmin 세션을 설정합니다.
                 session.setAttribute("sessionAdmin", sessionUser);
+                System.out.println("x : 관리자 로그인");
             } else if (sessionUser.getRole() == 1) {
                 // 개인 사용자의 경우 sessionUser 세션을 설정합니다.
                 session.setAttribute("sessionUser", sessionUser);
@@ -341,4 +342,17 @@ public class UserController {
     //
     // }
 
+
+    @GetMapping("/api/user/{userId}/ismessage")
+    public String messageCheckOut(@PathVariable Integer userId) {
+        System.out.println("메시지 삭제 컨트롤러 실행");
+        Integer sucsess = userService.받은메시지조회(false, userId);
+        if (sucsess == 1) {
+            System.out.println("메시지 삭제 성공");
+        } else {
+            System.out.println("메시지 삭제 실패");
+        }
+        return "redirect:/";
+    }
+  
 }
