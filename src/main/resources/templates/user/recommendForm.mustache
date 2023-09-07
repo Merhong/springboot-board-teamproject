@@ -339,6 +339,7 @@
 
     for (let i = 0; i < result.data.length; i++) {
       let item = result.data[i];
+      let postingskills = result.data[i].postingSkill;
       console.log("Item " + i + ": " + item.title);
       let optionEl = document.createElement("div");
       optionEl.value = item.title;
@@ -350,8 +351,14 @@
         "</div><div>" +
         item.position +
         "</div></div>";
+
+     {{! for (let j = 0; j < postingskills.length; j++) {
+      console.log('postingskills[j] : '+postingskills[j].skill.skillname);
+  optionEl.innerHTML += "<div>"+ postingskills[j].skill.skillname + "</div>";
+    } }}
       techEl.append(optionEl);
     }
+    
   }
 
   
