@@ -29,13 +29,14 @@
         <div class="col-10">
           <a href="/comp/posting/{{ id }}"
             ><img
-              src="공고사진"
+              src="/images/{{user.photo}}"
               alt="{{ user.compname }}(
 				{{ title }}/{{ position }})"
               class="img-thumbnail"
               width="100px"
               height="60px"
-          /></a>
+          />{{ user.compname }}(
+	          {{ title }}/{{ position }})</a>
         </div>
         <div class="mt-2 mb-2">
           <button
