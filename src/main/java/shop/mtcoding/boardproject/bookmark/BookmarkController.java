@@ -192,7 +192,7 @@ public class BookmarkController {
         if (user == null) {
             return new ApiUtil<String>(false, "로그인 안됨");
         }
-        Integer sucuess = bookmarkService.유저북마크제거(id, user.getId());
+        Integer sucuess = bookmarkService.유저북마크삭제(id, user.getId());
         System.out.println("테스트" + sucuess);
         if (sucuess == 1) {
             return new ApiUtil<String>(true, "북마크 제거 성공");
