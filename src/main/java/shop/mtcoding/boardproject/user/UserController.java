@@ -342,11 +342,26 @@ public class UserController {
     //
     // }
 
-
     @GetMapping("/api/user/{userId}/ismessage")
     public String messageCheckOut(@PathVariable Integer userId) {
         System.out.println("메시지 삭제 컨트롤러 실행");
         Integer sucsess = userService.받은메시지조회(false, userId);
+        User user = userService.회원조회(userId);
+
+        if (user.getRole() == 0) {
+            // 관리자의 경우 sessionAdmin 세션을 설정합니다.
+            session.setAttribute("sessionAdmin", user);
+            System.out.println("x : 관리자 로그인");
+        } else if (user.getRole() == 1) {
+            // 개인 사용자의 경우 sessionUser 세션을 설정합니다.
+            session.setAttribute("sessionUser", user);
+            System.out.println("x : 유저 로그인");
+        } else if (user.getRole() == 2) {
+            // 기업 사용자의 경우 CompSession 세션을 설정합니다.
+            session.setAttribute("CompSession", user);
+            System.out.println("x : 기업 로그인");
+        }
+
         if (sucsess == 1) {
             System.out.println("메시지 삭제 성공");
         } else {
@@ -354,5 +369,5 @@ public class UserController {
         }
         return "redirect:/";
     }
-  
+
 }
