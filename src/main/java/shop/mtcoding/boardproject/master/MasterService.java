@@ -87,6 +87,13 @@ public class MasterService {
     //     return postingList;
     // }
 
+
+    public List<Posting> 메인화면검색한방쿼리(List<String> skillList, String position, String region) {
+        List<Posting> postingList = postingQueryRepository.joinSkillPostingOneHitQuery(skillList, position, region);
+        return postingList;
+    }
+
+
     /**
      * 메인화면검색 메서드
      * (소거법)
@@ -96,7 +103,6 @@ public class MasterService {
      * 4. 남은 공고들을 리턴
      */
     public List<Posting> 메인화면검색(List<String> skillList, String position, String region) {
-        // 스킬 검색을 통해 공고를 담을 리스트
         List<Posting> postingList = new ArrayList<>();
         // 스킬을 선택하지 않거나 모두 선택했을때
         if (skillList.size() == 0 || skillList.get(0).equals("all")) {
@@ -105,8 +111,6 @@ public class MasterService {
         } else { // 스킬을 1개이상 선택했을때 해당스킬을 요구하는 공고를 찾아서 공고리스트에 담는다.
             postingList = postingQueryRepository.joinSkillPosting(skillList);
         }
-
-
         // 직무가 없거나 모두 선택했을때
         if (position == null || position.equals("all")) {
             // 스킬로 찾은 공고에서 소거법으로 제거하기 위해 (통과)
@@ -143,7 +147,6 @@ public class MasterService {
         // 소거법을 통해 검색에서 요구하는 조건을 모두 만족하는 리스트를 리턴
         return postingList;
     }
-
 
     public List<Master> 모든문의찾기() {
         List<Master> masterList = masterRepository.findAll();
@@ -190,9 +193,9 @@ public class MasterService {
         // 이름을 검색해서 나온 값들을 담은 유저리스트
         List<User> userList = userRepository.findByUsernameContainingOrCompnameContaining(keyword, keyword);
         // 공고 제목을 검색해서 나온 값들을 담은 공고리스트
-        List<Posting> postingList = postingRepository.findByTitleContaining(keyword);
+        List<Posting> postingList = postingRepository.findPostingByTitleOrJoinUserCompname(keyword, keyword);
         // 이력서 제목을 검색해서 나온 값들을 담은 이력서리스트
-        List<Resume> resumeList = resumeRepository.findByTitleContaining(keyword);
+        List<Resume> resumeList = resumeRepository.findResumeByTitleOrJoinUserUsername(keyword, keyword);
 
         MasterResponse.SearchDTO searchDTO = new MasterResponse.SearchDTO();
 

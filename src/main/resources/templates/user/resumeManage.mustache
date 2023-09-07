@@ -38,33 +38,41 @@
 				<h1 class="text-center"> 이력서관리하기</h1>
 			</div>
 			{{#resumes}}
-			<div>
-				<span type="text" class="w-50 title-link" data-href="/user/resume/{{id}}">{{title}}</span>
-				<a href="/user/resumeUpdateForm/{{id}}" class="w-20 btn btn-info">수정</a>
-				<a href="/user/resume/{{id}}/offerList" class="btn btn-primary btn btn-warning">입사 제안 보기</a>
 
-				<form action="/resume/delete/{{id}}" method="post">
-					<button class="btn btn-primary btn-sm" type="submit">삭제</button>
-				</form>
-				<hr>
+			<div class="d-flex border border-info m-3 p-2">
+				<div class="d-flex justify-content-between w-100">
+					<span type="text" class="w-50 title-link" data-href="/user/resume/{{id}}">{{title}}</span>
+					<div class="d-flex align-items-center">
+						<div class="d-inline-block me-2">
+							<a href="/user/resumeUpdateForm/{{id}}" class="btn btn-info btn-sm">수정</a>
+						</div>
+						<div class="d-inline-block me-2">
+							<a href="/user/resume/{{id}}/offerList" class="btn btn-warning btn-sm">입사 제안 보기</a>
+						</div>
+						<form action="/resume/delete/{{id}}" method="post" class="d-inline-block">
+							<button class="btn btn-danger btn-sm" type="submit">삭제</button>
+						</form>
+					</div>
+				</div>
 			</div>
+
 			{{/resumes}}
+
 
 		</div>
 	</div>
-</div>
 
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-		const titleLinks = document.querySelectorAll('.title-link');
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const titleLinks = document.querySelectorAll('.title-link');
 
-		titleLinks.forEach(function (titleLink) {
-			titleLink.addEventListener('click', function () {
-				const href = titleLink.getAttribute('data-href');
-				if (href) {
-					window.location.href = href;
-				}
+			titleLinks.forEach(function (titleLink) {
+				titleLink.addEventListener('click', function () {
+					const href = titleLink.getAttribute('data-href');
+					if (href) {
+						window.location.href = href;
+					}
+				});
 			});
 		});
-	});
-</script>
+	</script>
