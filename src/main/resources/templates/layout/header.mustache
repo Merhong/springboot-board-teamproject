@@ -24,16 +24,24 @@
 		div {
 			font-family: Giants-Bold;
 		}
+
 	</style>
 
+	<!-- 비로그인시 -->
 	{{^sessionComp}}
 		<style>
+			.big-search {
+				color: white;
+				background-color: grey;
+				border-style: hidden;
+			}
 			.header_title {
 				color: grey;
 			}
 
 			.bg-info {
 				background-color: grey !important;
+				border-style: hidden;
 			}
 
 			.title1 {
@@ -46,9 +54,16 @@
 
 		</style>
 	{{/sessionComp}}
+	<!-- 개인로그인시 -->
 	{{#sessionComp}}
 		{{^sessionComp.compname}}
 			<style>
+				.big-search {
+					color: white;
+					background-color: pink;
+					border-style: hidden;
+				}
+
 				.title1 {
 					font-size: 50px;
 					color: pink;
@@ -60,6 +75,7 @@
 
 				.bg-info {
 					background-color: pink !important;
+					border-style: hidden;
 				}
 
 				.border-info {
@@ -77,8 +93,15 @@
 			</style>
 		{{/sessionComp.compname}}
 	{{/sessionComp}}
+	<!-- 기업로그인시 -->
 	{{#sessionComp.compname}}
 		<style>
+			.big-search {
+				color: white;
+				background-color: #66e3dd;
+				border-style: hidden;
+			}
+
 			.title1 {
 				font-size: 50px;
 				color: #66e3dd;
@@ -91,6 +114,7 @@
 
 			.bg-info {
 				background-color: #66e3dd !important;
+				border-style: hidden;
 			}
 
 			.border-info {
