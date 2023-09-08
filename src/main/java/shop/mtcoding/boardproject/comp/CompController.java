@@ -57,8 +57,8 @@ public class CompController {
 
 
     // 기업페이지
-    @GetMapping("/comp/main")
-    public String Main() {
+    @GetMapping("/comp/updateForm")
+    public String updateForm() {
         // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         // 세션이 없다면 로그인 화면으로 이동시킴
@@ -70,7 +70,7 @@ public class CompController {
             throw new MyException("기업회원만 가능합니다.");
         }
         // 페이지를 보여준다.
-        return "comp/main";
+        return "comp/updateForm";
     }
 
     // 기업 공고 관리 페이지
@@ -190,7 +190,7 @@ public class CompController {
             throw new MyException("오류");
         }
         // 공고 수정 페이지를 보여준다.
-        return "comp/updateForm";
+        return "comp/postingUpdateForm";
     }
 
     // 공고관리 > 지원자 보기 페이지
@@ -435,7 +435,7 @@ public class CompController {
     }
 
     // 기업페이지 수정 POST
-    @PostMapping("/comp/main/{compId}/update")
+    @PostMapping("/comp/updateForm/{compId}/update")
     public @ResponseBody String compUpdate(@PathVariable Integer compId, CompRequest.compUpdateDTO DTO) {
         // 유저세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -463,7 +463,7 @@ public class CompController {
 
         // 메인페이지로 리다이렉트
         // return "redirect:/comp/main";
-        return Script.href("/comp/main", "정보 수정 완료");
+        return Script.href("/comp/updateForm", "정보 수정 완료");
     }
 
     // 기업 공고 삭제 POST
