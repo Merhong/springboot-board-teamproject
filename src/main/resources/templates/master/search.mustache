@@ -34,7 +34,7 @@
 
             {{#compUserList}}
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="border border-info m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: bisque;">
+                <div class="m-2 mb-0 ps-2 pe-2 pt-1 bg-warning-subtle">
                     <h4 class="text-center fw-bold">{{compname}}</h4>
                     {{#photo}}
                     <a href="/comp/company/{{id}}" class="text-black text-decoration-none"><img
@@ -83,7 +83,7 @@
 
             {{#postingList}}
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="border border-info m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: #bebebe;">
+                <div class="m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: #66e3dd;">
                     <h4 class="text-center fw-bold mt-1">{{user.compname}}</h4>
                     {{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
                         src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto"
@@ -106,7 +106,7 @@
 
                 </a>
                     <div class="d-flex justify-content-between">
-                        {{^sessionComp.compname}}<button type="button" class="border-0 mt-1 like-button" id="posting{{id}}" style="background-color: #bebebe;"
+                        {{^sessionComp.compname}}<button type="button" class="border-0 mt-1 like-button" id="posting{{id}}" style="background-color: #66e3dd;"
                                 onclick="bookmarkChange(`{{id}}`)"><h3>🤍</h3></button>{{/sessionComp.compname}}
                         <!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
                         <!-- 기업 유저는 북마크 못하게 -->
@@ -126,7 +126,7 @@
             
             {{#resumeList}}
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="border border-info m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: #1bc9ed;">
+                <div class="m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: pink;">
                     </span><h4 class="text-center fw-bold mt-1">{{user.username}}</h4>
                     {{#user.photo}}
                     <a href="/resume/{{id}}" class="text-black text-decoration-none"><img
