@@ -27,7 +27,7 @@
               src="{{#sessionUser.photo}}../../../../../images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}../../../../../images/basic.jpg{{/sessionUser.photo}}"
               class="img-fluid rounded-circle" style="width: 150px; height: 150px" />
             <div class="input-group mb-3 mt-3">
-              <input type="file" class="form-control" placeholder="Enter pto" name="pto" onchange="changePic(event)" />
+              <input type="file" class="form-control" placeholder="Enter pto" name="pto" onchange="changePic(event)" value="{{#sessionUser.photo}}../../../../../images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}../../../../../images/basic.jpg{{/sessionUser.photo}}"/>
               <input type="hidden" name="previousPhoto" value="{{ sessionUser.photo }}" />
             </div>
           </div>
@@ -35,37 +35,37 @@
           <div class="col-8 p-2">
             <div class="input-group mb-3">
               <span class="input-group-text"><span class="ms-2 me-4">이름</span></span>
-              <input type="text" class="form-control" name="username" value="{{ sessionUser.username }}" />
+              <input type="text" class="form-control" name="username" value="{{ sessionUser.username }}" required/>
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text">전화번호</span>
-              <input type="tel" class="form-control" name="tel" value="{{ sessionUser.tel }}" />
+              <input type="tel" class="form-control" name="tel" value="{{ sessionUser.tel }}" required />
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
               <input type="text" class="form-control" name="address" value="{{#sessionUser.address}}{{
                   sessionUser.address
-                }}{{/sessionUser.address}}{{^sessionUser.address}}{{/sessionUser.address}}" />
+                }}{{/sessionUser.address}}{{^sessionUser.address}}{{/sessionUser.address}}" required />
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text">생년월일</span>
               <input type="date" class="form-control" name="birth" value="{{#sessionUser.birth}}{{
                   sessionUser.birth
-                }}{{/sessionUser.birth}}{{^sessionUser.birth}}{{/sessionUser.birth}}" />
+                }}{{/sessionUser.birth}}{{^sessionUser.birth}}{{/sessionUser.birth}}" required />
             </div>
           </div>
         </div>
         <div class="input-group ms-2 mb-3">
           <span class="input-group-text">이력서 제목</span>
-          <input type="text" class="form-control" name="title" />
+          <input type="text" class="form-control" name="title" required />
         </div>
         <div class="input-group ms-2 mb-3">
           <span class="input-group-text">학력사항</span>
-          <input type="text" class="form-control" name="grade" />
+          <input type="text" class="form-control" name="grade" required />
         </div>
         <div class="input-group ms-2 mb-3">
           <span class="input-group-text" center>경력사항</span>
-          <input type="text" class="form-control" name="career" />
+          <input type="text" class="form-control" name="career" required />
         </div>
 
         <div class="card input-group ms-2 mb-3">
@@ -73,7 +73,7 @@
           <div class="d-flex flex-wrap">
             <div class="form-check d-inline-block ms-3 me-2">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="백엔드" name="position" value="백엔드" />
+                <input class="form-check-input" type="radio" id="백엔드" name="position" value="백엔드" required/>
                 백엔드</label>
             </div>
             <div class="form-check d-inline-block ms-3 me-2">
@@ -125,7 +125,8 @@
             {{#skillList}}
             <div class="form-check d-inline-block ms-3 me-2">
               <input class="form-check-input" type="checkbox" id="skill{{ id }}" value="{{ id }}" name="skillList"
-                checked />
+                checked
+              />
               <label class="form-check-label">{{ skillname }}</label>
             </div>
             {{/skillList}}
@@ -145,7 +146,7 @@
         <!-- readonly속성은 읽기전용 input태그를 만든다 -->
         <!-- disabled ="ture"가 생략 된것-->
         <div>
-          <input id="button" class="btn btn-primary m-2 mb-3 w-100" type="submit" value="이력서 등록" />
+          <input id="button" class="btn btn-primary m-2 mb-3 w-100 bg-info" type="submit" value="이력서 등록" />
         </div>
       </form>
     </div>

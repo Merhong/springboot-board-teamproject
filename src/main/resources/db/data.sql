@@ -1,8 +1,8 @@
 -- User 테이블 (개인회원)
 insert into user_tb(username, email, password, tel, photo, address, birth, role)
-values ('김대홍', 'kdh@nate.com', '1234', '01010001111', 'basic.jpg', '부산', '1955-07-21', 0);
+values ('김대홍', '3@nate.com', '1234', '01010001111', 'basic.jpg', '부산', '1955-07-21', 0);
 insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
-values ('유재석', 'ssar@nate.com', '1234', '01012341234', 'basic.jpg', '서울', '1966-07-13', '백엔드', 1);
+values ('유재석', '1@nate.com', '1234', '01012341234', 'basic.jpg', '서울', '1966-07-13', '백엔드', 1);
 insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
 values ('박명수', 'cos@nate.com', '1234', '01012344321', 'basic.jpg', '대구', '1977-04-22', '임베디드', 1);
 insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
@@ -11,7 +11,7 @@ values ('노홍철', 'haha@nate.com', '1234', '01022223333', 'basic.jpg', '부�
 
 -- User 테이블 (기업회원)
 insert into user_tb(compname, comp_register, email, password, tel, photo, address, homepage, role)
-values ('LG', '5050', 'love@nate.com', '1234', '01055555000', 'LG_logo.png', '서울', 'lg.com', 2);
+values ('LG', '5050', '2@nate.com', '1234', '01055555000', 'LG_logo.png', '서울', 'lg.com', 2);
 insert into user_tb(compname, comp_register, email, password, tel, photo, address, homepage, role)
 values ('배달의민족', '4636', 'bm@nate.com', '1234', '01099998888', '배달의민족_logo.png', '부산', 'bm.com', 2);
 insert into user_tb(compname, comp_register, email, password, tel, photo, address, homepage, role)
