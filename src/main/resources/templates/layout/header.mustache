@@ -35,6 +35,7 @@
 				background-color: grey;
 				border-style: hidden;
 			}
+
 			.header_title {
 				color: grey;
 			}
@@ -167,11 +168,11 @@
 		<nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3 p-1 d-flex justify-content-center">
 			<div class="col-xxl-7 col-xl-9 col-lg-10 col-md-11 col-sm-12 d-flex justify-content-between">
 
-				<div class="m-1">
-					<a href="/">
-						<img src="/images/brand.png" class="img-thumbnail" alt="구플 로고" width="50px"/>
-					</a>
-				</div>
+				<!-- <div class="m-1"> -->
+				<!-- 	<a href="/"> -->
+				<!-- 		<img src="/images/brand.png" class="img-thumbnail" alt="구플 로고" width="50px"/> -->
+				<!-- 	</a> -->
+				<!-- </div> -->
 
 				<div class="container-fluid align-self-center">
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
@@ -180,31 +181,45 @@
 					<div class="collapse navbar-collapse" id="mynavbar">
 						<ul class="navbar-nav me-auto">
 							<li class="nav-item">
-								<a class="nav-link text-white" href="/">채용정보</a>
+								{{^sessionComp.compname}}<a class="nav-link text-white"
+								                            href="/">채용정보</a>{{/sessionComp.compname}}
+								{{#sessionComp.compname}}<a class="nav-link text-white"
+								                            href="/comp/posting/saveForm">공고등록</a>{{/sessionComp.compname}}
 							</li>
 							<li class="nav-item">
 								{{^sessionComp.compname}}<a class="nav-link text-white"
-
 								                            href="/user/resumeForm">이력서등록</a>{{/sessionComp.compname}}
 								{{#sessionComp.compname}}<a class="nav-link text-white"
-								                            href="/comp/posting/saveForm">채용공고등록</a>{{/sessionComp.compname}}
+								                            href="/comp/{{sessionComp.userId}}/postingList">공고관리</a>{{/sessionComp.compname}}
 							</li>
 							<li class="nav-item">
 								{{^sessionComp.compname}}<a class="nav-link text-white"
 								                            href="/user/resumeManage">이력서관리</a>{{/sessionComp.compname}}
 								{{#sessionComp.compname}}<a class="nav-link text-white"
-								                            href="/comp/{{sessionComp.userId}}/postingList">채용공고관리</a>{{/sessionComp.compname}}
+								                            href="/comp/{{sessionComp.userId}}/allOfferList">입사제안</a>{{/sessionComp.compname}}
 							</li>
 							<li class="nav-item">
 								{{^sessionComp.compname}}<a class="nav-link text-white"
 								                            href="/user/applyList">지원내역</a>{{/sessionComp.compname}}
 								{{#sessionComp.compname}}<a class="nav-link text-white"
-								                            href="/comp/recommend">인재찾기</a>{{/sessionComp.compname}}
+								                            href="/comp/{{sessionComp.userId}}/allResumeList">지원자목록</a>{{/sessionComp.compname}}
 
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-white" href="/master/help">고객센터</a>
+								{{^sessionComp.compname}}<a class="nav-link text-white"
+								                            href="/user/bookmarkForm">북마크</a>{{/sessionComp.compname}}
+								{{#sessionComp.compname}}<a class="nav-link text-white"
+								                            href="/comp/{{sessionComp.userId}}/bookmarkList">북마크</a>{{/sessionComp.compname}}
+
 							</li>
+							<li class="nav-item">
+								{{^sessionComp.compname}}<a class="nav-link text-white"
+								                            href="/user/recommendForm">기업추천</a>{{/sessionComp.compname}}
+								{{#sessionComp.compname}}<a class="nav-link text-white"
+								                            href="/comp/recommend">인재찾기</a>{{/sessionComp.compname}}
+
+							</li>
+
 							<li class="nav-item">
 								{{#sessionAdmin}}<a class="nav-link text-danger fw-bold"
 								                    href="/master/admin">관리자전용</a>{{/sessionAdmin}}
@@ -236,20 +251,20 @@
 
 	<script>
 
-		document.querySelector("#selectPageSearchAllForm").addEventListener("submit", function(event) {
-				event.preventDefault();
-				searchAllPageZero();
-			}); // 엔터키 눌러도 바로 폼태그 안보내고 함수로 보내게
+		document.querySelector("#selectPageSearchAllForm").addEventListener("submit", function (event) {
+			event.preventDefault();
+			searchAllPageZero();
+		}); // 엔터키 눌러도 바로 폼태그 안보내고 함수로 보내게
 
 		function searchAllPageZero() {
-				pageSearchAllFind = document.querySelector("#pageSearchAllFind")
-				// console.log(pageSearchAllFind.value);
-				pageSearchAllFind.value=0; 
-				// console.log(pageSearchAllFind.value);
-				
-				let selectPageSearchAllForm = document.getElementById("selectPageSearchAllForm");
-				selectPageSearchAllForm.submit();
-			}
+			pageSearchAllFind = document.querySelector("#pageSearchAllFind")
+			// console.log(pageSearchAllFind.value);
+			pageSearchAllFind.value = 0;
+			// console.log(pageSearchAllFind.value);
+
+			let selectPageSearchAllForm = document.getElementById("selectPageSearchAllForm");
+			selectPageSearchAllForm.submit();
+		}
 
 
 		// 페이지 로드 시 초기 세션 상태에 따라 링크 텍스트 변경
@@ -271,7 +286,7 @@
 					loginLink.href = "/user/updateForm";
 				} else if (CompSession === "2") {
 					// 역할이 2인 경우 (기업 사용자)
-					loginLink.textContent = "기업 정보 보기";
+					loginLink.textContent = "기업페이지";
 					loginLink.href = "/comp/main";
 				}
 

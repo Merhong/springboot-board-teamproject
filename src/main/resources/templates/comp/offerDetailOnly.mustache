@@ -112,129 +112,127 @@
 <body class="d-flex flex-column min-vh-100 d-flex flex-column justify-content-center">
 
 
+	<!-- 25번 -->
 
 
-<!-- 25번 -->
+	<div class="container border border-info">
+		<h1 class="text-center mt-2">입사 제안 보내기</h1>
+		<h5 class="text-center mt-1 mb-3">보낼 공고를 선택하세요.</h5>
+
+		{{^postingList}}
+			<div class="text-center">공고 없음</div> {{/postingList}}
 
 
+		<form id="selectForm" method="post" action="/offer/save" enctype="multipart/form-data"
+		      class="d-flex flex-wrap justify-content-between">
 
+			<input type="hidden" value="{{resume.id}}" name="selectResume" id="selectResume">
 
-
-		<div class="container border border-info">
-			<h1 class="text-center mt-2">입사 제안 보내기</h1>
-			<h5 class="text-center mt-1 mb-3">보낼 공고를 선택하세요.</h5>
-
-			{{^postingList}} <div class="text-center">공고 없음</div> {{/postingList}}
-
-
-			<form id="selectForm" method="post" action="/offer/save" enctype="multipart/form-data" class="d-flex flex-wrap justify-content-between">
-
-				<input type="hidden" value="{{resume.id}}" name="selectResume" id="selectResume">
-
-				{{#postingList}}
+			{{#postingList}}
 
 				<div class="col-4 m-auto">
-					<a href="javascript:void(0);" class="btn btn-info m-2 mb-0" onclick="openNewWindow('/comp/posting/newWindow/{{id}}')" style="width:210px; height: 130px">
+					<a href="javascript:void(0);" class="btn btn-info m-2 mb-0"
+					   onclick="openNewWindow('/comp/posting/newWindow/{{id}}')" style="width:210px; height: 130px">
 						<div class="">
 							<div class="fw-bold">{{title}}</div>
-							<span class="badge bg-secondary">{{position}}</span>
-							<span class="expiryDate badge bg-black">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
+							<span class="badge" style="background-color: #2f3a7d">{{position}}</span>
+							<span class="expiryDate badge"
+							      style="background-color: red">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
 						</div>
 						<div class="">
-							{{#postingSkill}}<span class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
+							{{#postingSkill}}
+								<span class="badge me-1"
+								      style="background-color: #7F00FF">{{skill.skillname}}</span>{{/postingSkill}}
 						</div>
 						<div>
-							{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
-							{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
-							<span class="badge bg-success">{{region}}</span>
+							{{#career}}<span class="badge" style="background-color: #f9b233">{{career}}</span>{{/career}}
+							{{#education}}<span class="badge" style="background-color: #f27d0c">{{education}}</span>{{/education}}
+							<span class="badge" style="background-color: #f95959">{{region}}</span>
 						</div>
 					</a>
 
 					<div class="text-center mt-0 mb-3">
 
 						<label class="form-check-label mt-1 me-2">
-							<input class="form-check-input" type="radio" id="selectPosting{{id}}" name="selectPosting" value="{{id}}">
-						선택하기</label>
+							<input class="form-check-input" type="radio" id="selectPosting{{id}}" name="selectPosting"
+							       value="{{id}}">
+							선택하기</label>
 
 					</div>
 
 				</div>
-				{{/postingList}}
+			{{/postingList}}
 
-			</form>
+		</form>
 
 
-			<div class="d-flex justify-content-center mt-2 mb-2 me-1">
+		<div class="d-flex justify-content-center mt-2 mb-2 me-1">
 
-				<div class="w-100 mb-2">
-					<button type="button" class="w-100 btn btn-success me-1 ms-0" onclick="submitForm()">입사 제안</button>
-				</div>
-
-				<form action="/comp/bookmarkList/save" method="post" class="w-100">
-					<button class="w-100 btn btn-danger ms-1 me-0" onclick="closeWindow()">제안 취소</button>
-				</form>
-
+			<div class="w-100 mb-2">
+				<button type="button" class="w-100 btn btn-success me-1 ms-0" onclick="submitForm()">입사 제안</button>
 			</div>
+
+			<form action="/comp/bookmarkList/save" method="post" class="w-100">
+				<button class="w-100 btn btn-danger ms-1 me-0" onclick="closeWindow()">제안 취소</button>
+			</form>
 
 		</div>
 
+	</div>
 
 
-		<script>
+	<script>
 
-			function Ddaycheck(day){
-				if(typeof day === "string"){
-					let day2 = new Date(day);
-					return Ddaycheck(day2);
-				} else{
-					let today = new Date();
-		
-					// console.log((day-today) / (1000 * 60 * 60 * 24));
-					let DDay = Math.ceil( (day-today) / (1000 * 60 * 60 * 24));
-		
-					if(DDay==0){
-						// console.log("D-Day");
-						return "D-Day";
-					}
-					else if(DDay<0){
-						// console.log("만료");
-						return "만료";
-					}
-					else{
-						// console.log("D-"+DDay); 
-						return "D-"+DDay;
-					}
+		function Ddaycheck(day) {
+			if (typeof day === "string") {
+				let day2 = new Date(day);
+				return Ddaycheck(day2);
+			} else {
+				let today = new Date();
+
+				// console.log((day-today) / (1000 * 60 * 60 * 24));
+				let DDay = Math.ceil((day - today) / (1000 * 60 * 60 * 24));
+
+				if (DDay == 0) {
+					// console.log("D-Day");
+					return "D-Day";
+				} else if (DDay < 0) {
+					// console.log("만료");
+					return "만료";
+				} else {
+					// console.log("D-"+DDay);
+					return "D-" + DDay;
 				}
 			}
-			let day = document.querySelectorAll('.expiryDate');
-			day.forEach(element => {
-				element.textContent = Ddaycheck(element.textContent);
-			});
+		}
+
+		let day = document.querySelectorAll('.expiryDate');
+		day.forEach(element => {
+			element.textContent = Ddaycheck(element.textContent);
+		});
 
 
-			function openNewWindow(url) {
-				var width = 800; // 새 창의 가로 크기
-				var height = 1100; // 새 창의 세로 크기
-				var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
-				var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
-				
-				var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
-				window.open(url, '새 창', options);
-			}
+		function openNewWindow(url) {
+			var width = 800; // 새 창의 가로 크기
+			var height = 1100; // 새 창의 세로 크기
+			var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+			var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
+
+			var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+			window.open(url, '새 창', options);
+		}
 
 
-			
-			function closeWindow() {
-				window.close();
-			}
+		function closeWindow() {
+			window.close();
+		}
 
 
-
-			function submitForm() {
-				fetch('/offer/save', {
-					method: 'POST',
-					body: new FormData(document.querySelector("#selectForm")),
-				})
+		function submitForm() {
+			fetch('/offer/save', {
+				method: 'POST',
+				body: new FormData(document.querySelector("#selectForm")),
+			})
 				.then(response => response.text()) // 응답 데이터를 텍스트로 변환
 				.then(data => {
 					window.alert(data);
@@ -244,12 +242,10 @@
 					window.alert("공고를 선택하세요.");
 					window.close();
 				});
-			}
+		}
 
 
+	</script>
 
-
-		</script>
-
-	</body>
+</body>
 </html>
