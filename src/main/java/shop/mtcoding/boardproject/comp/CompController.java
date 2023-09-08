@@ -515,7 +515,7 @@ public class CompController {
 
         Apply apply = applyService.공고지원합격(applyId, sessionComp.getUserId());
 
-        if(redirectWhere.equals("allResumeList")){
+        if(redirectWhere != null){
             return "redirect:/comp/" + sessionComp.getUserId() + "/allResumeList";
         }
 
@@ -538,7 +538,7 @@ public class CompController {
 
         Apply apply = applyService.공고지원불합(applyId, sessionComp.getUserId());
 
-        if(redirectWhere.equals("allResumeList")){
+        if(redirectWhere != null){
             return "redirect:/comp/" + sessionComp.getUserId() + "/allResumeList";
         }
 
