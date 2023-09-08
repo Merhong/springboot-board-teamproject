@@ -16,7 +16,7 @@
 		<form action="/login" method="post" onsubmit="changeLoginLinksAndButton()">
 			<div class="d-flex form-group mt-2 mb-2">
 				<input type="email" name="email" class="form-control" placeholder="아이디(이메일)" id="email"
-					value="love@nate.com">
+					value="@nate.com">
 			</div>
 
 			<div class="mb-2">
@@ -54,7 +54,7 @@
 				loginLink.textContent = "마이페이지";
 				loginLink.href = "/user/updateForm";
 			} else if (CompSession === "2") {
-				loginLink.textContent = "기업정보보기";
+				loginLink.textContent = "기업페이지";
 				loginLink.href = "/comp/main";
 			}
 		} else {

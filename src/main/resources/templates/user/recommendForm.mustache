@@ -138,7 +138,7 @@
 			</form>
 
 			<div class="m-2 ms-2 me-2">
-				<div class="btn btn-success w-100" onclick="searchAll()">검색하기</div>
+				<div class="btn btn-success w-100 bg-info" onclick="searchAll()">검색하기</div>
 			</div>
 
 			{{#compInfoList}}
@@ -147,9 +147,9 @@
 					<div class="m-auto">
 						<span class="compname">{{this.compname}}</span>
 						<div data-id="{{id}}" class="posting-title">{{title}}</div>
-						<span class="badge bg-danger">{{position}}</span>
+						<span class="badge" style="background-color: #2f3a7d">{{position}}</span>
 						{{#postingSkills}}
-						<span class="badge bg-secondary me-1">{{skill.skillname}}</span>
+						<span class="badge me-1" style="background-color: #7F00FF">{{skill.skillname}}</span>
 						{{/postingSkills}}
 
 					</div>

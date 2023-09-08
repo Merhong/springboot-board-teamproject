@@ -1,60 +1,61 @@
 {{> layout/header}}
 
+
 <style>
-  /* .modal { */
-  /* display: none;
-	  position: fixed;
-	  top: 0;
-	  left: 0;
-	  width: 100%;
-	  height: 100%;
-	  background-color: rgba(0, 0, 0, 0.7); */
-  /* } */
-
-  .modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 400px;
-    height: 150px;
-    position: relative;
-    left: 0%;
-    top: -15%;
-    max-height: calc(80% - 100px); /* 화면 높이에서 40px 제외 */
-    max-width: calc(80% - 40px); /* 화면 높이에서 40px 제외 */
-    overflow-y: auto;
-  }
-
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .modal-backdrop {
-    display: none;
+	/* .modal { */
+	/* display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.25);
-    z-index: 1; /* 모달보다 위에 표시되도록 설정 */
-  }
+    background-color: rgba(0, 0, 0, 0.7); */
+	/* } */
 
-  /* 모달 활성화 시 백드롭 표시 */
-  .modal.active + .modal-backdrop {
-    display: block;
-  }
+	.modal-content {
+		background-color: #fff;
+		margin: 15% auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 400px;
+		height: 150px;
+		position: relative;
+		left: 0%;
+		top: -15%;
+		max-height: calc(80% - 100px); /* 화면 높이에서 40px 제외 */
+		max-width: calc(80% - 40px); /* 화면 높이에서 40px 제외 */
+		overflow-y: auto;
+	}
+
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+	.close:hover,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.modal-backdrop {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.25);
+		z-index: 1; /* 모달보다 위에 표시되도록 설정 */
+	}
+
+	/* 모달 활성화 시 백드롭 표시 */
+	.modal.active + .modal-backdrop {
+		display: block;
+	}
 </style>
 
 <!-- 메인페이지(인덱스) 화면-->
@@ -355,63 +356,6 @@
           <div class="border border-info m-2 ps-2 pe-2 pt-1">
             <h4 class="text-center fw-bold">{{ user.compname }}</h4>
             {{#user.photo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }}<a
               href="/comp/posting/{{ id }}"
               class="text-black text-decoration-none"
@@ -421,62 +365,6 @@
                 style="height: 120px"
               />{{/user.photo}}
               {{^user.photo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
               }}<a
                 href="/comp/posting/{{ id }}"
@@ -490,63 +378,6 @@
                 <div class="mb-1 fst-italic">{{ position }}</div>
                 <div class="mb-1">
                   {{#postingSkill
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                   }}<span class="badge bg-primary me-1">{{
                     skill.skillname
                   }}</span
@@ -556,63 +387,6 @@
                   {{#career}}<span class="badge bg-success">{{ career }}</span
                   >{{/career}}
                   {{#education
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                   }}<span class="badge bg-success">{{ education }}</span
                   >{{/education}}
                   <span class="badge bg-success">{{ region }}</span>
@@ -621,62 +395,6 @@
             </a>
             <div class="d-flex justify-content-between">
               {{^sessionComp.compname
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
               }}<button
                 type="button"
@@ -688,66 +406,10 @@
               >{{/sessionComp.compname}}
               <!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
               <!-- 기업 유저는 북마크 못하게 -->
-              {{#sessionComp.compname
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              }}<button type="button" class="invisible"><h3>🤍</h3></button
-              >{{/sessionComp.compname}}
+              {{#sessionComp.compname}}
+              <button type="button" class="invisible"><h3>🤍</h3></button
+              >
+              {{/sessionComp.compname}}
 
               <span class="expiryDate fw-bold align-self-center me-2"
                 >{{#expiryDate}}{{ expiryDate }}{{/expiryDate}}</span

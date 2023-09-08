@@ -101,7 +101,7 @@
 			</form>
 
 			<div class="m-2 ms-2 me-2">
-				<div class="btn btn-success w-100" onclick="searchAll()">검색하기</div>
+				<div class="btn btn-success w-100 bg-info" onclick="searchAll()">검색하기</div>
 			</div>
 
 
@@ -114,8 +114,8 @@
 					<div class="d-flex justify-content-between">
 						<div>
 							<div class="m-auto">
-								<span class="badge bg-danger">{{#position}}{{position}}{{/position}}</span>
-								{{#userSkillList}}<span class="badge bg-secondary me-1">{{skill.skillname}}</span>{{/userSkillList}}
+								<span class="badge" style="background-color: #2f3a7d">{{#position}}{{position}}{{/position}}</span>
+								{{#userSkillList}}<span class="badge me-1" style="background-color: #7F00FF">{{skill.skillname}}</span>{{/userSkillList}}
 							</div>
 
 							<div class="d-flex mb-1">
@@ -129,7 +129,7 @@
 								{{#resumeList}}
 								<input type="hidden" name="ResumeIdList" value="{{id}}">
 								{{/resumeList}}
-								<input class="btn btn-warning btn-sm" type="submit" value="모두 북마크">
+								<input class="btn btn-warning btn-sm text-white" type="submit" value="모두 북마크">
 							</form>
 						</div>
 					</div>

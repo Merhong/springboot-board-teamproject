@@ -21,16 +21,16 @@
 				<a href="javascript:void(0);" class="btn btn-light col-5" onclick="openNewWindow('/comp/posting/newWindow/{{id}}')">
 					<div class="">
 						<div class="fw-bold">{{title}}</div>
-						<span class="badge bg-secondary">{{position}}</span>
-						<span class="expiryDate badge bg-black">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
+						<span class="badge" style="background-color: #2f3a7d">{{position}}</span>
+						<span class="expiryDate badge" style="background-color: red">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
 					</div>
 					<div class="">
-						{{#postingSkill}}<span class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
+						{{#postingSkill}}<span class="badge me-1" style="background-color: #7F00FF">{{skill.skillname}}</span>{{/postingSkill}}
 					</div>
 					<div>
-						{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
-						{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
-						<span class="badge bg-success">{{region}}</span>
+						{{#career}}<span class="badge" style="background-color: #f9b233">{{career}}</span>{{/career}}
+						{{#education}}<span class="badge" style="background-color: #f27d0c">{{education}}</span>{{/education}}
+						<span class="badge" style="background-color: #f95959">{{region}}</span>
 					</div>
 				</a>
 
@@ -39,7 +39,7 @@
 				<div class="d-flex flex-column justify-content-between">
 					<a href="/comp/posting/{{id}}/resumeList" class="btn btn-success btn-sm mb-1">지원자 보기</a>
 					<a href="/comp/posting/{{id}}/offerList" class="btn btn-primary btn-sm mb-1">입사 제안 보기</a>
-					<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning btn-sm mb-1">수정하기</a>
+					<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning btn-sm mb-1 text-white">수정하기</a>
 					<form action="/comp/posting/{{id}}/delete" method="post">
 						<input class="btn btn-danger btn-sm w-100" type="submit" value="삭제하기">
 					</form>
