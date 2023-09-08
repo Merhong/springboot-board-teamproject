@@ -19,7 +19,7 @@
 					<div class="d-flex mb-3">
 						<div class="input-group">
 							<span class="input-group-text">추가할 기술 이름</span>
-							<input type="text" class="form-control" name="skillName" required>
+							<input type="text" class="form-control p-2" name="skillName" required>
 						</div>
 						<input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick="">
 					</div>
@@ -29,24 +29,25 @@
 
 				<form action="/master/mainPageCount" method="post" onsubmit="" id="selectform2">
 					<div class="d-flex mb-3">
-						<div class="input-group">
-							<span class="input-group-text">메인페이지 한페이지당 표시할 공고 수</span>
-							<div class="form-control">
-								<label class="form-check-label ms-1 me-5">
+						<div class="input-group m-1">
+							<span class="input-group-text">메인화면 한페이지당 표시할 개수</span>
+							<div class="form-control p-1">
+								<label class="form-check-label ms-1 me-3">
 									<input class="form-check-input" type="radio" id="mainPageCount3" name="mainPageCount" value="3">
 								3</label>
-								<label class="form-check-label me-5">
+								<label class="form-check-label me-3">
 									<input class="form-check-input" type="radio" id="mainPageCount4" name="mainPageCount" value="4">
 								4</label>
-								<label class="form-check-label me-5">
+								<label class="form-check-label me-3">
 									<input class="form-check-input" type="radio" id="mainPageCount6" name="mainPageCount" value="6">
 								6</label>
-								<label class="form-check-label me-5">
+								<label class="form-check-label me-3">
 									<input class="form-check-input" type="radio" id="mainPageCount8" name="mainPageCount" value="8">
 								8</label>
+								<input type="number" class="form-control w-25 d-inline" name="mainPageCount" placeholder="직접입력">
 							</div>
 						</div>
-						{{! <input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick=""> }}
+						<input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick="">
 					</div>
 				</form>
 
@@ -54,24 +55,22 @@
 
 				<form action="/master/searchAllPageCount" method="post" onsubmit="" id="selectform3">
 					<div class="d-flex mb-3">
-						<div class="input-group">
-							<span class="input-group-text">통합검색 한페이지당 표시할 공고 수</span>
-							<div class="form-control">
-								<label class="form-check-label ms-1 me-5">
-									<input class="form-check-input" type="radio" id="searchAllPageCount3" name="searchAllPageCount" value="3">
-								3</label>
-								<label class="form-check-label me-5">
+						<div class="input-group m-1">
+							<span class="input-group-text">통합검색 한페이지당 표시할 개수</span>
+							<div class="form-control p-1">
+								<label class="form-check-label me-3">
 									<input class="form-check-input" type="radio" id="searchAllPageCount4" name="searchAllPageCount" value="4">
 								4</label>
-								<label class="form-check-label me-5">
-									<input class="form-check-input" type="radio" id="searchAllPageCount6" name="searchAllPageCount" value="6">
-								6</label>
-								<label class="form-check-label me-5">
+								<label class="form-check-label me-3">
 									<input class="form-check-input" type="radio" id="searchAllPageCount8" name="searchAllPageCount" value="8">
 								8</label>
+								<label class="form-check-label me-3">
+									<input class="form-check-input" type="radio" id="searchAllPageCount12" name="searchAllPageCount" value="12">
+								12</label>
+								<input type="number" class="form-control w-25 d-inline" name="searchAllPageCount" placeholder="직접입력">
 							</div>
 						</div>
-						{{! <input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick=""> }}
+						<input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick="">
 					</div>
 				</form>
 			

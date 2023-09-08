@@ -347,7 +347,8 @@
 
     <div class="mb-4 d-flex flex-wrap">
       {{#postingList}}
-      <div class="col-lg-4 col-md-4 col-sm-6">
+      {{#col3}}<div class="col-lg-4 col-md-4 col-sm-6">{{/col3}}
+      {{^col3}}<div class="col-lg-3 col-md-4 col-sm-6">{{/col3}}
         <div class="border border-info m-2 ps-2 pe-2 pt-1">
           <h4 class="text-center fw-bold">{{ user.compname }}</h4>
           {{#user.photo}}<a

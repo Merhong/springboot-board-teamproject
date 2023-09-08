@@ -1,0 +1,137 @@
+{{> layout/header}}
+{{> layout/comp2header}}
+
+<!-- 22번 -->
+
+
+
+		<div class="col-9 m-auto">
+			<h1 class=" text-center mt-2">기업이 보낸 모든 입사제안</h1>
+			<div class="text-center mb-4"><a href="/comp/{{sessionComp.userId}}/postingList">개별 구인공고 기준으로 보기</a></div>
+
+
+
+			<table class="table table-bordered">
+				<thead>
+				  <tr class="table-secondary">
+					<th class="text-center" scope="col">No.</th>
+					<th class="text-center" scope="col">제안넣은 공고</th>
+					<th class="text-center" scope="col">이력서</th>
+					<th class="text-center" scope="col">이름</th>
+					<th class="text-center" scope="col">경력</th>
+					<th class="text-center" scope="col">학력</th>
+					<th class="text-center" scope="col">응답</th>
+				  </tr>
+				</thead>
+				<tbody>
+
+					{{^recommendCompDTOList}}
+					<tr>
+						<th class="text-center" scope="row">없음</th>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border border-0"></td>
+						<td class="text-center border-start-0"></td>
+					</tr>
+					{{/recommendCompDTOList}}
+					
+					{{#recommendCompDTOList}}
+					<tr class="{{statement}}">
+						<th class="text-center" scope="row"><div class="increNumber"></div></th>
+						<td class="text-center"><a href="javascript:void(0);" class="" onclick="openNewWindow('/comp/posting/newWindow/{{postingId}}')">{{postingTitle}}</a></td>
+						<td class="text-center"><a href="javascript:void(0);" class="" onclick="openNewWindow('/resume/newWindow/{{resumeId}}')">{{resumeTitle}}</a></td>
+						<td class="text-center">{{username}}</td>
+						<td class="text-center">{{resumeCareer}}</td>
+						<td class="text-center">{{resumeGrade}}</td>
+
+						<td class="d-flex justify-content-center statementJS">
+							<input type="hidden" value="{{statement}}">
+							<div class="statementJS2"></div>
+							<form action="/comp/posting/offer/{{recommendId}}/cancel" method="post" class="ms-1">
+								<input type="hidden" name="redirectWhere" value="allOfferList">
+								<input class="btn btn-sm btn-warning p-0 ps-1 pe-1 statementButton" type="submit" value="제안 취소">
+							</form>
+						</td>
+					</tr>
+					{{/recommendCompDTOList}}
+
+
+
+				</tbody>
+			  </table>
+
+
+		</div>
+
+
+
+
+
+		<script>
+
+
+			let statementJS = document.querySelectorAll(".statementJS");
+			
+			statementJS.forEach(element => {
+				let input = element.querySelector("input");
+
+				let statementButton = element.querySelector(".statementButton");
+				let statementJS2 = element.querySelector(".statementJS2");
+				
+				if(input.value == "대기"){
+					statementJS2.innerText = "대기";
+				} else if(input.value == "수락") {
+					statementJS2.innerText = "수락함";
+					statementButton.style.display = 'none';
+				} else {
+					statementJS2.innerText = "거절당함";
+					statementButton.style.display = 'none';
+				}
+			});
+
+
+			
+			let increNumber = document.querySelectorAll(".increNumber");
+			// console.log(increNumber);
+			let count=1;
+			increNumber.forEach(element => {
+				element.innerHTML=count++;
+			});
+
+
+
+
+
+	function openNewWindow(url) {
+	  var width = 800; // 새 창의 가로 크기
+	  var height = 1100; // 새 창의 세로 크기
+	  var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+	  var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
+	
+	  var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+	  window.open(url, '새 창', options);
+	}
+
+
+
+			
+			
+			let statementRed = document.querySelectorAll('.거절');
+			statementRed.forEach(element => {
+				element.classList.add("table-danger");
+			});
+			let statementGreen = document.querySelectorAll('.수락');
+			statementGreen.forEach(element => {
+				element.classList.add("table-success");
+			});
+		
+		</script>
+		
+
+
+
+
+{{> layout/comp2footer}}
+{{> layout/footer}}

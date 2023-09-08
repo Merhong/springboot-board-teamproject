@@ -10,9 +10,11 @@ import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.apply.Apply;
+import shop.mtcoding.boardproject.apply.ApplyResponse;
 import shop.mtcoding.boardproject.apply.ApplyService;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.recommend.Recommend;
+import shop.mtcoding.boardproject.recommend.RecommendResponse;
 import shop.mtcoding.boardproject.recommend.RecommendService;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeService;
@@ -223,6 +225,46 @@ public class CompController {
 
         // 지원자 내역 페이지를 보여준다.
         return "comp/resumeList";
+    }
+
+    @GetMapping("/comp/{compId}/allResumeList")
+    public String allResumeList(@PathVariable Integer compId, HttpServletRequest request) {
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        if (sessionAllUser == null) {
+            return "redirect:/user/loginForm";
+        }
+        if (sessionAllUser.getRole() != 2) {
+            throw new MyException("기업회원만 가능합니다.");
+        }
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+        if(sessionComp.getUserId() != compId){
+            throw new MyException("내꺼 아니라 못봄");
+        }
+
+        List<ApplyResponse.ApplyCompDTO> applyCompDTOList = applyService.기업별모든지원찾기(compId);
+        request.setAttribute("applyCompDTOList", applyCompDTOList);
+        
+        return "comp/allResumeList";
+    }
+
+    @GetMapping("/comp/{compId}/allOfferList")
+    public String allOfferList(@PathVariable Integer compId, HttpServletRequest request) {
+        User sessionAllUser = (User) session.getAttribute("sessionAllUser");
+        if (sessionAllUser == null) {
+            return "redirect:/user/loginForm";
+        }
+        if (sessionAllUser.getRole() != 2) {
+            throw new MyException("기업회원만 가능합니다.");
+        }
+        CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
+        if(sessionComp.getUserId() != compId){
+            throw new MyException("내꺼 아니라 못봄");
+        }
+
+        List<RecommendResponse.RecommendCompDTO> recommendCompDTOList = recommendService.기업별모든오퍼찾기(compId);
+        request.setAttribute("recommendCompDTOList", recommendCompDTOList);
+        
+        return "comp/allOfferList";
     }
 
     // 공고관리 > 입사 제안 보기
@@ -459,7 +501,7 @@ public class CompController {
 
     // 공고관리 > 지원자보기 > 합격 POST 
     @PostMapping("/comp/posting/apply/{applyId}/pass")
-    public String applyPass(@PathVariable Integer applyId) {
+    public String applyPass(@PathVariable Integer applyId, String redirectWhere) {
 
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
@@ -473,12 +515,16 @@ public class CompController {
 
         Apply apply = applyService.공고지원합격(applyId, sessionComp.getUserId());
 
+        if(redirectWhere != null){
+            return "redirect:/comp/" + sessionComp.getUserId() + "/allResumeList";
+        }
+
         return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
     }
 
     // 공고관리 > 지원자보기 > 불합격 POST
     @PostMapping("/comp/posting/apply/{applyId}/fail")
-    public String applyFail(@PathVariable Integer applyId) {
+    public String applyFail(@PathVariable Integer applyId, String redirectWhere) {
 
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
@@ -492,12 +538,16 @@ public class CompController {
 
         Apply apply = applyService.공고지원불합(applyId, sessionComp.getUserId());
 
+        if(redirectWhere != null){
+            return "redirect:/comp/" + sessionComp.getUserId() + "/allResumeList";
+        }
+
         return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
     }
 
     // 공고관리 > 입사제안 > 제안 취소 POST
     @PostMapping("/comp/posting/offer/{recommendId}/cancel")
-    public String recommendCancel(@PathVariable Integer recommendId) {
+    public String recommendCancel(@PathVariable Integer recommendId, String redirectWhere) {
 
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
@@ -511,6 +561,9 @@ public class CompController {
 
         Integer postingId = recommendService.입사제안취소(recommendId, sessionComp.getUserId());
 
+        if(redirectWhere.equals("allOfferList")){
+            return "redirect:/comp/" + sessionComp.getUserId() + "/allOfferList";
+        }
         return "redirect:/comp/posting/" + postingId + "/offerList";
     }
 

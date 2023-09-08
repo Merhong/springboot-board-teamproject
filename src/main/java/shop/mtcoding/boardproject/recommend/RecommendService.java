@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
-import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -141,6 +141,29 @@ public class RecommendService {
         } else {
             throw new MyException(recommendId + "없음");
         }
+    }
+
+    public List<RecommendResponse.RecommendCompDTO> 기업별모든오퍼찾기(Integer compId) {
+
+        List<Object[]> recommendList = recommendRepository.findByCompId(compId);
+        
+        List<RecommendResponse.RecommendCompDTO> recommendCompDTOList = new ArrayList<>();
+        
+        for (Object[] objects : recommendList) {
+            RecommendResponse.RecommendCompDTO recommendCompDTO = new RecommendResponse.RecommendCompDTO();
+            recommendCompDTO.setRecommendId((Integer)objects[0]);
+            recommendCompDTO.setPostingId((Integer)objects[1]);
+            recommendCompDTO.setResumeId((Integer)objects[2]);
+            recommendCompDTO.setPostingTitle((String)objects[3]);
+            recommendCompDTO.setResumeTitle((String)objects[4]);
+            recommendCompDTO.setResumeCareer((String)objects[5]);
+            recommendCompDTO.setResumeGrade((String)objects[6]);
+            recommendCompDTO.setUsername((String)objects[7]);
+            recommendCompDTO.setStatement((String)objects[8]);
+            recommendCompDTOList.add(recommendCompDTO);
+        }
+
+        return recommendCompDTOList;
     }
 
 }

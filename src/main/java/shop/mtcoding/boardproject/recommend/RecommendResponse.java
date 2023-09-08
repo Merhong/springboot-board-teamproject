@@ -1,28 +1,19 @@
-package shop.mtcoding.boardproject.apply;
+package shop.mtcoding.boardproject.recommend;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-public class ApplyResponse {
+public class RecommendResponse {
 
-    @Getter
-    @Setter
-    public static class TestApplyListDTO {
-        private String postingTitle;
-        private String resumeTitle;
-        private String position;
-        private String statement;
-
-    }
 
 
     @Getter
     @Setter
     @ToString
-    public static class ApplyCompDTO {
+    public static class RecommendCompDTO {
 
-        private Integer applyId;
+        private Integer recommendId;
 
         private Integer postingId;
 
@@ -41,7 +32,5 @@ public class ApplyResponse {
         private String statement;
 
     }
-
-
 
 }
