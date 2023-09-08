@@ -38,14 +38,39 @@
 							     data-type="posting"
 							     data-id="{{id}}"
 							/>
-							{{ user.compname }}({{ title }}/{{ position }})
+
+							{{^user.photo}}<a
+								href="/comp/posting/{{ id }}"
+								class="text-black text-decoration-none"
+							><img
+								src="../../../images/no_logo.png"
+								class="img-fluid d-block m-auto"
+								style="height: 120px"
+							/>{{/user.photo}}
+							<h5 class="mt-1 fw-bold">{{ title }}</h5>
+							<div class="mb-1 fst-italic">{{ position }}</div>
+							<div class="mb-1">
+								{{#postingSkill}}<span class="badge me-1" style="background-color: #7F00FF">{{
+								skill.skillname
+								}}</span
+								>{{/postingSkill}}
+							</div>
+							<div>
+								{{#career}}<span class="badge" style="background-color: #f9b233">{{ career }}</span
+								>{{/career}}
+								{{#education}}<span class="badge " style="background-color: #f27d0c">{{ education }}</span
+								>{{/education}}
+								<span class="badge" style="background-color: #f95959">{{ region }}</span>
+							</div>
+						</a>
+
 						</div>
 					</div>
-					<div class="mt-2 mb-2">
+					<div class="mt-4 mb-4">
 						<button type="button" action="/user/bookmarkForm/delete" method="post"
 						        class="btn btn-danger delete-button"
 						        data-posting-id="{{id}}">
-							삭제하기
+							삭제
 						</button>
 					</div>
 				</div>

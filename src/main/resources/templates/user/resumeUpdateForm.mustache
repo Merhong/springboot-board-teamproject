@@ -28,7 +28,7 @@
             <img id="preview" src="../../../../../images/{{resume.user.photo}}" class="circle_avatar"
               style="width:150px; height:150px;" />
             <div class="input-group mb-3 mt-3">
-              <input type="file" class="form-control" placeholder="Enter pto" name="pto" onchange="changePic(event)">
+              <input type="file" class="form-control" placeholder="Enter pto" name="pto" onchange="changePic(event)" value="{{ resume.user.photo }}">
               <input type="hidden" name="previousPhoto" value="{{ resume.user.photo }}" />
             </div>
           </div>
@@ -147,7 +147,7 @@
         <!-- disabled ="ture"가 생략 된것-->
 
         <div>
-          <input id="button" class="btn btn-primary m-2 mb-3 w-100" type="submit" value="이력서 수정" />
+          <input id="button" class="btn m-2 mb-3 w-100 bg-info text-white" type="submit" value="이력서 수정" />
         </div>
       </form>
     </div>
