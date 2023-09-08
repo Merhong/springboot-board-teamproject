@@ -227,8 +227,8 @@ public class CompController {
         return "comp/resumeList";
     }
 
-    @GetMapping("/comp/{compId}/allResumeList")
-    public String allResumeList(@PathVariable Integer compId, HttpServletRequest request) {
+    @GetMapping("/comp/{compId}/resumeListCompReceived")
+    public String resumeListCompReceived(@PathVariable Integer compId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         if (sessionAllUser == null) {
             return "redirect:/user/loginForm";
@@ -244,11 +244,11 @@ public class CompController {
         List<ApplyResponse.ApplyCompDTO> applyCompDTOList = applyService.기업별모든지원찾기(compId);
         request.setAttribute("applyCompDTOList", applyCompDTOList);
         
-        return "comp/allResumeList";
+        return "comp/resumeListCompReceived";
     }
 
-    @GetMapping("/comp/{compId}/allOfferList")
-    public String allOfferList(@PathVariable Integer compId, HttpServletRequest request) {
+    @GetMapping("/comp/{compId}/offerListCompSent")
+    public String offerListCompSent(@PathVariable Integer compId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         if (sessionAllUser == null) {
             return "redirect:/user/loginForm";
@@ -264,7 +264,7 @@ public class CompController {
         List<RecommendResponse.RecommendCompDTO> recommendCompDTOList = recommendService.기업별모든오퍼찾기(compId);
         request.setAttribute("recommendCompDTOList", recommendCompDTOList);
         
-        return "comp/allOfferList";
+        return "comp/offerListCompSent";
     }
 
     // 공고관리 > 입사 제안 보기
@@ -516,7 +516,7 @@ public class CompController {
         Apply apply = applyService.공고지원합격(applyId, sessionComp.getUserId());
 
         if(redirectWhere != null){
-            return "redirect:/comp/" + sessionComp.getUserId() + "/allResumeList";
+            return "redirect:/comp/" + sessionComp.getUserId() + "/resumeListCompReceived";
         }
 
         return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
@@ -539,7 +539,7 @@ public class CompController {
         Apply apply = applyService.공고지원불합(applyId, sessionComp.getUserId());
 
         if(redirectWhere != null){
-            return "redirect:/comp/" + sessionComp.getUserId() + "/allResumeList";
+            return "redirect:/comp/" + sessionComp.getUserId() + "/resumeListCompReceived";
         }
 
         return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
@@ -561,8 +561,8 @@ public class CompController {
 
         Integer postingId = recommendService.입사제안취소(recommendId, sessionComp.getUserId());
 
-        if(redirectWhere.equals("allOfferList")){
-            return "redirect:/comp/" + sessionComp.getUserId() + "/allOfferList";
+        if(redirectWhere.equals("offerListCompSent")){
+            return "redirect:/comp/" + sessionComp.getUserId() + "/offerListCompSent";
         }
         return "redirect:/comp/posting/" + postingId + "/offerList";
     }
