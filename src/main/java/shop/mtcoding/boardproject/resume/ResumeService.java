@@ -2,6 +2,7 @@ package shop.mtcoding.boardproject.resume;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.vo.MyPath;
@@ -98,24 +99,15 @@ public class ResumeService {
     }
 
     @Transactional
-    public void 이력서수정(Integer id, ResumeUpdateDTO resumeUpdateDTO) {
+    public void 이력서수정(Integer id, ResumeRequest.ResumeUpdateDTO resumeUpdateDTO) {
         // 이력서 ID로 엔티티를 찾습니다.
         Optional<Resume> optionalResume = resumeRepository.findById(id);
 
-        UUID uuid = UUID.randomUUID(); // 랜덤한 해시값을 만들어줌
-        String fileName = uuid + "_" + resumeUpdateDTO.getPto().getOriginalFilename();
-
-        // 프로젝트 실행 파일 변경 -> blogv2-1.0.jar
-        // 해당 실행파일 경로에 images 폴더가 필요함
-        Path filePath = Paths.get(MyPath.IMG_PATH + fileName);
-        try {
-            Files.write(filePath, resumeUpdateDTO.getPto().getBytes());
-        } catch (Exception e) {
-            throw new MyException(e.getMessage());
-        }
-
         if (optionalResume.isPresent()) {
             Resume resume = optionalResume.get();
+
+            // 이력서의 현재 사진 파일 이름을 가져옵니다.
+            String currentPhotoFileName = resume.getUser().getPhoto();
 
             // DTO에서 가져온 데이터로 이력서 엔티티를 수정
             User user = resume.getUser();
@@ -123,7 +115,29 @@ public class ResumeService {
             user.setTel(resumeUpdateDTO.getTel());
             user.setAddress(resumeUpdateDTO.getAddress());
             user.setBirth(resumeUpdateDTO.getBirth());
-            user.setPhoto(fileName);
+
+            // 사진 파일 업로드를 확인합니다.
+            MultipartFile newPhoto = resumeUpdateDTO.getPto();
+            if (newPhoto != null && !newPhoto.isEmpty()) {
+                // 새로운 사진 파일이 업로드되었을 경우
+                UUID uuid = UUID.randomUUID();
+                String fileName = uuid + "_" + newPhoto.getOriginalFilename();
+                Path filePath = Paths.get(MyPath.IMG_PATH + fileName);
+                try {
+                    Files.write(filePath, newPhoto.getBytes());
+
+                    // 새로운 사진 파일 이름을 사용합니다.
+                    user.setPhoto(fileName);
+
+                    // 이전 사진 파일을 삭제합니다.
+                    if (currentPhotoFileName != null) {
+                        Path currentPhotoPath = Paths.get(MyPath.IMG_PATH + currentPhotoFileName);
+                        Files.deleteIfExists(currentPhotoPath);
+                    }
+                } catch (Exception e) {
+                    throw new MyException(e.getMessage());
+                }
+            }
 
             resume.setUser(user);
             resume.setTitle(resumeUpdateDTO.getTitle());

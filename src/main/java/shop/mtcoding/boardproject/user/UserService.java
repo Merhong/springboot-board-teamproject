@@ -86,6 +86,8 @@ public class UserService {
         user.setBirth(updateDTO.getBirth());
         user.setPhoto(fileName);
 
+        userRepository.save(user);
+
         // 수정된 user 리턴
         return user;
     }

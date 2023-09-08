@@ -85,6 +85,13 @@ public class User {
     @Column(columnDefinition = "boolean default false")
     private Boolean message;
 
+    @PrePersist
+    public void prePersist() {
+        if (photo == null) {
+            photo = "basic.jpg";
+        }
+    }
+
     @Builder
     public User(Integer id, Integer role, String username, Date birth, String position, String compname,
             String compRegister,
