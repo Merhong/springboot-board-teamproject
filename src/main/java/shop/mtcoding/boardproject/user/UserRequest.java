@@ -52,4 +52,19 @@ public class UserRequest {
         private String position;
     }
 
+    @Getter
+    @Setter
+    public static class StateDTO {
+
+        private String username;
+    }
+
+    @Getter
+    @Setter
+    public static class CheckOutDTO {
+
+        private Integer userId;
+        private String username;
+    }
+
 }

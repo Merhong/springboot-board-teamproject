@@ -129,7 +129,7 @@ public class UserService {
     }
 
     @Transactional
-    public Integer 받은메시지조회(Boolean isMessage, Integer userId) {
+    public Integer 받은메시지조회변경(Boolean isMessage, Integer userId) {
 
         System.out.println("받은 메시지 여부 조회 isMessage : " + isMessage);
         System.out.println("받은 메시지 여부 조회 userId : " + userId);
@@ -155,5 +155,18 @@ public class UserService {
             user = userop.get();
         }
         return user;
+    }
+
+    @Transactional
+    public Integer 지원상태변경(Boolean isChange, String username) {
+
+        Integer suc = userRepository.stateChange(isChange, username);
+        if (suc == 1) {
+            System.out.println("테스트 지원상태 변경 suc : " + suc);
+            return suc;
+        } else {
+            System.out.println("테스트 지원상태 변경 : 0");
+            return 0;
+        }
     }
 }

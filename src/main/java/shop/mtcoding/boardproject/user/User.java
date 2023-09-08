@@ -85,6 +85,9 @@ public class User {
     @Column(columnDefinition = "boolean default false")
     private Boolean message;
 
+    @Column(columnDefinition = "boolean default false")
+    private Boolean stateChange;
+
     @PrePersist
     public void prePersist() {
         if (photo == null) {
@@ -115,5 +118,6 @@ public class User {
         this.resumeList = resumeList;
         this.createdAt = createdAt;
         this.message = false;
+        this.stateChange = false;
     }
 }

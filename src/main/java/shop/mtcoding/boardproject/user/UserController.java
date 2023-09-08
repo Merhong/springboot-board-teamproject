@@ -150,7 +150,7 @@ public class UserController {
 
         Posting posting = compService.공고찾기(postingId);
         Resume selectedResume = resumeService.이력서찾기(selectedResumeId); // 선택한 이력서를 ID로 조회
-        if(selectedResume.getDisclosure() == false){
+        if (selectedResume.getDisclosure() == false) {
             throw new MyException("비공개 이력서로 지원 못함");
         }
         Apply apply = new Apply();
@@ -345,11 +345,14 @@ public class UserController {
     //
     // }
 
-    @GetMapping("/api/user/{userId}/ismessage")
-    public String messageCheckOut(@PathVariable Integer userId) {
+    @PostMapping("/api/user/ismessage")
+    public String messageCheckOut(@RequestBody UserRequest.CheckOutDTO checkOutDTO) {
         System.out.println("메시지 삭제 컨트롤러 실행");
-        Integer sucsess = userService.받은메시지조회(false, userId);
-        User user = userService.회원조회(userId);
+        Integer sucsess1 = userService.받은메시지조회변경(false, checkOutDTO.getUserId());
+        Integer sucsess2 = userService.지원상태변경(false, checkOutDTO.getUsername());
+        System.out.println("checkOutDTO userId" + checkOutDTO.getUserId());
+        System.out.println("checkOutDTO getUsername" + checkOutDTO.getUsername());
+        User user = userService.회원조회(checkOutDTO.getUserId());
 
         if (user.getRole() == 0) {
             // 관리자의 경우 sessionAdmin 세션을 설정합니다.
@@ -365,7 +368,7 @@ public class UserController {
             System.out.println("x : 기업 로그인");
         }
 
-        if (sucsess == 1) {
+        if (sucsess1 == 1 || sucsess2 == 1) {
             System.out.println("메시지 삭제 성공");
         } else {
             System.out.println("메시지 삭제 실패");
@@ -373,4 +376,12 @@ public class UserController {
         return "redirect:/";
     }
 
+    @PostMapping("/api/user/changeState")
+    public String changeState(@RequestBody UserRequest.StateDTO stateDTO) {
+        System.out.println("changeState username 컨트롤러 때려짐");
+        String username = stateDTO.getUsername();
+        userService.지원상태변경(true, username);
+        System.out.println("username : " + username);
+        return "redirect:/user/resume/offerList";
+    }
 }
