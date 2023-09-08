@@ -86,8 +86,8 @@ public class MasterController {
 
         final int PAGESIZE = pageSize.getSearchAllPageSize();
         
-        int compUserListSize=0;
-        if(searchDTO.getCompUserList() != null){
+        int compUserListSize = 0;
+        if (searchDTO.getCompUserList() != null) {
             compUserListSize = searchDTO.getCompUserList().size();
         }
         int normalUserListSize = 0;
