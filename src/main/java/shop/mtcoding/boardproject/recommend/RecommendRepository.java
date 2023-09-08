@@ -21,6 +21,14 @@ public interface RecommendRepository extends JpaRepository<Recommend, Integer> {
                     "AND resume_tb.user_id = :userId", nativeQuery = true)
     List<Recommend> findByPostingIdAndResumeUserId(@Param("postingId") Integer postingId, @Param("userId") Integer userId);
 
+    @Query(value = " SELECT recommend_tb.id recommend_id, recommend_tb.posting_id posting_id, recommend_tb.resume_id resume_id, posting_tb.title posting_title, "+
+                    " resume_tb.title resume_title, resume_tb.career resume_career, resume_tb.grade resume_grade, "+
+                    " user_tb.username, recommend_tb.statement FROM recommend_tb "+
+                    " JOIN posting_tb ON recommend_tb.posting_id = posting_tb.id "+
+                    " JOIN resume_tb ON recommend_tb.resume_id = resume_tb.id "+
+                    " JOIN user_tb ON resume_tb.user_id = user_tb.id "+
+                    " WHERE posting_tb.user_id = :compId", nativeQuery = true)
+    List<Object[]> findByCompId(@Param("compId") Integer compId);
 
 
 }

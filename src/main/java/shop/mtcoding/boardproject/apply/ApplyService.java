@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
+import shop.mtcoding.boardproject.recommend.RecommendResponse;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,5 +82,28 @@ public class ApplyService {
 
     public void 지원(Apply apply) {
         applyRepository.save(apply);
+    }
+
+    public List<ApplyResponse.ApplyCompDTO> 기업별모든지원찾기(Integer compId) {
+
+        List<Object[]> applyList = applyRepository.findByCompId(compId);
+        
+        List<ApplyResponse.ApplyCompDTO> applyCompDTOList = new ArrayList<>();
+        
+        for (Object[] objects : applyList) {
+            ApplyResponse.ApplyCompDTO applyCompDTO = new ApplyResponse.ApplyCompDTO();
+            applyCompDTO.setApplyId((Integer)objects[0]);
+            applyCompDTO.setPostingId((Integer)objects[1]);
+            applyCompDTO.setResumeId((Integer)objects[2]);
+            applyCompDTO.setPostingTitle((String)objects[3]);
+            applyCompDTO.setResumeTitle((String)objects[4]);
+            applyCompDTO.setResumeCareer((String)objects[5]);
+            applyCompDTO.setResumeGrade((String)objects[6]);
+            applyCompDTO.setUsername((String)objects[7]);
+            applyCompDTO.setStatement((String)objects[8]);
+            applyCompDTOList.add(applyCompDTO);
+        }
+
+        return applyCompDTOList;
     }
 }

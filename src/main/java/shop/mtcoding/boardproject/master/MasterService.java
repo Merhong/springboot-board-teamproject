@@ -208,12 +208,6 @@ public class MasterService {
             List<User> compUserList = new ArrayList<>();
             // 유저리스트 크기만큼 반복
             for (User user : userList) {
-                if (user.getRole() == 1) {
-                    normalUserList.add(user);
-                } // 개인
-                if (user.getRole() == 2) {
-                    compUserList.add(user);
-                } // 기업
                 // 회원유형이 1일땐 개인유저리스트에 담고
                 if (user.getRole() == 1) {
                     normalUserList.add(user);

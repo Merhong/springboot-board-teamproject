@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import shop.mtcoding.boardproject._core.error.ex.MyApiException;
 import shop.mtcoding.boardproject._core.util.ApiUtil;
+import shop.mtcoding.boardproject._core.util.PageSize;
 import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.bookmark.BookmarkService;
 import shop.mtcoding.boardproject.master.MasterResponse.MasterListDTO;
@@ -58,6 +59,9 @@ public class MasterController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PageSize pageSize;
+
     @GetMapping("/search")
     public String search(@RequestParam(defaultValue = "")String keyword, 
             @RequestParam(name = "pageSearchAll", defaultValue = "0") Integer page,
@@ -74,6 +78,9 @@ public class MasterController {
 
         MasterResponse.SearchDTO searchDTO = masterService.전체검색(keyword);
 
+        // System.out.println("테스트1 : "+searchDTO.getCompUserList().size());
+        // System.out.println("테스트1 : "+searchDTO.getNormalUserList().size());
+
         if(searchDTO == null){
             return "/master/search";
         }
@@ -82,7 +89,7 @@ public class MasterController {
 
 
         
-        final int PAGESIZE=4;
+        final int PAGESIZE = pageSize.getSearchAllPageSize();
         
         int compUserListSize=0;
         if(searchDTO.getCompUserList() != null){
@@ -192,9 +199,29 @@ public class MasterController {
 
     // 코드 테이블 스킬 추가 POST
     @PostMapping("/master/skill")
-    public @ResponseBody String admin(String skillName) {
+    public @ResponseBody String admilSkill(String skillName) {
         masterService.스킬추가(skillName);
         return Script.href("/","스킬 추가 : "+skillName);
+    }
+
+    // 관리자용 메인화면 한페이지당 개수
+    @PostMapping("/master/mainPageCount")
+    public @ResponseBody String adminMainPageCount(int mainPageCount) {
+        if(mainPageCount<1){
+            return Script.back("1이상의 숫자만");
+        }
+        pageSize.setMainPageSize(mainPageCount);
+        return Script.href("/","메인화면 한페이지당 "+mainPageCount);
+    }
+
+    // 관리자용 메인화면 한페이지당 개수
+    @PostMapping("/master/searchAllPageCount")
+    public @ResponseBody String adminSearchAllPageCount(int searchAllPageCount) {
+        if(searchAllPageCount<1){
+            return Script.back("1이상의 숫자만");
+        }
+        pageSize.setSearchAllPageSize(searchAllPageCount);
+        return Script.href("/","통합검색 한페이지당 "+searchAllPageCount);
     }
 
     // 인덱스(홈) 페이지
@@ -228,7 +255,10 @@ public class MasterController {
         // System.out.println("테스트 전체size:"+postingList.size());
         // System.out.println("테스트 page:"+page);
 
-        final int PAGESIZE=6; // 한페이지에 보여줄 공고 개수
+        final int PAGESIZE=pageSize.getMainPageSize(); // 한페이지에 보여줄 공고 개수
+        if( PAGESIZE%3==0 && PAGESIZE%4!=0 ){
+            request.setAttribute("col3", PAGESIZE);
+        }
 
         int totalCount = postingList.size(); // 모든 공고 합친 개수
 

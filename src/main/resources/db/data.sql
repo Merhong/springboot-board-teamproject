@@ -33,15 +33,15 @@ values ('이순신', 'lee@nate.com', '1234', '01033335555', 'basic.jpg', '서울
 
 -- Posting(공고) 테이블
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
-values (5, '임원구함', '8년 이상 모집', '서울', '백엔드', '2023-10-1', '8년', '학력무관');
+values (5, '임원구함', '내용1내용1내용1내용1내용1내용1내용1내용1', '서울', '백엔드', '2023-10-1', '8년', '학력무관');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
-values (7, '신입모집합니다', '경력 3년 이상', '대구', '풀스택', '2024-01-2', '3년', '대학교 졸업');
+values (7, '신입모집합니다', '내용2내용2내용2내용2내용2', '대구', '풀스택', '2023-9-8', '3년', '대학교 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
-values (6, '배민신입구함', '경력 무관', '부산', '백엔드', '2023-09-11', '1년', '석사 졸업');
+values (6, '배민신입구함', '내용3내용3내용3내용3', '부산', '백엔드', '2023-09-11', '1년', '석사 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
-values (7, '경력직 모집', '경력 7년 이상', '대구', '빅데이터', '2023-12-21', '7년', '학력무관');
+values (7, '경력직 모집', '내용4내용4내용4내용4내용4', '대구', '빅데이터', '2023-12-21', '7년', '학력무관');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
-values (5, '이직하실분', '경력 무관', '서울', '프론트엔드', '2023-09-12', '경력무관', '대학교 졸업');
+values (5, '이직하실분', '내용5내용5내용5내용5내용5내용5', '서울', '프론트엔드', '2023-09-12', '경력무관', '대학교 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
 values (5, '경력직구함', '내용6', '서울', '안드로이드', '2023-9-4', '경력무관', '석사 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
@@ -58,6 +58,8 @@ insert into posting_tb(user_id, title, desc, region, position, expiry_date, care
 values (8, '구인홍보', '내용12', '서울', '프론트엔드', '2023-09-14', '8년', '대학 졸업');
 insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
 values (6, '이직자구함', '내용13', '서울', '백엔드', '2023-09-22', '6년', '학력무관');
+insert into posting_tb(user_id, title, desc, region, position, expiry_date, career, education)
+values (9, '삼성모집', '내용14', '서울', '백엔드', '2023-12-22', '5년', '학력무관');
 
 
 -- Resume(이력서) 테이블
@@ -198,6 +200,10 @@ insert into postingSkill_tb(skill_id, posting_id)
 values (3, 13);
 insert into postingSkill_tb(skill_id, posting_id)
 values (6, 13);
+insert into postingSkill_tb(skill_id, posting_id)
+values (1, 14);
+insert into postingSkill_tb(skill_id, posting_id)
+values (4, 14);
 
 
 -- Apply 테이블 (중간 테이블)
