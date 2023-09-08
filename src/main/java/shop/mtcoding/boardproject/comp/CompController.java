@@ -101,8 +101,8 @@ public class CompController {
     }
 
     // 기업 공고 등록 페이지
-    @GetMapping("/comp/posting/saveForm")
-    public String saveForm(HttpServletRequest request) {
+    @GetMapping("/comp/postingSaveForm")
+    public String postingSaveForm(HttpServletRequest request) {
         // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         // 세션이 없다면 로그인 화면으로 이동시킴
@@ -118,7 +118,7 @@ public class CompController {
         // request에 리스트를 담는다.
         request.setAttribute("skillList", skillList);
         // 공고 등록 화면을 보여준다.
-        return "comp/saveForm";
+        return "comp/postingSaveForm";
     }
 
     // 공고 상세보기 페이지
@@ -298,8 +298,8 @@ public class CompController {
     }
 
     // 기업 인재찾기 페이지
-    @GetMapping("/comp/recommend")
-    public String recommend(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
+    @GetMapping("/comp/recommendForm")
+    public String recommendForm(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
         // sessionAllUser(모든 유저가 가지고 있는 속성)을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         if (sessionAllUser == null) {
@@ -331,7 +331,7 @@ public class CompController {
         request.setAttribute("userList", userList);
 
         // 인재찾기 페이지를 보여준다.
-        return "comp/recommend";
+        return "comp/recommendForm";
     }
 
     // TODO 이력서는 쓴 본인과 기업만 볼 수 있게 막아야 함.
