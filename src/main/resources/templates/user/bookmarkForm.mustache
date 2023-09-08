@@ -3,87 +3,113 @@
 <!-- 16번 개인북마크 화면 -->
 
 <div class="d-flex mb-3">
-  <div class="col-2"></div>
+	<div class="col-2"></div>
 
-  <div class="class col-8 h-auto d-flex border border-info">
-    <div class="bg-info col-2">
-      <div class="m-2"></div>
-      <a href="/user/updateForm" class="w-100 btn btn-info">마이 페이지</a>
-      <div class="m-2"></div>
-      <a href="/user/resumeForm" class="w-100 btn btn-info">이력서 등록</a>
-      <div class="m-2"></div>
-      <a href="/user/resumeManage" class="w-100 btn btn-info">이력서 관리</a>
-      <div class="m-2"></div>
-      <a href="/user/applyList" class="w-100 btn btn-info">지원내역</a>
-      <div class="m-2"></div>
-      <a href="/user/bookmarkForm" class="w-100 btn btn-info">북마크</a>
-      <div class="m-2"></div>
-      <a href="/user/recommendForm" class="w-100 btn btn-info">기업추천</a>
-      <div class="m-2"></div>
-    </div>
+	<div class="class col-8 h-auto d-flex border border-info">
+		<div class="bg-info col-2">
+			<div class="m-2"></div>
+			<a href="/user/updateForm" class="w-100 btn btn-info">마이 페이지</a>
+			<div class="m-2"></div>
+			<a href="/user/resumeForm" class="w-100 btn btn-info">이력서 등록</a>
+			<div class="m-2"></div>
+			<a href="/user/resumeManage" class="w-100 btn btn-info">이력서 관리</a>
+			<div class="m-2"></div>
+			<a href="/user/applyList" class="w-100 btn btn-info">지원내역</a>
+			<div class="m-2"></div>
+			<a href="/user/bookmarkForm" class="w-100 btn btn-info">북마크</a>
+			<div class="m-2"></div>
+			<a href="/user/recommendForm" class="w-100 btn btn-info">기업추천</a>
+			<div class="m-2"></div>
+		</div>
 
-    <div class="main col-10">
-      <h1 class="text-center">북마크</h1>
-      {{#postingList }}
-      <div class="d-flex border border-info m-3 p-2">
-        <div class="col-10">
-          <a href="/comp/posting/{{ id }}"><img src="/images/{{user.photo}}" alt="{{ user.compname }}(
-				{{ title }}/{{ position }})" class="img-thumbnail" width="100px" height="60px" />{{ user.compname }}(
-            {{ title }}/{{ position }})</a>
-        </div>
-        <div class="mt-2 mb-2">
-          <button type="button" action="/user/bookmarkForm/delete" method="post" class="btn btn-danger delete-button"
-            data-posting-id="{{id}}">
-            삭제하기
-          </button>
-        </div>
-      </div>
-      {{/postingList}}
+		<div class="main col-10">
+			<h1 class="text-center">북마크</h1>
+			{{#postingList }}
+				<div class="d-flex border border-info m-3 p-2">
+					<div class="col-10">
+						<div class="clickable"
+						     href="/comp/posting/{{ id }}"
+						     data-type="posting"
+						     data-id="{{id}}">
+							<img src="/images/{{user.photo}}"
+							     alt="{{ user.compname }}({{ title }}/{{ position }})"
+							     class="img-thumbnail clickable"
+							     width="100px" height="60px"
+							     data-type="posting"
+							     data-id="{{id}}"
+							/>
+							{{ user.compname }}({{ title }}/{{ position }})
+						</div>
+					</div>
+					<div class="mt-2 mb-2">
+						<button type="button" action="/user/bookmarkForm/delete" method="post"
+						        class="btn btn-danger delete-button"
+						        data-posting-id="{{id}}">
+							삭제하기
+						</button>
+					</div>
+				</div>
+			{{/postingList}}
 
-      <div class="col-2"></div>
-    </div>
-  </div>
+			<div class="col-2"></div>
+		</div>
+	</div>
 </div>
 <script>
-  // 삭제 버튼 클릭 이벤트 핸들러
-  document.addEventListener("click", function (e) {
-    if (e.target && e.target.classList.contains("delete-button")) {
-      var postingId = e.target.getAttribute("data-posting-id"); // 해당 공고의 ID를 가져옴
+	// 클릭 이벤트 핸들러 함수
+	function handleItemClick(event) {
+		const targetType = event.target.getAttribute('data-type');
+		const itemId = event.target.getAttribute('data-id');
+		if (targetType === 'posting') {
+			window.location.href = '/comp/posting/' + itemId;
+		}
+	}
 
-      if (confirm("삭제하시겠습니까?")) {
-        // 사용자가 확인을 클릭한 경우
-        // 해당 아이템을 삭제하는 코드 추가
-        fetch("/user/bookmarkForm/delete", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: "postingId=" + postingId, // 공고 ID를 서버로 보냄
-        })
-          .then(function (response) {
-            if (response.ok) {
-              // 삭제 성공
-              alert("공고가 삭제되었습니다.");
+	// 모든 클릭 가능한 항목에 클릭 이벤트 핸들러 등록
+	const clickableItems = document.querySelectorAll('.clickable');
+	clickableItems.forEach((item) => {
+		item.addEventListener('click', handleItemClick);
+	});
 
-              // 삭제된 아이템을 화면에서 제거
-              var itemToRemove = e.target.closest(".d-flex.border.border-info.m-3.p-2");
-              if (itemToRemove) {
-                itemToRemove.remove(); // 해당 아이템을 삭제
-              }
-            } else {
-              // 삭제 실패
-              alert("공고 삭제에 실패했습니다.");
-            }
-          })
-          .catch(function (error) {
-            console.error("Error:", error);
-          });
-      } else {
-        // 사용자가 취소를 클릭한 경우
-        // 아무 동작하지 않음
-      }
-    }
-  });
+	// 삭제 버튼 클릭 이벤트 핸들러
+	document.addEventListener("click", function (e) {
+		if (e.target && e.target.classList.contains("delete-button")) {
+			var postingId = e.target.getAttribute("data-posting-id"); // 해당 공고의 ID를 가져옴
+
+			if (confirm("삭제하시겠습니까?")) {
+				// 사용자가 확인을 클릭한 경우
+				// 해당 아이템을 삭제하는 코드 추가
+				fetch("/user/bookmarkForm/delete", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded",
+					},
+					body: "postingId=" + postingId, // 공고 ID를 서버로 보냄
+				})
+					.then(function (response) {
+						if (response.ok) {
+							// 삭제 성공
+							alert("공고가 삭제되었습니다.");
+
+							// 삭제된 아이템을 화면에서 제거
+							var itemToRemove = e.target.closest(".d-flex.border.border-info.m-3.p-2");
+							if (itemToRemove) {
+								itemToRemove.remove(); // 해당 아이템을 삭제
+							}
+						} else {
+							// 삭제 실패
+							alert("공고 삭제에 실패했습니다.");
+						}
+					})
+					.catch(function (error) {
+						console.error("Error:", error);
+					});
+			} else {
+				// 사용자가 취소를 클릭한 경우
+				// 아무 동작하지 않음
+			}
+		}
+	});
 </script>
 
 {{> layout/footer}}

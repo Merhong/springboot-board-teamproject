@@ -122,7 +122,7 @@ public class UserController {
         User user = userService.회원수정(updateDTO, sessionUser.getId());
         session.setAttribute("sessionUser", user);
 
-        return "redirect:/";
+        return "redirect:/user/updateForm";
     }
 
     // 12_마이페이지 화면
