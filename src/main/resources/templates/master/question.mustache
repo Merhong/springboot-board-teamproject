@@ -66,22 +66,6 @@
       </div>
       <div  class="mb-2"><b>답변</b></div>
       <div id="list">
-      <input
-        type="text"
-        class="form-control m-1"
-        placeholder="Enter title"
-        name="title"
-        value="탈퇴 하세요"
-        disabled
-      />
-      <input
-        type="text"
-        class="form-control m-1"
-        placeholder="Enter title"
-        name="title"
-        value="집에 가세요"
-        disabled
-      /> 
     </div>
       {{! <input
         type="text"
@@ -92,7 +76,17 @@
         disabled
       /> 
     }}
-      
+
+	    <input
+		    id="masterId"
+		    type="hidden"
+		    class="form-control"
+		    placeholder="Enter email"
+		    name="title"
+		    value="{{ master.id  }}"
+		    disabled
+		    style="display: none;"
+	    />
       {{#admin}}
     <input
     id="userId"
@@ -113,8 +107,6 @@
       />
       <div>
         <button
-          id="masterId"
-          value="{{master.id}}"
           type="submit"
           class="btn btn-info form-control m-1"
           style="box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3)"
