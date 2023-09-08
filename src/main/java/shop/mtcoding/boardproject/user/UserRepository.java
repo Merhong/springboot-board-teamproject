@@ -33,4 +33,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query(value = "update user_tb set message = :boolean where id = :id", nativeQuery = true)
     Integer message(@Param("boolean") Boolean message, @Param("id") Integer id);
+
+    @Modifying
+    @Query(value = "update user_tb set state_change = :boolean where username = :username", nativeQuery = true)
+    Integer stateChange(@Param("boolean") Boolean message, @Param("username") String username);
 }

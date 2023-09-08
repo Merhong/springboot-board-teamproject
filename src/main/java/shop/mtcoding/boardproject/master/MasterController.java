@@ -85,7 +85,7 @@ public class MasterController {
         searchDTO.setNormalUserList(new ArrayList<User>()); // 일반유저 검색은 제외하기로 함
 
         final int PAGESIZE = pageSize.getSearchAllPageSize();
-        
+
         int compUserListSize = 0;
         if (searchDTO.getCompUserList() != null) {
             compUserListSize = searchDTO.getCompUserList().size();
@@ -204,21 +204,21 @@ public class MasterController {
     // 관리자용 메인화면 한페이지당 개수
     @PostMapping("/master/mainPageCount")
     public @ResponseBody String adminMainPageCount(int mainPageCount) {
-        if(mainPageCount<1){
+        if (mainPageCount < 1) {
             return Script.back("1이상의 숫자만");
         }
         pageSize.setMainPageSize(mainPageCount);
-        return Script.href("/","메인화면 한페이지당 "+mainPageCount);
+        return Script.href("/", "메인화면 한페이지당 " + mainPageCount);
     }
 
     // 관리자용 메인화면 한페이지당 개수
     @PostMapping("/master/searchAllPageCount")
     public @ResponseBody String adminSearchAllPageCount(int searchAllPageCount) {
-        if(searchAllPageCount<1){
+        if (searchAllPageCount < 1) {
             return Script.back("1이상의 숫자만");
         }
         pageSize.setSearchAllPageSize(searchAllPageCount);
-        return Script.href("/","통합검색 한페이지당 "+searchAllPageCount);
+        return Script.href("/", "통합검색 한페이지당 " + searchAllPageCount);
     }
 
     // 인덱스(홈) 페이지
@@ -251,8 +251,8 @@ public class MasterController {
         // System.out.println("테스트 전체size:"+postingList.size());
         // System.out.println("테스트 page:"+page);
 
-        final int PAGESIZE=pageSize.getMainPageSize(); // 한페이지에 보여줄 공고 개수
-        if( PAGESIZE%3==0 && PAGESIZE%4!=0 ){
+        final int PAGESIZE = pageSize.getMainPageSize(); // 한페이지에 보여줄 공고 개수
+        if (PAGESIZE % 3 == 0 && PAGESIZE % 4 != 0) {
             request.setAttribute("col3", PAGESIZE);
         }
 
@@ -408,7 +408,7 @@ public class MasterController {
         }
         List<Reply> replyList = replyServiece.문의넘버로찾기(id);
         System.out.println("테스트 getUserId : " + replyDTO.getUserId());
-        Integer sucuess = userService.받은메시지조회(true, replyDTO.getUserId());
+        Integer sucuess = userService.받은메시지조회변경(true, replyDTO.getUserId());
         if (sucuess == 1) {
             return new ApiUtil<List<Reply>>(true, replyList);
         }

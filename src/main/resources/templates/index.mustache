@@ -309,7 +309,7 @@
         </div>
       </div>
       <div class="m-2 mb-3">
-        <div class="btn btn-success w-100" style="background-color: " onclick="searchAll()">검색하기</div>
+        <div class="btn btn-success w-100" onclick="searchAll()">검색하기</div>
       </div>
 
       <textarea
@@ -347,94 +347,468 @@
 
     <div class="mb-4 d-flex flex-wrap">
       {{#postingList}}
-      {{#col3}}<div class="col-lg-4 col-md-4 col-sm-6">{{/col3}}
-      {{^col3}}<div class="col-lg-3 col-md-4 col-sm-6">{{/col3}}
-        <div class="border border-info m-2 ps-2 pe-2 pt-1">
-          <h4 class="text-center fw-bold">{{ user.compname }}</h4>
-          {{#user.photo}}<a
-            href="/comp/posting/{{ id }}"
-            class="text-black text-decoration-none"
-            ><img
-              src="../../../images/{{ user.photo }}"
-              class="img-fluid d-block m-auto"
-              style="height: 120px"
-            />{{/user.photo}}
-            {{^user.photo}}<a
+      {{#col3}}
+      <div class="col-lg-4 col-md-4 col-sm-6">
+        {{/col3}} {{^col3}}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          {{/col3}}
+          <div class="border border-info m-2 ps-2 pe-2 pt-1">
+            <h4 class="text-center fw-bold">{{ user.compname }}</h4>
+            {{#user.photo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }}<a
               href="/comp/posting/{{ id }}"
               class="text-black text-decoration-none"
               ><img
-                src="../../../images/no_logo.png"
+                src="../../../images/{{ user.photo }}"
                 class="img-fluid d-block m-auto"
                 style="height: 120px"
               />{{/user.photo}}
-              <h5 class="mt-1 fw-bold">{{ title }}</h5>
-              <div class="mb-1 fst-italic">{{ position }}</div>
-              <div class="mb-1">
-                {{#postingSkill}}<span class="badge bg-primary me-1">{{
-                  skill.skillname
-                }}</span
-                >{{/postingSkill}}
-              </div>
-              <div>
-                {{#career}}<span class="badge bg-success">{{ career }}</span
-                >{{/career}}
-                {{#education}}<span class="badge bg-success">{{ education }}</span
-                >{{/education}}
-                <span class="badge bg-success">{{ region }}</span>
-              </div>
-            </a>
-          </a>
-          <div class="d-flex justify-content-between">
-            {{^sessionComp.compname}}<button
-              type="button"
-              class="border-0 bg-white mt-1 like-button"
-              id="posting{{ id }}"
-              onclick="bookmarkChange(`{{ id }}`)"
-            >
-              <h3>🤍</h3></button
-            >{{/sessionComp.compname}}
-            <!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
-            <!-- 기업 유저는 북마크 못하게 -->
-            {{#sessionComp.compname}}<button type="button" class="invisible"><h3>🤍</h3></button
-            >{{/sessionComp.compname}}
+              {{^user.photo
 
-            <span class="expiryDate fw-bold align-self-center me-2"
-              >{{#expiryDate}}{{ expiryDate }}{{/expiryDate}}</span
-            >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              }}<a
+                href="/comp/posting/{{ id }}"
+                class="text-black text-decoration-none"
+                ><img
+                  src="../../../images/no_logo.png"
+                  class="img-fluid d-block m-auto"
+                  style="height: 120px"
+                />{{/user.photo}}
+                <h5 class="mt-1 fw-bold">{{ title }}</h5>
+                <div class="mb-1 fst-italic">{{ position }}</div>
+                <div class="mb-1">
+                  {{#postingSkill
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  }}<span class="badge bg-primary me-1">{{
+                    skill.skillname
+                  }}</span
+                  >{{/postingSkill}}
+                </div>
+                <div>
+                  {{#career}}<span class="badge bg-success">{{ career }}</span
+                  >{{/career}}
+                  {{#education
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  }}<span class="badge bg-success">{{ education }}</span
+                  >{{/education}}
+                  <span class="badge bg-success">{{ region }}</span>
+                </div>
+              </a>
+            </a>
+            <div class="d-flex justify-content-between">
+              {{^sessionComp.compname
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              }}<button
+                type="button"
+                class="border-0 bg-white mt-1 like-button"
+                id="posting{{ id }}"
+                onclick="bookmarkChange(`{{ id }}`)"
+              >
+                <h3>🤍</h3></button
+              >{{/sessionComp.compname}}
+              <!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
+              <!-- 기업 유저는 북마크 못하게 -->
+              {{#sessionComp.compname
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              }}<button type="button" class="invisible"><h3>🤍</h3></button
+              >{{/sessionComp.compname}}
+
+              <span class="expiryDate fw-bold align-self-center me-2"
+                >{{#expiryDate}}{{ expiryDate }}{{/expiryDate}}</span
+              >
+            </div>
           </div>
         </div>
+        {{/postingList}}
       </div>
-      {{/postingList}}
+    </div>
+
+    <div class="col-auto"></div>
+  </div>
+
+  <div id="customModal" class="modal" onclick="closeModal()">
+    <div class="d-flex modal-content">
+      <div class="d-flex justify-content-between align-content-center">
+        <div id="print" class="d-inline text align-self-center">
+          모달 내용을 여기에 입력하세요.
+        </div>
+        <div class="align-self-end">
+          <input
+            id="applyPage"
+            type="hidden"
+            class="btn btn-sm btn-danger p-0 ps-1 pe-1 failButton"
+            value="보러가기"
+            style="
+              display: flex;
+              align-items: end;
+              width: 50px;
+              height: 20px;
+              font-size: 5px;
+            "
+            onclick="applyPage()"
+          />
+        </div>
+        <div class="close d-inline" onclick="closeModal()">X</div>
+      </div>
     </div>
   </div>
 
-  <div class="col-auto"></div>
+  <div id="modalBackdrop" class="modal-backdrop"></div>
+
+  <input type="hidden" value="{{ json }}" name="json" id="json" />
+  <input
+    type="hidden"
+    value="{{ position }}"
+    name="positionSet"
+    id="positionSet"
+  />
+  <input type="hidden" value="{{ region }}" name="regionSet" id="regionSet" />
 </div>
-
-<div id="customModal" class="modal" onclick="closeModal()">
-  <div class="d-flex modal-content">
-    <div class="d-flex justify-content-between align-content-center">
-      <div id="print" class="d-inline text align-self-center">
-        모달 내용을 여기에 입력하세요.
-      </div>
-      <div class="close d-inline" onclick="closeModal()">X</div>
-    </div>
-  </div>
-</div>
-
-<div id="modalBackdrop" class="modal-backdrop"></div>
-
-<input type="hidden" value="{{ json }}" name="json" id="json" />
-<input
-  type="hidden"
-  value="{{ position }}"
-  name="positionSet"
-  id="positionSet"
-/>
-<input type="hidden" value="{{ region }}" name="regionSet" id="regionSet" />
 
 {{#sessionUser}}
 <input type="hidden" value="{{ sessionUser.id }}" name="userId" id="userId" />
+<input
+  type="hidden"
+  value="{{ sessionUser.username }}"
+  name="username"
+  id="username"
+/>
 
 <input
   type="hidden"
@@ -443,7 +817,15 @@
   id="message"
 />
 
+<input
+  type="hidden"
+  value="{{ sessionUser.stateChange }}"
+  name="stateChange"
+  id="stateChange"
+/>
+
 {{/sessionUser}}
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const likeButtons = document.querySelectorAll(".like-button");
@@ -779,7 +1161,9 @@
   function closeModal() {
     console.log("closeModal 실행");
     customModal.classList.remove("active");
+    document.querySelector("#applyPage").setAttribute("type", "hidden");
     customModal.style.display = "none";
+    messageCheckOut();
   }
 
   function closeBackdrop() {
@@ -794,23 +1178,73 @@
 
   async function messageCheckOut() {
     let userId = document.querySelector("#userId").value;
+    let username = document.querySelector("#username").value;
     console.log("userId : " + userId);
-    let response = await fetch(`/api/user/${userId}/ismessage`);
+    console.log("username : " + username);
+
+    let requestBody = {
+      userId: userId,
+      username: username,
+    };
+
+    let response = await fetch(`/api/user/ismessage`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
   }
+
+  // let content = document.querySelector("#reply").value;
+  //   let userId = document.querySelector("#userId").value;
+  //   console.log(content+"  "+ id+"  "+ userId);
+
+  //   let response = await fetch(`/api/master/${id}/saveReply`, {
+  //     method: "post",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(requestBody),
+  //   });
+
+  //   let result = await response.json();
+  //   console.log(result);
+
+  let string = "[알림] \n";
 
   function messageCheck() {
     let message;
     if (document.querySelector("#message")) {
       message = document.querySelector("#message").value;
+      stateChange = document.querySelector("#stateChange").value;
+      // message = document.querySelector("#message").value;
       console.log("메세지 체크 실행됨 message : " + message);
       if (message == "true") {
         console.log("모달 실행  message : " + message);
-        openModal("문의에 대한 답변이 달렸습니다.");
+        string += "\n 문의에 대한 답변이 달렸습니다.";
+        openModal(string);
+        string = "[알림] \n";
+        if (stateChange != "true") {
+          messageCheckOut();
+        }
+      }
+
+      if (stateChange == "true") {
+        console.log("모달 실행  stateChange : " + stateChange);
+        string += "\n 지원결과가 발표되었습니다!";
+        document.querySelector("#applyPage").setAttribute("type", "button");
+        openModal(string);
         messageCheckOut();
       }
     }
   }
   messageCheck();
+
+  function applyPage() {
+    messageCheckOut();
+    location.href = "/user/applyList";
+  }
 </script>
 
 {{> layout/footer}}
