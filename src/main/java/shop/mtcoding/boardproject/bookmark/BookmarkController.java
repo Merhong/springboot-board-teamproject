@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.*;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
@@ -29,7 +28,7 @@ public class BookmarkController {
     private HttpSession session;
 
     // 개인북마크 화면
-    @GetMapping("/user/bookmarkForm")
+    @GetMapping("/user/bookmark/form")
     public String userBookMarkForm(HttpServletRequest request,
             BookmarkResponse.UserBookmarkDTO bookmarkDTO) {
 
@@ -42,11 +41,11 @@ public class BookmarkController {
         List<Posting> postingList = bookmarkService.유저북마크전체(user.getId());
         request.setAttribute("postingList", postingList);
 
-        return "/user/bookmarkForm";
+        return "/user/bookmark/form";
     }
 
     // 기업북마크 화면
-    @GetMapping("/comp/{compId}/bookmarkList")
+    @GetMapping("/comp/{compId}/bookmark/list")
     public String bookmarkList(@PathVariable Integer compId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
@@ -76,11 +75,11 @@ public class BookmarkController {
         List<Resume> resumeList = bookmarkService.회사별북마크찾기(compId);
         request.setAttribute("resumeList", resumeList);
 
-        return "comp/bookmarkList";
+        return "comp/bookmark/list";
     }
 
     // 기업 이력서 북마크 삭제 POST
-    @PostMapping("/comp/bookmarkList/delete")
+    @PostMapping("/comp/bookmark/list/delete")
     public String bookmarkDelete(Integer hiddenResumeId) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
@@ -93,11 +92,11 @@ public class BookmarkController {
         }
 
         bookmarkService.회사별북마크삭제(sessionComp.getUserId(), hiddenResumeId);
-        return "redirect:/comp/" + sessionComp.getUserId() + "/bookmarkList";
+        return "redirect:/comp/" + sessionComp.getUserId() + "/bookmark/list";
     }
 
     // 인재찾기 > 모두 북마크 POST
-    @PostMapping("/comp/bookmarkList/saveAll")
+    @PostMapping("/comp/bookmark/list/saveAll")
     public String bookmarkSaveALL(@RequestParam(defaultValue = "") List<Integer> ResumeIdList) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         CompRequest.SessionCompDTO sessionComp = (CompRequest.SessionCompDTO) session.getAttribute("sessionComp");
@@ -111,11 +110,11 @@ public class BookmarkController {
 
         bookmarkService.회사북마크추가(sessionComp.getUserId(), ResumeIdList);
 
-        return "redirect:/comp/" + sessionComp.getUserId() + "/bookmarkList";
+        return "redirect:/comp/" + sessionComp.getUserId() + "/bookmark/list";
     }
 
     // 공고관리 > 지원자보기 > 이력서 > 북마크 하기 POST
-    @PostMapping("/comp/bookmarkList/save")
+    @PostMapping("/comp/bookmark/list/save")
     public String bookmarkSave(@RequestParam(defaultValue = "") Integer ResumeId, String bookmark2) {
         System.out.println("테스트a:" + bookmark2);
 
@@ -142,7 +141,7 @@ public class BookmarkController {
 
 
     // 개인 공고 북마크하기 POST
-    @PostMapping("/user/bookmarkForm/save")
+    @PostMapping("/user/bookmark/form/save")
     public ResponseEntity<String> userbookmarkSave(@RequestParam(defaultValue = "") Integer postingId) {
         Integer userId = ((CompRequest.SessionCompDTO) session.getAttribute("sessionComp")).getUserId(); // 현재 로그인한 사용자의
         // ID를 가져옴
@@ -156,7 +155,7 @@ public class BookmarkController {
     }
 
 
-    @PostMapping("/user/bookmarkForm/delete")
+    @PostMapping("/user/bookmark/form/delete")
     public ResponseEntity<String> deleteUserBookmark(@RequestParam Integer postingId) {
         Integer userId = ((User) session.getAttribute("sessionUser")).getId(); // 현재 로그인한 사용자의
                                                                                                          // ID를 가져옴

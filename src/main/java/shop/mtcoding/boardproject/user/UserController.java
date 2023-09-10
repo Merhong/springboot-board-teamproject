@@ -29,13 +29,10 @@ import shop.mtcoding.boardproject.skill.PostingSkill;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -64,7 +61,7 @@ public class UserController {
     private HttpSession session;
 
     // 17_개인기업추천 화면
-    @GetMapping("/user/recommendForm")
+    @GetMapping("/user/recommend/form")
     public String userRecommendForm(
             @RequestParam(defaultValue = "all") List<String> skillList,
             @RequestParam(defaultValue = "all") String position,
@@ -109,7 +106,7 @@ public class UserController {
         // compInfoList를 컨트롤러에서 뷰로 전달
         request.setAttribute("compInfoList", compInfoList);
 
-        return "user/recommendForm";
+        return "user/recommend/form";
     }
 
     // 12번 수정하기 버튼 POST
@@ -162,7 +159,7 @@ public class UserController {
     }
 
     // 개인_지원하기 페이지
-    @GetMapping("/user/applyForm/{postingId}")
+    @GetMapping("/user/apply/form/{postingId}")
     public String userApplyForm(Model model, @PathVariable("postingId") Integer postingId) {
         Posting posting = compService.공고찾기(postingId);
 
@@ -174,7 +171,7 @@ public class UserController {
         model.addAttribute("user", user); // 유저 아이디를 모델에 추가
         model.addAttribute("posting", posting); // 공고를 모델에 추가
 
-        return "user/applyForm";
+        return "user/apply/form";
     }
 
     // 5_로그인 화면
@@ -284,7 +281,7 @@ public class UserController {
     }
 
     // 개인 이력서를 보고 기업에서 입사제안 하는 페이지
-    @GetMapping("/user/resume/{resumeId}/offerList")
+    @GetMapping("/user/resume/{resumeId}/offer/list")
     public String offerListUser(@PathVariable Integer resumeId, HttpServletRequest request) {
         // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -301,7 +298,7 @@ public class UserController {
         // request에 추천리스트를 담는다.
         request.setAttribute("recommendList", recommendList);
         // 입사 제안 보기 페이지로 이동
-        return "user/offerList";
+        return "user/offer/list";
     }
 
     // 입사제안에 대한 거절 POST
@@ -316,7 +313,7 @@ public class UserController {
         // 세션의id와 추천id를 비교해서 거절
         Integer resumeId = recommendService.오퍼거절(recommendId, sessionAllUser.getId());
         // 입사제안 화면으로 리다이렉트
-        return "redirect:/user/resume/" + resumeId + "/offerList";
+        return "redirect:/user/resume/" + resumeId + "/offer/list";
     }
 
     // 입사제안에 대한 수락 POST
@@ -331,7 +328,7 @@ public class UserController {
         // 세션의id와 추천id를 비교해서 수락
         Integer resumeId = recommendService.오퍼수락(recommendId, sessionAllUser.getId());
         // 입사제안 화면으로 리다이렉트
-        return "redirect:/user/resume/" + resumeId + "/offerList";
+        return "redirect:/user/resume/" + resumeId + "/offer/list";
     }
 
     // // 기업추천 검색 POST
@@ -382,6 +379,6 @@ public class UserController {
         String username = stateDTO.getUsername();
         userService.지원상태변경(true, username);
         System.out.println("username : " + username);
-        return "redirect:/user/resume/offerList";
+        return "redirect:/user/offer/list";
     }
 }

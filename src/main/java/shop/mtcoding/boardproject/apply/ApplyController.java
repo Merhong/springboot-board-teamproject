@@ -19,7 +19,7 @@ public class ApplyController {
     private ApplyService applyservice;
 
     // 15_개인지원내역 화면
-    @GetMapping("/user/applyList")
+    @GetMapping("/user/apply/list")
     public String userApplyList(HttpServletRequest request) {
         User user = (User) session.getAttribute("sessionUser");
 
@@ -30,6 +30,6 @@ public class ApplyController {
 
         request.setAttribute("applyList", applyList);
 
-        return "user/applyList";
+        return "user/apply/list";
     }
 }

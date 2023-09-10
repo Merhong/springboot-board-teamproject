@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject.comp.CompRequest;
@@ -49,7 +48,7 @@ public class ResumeController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser.getId().equals(resume.getUser().getId())) {
             resumeService.이력서삭제(resumeId);
-            return "redirect:/user/resumeManage";
+            return "redirect:/user/resume/manage";
         }
         // 2-2. id가 다르다면, 예외처리
         throw new MyException("권한이 없습니다.");
@@ -77,7 +76,7 @@ public class ResumeController {
     }
 
     // 이력서 수정 화면
-    @GetMapping("/user/resumeUpdateForm/{resumeId}")
+    @GetMapping("/user/resume/updateForm/{resumeId}")
     public String userResumeUpdate(@PathVariable Integer resumeId, HttpServletRequest request) {
         // 1. 이력서를 찾는다.
         Resume resume = resumeService.이력서상세보기(resumeId);
@@ -92,11 +91,11 @@ public class ResumeController {
                 request.setAttribute("userSkillList", userSkillList);
                 request.setAttribute("skillList", skillList);
                 request.setAttribute("resume", resume);
-                return "/user/resumeUpdateForm";
+                return "/user/resume/updateForm";
             }
 
         }
-        return "redirect:/user/resumeManage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
+        return "redirect:/user/resume/manage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
     }
 
     // 개인이력서 상세보기
@@ -118,14 +117,14 @@ public class ResumeController {
                 request.setAttribute("userSkillList", userSkillList);
                 request.setAttribute("skillList", skillList);
                 request.setAttribute("resume", resume);
-                return "/user/resumeDetailForm";
+                return "/user/resume/detailForm";
             }
         }
-        return "redirect:/user/resumeManage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
+        return "redirect:/user/resume/manage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
     }
 
     // 14_개인이력서관리 화면
-    @GetMapping("/user/resumeManage")
+    @GetMapping("/user/resume/manage")
     public String userResumeManage(Model model) {
         // 1. 세션을 찾는다.
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -138,11 +137,11 @@ public class ResumeController {
         // 3. 이력서 리스트와 유저id를 모델에 추가하고 화면을 보여준다.
         model.addAttribute("resumes", resumes);
         model.addAttribute("userId", userId); // 유저 아이디를 모델에 추가
-        return "/user/resumeManage";
+        return "/user/resume/manage";
     }
 
     // 이력서 등록 버튼 POST
-    @PostMapping("/user/resumeSave")
+    @PostMapping("/user/resume/save")
     public String userResumeSave(ResumeRequest.ResumeDTO resumeDTO) {
         // 1. 세션유저를 찾는다.
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -160,7 +159,7 @@ public class ResumeController {
     }
 
     // 개인이력서등록 화면
-    @GetMapping("/user/resumeForm")
+    @GetMapping("/user/resume/form")
     public String userResumeForm(HttpServletRequest request) {
         // 1. 세션유저를 찾는다.
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -172,7 +171,7 @@ public class ResumeController {
         // 3. 찾은 리스트를 request에 담는다.
         request.setAttribute("skillList", skillList);
         // 4. 담은것을 화면에 보여준다.
-        return "user/resumeForm";
+        return "user/resume/form";
     }
 
 }

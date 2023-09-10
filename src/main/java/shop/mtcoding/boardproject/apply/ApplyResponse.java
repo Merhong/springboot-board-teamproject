@@ -13,7 +13,6 @@ public class ApplyResponse {
         private String resumeTitle;
         private String position;
         private String statement;
-
     }
 
 
@@ -21,27 +20,16 @@ public class ApplyResponse {
     @Setter
     @ToString
     public static class ApplyCompDTO {
-
         private Integer applyId;
-
         private Integer postingId;
-
         private Integer resumeId;
-        
         private String postingTitle;
-
         private String resumeTitle;
-       
         private String resumeCareer;
-       
         private String resumeGrade;
-
         private String username;
-
         private String statement;
-
     }
-
 
 
 }
