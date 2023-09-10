@@ -272,15 +272,22 @@ values (7, 11);
 
 
 -- Recommend 테이블 (중간 테이블)
-insert into recommend_tb(posting_id, resume_id, statement) values (1, 1, '대기');
-insert into recommend_tb(posting_id, resume_id, statement) values (1, 2, '대기');
+insert into recommend_tb(posting_id, resume_id, statement)
+values (1, 1, '대기');
+insert into recommend_tb(posting_id, resume_id, statement)
+values (1, 2, '대기');
 -- insert into recommend_tb(posting_id, resume_id, statement) values (1, 3, '수락'); 비공개이력서임
-insert into recommend_tb(posting_id, resume_id, statement) values (5, 4, '거절');
-insert into recommend_tb(posting_id, resume_id, statement) values (5, 5, '대기');
+insert into recommend_tb(posting_id, resume_id, statement)
+values (5, 4, '거절');
+insert into recommend_tb(posting_id, resume_id, statement)
+values (5, 5, '대기');
 -- insert into recommend_tb(posting_id, resume_id, statement) values (1, 6, '대기'); 비공개이력서임
-insert into recommend_tb(posting_id, resume_id, statement) values (4, 7, '대기');
-insert into recommend_tb(posting_id, resume_id, statement) values (1, 8, '수락');
-insert into recommend_tb(posting_id, resume_id, statement) values (5, 9, '대기');
+insert into recommend_tb(posting_id, resume_id, statement)
+values (4, 7, '대기');
+insert into recommend_tb(posting_id, resume_id, statement)
+values (1, 8, '수락');
+insert into recommend_tb(posting_id, resume_id, statement)
+values (5, 9, '대기');
 
 
 -- Master 테이블

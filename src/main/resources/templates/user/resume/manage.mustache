@@ -48,7 +48,8 @@
 								<a href="/user/resume/updateForm/{{id}}" class="btn btn-info btn-sm text-white">수정</a>
 							</div>
 							<div class="d-inline-block me-2">
-								<a href="/user/resume/{{id}}/offer/list" class="btn btn-warning btn-sm text-white">입사 제안 보기</a>
+								<a href="/user/resume/{{id}}/offer/list" class="btn btn-warning btn-sm text-white">입사 제안
+									보기</a>
 							</div>
 							<form action="/resume/delete/{{id}}" method="post" class="d-inline-block">
 								<button class="btn btn-danger btn-sm" type="submit">삭제</button>
@@ -64,19 +65,19 @@
 	</div>
 </div>
 
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			const titleLinks = document.querySelectorAll('.title-link');
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const titleLinks = document.querySelectorAll('.title-link');
 
-			titleLinks.forEach(function (titleLink) {
-				titleLink.addEventListener('click', function () {
-					const href = titleLink.getAttribute('data-href');
-					if (href) {
-						window.location.href = href;
-					}
-				});
+		titleLinks.forEach(function (titleLink) {
+			titleLink.addEventListener('click', function () {
+				const href = titleLink.getAttribute('data-href');
+				if (href) {
+					window.location.href = href;
+				}
 			});
 		});
-	</script>
+	});
+</script>
 
 {{> layout/footer}}

@@ -3,10 +3,7 @@ package shop.mtcoding.boardproject.apply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import shop.mtcoding.boardproject._core.error.ex.MyException;
-import shop.mtcoding.boardproject.recommend.RecommendResponse;
-import shop.mtcoding.boardproject.resume.ResumeRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +13,8 @@ import java.util.Optional;
 public class ApplyService {
 
     @Autowired
-    private ResumeRepository resumeRepository;
-
-    @Autowired
     private ApplyRepository applyRepository;
+
 
     public List<Apply> 유저지원내역전체(Integer id) {
         List<Apply> applyList = applyRepository.findApplyResumeByUserId(id);
@@ -43,13 +38,13 @@ public class ApplyService {
     public Apply 공고지원합격(Integer applyId, Integer compId) {
         Optional<Apply> applyOP = applyRepository.findById(applyId);
         if (applyOP.isPresent()) {
-          
+
             Apply apply = applyOP.get();
 
-            if(apply.getPosting().getUser().getId() != compId){
+            if (apply.getPosting().getUser().getId() != compId) {
                 throw new MyException("권한이 없습니다.");
             }
-            if(!(apply.getStatement().equals("대기"))){
+            if (!(apply.getStatement().equals("대기"))) {
                 throw new MyException("이미 답변했습니다.");
             }
 
@@ -66,10 +61,10 @@ public class ApplyService {
         if (applyOP.isPresent()) {
             Apply apply = applyOP.get();
 
-            if(apply.getPosting().getUser().getId() != compId){
+            if (apply.getPosting().getUser().getId() != compId) {
                 throw new MyException("권한이 없습니다.");
             }
-            if(!(apply.getStatement().equals("대기"))){
+            if (!(apply.getStatement().equals("대기"))) {
                 throw new MyException("이미 답변했습니다.");
             }
 
@@ -87,20 +82,20 @@ public class ApplyService {
     public List<ApplyResponse.ApplyCompDTO> 기업별모든지원찾기(Integer compId) {
 
         List<Object[]> applyList = applyRepository.findByCompId(compId);
-        
+
         List<ApplyResponse.ApplyCompDTO> applyCompDTOList = new ArrayList<>();
-        
+
         for (Object[] objects : applyList) {
             ApplyResponse.ApplyCompDTO applyCompDTO = new ApplyResponse.ApplyCompDTO();
-            applyCompDTO.setApplyId((Integer)objects[0]);
-            applyCompDTO.setPostingId((Integer)objects[1]);
-            applyCompDTO.setResumeId((Integer)objects[2]);
-            applyCompDTO.setPostingTitle((String)objects[3]);
-            applyCompDTO.setResumeTitle((String)objects[4]);
-            applyCompDTO.setResumeCareer((String)objects[5]);
-            applyCompDTO.setResumeGrade((String)objects[6]);
-            applyCompDTO.setUsername((String)objects[7]);
-            applyCompDTO.setStatement((String)objects[8]);
+            applyCompDTO.setApplyId((Integer) objects[0]);
+            applyCompDTO.setPostingId((Integer) objects[1]);
+            applyCompDTO.setResumeId((Integer) objects[2]);
+            applyCompDTO.setPostingTitle((String) objects[3]);
+            applyCompDTO.setResumeTitle((String) objects[4]);
+            applyCompDTO.setResumeCareer((String) objects[5]);
+            applyCompDTO.setResumeGrade((String) objects[6]);
+            applyCompDTO.setUsername((String) objects[7]);
+            applyCompDTO.setStatement((String) objects[8]);
             applyCompDTOList.add(applyCompDTO);
         }
 

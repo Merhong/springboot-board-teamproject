@@ -1,18 +1,7 @@
 package shop.mtcoding.boardproject.user;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.vo.MyPath;
 import shop.mtcoding.boardproject.posting.Posting;
@@ -20,6 +9,15 @@ import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.user.UserRequest.LoginDTO;
 import shop.mtcoding.boardproject.user.UserRequest.UpdateDTO;
+
+import javax.transaction.Transactional;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -33,6 +31,7 @@ public class UserService {
 
     @Autowired
     PostingQueryRepository postingQueryRepository;
+
 
     @Transactional
     public void 회원가입(UserRequest.JoinDTO joinDTO) {

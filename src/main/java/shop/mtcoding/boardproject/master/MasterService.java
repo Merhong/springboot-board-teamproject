@@ -1,25 +1,22 @@
 package shop.mtcoding.boardproject.master;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import shop.mtcoding.boardproject.master.MasterRequest.MasterDTO;
-import shop.mtcoding.boardproject.master.MasterRequest.ReplyDTO;
-import shop.mtcoding.boardproject.user.User;
-import shop.mtcoding.boardproject.user.UserRepository;
-import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.Posting;
+import shop.mtcoding.boardproject.posting.PostingQueryRepository;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 import shop.mtcoding.boardproject.skill.Skill;
 import shop.mtcoding.boardproject.skill.SkillRepository;
+import shop.mtcoding.boardproject.user.User;
+import shop.mtcoding.boardproject.user.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MasterService {
@@ -171,13 +168,13 @@ public class MasterService {
         masterRepository.save(master);
     }
 
-    
+
     public List<Master> 유저로문의찾기(Integer Id) {
         List<Master> masterList = masterRepository.findByUserId(Id);
         return masterList;
     }
-   
-  
+
+
     // 관리자용, 스킬테이블은 코드테이블이라 관리자가 스킬을 추가해야 하는데 그때 사용하는 메서드
     public void 스킬추가(String skillName) {
         Skill skill = new Skill();
@@ -185,7 +182,7 @@ public class MasterService {
         skillRepository.save(skill);
     }
 
-  
+
     // 검색 메서드
     public MasterResponse.SearchDTO 전체검색(String keyword) {
         // 이름을 검색해서 나온 값들을 담은 유저리스트

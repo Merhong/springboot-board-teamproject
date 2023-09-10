@@ -7,8 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
-import shop.mtcoding.boardproject.user.UserRequest;
-
 @Repository
 public class PostingQueryRepository {
 
@@ -28,15 +26,15 @@ public class PostingQueryRepository {
     // WHERE pt.position = '백엔드'
     // AND pt.region = '서울'
     public List<Posting> joinSkillPostingOneHitQuery(List<String> skillnameList, String position, String region) {
-        String sql = " SELECT DISTINCT pt.* "+
-        " FROM ( SELECT DISTINCT posting_tb.* "+
-        " FROM skill_tb "+
-        " JOIN postingskill_tb ON skill_tb.id = postingskill_tb.skill_id "+
-        " JOIN posting_tb ON postingskill_tb.posting_id = posting_tb.id ";
-        
+        String sql = " SELECT DISTINCT pt.* " +
+                " FROM ( SELECT DISTINCT posting_tb.* " +
+                " FROM skill_tb " +
+                " JOIN postingskill_tb ON skill_tb.id = postingskill_tb.skill_id " +
+                " JOIN posting_tb ON postingskill_tb.posting_id = posting_tb.id ";
+
         // 반복문을 통해 (스킬이름)체크박스에 체크된 횟수만큼 스킬이름을 or로 검색
-        if( !(skillnameList.get(0).equals("all")) ){
-                for (int i = 0; i < skillnameList.size(); i++) {
+        if (!(skillnameList.get(0).equals("all"))) {
+            for (int i = 0; i < skillnameList.size(); i++) {
                 if (i == 0) {
                     sql += " WHERE skill_tb.skillname = :skillname" + i + " ";
                 } else {
@@ -44,18 +42,18 @@ public class PostingQueryRepository {
                 }
             }
         }
-        
+
         sql += " ) pt ";
 
-        if(position.equals("all") && region.equals("all")){
+        if (position.equals("all") && region.equals("all")) {
             //
-        } else if( !(region.equals("all")) && position.equals("all") ){
+        } else if (!(region.equals("all")) && position.equals("all")) {
             sql += " WHERE pt.region = :region ";
-        } else if( !(position.equals("all")) &&  region.equals("all") ){
+        } else if (!(position.equals("all")) && region.equals("all")) {
             sql += " WHERE pt.position = :position ";
-        } else{
-            sql += " WHERE pt.position = :position "+
-                   " AND pt.region = :region ";
+        } else {
+            sql += " WHERE pt.position = :position " +
+                    " AND pt.region = :region ";
         }
 
         System.out.println("테스트 메인페이지 sql : " + sql);
@@ -63,22 +61,21 @@ public class PostingQueryRepository {
 
         // 매핑
         Query query = em.createNativeQuery(sql, Posting.class);
-        if( !(skillnameList.get(0).equals("all")) ){
+        if (!(skillnameList.get(0).equals("all"))) {
             for (int i = 0; i < skillnameList.size(); i++) {
                 query.setParameter("skillname" + i, skillnameList.get(i));
             }
         }
-        if( !(position.equals("all")) ){
-        query.setParameter("position", position);
+        if (!(position.equals("all"))) {
+            query.setParameter("position", position);
         }
-        if( !(region.equals("all")) ){
-        query.setParameter("region", region);
+        if (!(region.equals("all"))) {
+            query.setParameter("region", region);
         }
 
         // 조회된 결과를 리스트에 담아서 리턴
         return (List<Posting>) query.getResultList();
     }
-
 
 
     // 공고에서 요구하는 스킬을 조인해서 조회하는 쿼리

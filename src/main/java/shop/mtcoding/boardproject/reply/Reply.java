@@ -1,25 +1,13 @@
 package shop.mtcoding.boardproject.reply;
 
-import java.sql.Timestamp;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import shop.mtcoding.boardproject.master.Master;
-import shop.mtcoding.boardproject.posting.Posting;
-import shop.mtcoding.boardproject.resume.Resume;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 // 문의에 대한 답변 테이블
 @NoArgsConstructor

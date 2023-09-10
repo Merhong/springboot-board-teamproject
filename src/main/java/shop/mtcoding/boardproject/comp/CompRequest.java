@@ -24,7 +24,6 @@ public class CompRequest {
         private String homepage;
         private Integer role;
 
-
         @Builder
         public SessionCompDTO(Integer userId, String email, String compname, String compRegister, String tel,
                               String photo, String address, String homepage, Integer role) {
@@ -111,6 +110,4 @@ public class CompRequest {
         private String tel;
         private String homepage;
     }
-
-
 }

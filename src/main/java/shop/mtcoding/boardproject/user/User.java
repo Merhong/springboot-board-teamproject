@@ -97,9 +97,9 @@ public class User {
 
     @Builder
     public User(Integer id, Integer role, String username, Date birth, String position, String compname,
-            String compRegister,
-            String homepage, String email, String password, String tel, String photo, String address,
-            List<Posting> postingList, List<UserSkill> userSkillList, List<Resume> resumeList, Timestamp createdAt) {
+                String compRegister,
+                String homepage, String email, String password, String tel, String photo, String address,
+                List<Posting> postingList, List<UserSkill> userSkillList, List<Resume> resumeList, Timestamp createdAt) {
         this.id = id;
         this.role = role;
         this.username = username;

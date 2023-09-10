@@ -12,19 +12,16 @@ public class BookmarkRequset {
     @Getter
     @Setter
     public static class UserBookmarkDTO {
-
         private List<Posting> postingList;
 
         public UserBookmarkDTO(List<Posting> postingList) {
             this.postingList = postingList;
         }
-
     }
 
     @Getter
     @Setter
     public static class CompBookmarkDTO {
-
         private Posting posting;
         private Resume resume;
 
@@ -32,19 +29,15 @@ public class BookmarkRequset {
             this.posting = posting;
             this.resume = resume;
         }
-
     }
 
     @Getter
     @Setter
     public static class UserDTO {
-
         private Posting posting;
 
         public UserDTO(Posting posting) {
             this.posting = posting;
         }
-
     }
-
 }

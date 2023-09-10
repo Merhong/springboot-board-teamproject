@@ -37,6 +37,7 @@ public class RecommendController {
     @Autowired
     private HttpSession session;
 
+
     // 기업 인재찾기 페이지
     @GetMapping("/comp/recommend/form")
     public String recommendForm(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {

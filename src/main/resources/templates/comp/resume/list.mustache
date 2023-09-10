@@ -4,212 +4,204 @@
 <!-- 22번 지원자 내역 페이지-->
 
 
-
-		<div class="col-9 m-auto">
-			<h1 class=" text-center mt-2 mb-2">지원자 내역</h1>
-
+<div class="col-9 m-auto">
+	<h1 class=" text-center mt-2 mb-2">지원자 내역</h1>
 
 
-		<div class="d-flex justify-content-center mb-2">
-			<h5 class="align-self-center">이 공고에 지원한 지원자입니다. :</h5>
+	<div class="d-flex justify-content-center mb-2">
+		<h5 class="align-self-center">이 공고에 지원한 지원자입니다. :</h5>
 
-			<a href="javascript:void(0);" class="btn btn-info m-2" onclick="openNewWindow('/comp/posting/newWindow/{{posting.id}}')">
-				<div class="">
-					<div class="fw-bold">{{posting.title}}</div>
-					<span class="badge" style="background-color: #2f3a7d">{{posting.position}}</span>
-					<span class="expiryDate badge" style="background-color: red">{{#posting.expiryDate}}{{posting.expiryDate}}{{/posting.expiryDate}}</span>
-				</div>
-				<div class="">
-					{{#posting.postingSkill}}<span class="badge me-1" style="background-color: #7F00FF">{{skill.skillname}}</span>{{/posting.postingSkill}}
-				</div>
-				<div>
-					{{#posting.career}}<span class="badge" style="background-color: #f9b233">{{posting.career}}</span>{{/posting.career}}
-					{{#posting.education}}<span class="badge" style="background-color: #f27d0c">{{posting.education}}</span>{{/posting.education}}
-					<span class="badge" style="background-color: #f95959">{{posting.region}}</span>
-				</div>
-			</a>
-			
-
-		</div>
-
-			
-
-
-			<table class="table table-bordered">
-				<thead>
-				  <tr class="table-secondary">
-					<th class="text-center" scope="col">No.</th>
-					<th class="text-center" scope="col">이름</th>
-					<th class="text-center" scope="col">이력서</th>
-					<!-- <th class="text-center" scope="col">생년월일</th> -->
-					<th class="text-center" scope="col">경력</th>
-					<th class="text-center" scope="col">학력</th>
-					<th class="text-center" scope="col">보유기술</th>
-					<th class="text-center" scope="col">응답</th>
-				  </tr>
-				</thead>
-				<tbody>
-
-					{{^applyList}}
-					<tr>
-						<th class="text-center" scope="row">없음</th>
-						<td class="text-center border border-0"></td>
-						<td class="text-center border border-0"></td>
-						<td class="text-center border border-0"></td>
-						<td class="text-center border border-0"></td>
-						<td class="text-center border border-0"></td>
-						<td class="text-center border-start-0"></td>
-					</tr>
-					{{/applyList}}
-					
-					{{#applyList}}
-					<tr class="{{statement}}">
-						<th class="text-center" scope="row"><div class="increNumber"></div></th>
-						<td class="text-center">{{resume.user.username}}</td>
-						<td class="text-center"><a href="javascript:void(0);" class="" onclick="openNewWindow('/resume/newWindow/{{resume.id}}')">{{resume.title}}</a></td>
-						<!-- <td class="text-center">{{resume.user.birth}}</td> -->
-						<td class="text-center">{{resume.career}}</td>
-						<td class="text-center">{{resume.grade}}</td>
-						<td class="text-center">
-							<div class="comma">{{#resume.user.userSkillList}}{{skill.skillname}}, {{/resume.user.userSkillList}}</div>
-						</td>
-						<td class="d-flex justify-content-center statementJS">
-							<input type="hidden" value="{{statement}}">
-							<div class="statementJS2"></div>
-
-							<form action="/comp/posting/apply/{{id}}/pass" method="post">
-								<input class="btn btn-sm btn-success p-0 ps-1 pe-1 me-1 passButton" type="submit" value="합격">
-							</form>
-							<form action="/comp/posting/apply/{{id}}/fail" method="post">
-								<input class="btn btn-sm btn-danger p-0 ps-1 pe-1 failButton" type="submit" value="불합격">
-							</form>
-						</td>
-					</tr>
-					{{/applyList}}
+		<a href="javascript:void(0);" class="btn btn-info m-2"
+		   onclick="openNewWindow('/comp/posting/newWindow/{{posting.id}}')">
+			<div class="">
+				<div class="fw-bold">{{posting.title}}</div>
+				<span class="badge" style="background-color: #2f3a7d">{{posting.position}}</span>
+				<span class="expiryDate badge"
+				      style="background-color: red">{{#posting.expiryDate}}{{posting.expiryDate}}{{/posting.expiryDate}}</span>
+			</div>
+			<div class="">
+				{{#posting.postingSkill}}<span class="badge me-1"
+				                               style="background-color: #7F00FF">{{skill.skillname}}</span>{{/posting.postingSkill}}
+			</div>
+			<div>
+				{{#posting.career}}
+					<span class="badge" style="background-color: #f9b233">{{posting.career}}</span>{{/posting.career}}
+				{{#posting.education}}<span class="badge"
+				                            style="background-color: #f27d0c">{{posting.education}}</span>{{/posting.education}}
+				<span class="badge" style="background-color: #f95959">{{posting.region}}</span>
+			</div>
+		</a>
 
 
-
-				</tbody>
-			  </table>
+	</div>
 
 
-		</div>
+	<table class="table table-bordered">
+		<thead>
+			<tr class="table-secondary">
+				<th class="text-center" scope="col">No.</th>
+				<th class="text-center" scope="col">이름</th>
+				<th class="text-center" scope="col">이력서</th>
+				<!-- <th class="text-center" scope="col">생년월일</th> -->
+				<th class="text-center" scope="col">경력</th>
+				<th class="text-center" scope="col">학력</th>
+				<th class="text-center" scope="col">보유기술</th>
+				<th class="text-center" scope="col">응답</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			{{^applyList}}
+				<tr>
+					<th class="text-center" scope="row">없음</th>
+					<td class="text-center border border-0"></td>
+					<td class="text-center border border-0"></td>
+					<td class="text-center border border-0"></td>
+					<td class="text-center border border-0"></td>
+					<td class="text-center border border-0"></td>
+					<td class="text-center border-start-0"></td>
+				</tr>
+			{{/applyList}}
+
+			{{#applyList}}
+				<tr class="{{statement}}">
+					<th class="text-center" scope="row">
+						<div class="increNumber"></div>
+					</th>
+					<td class="text-center">{{resume.user.username}}</td>
+					<td class="text-center"><a href="javascript:void(0);" class=""
+					                           onclick="openNewWindow('/resume/newWindow/{{resume.id}}')">{{resume.title}}</a>
+					</td>
+					<!-- <td class="text-center">{{resume.user.birth}}</td> -->
+					<td class="text-center">{{resume.career}}</td>
+					<td class="text-center">{{resume.grade}}</td>
+					<td class="text-center">
+						<div class="comma">{{#resume.user.userSkillList}}{{skill.skillname}}
+							, {{/resume.user.userSkillList}}</div>
+					</td>
+					<td class="d-flex justify-content-center statementJS">
+						<input type="hidden" value="{{statement}}">
+						<div class="statementJS2"></div>
+
+						<form action="/comp/posting/apply/{{id}}/pass" method="post">
+							<input class="btn btn-sm btn-success p-0 ps-1 pe-1 me-1 passButton" type="submit"
+							       value="합격">
+						</form>
+						<form action="/comp/posting/apply/{{id}}/fail" method="post">
+							<input class="btn btn-sm btn-danger p-0 ps-1 pe-1 failButton" type="submit" value="불합격">
+						</form>
+					</td>
+				</tr>
+			{{/applyList}}
 
 
+		</tbody>
+	</table>
 
 
-
-		<script>
-
-
-			let statementJS = document.querySelectorAll(".statementJS");
-			// console.log(typeof statementJS);
-			// console.log(typeof statementJS[0]);
-			// console.log(typeof statementJS[0].value);
-			// console.log(statementJS[0].value);
-			// console.log(statementJS[1].value);
-			// console.log(statementJS[2].value);
-			
-			statementJS.forEach(element => {
-				let input = element.querySelector("input");
-
-				if(input.value == "대기"){
-					return;
-				}
-
-				let passButton = element.querySelector(".passButton");
-				let failButton = element.querySelector(".failButton");
-				let statementJS2 = element.querySelector(".statementJS2");
-				
-				if(input.value == "합격"){
-					passButton.style.display = 'none';
-					failButton.style.display = 'none';
-					statementJS2.innerText = "합격";
-				} else {
-					passButton.style.display = 'none';
-					failButton.style.display = 'none';
-					statementJS2.innerText = "불합격";
-				}
-			});
+</div>
 
 
-			
-			let increNumber = document.querySelectorAll(".increNumber");
-			// console.log(increNumber);
-			let count=1;
-			increNumber.forEach(element => {
-				element.innerHTML=count++;
-			});
+<script>
 
 
+	let statementJS = document.querySelectorAll(".statementJS");
+	// console.log(typeof statementJS);
+	// console.log(typeof statementJS[0]);
+	// console.log(typeof statementJS[0].value);
+	// console.log(statementJS[0].value);
+	// console.log(statementJS[1].value);
+	// console.log(statementJS[2].value);
+
+	statementJS.forEach(element => {
+		let input = element.querySelector("input");
+
+		if (input.value == "대기") {
+			return;
+		}
+
+		let passButton = element.querySelector(".passButton");
+		let failButton = element.querySelector(".failButton");
+		let statementJS2 = element.querySelector(".statementJS2");
+
+		if (input.value == "합격") {
+			passButton.style.display = 'none';
+			failButton.style.display = 'none';
+			statementJS2.innerText = "합격";
+		} else {
+			passButton.style.display = 'none';
+			failButton.style.display = 'none';
+			statementJS2.innerText = "불합격";
+		}
+	});
 
 
-			let comma = document.querySelectorAll(".comma");
-			comma.forEach(element => {
-				element.innerHTML = element.innerHTML.slice(0, -2);
-			});
+	let increNumber = document.querySelectorAll(".increNumber");
+	// console.log(increNumber);
+	let count = 1;
+	increNumber.forEach(element => {
+		element.innerHTML = count++;
+	});
 
 
+	let comma = document.querySelectorAll(".comma");
+	comma.forEach(element => {
+		element.innerHTML = element.innerHTML.slice(0, -2);
+	});
 
 
 	function openNewWindow(url) {
-	  var width = 800; // 새 창의 가로 크기
-	  var height = 1100; // 새 창의 세로 크기
-	  var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
-	  var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
-	
-	  var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
-	  window.open(url, '새 창', options);
+		var width = 800; // 새 창의 가로 크기
+		var height = 1100; // 새 창의 세로 크기
+		var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+		var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
+
+		var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+		window.open(url, '새 창', options);
 	}
 
 
+	function Ddaycheck(day) {
+		if (typeof day === "string") {
+			let day2 = new Date(day);
+			return Ddaycheck(day2);
+		} else {
+			let today = new Date();
 
+			// console.log((day-today) / (1000 * 60 * 60 * 24));
+			let DDay = Math.ceil((day - today) / (1000 * 60 * 60 * 24));
 
-			function Ddaycheck(day){
-				if(typeof day === "string"){
-					let day2 = new Date(day);
-					return Ddaycheck(day2);
-				} else{
-					let today = new Date();
-		
-					// console.log((day-today) / (1000 * 60 * 60 * 24));
-					let DDay = Math.ceil( (day-today) / (1000 * 60 * 60 * 24));
-		
-					if(DDay==0){
-						// console.log("D-Day");
-						return "D-Day";
-					}
-					else if(DDay<0){
-						// console.log("만료");
-						return "만료";
-					}
-					else{
-						// console.log("D-"+DDay); 
-						return "D-"+DDay;
-					}
-				}
+			if (DDay == 0) {
+				// console.log("D-Day");
+				return "D-Day";
+			} else if (DDay < 0) {
+				// console.log("만료");
+				return "만료";
+			} else {
+				// console.log("D-"+DDay);
+				return "D-" + DDay;
 			}
-		
-		
-		
-			let day = document.querySelectorAll('.expiryDate');
-			day.forEach(element => {
-				element.textContent = Ddaycheck(element.textContent);
-			});
+		}
+	}
 
-			
-			
-			let statementRed = document.querySelectorAll('.불합');
-			statementRed.forEach(element => {
-				element.classList.add("table-danger");
-			});
-			let statementGreen = document.querySelectorAll('.합격');
-			statementGreen.forEach(element => {
-				element.classList.add("table-success");
-			});
-		
-		</script>
-		
+
+	let day = document.querySelectorAll('.expiryDate');
+	day.forEach(element => {
+		element.textContent = Ddaycheck(element.textContent);
+	});
+
+
+	let statementRed = document.querySelectorAll('.불합');
+	statementRed.forEach(element => {
+		element.classList.add("table-danger");
+	});
+	let statementGreen = document.querySelectorAll('.합격');
+	statementGreen.forEach(element => {
+		element.classList.add("table-success");
+	});
+
+</script>
+
 
 
 

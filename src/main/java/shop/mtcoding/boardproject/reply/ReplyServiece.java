@@ -1,14 +1,12 @@
 package shop.mtcoding.boardproject.reply;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import shop.mtcoding.boardproject.master.Master;
 import shop.mtcoding.boardproject.master.MasterRequest.ReplyDTO;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ReplyServiece {

@@ -9,7 +9,7 @@
 		<div class="d-flex m-2">
 			<div class="col-5">
 				<a href="#"><img src="../../../images/basic.jpg" class="img-fluid"
-						style="width:300px; height:200px;" /></a>
+				                 style="width:300px; height:200px;"/></a>
 			</div>
 
 			<form action="/user/apply" method="post">
@@ -22,7 +22,7 @@
 					<div class="input-group mb-3">
 						<span class="input-group-text">회사명</span>
 						<input type="text" class="form-control" nane="compname" value="{{posting.user.compname}}"
-							readonly>
+						       readonly>
 					</div>
 					<div class="input-group mb-3">
 						<span class="input-group-text">홈페이지</span>
@@ -37,11 +37,11 @@
 
 		<div class="p-3 m-3 d-flex flex-column align-items-center">
 			{{#resumes}} {{! 이력서 목록 }}
-			<div class="input-group mb-3">
-				<label class="form-check-label">
-					<input class="form-check-input" type="radio" name="selectedResume" value="{{id}}">
-					{{title}}</label>
-			</div>
+				<div class="input-group mb-3">
+					<label class="form-check-label">
+						<input class="form-check-input" type="radio" name="selectedResume" value="{{id}}">
+						{{title}}</label>
+				</div>
 			{{/resumes}}
 
 

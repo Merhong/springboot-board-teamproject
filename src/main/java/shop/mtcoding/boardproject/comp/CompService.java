@@ -10,12 +10,10 @@ import shop.mtcoding.boardproject.apply.ApplyRepository;
 import shop.mtcoding.boardproject.bookmark.CompBookmarkRepository;
 import shop.mtcoding.boardproject.bookmark.UserBookmark;
 import shop.mtcoding.boardproject.bookmark.UserBookmarkRepository;
-
 import shop.mtcoding.boardproject.comp.CompRequest.JoinDTO;
 import shop.mtcoding.boardproject.comp.CompRequest.SaveDTO;
 import shop.mtcoding.boardproject.comp.CompRequest.UpdateDTO;
 import shop.mtcoding.boardproject.comp.CompRequest.compUpdateDTO;
-
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.recommend.Recommend;
@@ -51,7 +49,7 @@ public class CompService {
 
     @Autowired
     private UserBookmarkRepository userBookmarkRepository;
-    
+
     @Autowired
     private RecommendRepository recommendRepository;
 
@@ -218,7 +216,7 @@ public class CompService {
                     .homepage(user.getHomepage())
                     .role(user.getRole())
                     .build();
-            
+
             return sessionComp;
 
         } else {
@@ -237,7 +235,7 @@ public class CompService {
 
         List<Apply> applyList = applyRepository.findByPostingId(postingId);
         applyRepository.deleteAll(applyList);
-        
+
         List<Recommend> recommendList = recommendRepository.findByPostingId(postingId);
         recommendRepository.deleteAll(recommendList);
 
@@ -269,9 +267,9 @@ public class CompService {
 
         List<User> userList = new ArrayList<>();
 
-        if(skillList.size()==0 || skillList.get(0).equals("all")){
+        if (skillList.size() == 0 || skillList.get(0).equals("all")) {
             userList = userRepository.findByRole(1);
-        } else{
+        } else {
             Set<User> userSet = new LinkedHashSet<>(); // 중복 제거하려고 Set으로 했다가 List로 변경
             for (String s : skillList) {
                 List<User> tempList = userRepository.findBykillResumeReturnUser(s);
@@ -280,12 +278,12 @@ public class CompService {
             userList = new ArrayList<>(userSet);
         }
 
-        if(position==null || position.equals("all")){
+        if (position == null || position.equals("all")) {
             //
-        }else{
+        } else {
             List<User> tempList = new ArrayList<>();
             for (User user : userList) {
-                if(!(user.getPosition().equals(position))){
+                if (!(user.getPosition().equals(position))) {
                     tempList.add(user);
                 }
             }
@@ -298,10 +296,10 @@ public class CompService {
 
     public Boolean 북마크중복체크(Integer compId, Integer resumeId) {
 
-        if(compBookmarkRepository.findByUserIdAndResumeId(compId, resumeId) == null){
+        if (compBookmarkRepository.findByUserIdAndResumeId(compId, resumeId) == null) {
             // System.out.println("테스트: 기업:"+compId+"  이력서:"+resumeId);
             return true;
-        } else{
+        } else {
             return false;
         }
 
@@ -312,7 +310,7 @@ public class CompService {
 
         if (companyOP.isPresent()) {
             User company = companyOP.get();
-            if(company.getRole()!=2){
+            if (company.getRole() != 2) {
                 throw new MyException("기업아님");
             }
             return company;

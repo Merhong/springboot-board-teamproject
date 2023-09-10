@@ -64,13 +64,14 @@
 				</thead>
 				<tbody>
 					{{#applyList}}
-					<tr>
-						<td>{{ posting.user.compname}}</td>
-						<td class="clickable" data-type="posting" data-id="{{ posting.id }}">{{ posting.title }}</td>
-						<td class="clickable" data-type="resume" data-id="{{ resume.id }}">{{ resume.title }}</td>
-						<td>{{ posting.position }}</td>
-						<td class="apply-status" data-statement="{{ statement }}">{{ statement }}</td>
-					</tr>
+						<tr>
+							<td>{{ posting.user.compname}}</td>
+							<td class="clickable" data-type="posting"
+							    data-id="{{ posting.id }}">{{ posting.title }}</td>
+							<td class="clickable" data-type="resume" data-id="{{ resume.id }}">{{ resume.title }}</td>
+							<td>{{ posting.position }}</td>
+							<td class="apply-status" data-statement="{{ statement }}">{{ statement }}</td>
+						</tr>
 					{{/applyList}}
 				</tbody>
 			</table>
@@ -90,6 +91,7 @@
 			window.location.href = '/user/resume/' + itemId;
 		}
 	}
+
 	// 모든 클릭 가능한 항목에 클릭 이벤트 핸들러 등록
 	const clickableItems = document.querySelectorAll('.clickable');
 	clickableItems.forEach((item) => {

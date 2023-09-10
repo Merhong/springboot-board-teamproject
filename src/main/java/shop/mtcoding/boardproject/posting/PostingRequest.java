@@ -1,16 +1,11 @@
 package shop.mtcoding.boardproject.posting;
 
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
+import shop.mtcoding.boardproject.skill.PostingSkill;
+
 import java.sql.Date;
 import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import shop.mtcoding.boardproject.skill.PostingSkill;
 
 public class PostingRequest {
 
@@ -32,7 +27,7 @@ public class PostingRequest {
 
         @Builder
         public SessionCompDTO(Integer userId, String email, String compname, String compRegister, String tel,
-                String photo, String address, String homepage, Integer role) {
+                              String photo, String address, String homepage, Integer role) {
             this.userId = userId;
             this.email = email;
             this.compname = compname;

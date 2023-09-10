@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface UserBookmarkRepository extends JpaRepository<UserBookmark, Integer> {
 
-        @Query(value = "select * from userbookmark_tb where user_Id = :userId", nativeQuery = true)
-        List<UserBookmark> findAllByUserId(@Param("userId") Integer userId);
+    @Query(value = "select * from userbookmark_tb where user_Id = :userId", nativeQuery = true)
+    List<UserBookmark> findAllByUserId(@Param("userId") Integer userId);
 
-        List<UserBookmark> findByPostingId(@Param("postingId") Integer postingId);
+    List<UserBookmark> findByPostingId(@Param("postingId") Integer postingId);
 
     @Query(value = "select * from userbookmark_tb where posting_id = :postingId and user_Id  = :userId", nativeQuery = true)
     UserBookmark findByUserIdAndPostingId(@Param("postingId") Integer postingId, @Param("userId") Integer userId);

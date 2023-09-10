@@ -2,15 +2,10 @@ package shop.mtcoding.boardproject.resume;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Builder.Default;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.util.List;
-
-import javax.persistence.Column;
-
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.web.multipart.MultipartFile;
 
 public class ResumeRequest {
 

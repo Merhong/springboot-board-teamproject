@@ -3,14 +3,12 @@ package shop.mtcoding.boardproject.bookmark;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import shop.mtcoding.boardproject.posting.Posting;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.user.User;
 
 import javax.persistence.*;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 /* 기업의 북마크 중간 테이블 */
 // 공고id, 이력서 id

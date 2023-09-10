@@ -1,41 +1,29 @@
 package shop.mtcoding.boardproject.master;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.*;
 import shop.mtcoding.boardproject._core.error.ex.MyApiException;
 import shop.mtcoding.boardproject._core.util.ApiUtil;
 import shop.mtcoding.boardproject._core.util.PageSize;
 import shop.mtcoding.boardproject._core.util.Script;
 import shop.mtcoding.boardproject.bookmark.BookmarkService;
 import shop.mtcoding.boardproject.master.MasterResponse.MasterListDTO;
-
 import shop.mtcoding.boardproject.posting.Posting;
-
 import shop.mtcoding.boardproject.reply.Reply;
 import shop.mtcoding.boardproject.reply.ReplyServiece;
 import shop.mtcoding.boardproject.resume.Resume;
-
 import shop.mtcoding.boardproject.skill.Skill;
+import shop.mtcoding.boardproject.skill.SkillService;
 import shop.mtcoding.boardproject.user.User;
 import shop.mtcoding.boardproject.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import shop.mtcoding.boardproject.skill.SkillService;
 
 @Controller
 public class MasterController {
@@ -64,8 +52,8 @@ public class MasterController {
 
     @GetMapping("/search")
     public String search(@RequestParam(defaultValue = "") String keyword,
-            @RequestParam(name = "pageSearchAll", defaultValue = "0") Integer page,
-            HttpServletRequest request) {
+                         @RequestParam(name = "pageSearchAll", defaultValue = "0") Integer page,
+                         HttpServletRequest request) {
 
         keyword = keyword.trim();
 
@@ -224,10 +212,10 @@ public class MasterController {
     // 인덱스(홈) 페이지
     @GetMapping("/")
     public String index(@RequestParam(defaultValue = "all") List<String> skillList,
-            @RequestParam(defaultValue = "all") String position,
-            @RequestParam(defaultValue = "all") String region,
-            @RequestParam(defaultValue = "0") Integer page,
-            HttpServletRequest request) {
+                        @RequestParam(defaultValue = "all") String position,
+                        @RequestParam(defaultValue = "all") String region,
+                        @RequestParam(defaultValue = "0") Integer page,
+                        HttpServletRequest request) {
 
         List<Skill> sl = skillService.스킬이름전부();
         request.setAttribute("skillList", sl);
@@ -383,7 +371,7 @@ public class MasterController {
     // 문의 상세보기 페이지
     @GetMapping("/question/{id}")
     public String questionForm(@PathVariable Integer id, HttpServletRequest request,
-            MasterResponse.MasterReplyDTO masterReplyDTO) {
+                               MasterResponse.MasterReplyDTO masterReplyDTO) {
 
         Boolean admin = false;
 
@@ -400,7 +388,7 @@ public class MasterController {
     // /api/master/${id}/saveReply
     @PostMapping("/api/master/{id}/saveReply")
     public @ResponseBody ApiUtil<List<Reply>> saveReply(@PathVariable Integer id,
-            @RequestBody MasterRequest.ReplyDTO replyDTO) {
+                                                        @RequestBody MasterRequest.ReplyDTO replyDTO) {
         System.out.println("테스트 post호출");
         Reply reply = replyServiece.댓글작성하기(id, replyDTO);
         if (reply == null) {

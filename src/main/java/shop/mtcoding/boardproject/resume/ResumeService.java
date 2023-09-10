@@ -3,22 +3,19 @@ package shop.mtcoding.boardproject.resume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import shop.mtcoding.boardproject._core.error.ex.MyException;
 import shop.mtcoding.boardproject._core.vo.MyPath;
 import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeDTO;
-import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeUpdateDTO;
 import shop.mtcoding.boardproject.skill.UserSkillRepository;
 import shop.mtcoding.boardproject.user.User;
 
+import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import javax.transaction.Transactional;
 
 @Service
 public class ResumeService {
@@ -28,6 +25,7 @@ public class ResumeService {
 
     @Autowired
     private UserSkillRepository userSkillRepository;
+
 
     @Transactional
     public void 이력서등록(ResumeDTO resumeDTO, Integer id) {

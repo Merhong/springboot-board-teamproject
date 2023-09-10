@@ -3,230 +3,228 @@
 <!-- 21번 공고 상세보기 새창-->
 
 <html lang="en">
-	<head>
-		<title>구플</title>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"/>
-		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-	
-		<link rel="icon" href="/images/brand.png">
-	
+<head>
+	<title>구플</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"/>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+	<link rel="icon" href="/images/brand.png">
+
+	<style>
+		@font-face {
+			font-family: 'Giants-Bold';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+			font-weight: 700;
+			font-style: normal;
+		}
+
+		div {
+			font-family: Giants-Bold;
+		}
+	</style>
+
+	{{^sessionComp}}
 		<style>
-			@font-face {
-				font-family: 'Giants-Bold';
-				src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
-				font-weight: 700;
-				font-style: normal;
+			.header_title {
+				color: grey;
 			}
-	
-			div {
-				font-family: Giants-Bold;
+
+			.bg-info {
+				background-color: grey !important;
 			}
+
+			.title1 {
+				font-size: 50px;
+			}
+
+			.header_search {
+				color: white;
+			}
+
 		</style>
-	
-		{{^sessionComp}}
-			<style>
-				.header_title {
-					color: grey;
-				}
-	
-				.bg-info {
-					background-color: grey !important;
-				}
-	
-				.title1 {
-					font-size: 50px;
-				}
-	
-				.header_search {
-					color: white;
-				}
-	
-			</style>
-		{{/sessionComp}}
-		{{#sessionComp}}
-			{{^sessionComp.compname}}
-				<style>
-					.title1 {
-						font-size: 50px;
-						color: pink;
-					}
-	
-					.header_search {
-						background-color: pink;
-					}
-	
-					.bg-info {
-						background-color: pink !important;
-					}
-	
-					.border-info {
-						border-color: pink !important;
-					}
-	
-					.btn-info {
-						border-color: pink;
-						background-color: pink !important;
-					}
-	
-					.btn-info:hover {
-						border-color: pink !important;
-					}
-				</style>
-			{{/sessionComp.compname}}
-		{{/sessionComp}}
-		{{#sessionComp.compname}}
+	{{/sessionComp}}
+	{{#sessionComp}}
+		{{^sessionComp.compname}}
 			<style>
 				.title1 {
 					font-size: 50px;
-					color: #66e3dd;
+					color: pink;
 				}
-	
+
 				.header_search {
-					border-style: solid;
-					background-color: #66e3dd;
+					background-color: pink;
 				}
-	
+
 				.bg-info {
-					background-color: #66e3dd !important;
+					background-color: pink !important;
 				}
-	
+
 				.border-info {
-					border-color: #66e3dd !important;
+					border-color: pink !important;
 				}
-	
+
 				.btn-info {
-					border-color: #66e3dd;
-					background-color: #66e3dd !important;
+					border-color: pink;
+					background-color: pink !important;
 				}
-	
+
 				.btn-info:hover {
-					border-color: #66e3dd !important;
+					border-color: pink !important;
 				}
 			</style>
 		{{/sessionComp.compname}}
-	
-	</head>
+	{{/sessionComp}}
+	{{#sessionComp.compname}}
+		<style>
+			.title1 {
+				font-size: 50px;
+				color: #66e3dd;
+			}
+
+			.header_search {
+				border-style: solid;
+				background-color: #66e3dd;
+			}
+
+			.bg-info {
+				background-color: #66e3dd !important;
+			}
+
+			.border-info {
+				border-color: #66e3dd !important;
+			}
+
+			.btn-info {
+				border-color: #66e3dd;
+				background-color: #66e3dd !important;
+			}
+
+			.btn-info:hover {
+				border-color: #66e3dd !important;
+			}
+		</style>
+	{{/sessionComp.compname}}
+
+</head>
 
 <body class="d-flex flex-column min-vh-100 d-flex flex-column justify-content-center">
 
 
+	<!-- 21번 -->
 
 
-<!-- 21번 -->
+	<div class="container border border-info">
+		<h1 class="text-center mt-2">공고</h1>
 
+		<div class="d-flex">
+			<div class="m-1 col-4 d-flex flex-column img-fluid d-block m-auto" style="width:178px; height:280px;">
+				<img src="../../../images/{{posting.user.photo}}" class=""/>
+			</div>
 
-
-
-
-		<div class="container border border-info">
-			<h1 class="text-center mt-2">공고</h1>
-
-			<div class="d-flex">
-				<div class="m-1 col-4 d-flex flex-column img-fluid d-block m-auto" style="width:178px; height:280px;">
-					<img src="../../../images/{{posting.user.photo}}" class=""/>
+			<div class="col-8 ps-2">
+				<div class="input-group mb-3">
+					<span class="input-group-text">회사명</span>
+					<input type="text" class="form-control" value="{{posting.user.compname}}" disabled>
 				</div>
-
-				<div class="col-8 ps-2">
-						<div class="input-group mb-3">
-							<span class="input-group-text">회사명</span>
-							<input type="text" class="form-control" value="{{posting.user.compname}}" disabled>
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">사업자번호</span>
-							<input type="text" class="form-control" value="{{posting.user.compRegister}}" disabled>
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">주소</span>
-							<textarea class="form-control" rows="2" disabled>{{posting.user.address}}</textarea>
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control" value="{{posting.user.tel}}" disabled>
-						</div>
-						<div class="input-group mb-2">
-							<span class="input-group-text">홈페이지</span>
-							<input type="text" class="form-control" value="{{#posting.user.homepage}}{{posting.user.homepage}}{{/posting.user.homepage}}" disabled>
-						</div>
+				<div class="input-group mb-3">
+					<span class="input-group-text">사업자번호</span>
+					<input type="text" class="form-control" value="{{posting.user.compRegister}}" disabled>
 				</div>
-
+				<div class="input-group mb-3">
+					<span class="input-group-text">주소</span>
+					<textarea class="form-control" rows="2" disabled>{{posting.user.address}}</textarea>
+				</div>
+				<div class="input-group mb-3">
+					<span class="input-group-text">전화번호</span>
+					<input type="text" class="form-control" value="{{posting.user.tel}}" disabled>
+				</div>
+				<div class="input-group mb-2">
+					<span class="input-group-text">홈페이지</span>
+					<input type="text" class="form-control"
+					       value="{{#posting.user.homepage}}{{posting.user.homepage}}{{/posting.user.homepage}}"
+					       disabled>
+				</div>
 			</div>
 
-			<div class="input-group mb-3 mt-2">
-				<span class="input-group-text">공고명</span>
-				<input type="text" class="form-control" value="{{posting.title}}" disabled>
-			</div>
+		</div>
 
-			<div class="input-group mb-3">
-				<span class="input-group-text">공고내용</span>
-				<textarea class="form-control" rows="5" disabled>{{posting.desc}}</textarea>
-			</div>
+		<div class="input-group mb-3 mt-2">
+			<span class="input-group-text">공고명</span>
+			<input type="text" class="form-control" value="{{posting.title}}" disabled>
+		</div>
 
-			<div class="input-group mb-3">
-				<span class="input-group-text">직무</span>
-				<input type="text" class="form-control" value="{{posting.position}}" disabled>
-			</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">공고내용</span>
+			<textarea class="form-control" rows="5" disabled>{{posting.desc}}</textarea>
+		</div>
 
-			<div class="input-group mb-3">
-				<span class="input-group-text">기술</span>
-				<input type="text" class="form-control comma" value="{{#posting.postingSkill}}{{skill.skillname}}, {{/posting.postingSkill}}" disabled>
-			</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">직무</span>
+			<input type="text" class="form-control" value="{{posting.position}}" disabled>
+		</div>
 
-			<div class="input-group mb-3">
-				<span class="input-group-text">학력</span>
-				<input type="text" class="form-control" value="{{#posting.education}}{{posting.education}}{{/posting.education}}" disabled>
-			</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">기술</span>
+			<input type="text" class="form-control comma"
+			       value="{{#posting.postingSkill}}{{skill.skillname}}, {{/posting.postingSkill}}" disabled>
+		</div>
 
-			<div class="input-group mb-3">
-				<span class="input-group-text">연차</span>
-				<input type="text" class="form-control" value="{{#posting.career}}{{posting.career}}{{/posting.career}}" disabled>
-			</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">학력</span>
+			<input type="text" class="form-control"
+			       value="{{#posting.education}}{{posting.education}}{{/posting.education}}" disabled>
+		</div>
 
-			<div class="input-group mb-3">
-				<span class="input-group-text">지역</span>
-				<input type="text" class="form-control" value="{{#posting.region}}{{posting.region}}{{/posting.region}}" disabled>
-			</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">연차</span>
+			<input type="text" class="form-control" value="{{#posting.career}}{{posting.career}}{{/posting.career}}"
+			       disabled>
+		</div>
 
-			<div class="input-group mb-3">
-				<span class="input-group-text">종료일</span>
-				<input type="text" class="form-control" id="dateNew" value="{{#posting.expiryDate}}{{posting.expiryDate}}{{/posting.expiryDate}}" disabled>
-			</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text">지역</span>
+			<input type="text" class="form-control" value="{{#posting.region}}{{posting.region}}{{/posting.region}}"
+			       disabled>
+		</div>
 
-
-
-			
-			<div class="d-flex">
-				{{^sessionComp.compname}}<button type="button" class="w-50 mb-3 me-2 btn btn-success">지원하기</button>
-				<button type="button" class="w-50 mb-3 ms-2 btn btn-warning">북마크하기</button>{{/sessionComp.compname}}
-			</div>
-			<button class="w-100 btn btn-danger mb-3" onclick="closeWindow()">새 창 닫기</button>
+		<div class="input-group mb-3">
+			<span class="input-group-text">종료일</span>
+			<input type="text" class="form-control" id="dateNew"
+			       value="{{#posting.expiryDate}}{{posting.expiryDate}}{{/posting.expiryDate}}" disabled>
 		</div>
 
 
-
-		<script>
-
-			let comma = document.querySelector(".comma");
-			console.log(comma.value);
-			comma.value = comma.value.slice(0, -2);
-			console.log(comma.value);
-
-			function closeWindow() {
-				window.close();
-			}
-
-			let dateNew = document.querySelector("#dateNew");
-			// console.log(typeof dateNew.value)
-			dateNew.value = dateNew.value.split(' ')[0];
-
-		</script>
+		<div class="d-flex">
+			{{^sessionComp.compname}}
+				<button type="button" class="w-50 mb-3 me-2 btn btn-success">지원하기</button>
+				<button type="button" class="w-50 mb-3 ms-2 btn btn-warning">북마크하기</button>{{/sessionComp.compname}}
+		</div>
+		<button class="w-100 btn btn-danger mb-3" onclick="closeWindow()">새 창 닫기</button>
+	</div>
 
 
+	<script>
+
+		let comma = document.querySelector(".comma");
+		console.log(comma.value);
+		comma.value = comma.value.slice(0, -2);
+		console.log(comma.value);
+
+		function closeWindow() {
+			window.close();
+		}
+
+		let dateNew = document.querySelector("#dateNew");
+		// console.log(typeof dateNew.value)
+		dateNew.value = dateNew.value.split(' ')[0];
+
+	</script>
 
 
-	</body>
+</body>
 </html>

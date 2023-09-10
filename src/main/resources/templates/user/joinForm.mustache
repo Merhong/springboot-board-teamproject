@@ -13,11 +13,11 @@
 			<div class="d-flex form-group mt-2 mb-2">
 
 				<div>
-					<input type="hidden" name="role" value=1 />
+					<input type="hidden" name="role" value=1/>
 				</div>
 				<div>
 					<input type="email" name="email" class="form-control" placeholder="아이디(이메일)" id="email"
-						onchange="useremailChange()" />
+					       onchange="useremailChange()"/>
 				</div>
 				<div>
 					<button type="button" class="ms-2 ps-1 pe-1 btn btn-warning" onclick="check()">중복체크</button>
@@ -27,50 +27,50 @@
 			<div class="mt-4"></div>
 
 			<div class="mb-2">
-				<input type="password" name="password" class="form-control" placeholder="비밀번호" id="password" />
+				<input type="password" name="password" class="form-control" placeholder="비밀번호" id="password"/>
 			</div>
 
 			<div class="mb-2">
-				<input type="password" class="form-control" placeholder="비밀번호 확인" id="passwordCheck" />
+				<input type="password" class="form-control" placeholder="비밀번호 확인" id="passwordCheck"/>
 			</div>
 
 			<div class="mt-4"></div>
 
 			<div class="mb-2">
-				<input type="name" name="username" class="form-control" placeholder="이름" id="username" />
+				<input type="name" name="username" class="form-control" placeholder="이름" id="username"/>
 
 			</div>
 
 			<div class="mb-2">
-				<input type="tel" name="tel" class="form-control" placeholder="전화번호" id="tel" />
+				<input type="tel" name="tel" class="form-control" placeholder="전화번호" id="tel"/>
 			</div>
 
 			<div class="mt-4"></div>
 
 			<div class="form-check">
-				<input class="form-check-input" type="checkbox" id="serviceAgreement" />
+				<input class="form-check-input" type="checkbox" id="serviceAgreement"/>
 				<label class="form-check-label" for="serviceAgreement">서비스 이용약관 관련 전체동의</label>
 			</div>
 
-			<hr />
+			<hr/>
 
 			<div class="form-check">
-				<input class="form-check-input" type="checkbox" id="termsAgreement" />
+				<input class="form-check-input" type="checkbox" id="termsAgreement"/>
 				<label class="form-check-label" for="termsAgreement">(필수) 이용약관 동의</label>
 			</div>
 			<div class="form-check">
-				<input class="form-check-input" type="checkbox" id="privacyAgreement" />
+				<input class="form-check-input" type="checkbox" id="privacyAgreement"/>
 				<label class="form-check-label" for="privacyAgreement">(필수) 개인정보 수집 및 이용 동의</label>
 			</div>
 
 			<div class="mt-3"></div>
 
 			<div class="form-check mb-3">
-				<input class="form-check-input" type="checkbox" id="emailAgreement" />
+				<input class="form-check-input" type="checkbox" id="emailAgreement"/>
 				<label class="form-check-label" for="emailAgreement">(선택) 이메일 수신 동의</label>
 			</div>
 			<div class="d-grid">
-				<input id="button" class="btn btn-primary" type="submit" value="회원가입" onclick="" />
+				<input id="button" class="btn btn-primary" type="submit" value="회원가입" onclick=""/>
 			</div>
 		</form>
 	</div>
@@ -97,6 +97,7 @@
 		console.log("이메일 값이 변경됨");
 		useremailSameCheck = false;
 	}
+
 	function valid() {
 		if (useremailSameCheck) {
 			return true;

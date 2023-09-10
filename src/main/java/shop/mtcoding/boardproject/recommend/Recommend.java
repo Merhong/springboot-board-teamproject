@@ -3,15 +3,13 @@ package shop.mtcoding.boardproject.recommend;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import shop.mtcoding.boardproject.posting.Posting;
 import shop.mtcoding.boardproject.resume.Resume;
 
-import java.sql.Timestamp;
-
 import javax.persistence.*;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import java.sql.Timestamp;
 
 /* 기업추천, 인재추천 테이블 - 중간테이블 */
 // 유저id, 공고id, 이력서id
@@ -35,7 +33,7 @@ public class Recommend {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Resume resume;
-    
+
     // 대기/수락/거절
     private String statement;
 

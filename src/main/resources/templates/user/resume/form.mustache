@@ -1,175 +1,180 @@
 {{> layout/header}}
 <div class="d-flex mb-3">
-  <div class="col-2"></div>
-  <div class="class col-8 h-auto d-flex border border-info">
-	  <div class="bg-info col-2">
-		  <div class="m-2"></div>
-		  <a href="/user/updateForm" class="w-100 btn btn-info">마이 페이지</a>
-		  <div class="m-2"></div>
-		  <a href="/user/resume/form" class="w-100 btn btn-info">이력서 등록</a>
-		  <div class="m-2"></div>
-		  <a href="/user/resume/manage" class="w-100 btn btn-info">이력서 관리</a>
-		  <div class="m-2"></div>
-		  <a href="/user/apply/list" class="w-100 btn btn-info">지원내역</a>
-		  <div class="m-2"></div>
-		  <a href="/user/bookmark/form" class="w-100 btn btn-info">북마크</a>
-		  <div class="m-2"></div>
-		  <a href="/user/recommend/form" class="w-100 btn btn-info">기업추천</a>
-		  <div class="m-2"></div>
-	  </div>
+	<div class="col-2"></div>
+	<div class="class col-8 h-auto d-flex border border-info">
+		<div class="bg-info col-2">
+			<div class="m-2"></div>
+			<a href="/user/updateForm" class="w-100 btn btn-info">마이 페이지</a>
+			<div class="m-2"></div>
+			<a href="/user/resume/form" class="w-100 btn btn-info">이력서 등록</a>
+			<div class="m-2"></div>
+			<a href="/user/resume/manage" class="w-100 btn btn-info">이력서 관리</a>
+			<div class="m-2"></div>
+			<a href="/user/apply/list" class="w-100 btn btn-info">지원내역</a>
+			<div class="m-2"></div>
+			<a href="/user/bookmark/form" class="w-100 btn btn-info">북마크</a>
+			<div class="m-2"></div>
+			<a href="/user/recommend/form" class="w-100 btn btn-info">기업추천</a>
+			<div class="m-2"></div>
+		</div>
 
-    <div class="col-9 ms-3">
-      <h1 class="text-center mt-2">이력서 등록</h1>
-      <form action="/user/resume/save" method="post" enctype="multipart/form-data">
-        <div class="d-flex">
-          <div class="m-2 col-4 d-flex flex-column align-items-center">
-            <img id="preview"
-              src="{{#sessionUser.photo}}../../../../../images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}../../../../../images/basic.jpg{{/sessionUser.photo}}"
-              class="img-fluid rounded-circle" style="width: 150px; height: 150px" />
-            <div class="input-group mb-3 mt-3">
-              <input type="file" class="form-control" placeholder="Enter pto" name="pto" onchange="changePic(event)" value="{{#sessionUser.photo}}../../../../../images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}../../../../../images/basic.jpg{{/sessionUser.photo}}"/>
-              <input type="hidden" name="previousPhoto" value="{{ sessionUser.photo }}" />
-            </div>
-          </div>
+		<div class="col-9 ms-3">
+			<h1 class="text-center mt-2">이력서 등록</h1>
+			<form action="/user/resume/save" method="post" enctype="multipart/form-data">
+				<div class="d-flex">
+					<div class="m-2 col-4 d-flex flex-column align-items-center">
+						<img id="preview"
+						     src="{{#sessionUser.photo}}../../../../../images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}../../../../../images/basic.jpg{{/sessionUser.photo}}"
+						     class="img-fluid rounded-circle" style="width: 150px; height: 150px"/>
+						<div class="input-group mb-3 mt-3">
+							<input type="file" class="form-control" placeholder="Enter pto" name="pto"
+							       onchange="changePic(event)"
+							       value="{{#sessionUser.photo}}../../../../../images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}../../../../../images/basic.jpg{{/sessionUser.photo}}"/>
+							<input type="hidden" name="previousPhoto" value="{{ sessionUser.photo }}"/>
+						</div>
+					</div>
 
-          <div class="col-8 p-2">
-            <div class="input-group mb-3">
-              <span class="input-group-text"><span class="ms-2 me-4">이름</span></span>
-              <input type="text" class="form-control" name="username" value="{{ sessionUser.username }}" required/>
-            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text">전화번호</span>
-              <input type="tel" class="form-control" name="tel" value="{{ sessionUser.tel }}" required />
-            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
-              <input type="text" class="form-control" name="address" value="{{#sessionUser.address}}{{
-                  sessionUser.address
-                }}{{/sessionUser.address}}{{^sessionUser.address}}{{/sessionUser.address}}" required />
-            </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text">생년월일</span>
-              <input type="date" class="form-control" name="birth" value="{{#sessionUser.birth}}{{
-                  sessionUser.birth
-                }}{{/sessionUser.birth}}{{^sessionUser.birth}}{{/sessionUser.birth}}" required />
-            </div>
-          </div>
-        </div>
-        <div class="input-group ms-2 mb-3">
-          <span class="input-group-text">이력서 제목</span>
-          <input type="text" class="form-control" name="title" required />
-        </div>
-        <div class="input-group ms-2 mb-3">
-          <span class="input-group-text">학력사항</span>
-          <input type="text" class="form-control" name="grade" required />
-        </div>
-        <div class="input-group ms-2 mb-3">
-          <span class="input-group-text" center>경력사항</span>
-          <input type="text" class="form-control" name="career" required />
-        </div>
+					<div class="col-8 p-2">
+						<div class="input-group mb-3">
+							<span class="input-group-text"><span class="ms-2 me-4">이름</span></span>
+							<input type="text" class="form-control" name="username" value="{{ sessionUser.username }}"
+							       required/>
+						</div>
+						<div class="input-group mb-3">
+							<span class="input-group-text">전화번호</span>
+							<input type="tel" class="form-control" name="tel" value="{{ sessionUser.tel }}" required/>
+						</div>
+						<div class="input-group mb-3">
+							<span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
+							<input type="text" class="form-control" name="address" value="{{#sessionUser.address}}{{
+							sessionUser.address
+							}}{{/sessionUser.address}}{{^sessionUser.address}}{{/sessionUser.address}}" required/>
+						</div>
+						<div class="input-group mb-3">
+							<span class="input-group-text">생년월일</span>
+							<input type="date" class="form-control" name="birth" value="{{#sessionUser.birth}}{{
+							sessionUser.birth
+							}}{{/sessionUser.birth}}{{^sessionUser.birth}}{{/sessionUser.birth}}" required/>
+						</div>
+					</div>
+				</div>
+				<div class="input-group ms-2 mb-3">
+					<span class="input-group-text">이력서 제목</span>
+					<input type="text" class="form-control" name="title" required/>
+				</div>
+				<div class="input-group ms-2 mb-3">
+					<span class="input-group-text">학력사항</span>
+					<input type="text" class="form-control" name="grade" required/>
+				</div>
+				<div class="input-group ms-2 mb-3">
+					<span class="input-group-text" center>경력사항</span>
+					<input type="text" class="form-control" name="career" required/>
+				</div>
 
-        <div class="card input-group ms-2 mb-3">
-          <span class="input-group-text">직무 선택</span>
-          <div class="d-flex flex-wrap">
-            <div class="form-check d-inline-block ms-3 me-2">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="백엔드" name="position" value="백엔드" required/>
-                백엔드</label>
-            </div>
-            <div class="form-check d-inline-block ms-3 me-2">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="프론트엔드" name="position" value="프론트엔드" />
-                프론트엔드</label>
-            </div>
-            <div class="form-check d-inline-block ms-3 me-2">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="풀스택" name="position" value="풀스택" />
-                풀스택</label>
-            </div>
-            <div class="form-check d-inline-block ms-3 me-2">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="안드로이드" name="position" value="안드로이드" />
-                안드로이드</label>
-            </div>
-            <div class="form-check d-inline-block ms-3 me-2">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="IOS" name="position" value="IOS" />
-                IOS</label>
-            </div>
-            <div class="form-check d-inline-block ms-3 me-2">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="임베디드" name="position" value="임베디드" />
-                임베디드</label>
-            </div>
-            <div class="form-check d-inline-block ms-3 me-2">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="빅데이터" name="position" value="빅데이터" />
-                빅데이터</label>
-            </div>
-            <div class="form-check d-inline-block ms-3 me-2">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="서버" name="position" value="서버" />
-                서버</label>
-            </div>
-            <div class="form-check d-inline-block ms-3 me-2">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" id="머신러닝" name="position" value="머신러닝" />
-                머신러닝</label>
-            </div>
-          </div>
-        </div>
+				<div class="card input-group ms-2 mb-3">
+					<span class="input-group-text">직무 선택</span>
+					<div class="d-flex flex-wrap">
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="백엔드" name="position" value="백엔드"
+								       required/>
+								백엔드</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="프론트엔드" name="position" value="프론트엔드"/>
+								프론트엔드</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="풀스택" name="position" value="풀스택"/>
+								풀스택</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="안드로이드" name="position" value="안드로이드"/>
+								안드로이드</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="IOS" name="position" value="IOS"/>
+								IOS</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="임베디드" name="position" value="임베디드"/>
+								임베디드</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="빅데이터" name="position" value="빅데이터"/>
+								빅데이터</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="서버" name="position" value="서버"/>
+								서버</label>
+						</div>
+						<div class="form-check d-inline-block ms-3 me-2">
+							<label class="form-check-label">
+								<input class="form-check-input" type="radio" id="머신러닝" name="position" value="머신러닝"/>
+								머신러닝</label>
+						</div>
+					</div>
+				</div>
 
-        <div class="card input-group ms-2 mb-3">
-          <span class="input-group-text">보유 기술</span>
-          <div class="d-flex flex-wrap">
-            {{#skillList}}
-            <div class="form-check d-inline-block ms-3 me-2">
-              <input class="form-check-input" type="checkbox" id="skill{{ id }}" value="{{ id }}" name="skillList"
-                checked
-              />
-              <label class="form-check-label">{{ skillname }}</label>
-            </div>
-            {{/skillList}}
-          </div>
-        </div>
+				<div class="card input-group ms-2 mb-3">
+					<span class="input-group-text">보유 기술</span>
+					<div class="d-flex flex-wrap">
+						{{#skillList}}
+							<div class="form-check d-inline-block ms-3 me-2">
+								<input class="form-check-input" type="checkbox" id="skill{{ id }}" value="{{ id }}"
+								       name="skillList"
+								       checked
+								/>
+								<label class="form-check-label">{{ skillname }}</label>
+							</div>
+						{{/skillList}}
+					</div>
+				</div>
 
-        <div class="input-group ms-2 mb-3">
-          <span class="input-group-text">자기소개서</span>
-          <textarea class="form-control" rows="5" name="personalStatement"></textarea>
-        </div>
+				<div class="input-group ms-2 mb-3">
+					<span class="input-group-text">자기소개서</span>
+					<textarea class="form-control" rows="5" name="personalStatement"></textarea>
+				</div>
 
-        <input type="checkbox" name="disclosure" value="true" /> 이력서 공개
-        여부
-        <br />
-        <!-- disabled속성은 입력할 수 없는 input태그를 만든다 -->
-        <!-- disabled속성은 적용된 input은 서버로 데이터가 전송되지 않는다-->
-        <!-- readonly속성은 읽기전용 input태그를 만든다 -->
-        <!-- disabled ="ture"가 생략 된것-->
-        <div>
-          <input id="button" class="btn btn-primary m-2 mb-3 w-100 bg-info" type="submit" value="이력서 등록" />
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
+				<input type="checkbox" name="disclosure" value="true"/> 이력서 공개
+				여부
+				<br/>
+				<!-- disabled속성은 입력할 수 없는 input태그를 만든다 -->
+				<!-- disabled속성은 적용된 input은 서버로 데이터가 전송되지 않는다-->
+				<!-- readonly속성은 읽기전용 input태그를 만든다 -->
+				<!-- disabled ="ture"가 생략 된것-->
+				<div>
+					<input id="button" class="btn btn-primary m-2 mb-3 w-100 bg-info" type="submit" value="이력서 등록"/>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="col-xl-3 col-lg-2 col-md-1 col-sm-auto"></div>
 </div>
 
 <script>
-  function changePic(e1) {
-    console.log(e1);
-    let f = e1.srcElement.files[0];
-    if (!f.type.match("image.*")) {
-      alert("이미지를 등록해주세요.");
-      return;
-    }
-    let reader = new FileReader(); //버퍼를 하나 만듦 ,메모리에 끌어 올릴려고!
-    reader.onload = function (e2) {
-      // 파일이 다 읽어지면 콜백됨
-      let previewEl = document.querySelector("#preview");
-      previewEl.setAttribute("src", e2.target.result);
-    };
-    reader.readAsDataURL(f); // 파일 읽기, 버퍼로 다 읽으면 onload() 발동 -> 파일 다 읽으면 콜백
-  }
+	function changePic(e1) {
+		console.log(e1);
+		let f = e1.srcElement.files[0];
+		if (!f.type.match("image.*")) {
+			alert("이미지를 등록해주세요.");
+			return;
+		}
+		let reader = new FileReader(); //버퍼를 하나 만듦 ,메모리에 끌어 올릴려고!
+		reader.onload = function (e2) {
+			// 파일이 다 읽어지면 콜백됨
+			let previewEl = document.querySelector("#preview");
+			previewEl.setAttribute("src", e2.target.result);
+		};
+		reader.readAsDataURL(f); // 파일 읽기, 버퍼로 다 읽으면 onload() 발동 -> 파일 다 읽으면 콜백
+	}
 </script>
 
 {{> layout/footer}}

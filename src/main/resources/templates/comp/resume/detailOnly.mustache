@@ -3,226 +3,226 @@
 <!-- 기업_이력서 상세보기 페이지 새창 -->
 
 <html lang="en">
-	<head>
-		<title>구플</title>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"/>
-		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-	
-		<link rel="icon" href="/images/brand.png">
-	
+<head>
+	<title>구플</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"/>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+	<link rel="icon" href="/images/brand.png">
+
+	<style>
+		@font-face {
+			font-family: 'Giants-Bold';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+			font-weight: 700;
+			font-style: normal;
+		}
+
+		div {
+			font-family: Giants-Bold;
+		}
+	</style>
+
+	{{^sessionComp}}
 		<style>
-			@font-face {
-				font-family: 'Giants-Bold';
-				src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
-				font-weight: 700;
-				font-style: normal;
+			.header_title {
+				color: grey;
 			}
-	
-			div {
-				font-family: Giants-Bold;
+
+			.bg-info {
+				background-color: grey !important;
 			}
+
+			.title1 {
+				font-size: 50px;
+			}
+
+			.header_search {
+				color: white;
+			}
+
 		</style>
-	
-		{{^sessionComp}}
-			<style>
-				.header_title {
-					color: grey;
-				}
-	
-				.bg-info {
-					background-color: grey !important;
-				}
-	
-				.title1 {
-					font-size: 50px;
-				}
-	
-				.header_search {
-					color: white;
-				}
-	
-			</style>
-		{{/sessionComp}}
-		{{#sessionComp}}
-			{{^sessionComp.compname}}
-				<style>
-					.title1 {
-						font-size: 50px;
-						color: pink;
-					}
-	
-					.header_search {
-						background-color: pink;
-					}
-	
-					.bg-info {
-						background-color: pink !important;
-					}
-	
-					.border-info {
-						border-color: pink !important;
-					}
-	
-					.btn-info {
-						border-color: pink;
-						background-color: pink !important;
-					}
-	
-					.btn-info:hover {
-						border-color: pink !important;
-					}
-				</style>
-			{{/sessionComp.compname}}
-		{{/sessionComp}}
-		{{#sessionComp.compname}}
+	{{/sessionComp}}
+	{{#sessionComp}}
+		{{^sessionComp.compname}}
 			<style>
 				.title1 {
 					font-size: 50px;
-					color: #66e3dd;
+					color: pink;
 				}
-	
+
 				.header_search {
-					border-style: solid;
-					background-color: #66e3dd;
+					background-color: pink;
 				}
-	
+
 				.bg-info {
-					background-color: #66e3dd !important;
+					background-color: pink !important;
 				}
-	
+
 				.border-info {
-					border-color: #66e3dd !important;
+					border-color: pink !important;
 				}
-	
+
 				.btn-info {
-					border-color: #66e3dd;
-					background-color: #66e3dd !important;
+					border-color: pink;
+					background-color: pink !important;
 				}
-	
+
 				.btn-info:hover {
-					border-color: #66e3dd !important;
+					border-color: pink !important;
 				}
 			</style>
 		{{/sessionComp.compname}}
-	
-	</head>
+	{{/sessionComp}}
+	{{#sessionComp.compname}}
+		<style>
+			.title1 {
+				font-size: 50px;
+				color: #66e3dd;
+			}
+
+			.header_search {
+				border-style: solid;
+				background-color: #66e3dd;
+			}
+
+			.bg-info {
+				background-color: #66e3dd !important;
+			}
+
+			.border-info {
+				border-color: #66e3dd !important;
+			}
+
+			.btn-info {
+				border-color: #66e3dd;
+				background-color: #66e3dd !important;
+			}
+
+			.btn-info:hover {
+				border-color: #66e3dd !important;
+			}
+		</style>
+	{{/sessionComp.compname}}
+
+</head>
 
 <body class="d-flex flex-column min-vh-100 d-flex flex-column justify-content-center">
 
 
+	<!-- 25번 -->
 
 
-<!-- 25번 -->
+	<div class="container border border-info">
+		<h1 class="text-center mt-2">이력서 상세보기</h1>
 
+		<div class="d-flex">
+			<div class="m-1 col-4 d-flex flex-column img-fluid d-block m-auto" style="width:178px; height:165px;">
+				<img src="../../../images/{{resume.user.photo}}" class="rounded-circle"/>
+			</div>
 
-
-
-
-		<div class="container border border-info">
-			<h1 class="text-center mt-2">이력서 상세보기</h1>
-
-			<div class="d-flex">
-				<div class="m-1 col-4 d-flex flex-column img-fluid d-block m-auto" style="width:178px; height:165px;">
-					<img src="../../../images/{{resume.user.photo}}" class="rounded-circle"/>
+			<div class="col-8 ps-2">
+				<div class="input-group mb-3">
+					<span class="input-group-text">이름</span>
+					<input type="text" class="form-control"
+					       value="{{#resume.user.username}}{{resume.user.username}}{{/resume.user.username}}" disabled>
 				</div>
-
-				<div class="col-8 ps-2">
-						<div class="input-group mb-3">
-							<span class="input-group-text">이름</span>
-							<input type="text" class="form-control" value="{{#resume.user.username}}{{resume.user.username}}{{/resume.user.username}}" disabled>
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">전화번호</span>
-							<input type="text" class="form-control" value="{{#resume.user.tel}}{{resume.user.tel}}{{/resume.user.tel}}" disabled>
-						</div>
-						<div class="input-group mb-3">
-							<span class="input-group-text">주소</span>
-							<textarea class="form-control" rows="2" disabled>{{#resume.user.address}}{{resume.user.address}}{{/resume.user.address}}</textarea>
-						</div>
-						<div class="input-group mb-2">
-							<span class="input-group-text">생년월일</span>
-							<input type="text" class="form-control" value="{{#resume.user.birth}}{{resume.user.birth}}{{/resume.user.birth}}" disabled>
-						</div>
+				<div class="input-group mb-3">
+					<span class="input-group-text">전화번호</span>
+					<input type="text" class="form-control"
+					       value="{{#resume.user.tel}}{{resume.user.tel}}{{/resume.user.tel}}" disabled>
 				</div>
-
-			</div>
-
-			<div class="input-group mb-3 mt-2">
-				<span class="input-group-text">학력사항</span>
-				<input type="text" class="form-control" value="{{resume.grade}}" disabled>
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text">경력사항</span>
-				<input type="text" class="form-control" value="{{resume.career}}" disabled>
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text">보유기술</span>
-				<input type="text" class="form-control comma" value="{{#resume.user.userSkillList}}{{skill.skillname}}, {{/resume.user.userSkillList}}" disabled>
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text">제목</span>
-				<input type="text" class="form-control" value="{{resume.title}}" disabled>
-			</div>
-
-			<div class="input-group mb-3">
-				<span class="input-group-text">내용</span>
-				<textarea class="form-control" rows="5" disabled>{{resume.personalStatement}}</textarea>
-			</div>
-
-
-			<div class="d-flex justify-content-center me-1">
-				<div class="w-100 mb-2">
-					<a href="javascript:void(0);" class="w-100 btn btn-success me-1 ms-0" onclick="openNewWindow2('/offer/newWindow/{{resume.id}}')">입사 제안</a>
+				<div class="input-group mb-3">
+					<span class="input-group-text">주소</span>
+					<textarea class="form-control" rows="2"
+					          disabled>{{#resume.user.address}}{{resume.user.address}}{{/resume.user.address}}</textarea>
 				</div>
-
-				<form action="/comp/bookmark/list/save" method="post" class="w-100">
-					{{#resume}}
-					<input type="hidden" name="ResumeId" value="{{id}}">
-					{{/resume}}
-					{{#boomarkOK}}<input class="w-100 btn btn-primary ms-1 me-0" type="submit" name="bookmark2" value="북마크 하기">{{/boomarkOK}}
-					{{^boomarkOK}}<input class="w-100 btn btn-warning ms-1 me-0" type="submit" name="bookmark2" value="북마크 삭제">{{/boomarkOK}}
-				</form>
-
+				<div class="input-group mb-2">
+					<span class="input-group-text">생년월일</span>
+					<input type="text" class="form-control"
+					       value="{{#resume.user.birth}}{{resume.user.birth}}{{/resume.user.birth}}" disabled>
+				</div>
 			</div>
-			<button class="w-100 btn btn-danger mb-3" onclick="closeWindow()">새 창 닫기</button>
+
+		</div>
+
+		<div class="input-group mb-3 mt-2">
+			<span class="input-group-text">학력사항</span>
+			<input type="text" class="form-control" value="{{resume.grade}}" disabled>
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">경력사항</span>
+			<input type="text" class="form-control" value="{{resume.career}}" disabled>
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">보유기술</span>
+			<input type="text" class="form-control comma"
+			       value="{{#resume.user.userSkillList}}{{skill.skillname}}, {{/resume.user.userSkillList}}" disabled>
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">제목</span>
+			<input type="text" class="form-control" value="{{resume.title}}" disabled>
+		</div>
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">내용</span>
+			<textarea class="form-control" rows="5" disabled>{{resume.personalStatement}}</textarea>
 		</div>
 
 
+		<div class="d-flex justify-content-center me-1">
+			<div class="w-100 mb-2">
+				<a href="javascript:void(0);" class="w-100 btn btn-success me-1 ms-0"
+				   onclick="openNewWindow2('/offer/newWindow/{{resume.id}}')">입사 제안</a>
+			</div>
+
+			<form action="/comp/bookmark/list/save" method="post" class="w-100">
+				{{#resume}}
+					<input type="hidden" name="ResumeId" value="{{id}}">
+				{{/resume}}
+				{{#boomarkOK}}<input class="w-100 btn btn-primary ms-1 me-0" type="submit" name="bookmark2"
+				                     value="북마크 하기">{{/boomarkOK}}
+				{{^boomarkOK}}<input class="w-100 btn btn-warning ms-1 me-0" type="submit" name="bookmark2"
+				                     value="북마크 삭제">{{/boomarkOK}}
+			</form>
+
+		</div>
+		<button class="w-100 btn btn-danger mb-3" onclick="closeWindow()">새 창 닫기</button>
+	</div>
 
 
-		<script>
-			
-			let comma = document.querySelector(".comma");
-			console.log(comma.value);
-			comma.value = comma.value.slice(0, -2);
-			console.log(comma.value);
+	<script>
+
+		let comma = document.querySelector(".comma");
+		console.log(comma.value);
+		comma.value = comma.value.slice(0, -2);
+		console.log(comma.value);
 
 
-			function closeWindow() {
-				window.close();
-			}
+		function closeWindow() {
+			window.close();
+		}
 
 
-			
-			function openNewWindow2(url) {
-				var width = 800; // 새 창의 가로 크기
-				var height = 1100; // 새 창의 세로 크기
-				var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
-				var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
-				
-				var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
-				window.open(url, '새 창', options);
-			}
+		function openNewWindow2(url) {
+			var width = 800; // 새 창의 가로 크기
+			var height = 1100; // 새 창의 세로 크기
+			var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+			var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
 
-		</script>
+			var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+			window.open(url, '새 창', options);
+		}
 
-	</body>
+	</script>
+
+</body>
 </html>

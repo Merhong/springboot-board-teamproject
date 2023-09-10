@@ -3,84 +3,84 @@
 <!-- 20번 -->
 
 
-
 <!-- 값 안적거나 안고르면 오류뜸 -->
 
 
-		<div class="container">
-			<div class="col-8 container border border-info mb-3">
+<div class="container">
+	<div class="col-8 container border border-info mb-3">
 
 
-				<h1 class="text-center mt-2">관리자 페이지</h1>
+		<h1 class="text-center mt-2">관리자 페이지</h1>
 
 
-
-				<form action="/master/skill" method="post" onsubmit="" id="selectform">
-					<div class="d-flex mb-3">
-						<div class="input-group">
-							<span class="input-group-text">추가할 기술 이름</span>
-							<input type="text" class="form-control p-2" name="skillName" required>
-						</div>
-						<input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick="">
-					</div>
-				</form>
-
-				
-
-				<form action="/master/mainPageCount" method="post" onsubmit="" id="selectform2">
-					<div class="d-flex mb-3">
-						<div class="input-group m-1">
-							<span class="input-group-text">메인화면 한페이지당 표시할 개수</span>
-							<div class="form-control p-1">
-								<label class="form-check-label ms-1 me-3">
-									<input class="form-check-input" type="radio" id="mainPageCount3" name="mainPageCount" value="3">
-								3</label>
-								<label class="form-check-label me-3">
-									<input class="form-check-input" type="radio" id="mainPageCount4" name="mainPageCount" value="4">
-								4</label>
-								<label class="form-check-label me-3">
-									<input class="form-check-input" type="radio" id="mainPageCount6" name="mainPageCount" value="6">
-								6</label>
-								<label class="form-check-label me-3">
-									<input class="form-check-input" type="radio" id="mainPageCount8" name="mainPageCount" value="8">
-								8</label>
-								<input type="number" class="form-control w-25 d-inline" name="mainPageCount" placeholder="직접입력">
-							</div>
-						</div>
-						<input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick="">
-					</div>
-				</form>
-
-
-
-				<form action="/master/searchAllPageCount" method="post" onsubmit="" id="selectform3">
-					<div class="d-flex mb-3">
-						<div class="input-group m-1">
-							<span class="input-group-text">통합검색 한페이지당 표시할 개수</span>
-							<div class="form-control p-1">
-								<label class="form-check-label me-3">
-									<input class="form-check-input" type="radio" id="searchAllPageCount4" name="searchAllPageCount" value="4">
-								4</label>
-								<label class="form-check-label me-3">
-									<input class="form-check-input" type="radio" id="searchAllPageCount8" name="searchAllPageCount" value="8">
-								8</label>
-								<label class="form-check-label me-3">
-									<input class="form-check-input" type="radio" id="searchAllPageCount12" name="searchAllPageCount" value="12">
-								12</label>
-								<input type="number" class="form-control w-25 d-inline" name="searchAllPageCount" placeholder="직접입력">
-							</div>
-						</div>
-						<input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick="">
-					</div>
-				</form>
-			
-
-
-
+		<form action="/master/skill" method="post" onsubmit="" id="selectform">
+			<div class="d-flex mb-3">
+				<div class="input-group">
+					<span class="input-group-text">추가할 기술 이름</span>
+					<input type="text" class="form-control p-2" name="skillName" required>
+				</div>
+				<input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick="">
 			</div>
-		</div>
+		</form>
 
 
+		<form action="/master/mainPageCount" method="post" onsubmit="" id="selectform2">
+			<div class="d-flex mb-3">
+				<div class="input-group m-1">
+					<span class="input-group-text">메인화면 한페이지당 표시할 개수</span>
+					<div class="form-control p-1">
+						<label class="form-check-label ms-1 me-3">
+							<input class="form-check-input" type="radio" id="mainPageCount3" name="mainPageCount"
+							       value="3">
+							3</label>
+						<label class="form-check-label me-3">
+							<input class="form-check-input" type="radio" id="mainPageCount4" name="mainPageCount"
+							       value="4">
+							4</label>
+						<label class="form-check-label me-3">
+							<input class="form-check-input" type="radio" id="mainPageCount6" name="mainPageCount"
+							       value="6">
+							6</label>
+						<label class="form-check-label me-3">
+							<input class="form-check-input" type="radio" id="mainPageCount8" name="mainPageCount"
+							       value="8">
+							8</label>
+						<input type="number" class="form-control w-25 d-inline" name="mainPageCount" placeholder="직접입력">
+					</div>
+				</div>
+				<input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick="">
+			</div>
+		</form>
+
+
+		<form action="/master/searchAllPageCount" method="post" onsubmit="" id="selectform3">
+			<div class="d-flex mb-3">
+				<div class="input-group m-1">
+					<span class="input-group-text">통합검색 한페이지당 표시할 개수</span>
+					<div class="form-control p-1">
+						<label class="form-check-label me-3">
+							<input class="form-check-input" type="radio" id="searchAllPageCount4"
+							       name="searchAllPageCount" value="4">
+							4</label>
+						<label class="form-check-label me-3">
+							<input class="form-check-input" type="radio" id="searchAllPageCount8"
+							       name="searchAllPageCount" value="8">
+							8</label>
+						<label class="form-check-label me-3">
+							<input class="form-check-input" type="radio" id="searchAllPageCount12"
+							       name="searchAllPageCount" value="12">
+							12</label>
+						<input type="number" class="form-control w-25 d-inline" name="searchAllPageCount"
+						       placeholder="직접입력">
+					</div>
+				</div>
+				<input id="button" class="ms-2 btn btn-danger" type="submit" value="확인" onclick="">
+			</div>
+		</form>
+
+
+	</div>
+</div>
 
 
 <script>
@@ -92,19 +92,14 @@
 	expiryDate.value = DateToString(UTCToKorea(new Date()));
 
 
+	function UTCToKorea(utc) {
+		const OFFSET = new Date().getTimezoneOffset() * 60000;
+		return (new Date(utc - OFFSET));
+	}
 
-
-function UTCToKorea(utc){
-	const OFFSET = new Date().getTimezoneOffset() * 60000;
-	return (new Date(utc - OFFSET));
-}
-
-function DateToString(date){ // new Date(); 매개변수로
-	return (date.toISOString().split('T')[0]);
-}
-
-
-
+	function DateToString(date) { // new Date(); 매개변수로
+		return (date.toISOString().split('T')[0]);
+	}
 
 
 </script>

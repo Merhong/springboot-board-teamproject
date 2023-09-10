@@ -1,12 +1,11 @@
 package shop.mtcoding.boardproject.resume;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import shop.mtcoding.boardproject.user.User;
+
+import java.util.List;
 
 public interface ResumeRepository extends JpaRepository<Resume, Integer> {
 
@@ -35,13 +34,13 @@ public interface ResumeRepository extends JpaRepository<Resume, Integer> {
     List<Resume> findByTitleContaining(@Param("title") String keyword);
 
     @Query(value = "SELECT resume_tb.* " +
-                    "FROM resume_tb " +
-                    "JOIN user_tb ON resume_tb.user_id = user_tb.id " +
-                    "WHERE user_tb.username LIKE %:username% " +
-                    "UNION " +
-                    "SELECT resume_tb.* " +
-                    "FROM resume_tb " +
-                    "WHERE title LIKE %:title% ", nativeQuery = true)
+            "FROM resume_tb " +
+            "JOIN user_tb ON resume_tb.user_id = user_tb.id " +
+            "WHERE user_tb.username LIKE %:username% " +
+            "UNION " +
+            "SELECT resume_tb.* " +
+            "FROM resume_tb " +
+            "WHERE title LIKE %:title% ", nativeQuery = true)
     List<Resume> findResumeByTitleOrJoinUserUsername(@Param("username") String username, @Param("title") String title);
 
 }

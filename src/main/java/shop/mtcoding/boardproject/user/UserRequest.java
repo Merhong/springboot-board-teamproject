@@ -2,15 +2,10 @@ package shop.mtcoding.boardproject.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import lombok.Getter;
-import lombok.Setter;
-import shop.mtcoding.boardproject.skill.Skill;
 
 public class UserRequest {
 
@@ -47,7 +42,6 @@ public class UserRequest {
     @Getter
     @Setter
     public static class SearchDTO {
-
         private List<String> skillName;
         private String position;
     }
@@ -55,14 +49,12 @@ public class UserRequest {
     @Getter
     @Setter
     public static class StateDTO {
-
         private String username;
     }
 
     @Getter
     @Setter
     public static class CheckOutDTO {
-
         private Integer userId;
         private String username;
     }

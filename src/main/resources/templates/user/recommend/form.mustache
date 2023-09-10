@@ -53,7 +53,7 @@
 						<div class="form-check d-inline-block ms-3 me-2">
 							<label class="form-check-label">
 								<input class="form-check-input" type="checkbox" name="skillList" id="skillAll"
-									value="all" onclick="skillCheck(this)">
+								       value="all" onclick="skillCheck(this)">
 								모두</label>
 						</div>
 
@@ -61,12 +61,12 @@
 
 						<div class="d-flex flex-wrap">
 							{{#skillList}}
-							<div class="form-check d-inline-block ms-3 me-2">
-								<label class="form-check-label">
-									<input class="skillFind form-check-input" type="checkbox" id="{{skillname}}"
-										name="skillList" value="{{skillname}}" onclick='skillAllCheck()'>
-									{{skillname}}</label>
-							</div>
+								<div class="form-check d-inline-block ms-3 me-2">
+									<label class="form-check-label">
+										<input class="skillFind form-check-input" type="checkbox" id="{{skillname}}"
+										       name="skillList" value="{{skillname}}" onclick='skillAllCheck()'>
+										{{skillname}}</label>
+								</div>
 							{{/skillList}}
 
 						</div>
@@ -93,7 +93,7 @@
 							<div class="form-check d-inline-block ms-3 me-2">
 								<label class="form-check-label">
 									<input class="form-check-input" type="radio" id="프론트엔드" name="position"
-										value="프론트엔드">
+									       value="프론트엔드">
 									프론트엔드</label>
 							</div>
 							<div class="form-check d-inline-block ms-3 me-2">
@@ -104,7 +104,7 @@
 							<div class="form-check d-inline-block ms-3 me-2">
 								<label class="form-check-label">
 									<input class="form-check-input" type="radio" id="안드로이드" name="position"
-										value="안드로이드">
+									       value="안드로이드">
 									안드로이드</label>
 							</div>
 							<div class="form-check d-inline-block ms-3 me-2">
@@ -143,19 +143,19 @@
 			</div>
 
 			{{#compInfoList}}
-			<div class="d-flex border border-info m-3 p-2">
-				<div class="col-9">
-					<div class="m-auto">
-						<span class="compname">{{this.compname}}</span>
-						<div data-id="{{id}}" class="posting-title">{{title}}</div>
-						<span class="badge" style="background-color: #2f3a7d">{{position}}</span>
-						{{#postingSkills}}
-						<span class="badge me-1" style="background-color: #7F00FF">{{skill.skillname}}</span>
-						{{/postingSkills}}
+				<div class="d-flex border border-info m-3 p-2">
+					<div class="col-9">
+						<div class="m-auto">
+							<span class="compname">{{this.compname}}</span>
+							<div data-id="{{id}}" class="posting-title">{{title}}</div>
+							<span class="badge" style="background-color: #2f3a7d">{{position}}</span>
+							{{#postingSkills}}
+								<span class="badge me-1" style="background-color: #7F00FF">{{skill.skillname}}</span>
+							{{/postingSkills}}
 
+						</div>
 					</div>
 				</div>
-			</div>
 			{{/compInfoList}}
 		</div>
 
@@ -181,6 +181,7 @@
 			element.checked = selectAll.checked;
 		});
 	}
+
 	function skillAllCheck() {
 		let allCheck = document.querySelector("#skillAll");
 		let skillAll = document.querySelectorAll(".skillFind");
@@ -190,7 +191,8 @@
 			allCheck.checked = true;
 		} else {
 			allCheck.checked = false
-		};
+		}
+		;
 	}
 
 
@@ -204,7 +206,6 @@
 		let submit = document.getElementById("selectform");
 		submit.submit();
 	}
-
 
 
 	function check() {
@@ -225,6 +226,7 @@
 			});
 		}
 	}
+
 	check();
 
 	const positionSet = document.querySelector("#positionSet").value;

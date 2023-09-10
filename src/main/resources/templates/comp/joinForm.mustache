@@ -12,11 +12,11 @@
 		<div class="mt-3"></div>
 
 		<form action="/comp/join" method="post" enctype="multipart/form-data" onsubmit="return valid()">
-			
+
 			<div class="d-flex form-group mt-2 mb-2">
-				<input type="hidden" name="role" value=2 />
+				<input type="hidden" name="role" value=2/>
 				<input type="email" name="email" class="form-control" placeholder="아이디(이메일)" id="email"
-					onchange="useremailChange()" />
+				       onchange="useremailChange()"/>
 				<button type="button" class="badge bg-secondary ms-2" onclick="check()">중복체크</button>
 			</div>
 
@@ -109,6 +109,7 @@
 		console.log("이메일 값이 변경됨");
 		useremailSameCheck = false;
 	}
+
 	function valid() {
 		if (useremailSameCheck) {
 			return true;

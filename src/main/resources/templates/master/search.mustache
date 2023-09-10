@@ -6,188 +6,192 @@
 	<div class="col-xxl-7 col-xl-9 col-lg-10 col-md-11 col-sm-12">
 
 
-        <div class="text-center mt-1"><h3>통합검색</h3></div>
-        <div class="text-center mb-3">검색어가 <b>회사명</b>, <b>공고명</b>, <b>이력서명</b>, <b>유저실명</b>에 포함되면 검색됩니다.</div>
-        
-        
-        {{#totalCount}}
-        <div class="text-center">결과 : 총합 <b>{{totalCount}}</b>개, <b>{{totalPage}}</b>페이지</div>
-
-        <ul class="pagination d-flex justify-content-center mt-1">
-            <li class="page-item {{#first}}disabled{{/first}}"><button class="page-link" onclick="searchAllPageMinus()">이전 페이지</button></li>
-            <li class="page-item"><div class="page-link">{{#pageSearchAll}}{{pageSearchAll}}{{/pageSearchAll}}{{^pageSearchAll}}0{{/pageSearchAll}}</div></li>
-            <li class="page-item {{#last}}disabled{{/last}}"><button class="page-link" onclick="searchAllPagePlus()">다음 페이지</button></li>
-        </ul>
-        {{/totalCount}}
-        
-
-        
-        {{#searchDTO}}
+		<div class="text-center mt-1"><h3>통합검색</h3></div>
+		<div class="text-center mb-3">검색어가 <b>회사명</b>, <b>공고명</b>, <b>이력서명</b>, <b>유저실명</b>에 포함되면 검색됩니다.</div>
 
 
-        
-		<div class="mb-4 d-flex flex-wrap">
-            
+		{{#totalCount}}
+			<div class="text-center">결과 : 총합 <b>{{totalCount}}</b>개, <b>{{totalPage}}</b>페이지</div>
 
-
-            
-
-            {{#compUserList}}
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="m-2 mb-0 ps-2 pe-2 pt-1 bg-warning-subtle">
-                    <h4 class="text-center fw-bold">{{compname}}</h4>
-                    {{#photo}}
-                    <a href="/comp/company/{{id}}" class="text-black text-decoration-none"><img
-                        src="../../../images/{{photo}}" class="img-fluid d-block m-auto"
-                        style="height: 120px;">{{/photo}}
-                        {{^photo}}
-                        <a href="/comp/company/{{id}}" class="text-black text-decoration-none"><img
-                            src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
-                            style="height: 120px;">
-                        {{/photo}}
-
-                        <div class="d-flex align-items-center mt-3">
-                            <span>전화번호 : </span>
-                            <span class="ms-1 fw-bold mt-2 mb-1"> {{tel}}</span>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <span>이메일 : </span>
-                            <span class="ms-1 fw-bold mt-2 mb-1">{{email}}</span>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <span>홈페이지 : </span>
-                            <span class="ms-1 fw-bold mt-2 mb-1">{{homepage}}</span>
-                        </div>
-
-                        <div class="d-flex align-items-center mb-2">
-                            <span>주소 : </span>
-                            <span class="ms-1 fw-bold mt-2 mb-1">{{address}}</span>
-                        </div>
-
-                    </a>
-                    
-                </a>
-                    <div class="d-flex justify-content-between">
-                
-                    </div>
-                </div>
-                <div class="text-center">기업</div>
-            </div>
-            {{/compUserList}}
+			<ul class="pagination d-flex justify-content-center mt-1">
+				<li class="page-item {{#first}}disabled{{/first}}">
+					<button class="page-link" onclick="searchAllPageMinus()">이전 페이지</button>
+				</li>
+				<li class="page-item">
+					<div class="page-link">{{#pageSearchAll}}{{pageSearchAll}}{{/pageSearchAll}}{{^pageSearchAll}}
+						0{{/pageSearchAll}}</div>
+				</li>
+				<li class="page-item {{#last}}disabled{{/last}}">
+					<button class="page-link" onclick="searchAllPagePlus()">다음 페이지</button>
+				</li>
+			</ul>
+		{{/totalCount}}
 
 
 
-
-
-            {{#postingList}}
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: #66e3dd;">
-                    <h4 class="text-center fw-bold mt-1">{{user.compname}}</h4>
-                    {{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
-                        src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto"
-                        style="height: 120px;">{{/user.photo}}
-                    {{^user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
-                        src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
-                        style="height: 120px;">{{/user.photo}}
-                    <h5 class="mt-1 fw-bold">{{title}}</h5>
-                    <div class="mb-1 fst-italic">{{position}}</div>
-                    <div class="mb-1">
-                        {{#postingSkill}}<span
-                            class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
-                    </div>
-                    <div>
-                        {{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
-                        {{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
-                        <span class="badge bg-success">{{region}}</span>
-                    </div>
-                </a>
-
-                </a>
-                    <div class="d-flex justify-content-between">
-                        {{^sessionComp.compname}}<button type="button" class="border-0 mt-1 like-button" id="posting{{id}}" style="background-color: #66e3dd;"
-                                onclick="bookmarkChange(`{{id}}`)"><h3>🤍</h3></button>{{/sessionComp.compname}}
-                        <!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
-                        <!-- 기업 유저는 북마크 못하게 -->
-                        {{#sessionComp.compname}}<button type="button" class="invisible"><h3>🤍</h3></button>{{/sessionComp.compname}}
-
-                        <span
-                            class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
-                    </div>
-                </div>
-                <div class="text-center">구인공고</div>
-            </div>
-            {{/postingList}}
-            
+		{{#searchDTO}}
 
 
 
-            
-            {{#resumeList}}
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: pink;">
-                    </span><h4 class="text-center fw-bold mt-1">{{user.username}}</h4>
-                    {{#user.photo}}
-                    <a href="/resume/{{id}}" class="text-black text-decoration-none"><img
-                        src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto"
-                        style="height: 120px;">{{/user.photo}}
-                        {{^user.photo}}
-                        <a href="/resume/{{id}}" class="text-black text-decoration-none"><img
-                            src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
-                            style="height: 120px;">
-                        {{/user.photo}}
-                        <h5 class="mt-1 fw-bold">{{title}}</h5>
-                        <span class="badge bg-warning mt-1 mb-1">{{#user.birth}}{{user.birth}}{{/user.birth}}</span>
-                        <div class="mb-1">
-                            {{#user.userSkillList}}<span class="badge bg-primary me-1">{{skill.skillname}}</span>{{/user.userSkillList}}
-                        </div>
-                        <div>
-                            {{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
-                            {{#grade}}<span class="badge bg-success">{{grade}}</span>{{/grade}}
-                            <span class="badge bg-success">{{#user.address}}{{user.address}}{{/user.address}}</span>
-                        </div>
-                    </a>
-                    
-                </a>
-                <div class="d-flex justify-content-between">
-                
-                        <div class="mt-2 fst-italic">{{user.position}}</div>
-                        <button type="button" class="invisible"><h3>🤍</h3></button>
-                    </div>
-                </div>
-                <div class="text-center">개인이력서</div>
-            </div>
-            {{/resumeList}}
+			<div class="mb-4 d-flex flex-wrap">
+
+
+				{{#compUserList}}
+					<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+						<div class="m-2 mb-0 ps-2 pe-2 pt-1 bg-warning-subtle">
+							<h4 class="text-center fw-bold">{{compname}}</h4>
+							{{#photo}}
+							<a href="/comp/company/{{id}}" class="text-black text-decoration-none"><img
+								src="../../../images/{{photo}}" class="img-fluid d-block m-auto"
+								style="height: 120px;">{{/photo}}
+							{{^photo}}
+							<a href="/comp/company/{{id}}" class="text-black text-decoration-none"><img
+								src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
+								style="height: 120px;">
+							{{/photo}}
+
+							<div class="d-flex align-items-center mt-3">
+								<span>전화번호 : </span>
+								<span class="ms-1 fw-bold mt-2 mb-1"> {{tel}}</span>
+							</div>
+
+							<div class="d-flex align-items-center">
+								<span>이메일 : </span>
+								<span class="ms-1 fw-bold mt-2 mb-1">{{email}}</span>
+							</div>
+
+							<div class="d-flex align-items-center">
+								<span>홈페이지 : </span>
+								<span class="ms-1 fw-bold mt-2 mb-1">{{homepage}}</span>
+							</div>
+
+							<div class="d-flex align-items-center mb-2">
+								<span>주소 : </span>
+								<span class="ms-1 fw-bold mt-2 mb-1">{{address}}</span>
+							</div>
+
+						</a>
+
+						</a>
+							<div class="d-flex justify-content-between">
+
+							</div>
+						</div>
+						<div class="text-center">기업</div>
+					</div>
+				{{/compUserList}}
 
 
 
 
 
-        </div>
+				{{#postingList}}
+					<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+						<div class="m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: #66e3dd;">
+							<h4 class="text-center fw-bold mt-1">{{user.compname}}</h4>
+							{{#user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
+								src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto"
+								style="height: 120px;">{{/user.photo}}
+							{{^user.photo}}<a href="/comp/posting/{{id}}" class="text-black text-decoration-none"><img
+								src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
+								style="height: 120px;">{{/user.photo}}
+							<h5 class="mt-1 fw-bold">{{title}}</h5>
+							<div class="mb-1 fst-italic">{{position}}</div>
+							<div class="mb-1">
+								{{#postingSkill}}<span
+									class="badge bg-primary me-1">{{skill.skillname}}</span>{{/postingSkill}}
+							</div>
+							<div>
+								{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
+								{{#education}}<span class="badge bg-success">{{education}}</span>{{/education}}
+								<span class="badge bg-success">{{region}}</span>
+							</div>
+						</a>
+
+						</a>
+							<div class="d-flex justify-content-between">
+								{{^sessionComp.compname}}
+									<button type="button" class="border-0 mt-1 like-button" id="posting{{id}}"
+									        style="background-color: #66e3dd;"
+									        onclick="bookmarkChange(`{{id}}`)"><h3>🤍</h3>
+									</button>{{/sessionComp.compname}}
+								<!-- <button type="button" class="border-0 bg-white mt-2"><h3>❤️</h3></button> -->
+								<!-- 기업 유저는 북마크 못하게 -->
+								{{#sessionComp.compname}}
+									<button type="button" class="invisible"><h3>🤍</h3></button>{{/sessionComp.compname}}
+
+								<span
+									class="expiryDate fw-bold align-self-center me-2">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
+							</div>
+						</div>
+						<div class="text-center">구인공고</div>
+					</div>
+				{{/postingList}}
 
 
 
-        {{/searchDTO}}
+
+
+				{{#resumeList}}
+					<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+						<div class="m-2 mb-0 ps-2 pe-2 pt-1" style="background-color: pink;">
+							</span><h4 class="text-center fw-bold mt-1">{{user.username}}</h4>
+							{{#user.photo}}
+							<a href="/resume/{{id}}" class="text-black text-decoration-none"><img
+								src="../../../images/{{user.photo}}" class="img-fluid d-block m-auto"
+								style="height: 120px;">{{/user.photo}}
+							{{^user.photo}}
+							<a href="/resume/{{id}}" class="text-black text-decoration-none"><img
+								src="../../../images/no_logo.png" class="img-fluid d-block m-auto"
+								style="height: 120px;">
+							{{/user.photo}}
+							<h5 class="mt-1 fw-bold">{{title}}</h5>
+							<span class="badge bg-warning mt-1 mb-1">{{#user.birth}}{{user.birth}}{{/user.birth}}</span>
+							<div class="mb-1">
+								{{#user.userSkillList}}<span
+									class="badge bg-primary me-1">{{skill.skillname}}</span>{{/user.userSkillList}}
+							</div>
+							<div>
+								{{#career}}<span class="badge bg-success">{{career}}</span>{{/career}}
+								{{#grade}}<span class="badge bg-success">{{grade}}</span>{{/grade}}
+								<span class="badge bg-success">{{#user.address}}{{user.address}}{{/user.address}}</span>
+							</div>
+						</a>
+
+						</a>
+							<div class="d-flex justify-content-between">
+
+								<div class="mt-2 fst-italic">{{user.position}}</div>
+								<button type="button" class="invisible"><h3>🤍</h3></button>
+							</div>
+						</div>
+						<div class="text-center">개인이력서</div>
+					</div>
+				{{/resumeList}}
+
+
+			</div>
+
+
+
+		{{/searchDTO}}
 
 
 
 
-        {{^searchDTO}}
-        <h1 class="text-center">검색 결과 없음.</h1>
-        {{/searchDTO}}
+		{{^searchDTO}}
+			<h1 class="text-center">검색 결과 없음.</h1>
+		{{/searchDTO}}
 
-    </div>
+	</div>
 </div>
 
 <div class="col-auto"></div>
 </div>
 
 
-
-
 <script>
-    
+
 	function Ddaycheck(day) {
 		if (typeof day === "string") {
 			let day2 = new Date(day);
@@ -215,11 +219,6 @@
 	day.forEach(element => {
 		element.textContent = Ddaycheck(element.textContent);
 	});
-
-
-
-
-
 
 
 	document.addEventListener("DOMContentLoaded", function () {
@@ -267,7 +266,6 @@
 	}
 
 
-    
 	let bookmarked = '<h3>❤️</h3>';
 	let noBookmark = '<h3>🤍</h3>';
 
@@ -342,17 +340,12 @@
 	}
 
 
-
-
-
-    
-
 	function searchAllPagePlus() {
 		pageSearchAllFind = document.querySelector("#pageSearchAllFind")
 		// console.log(pageSearchAllFind.value);
-		pageSearchAllFind.value++; 
+		pageSearchAllFind.value++;
 		// console.log(pageSearchAllFind.value);
-        
+
 		let selectPageSearchAllForm = document.getElementById("selectPageSearchAllForm");
 		selectPageSearchAllForm.submit();
 	}
@@ -360,16 +353,14 @@
 	function searchAllPageMinus() {
 		pageSearchAllFind = document.querySelector("#pageSearchAllFind")
 		// console.log(pageSearchAllFind.value);
-		pageSearchAllFind.value--; 
+		pageSearchAllFind.value--;
 		// console.log(pageSearchAllFind.value);
-        
+
 		let selectPageSearchAllForm = document.getElementById("selectPageSearchAllForm");
 		selectPageSearchAllForm.submit();
 	}
 
 
-
-    
 </script>
 
 

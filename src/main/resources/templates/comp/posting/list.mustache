@@ -4,98 +4,92 @@
 <!-- 19번 기업_공고관리 페이지-->
 
 
-		<div class="col-9 m-auto">
-			<h1 class="text-center mt-2">공고관리</h1>
-
-			
-			{{^postingList}}
-			<h3 class="text-center mt-5 mb-5">
-				등록한 공고가 없습니다.
-			</h3>
-			{{/postingList}}
+<div class="col-9 m-auto">
+	<h1 class="text-center mt-2">공고관리</h1>
 
 
-			{{#postingList}}
-			<div class="d-flex border border-info m-3 mt-4 p-2 justify-content-between bg-info">
-				<a href="javascript:void(0);" class="btn btn-light col-5" onclick="openNewWindow('/comp/posting/newWindow/{{id}}')">
-					<div class="">
-						<div class="fw-bold">{{title}}</div>
-						<span class="badge" style="background-color: #2f3a7d">{{position}}</span>
-						<span class="expiryDate badge" style="background-color: red">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
-					</div>
-					<div class="">
-						{{#postingSkill}}<span class="badge me-1" style="background-color: #7F00FF">{{skill.skillname}}</span>{{/postingSkill}}
-					</div>
-					<div>
-						{{#career}}<span class="badge" style="background-color: #f9b233">{{career}}</span>{{/career}}
-						{{#education}}<span class="badge" style="background-color: #f27d0c">{{education}}</span>{{/education}}
-						<span class="badge" style="background-color: #f95959">{{region}}</span>
-					</div>
-				</a>
+	{{^postingList}}
+		<h3 class="text-center mt-5 mb-5">
+			등록한 공고가 없습니다.
+		</h3>
+	{{/postingList}}
 
-				<div class="col-4">{{desc}}</div>
 
-				<div class="d-flex flex-column justify-content-between">
-					<a href="/comp/posting/{{id}}/resume/list" class="btn btn-success btn-sm mb-1">지원자 보기</a>
-					<a href="/comp/posting/{{id}}/offer/list" class="btn btn-primary btn-sm mb-1">입사 제안 보기</a>
-					<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning btn-sm mb-1 text-white">수정하기</a>
-					<form action="/comp/posting/{{id}}/delete" method="post">
-						<input class="btn btn-danger btn-sm w-100" type="submit" value="삭제하기">
-					</form>
+	{{#postingList}}
+		<div class="d-flex border border-info m-3 mt-4 p-2 justify-content-between bg-info">
+			<a href="javascript:void(0);" class="btn btn-light col-5"
+			   onclick="openNewWindow('/comp/posting/newWindow/{{id}}')">
+				<div class="">
+					<div class="fw-bold">{{title}}</div>
+					<span class="badge" style="background-color: #2f3a7d">{{position}}</span>
+					<span class="expiryDate badge"
+					      style="background-color: red">{{#expiryDate}}{{expiryDate}}{{/expiryDate}}</span>
 				</div>
+				<div class="">
+					{{#postingSkill}}<span class="badge me-1"
+					                       style="background-color: #7F00FF">{{skill.skillname}}</span>{{/postingSkill}}
+				</div>
+				<div>
+					{{#career}}<span class="badge" style="background-color: #f9b233">{{career}}</span>{{/career}}
+					{{#education}}
+						<span class="badge" style="background-color: #f27d0c">{{education}}</span>{{/education}}
+					<span class="badge" style="background-color: #f95959">{{region}}</span>
+				</div>
+			</a>
+
+			<div class="col-4">{{desc}}</div>
+
+			<div class="d-flex flex-column justify-content-between">
+				<a href="/comp/posting/{{id}}/resume/list" class="btn btn-success btn-sm mb-1">지원자 보기</a>
+				<a href="/comp/posting/{{id}}/offer/list" class="btn btn-primary btn-sm mb-1">입사 제안 보기</a>
+				<a href="/comp/posting/{{id}}/updateForm" class="btn btn-warning btn-sm mb-1 text-white">수정하기</a>
+				<form action="/comp/posting/{{id}}/delete" method="post">
+					<input class="btn btn-danger btn-sm w-100" type="submit" value="삭제하기">
+				</form>
 			</div>
-			{{/postingList}}
-
-
-
 		</div>
+	{{/postingList}}
 
 
-
+</div>
 
 
 <script>
 
 
 	function openNewWindow(url) {
-	  var width = 800; // 새 창의 가로 크기
-	  var height = 1100; // 새 창의 세로 크기
-	  var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
-	  var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
-	
-	  var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
-	  window.open(url, '새 창', options);
+		var width = 800; // 새 창의 가로 크기
+		var height = 1100; // 새 창의 세로 크기
+		var left = (window.innerWidth - width) / 2; // 화면 중앙에 위치
+		var top = (window.innerHeight - height) / 2; // 화면 중앙에 위치
+
+		var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+		window.open(url, '새 창', options);
 	}
 
 
-
-
-
-	function Ddaycheck(day){
-		if(typeof day === "string"){
+	function Ddaycheck(day) {
+		if (typeof day === "string") {
 			let day2 = new Date(day);
 			return Ddaycheck(day2);
-		} else{
+		} else {
 			let today = new Date();
 
 			// console.log((day-today) / (1000 * 60 * 60 * 24));
-			let DDay = Math.ceil( (day-today) / (1000 * 60 * 60 * 24));
+			let DDay = Math.ceil((day - today) / (1000 * 60 * 60 * 24));
 
-			if(DDay==0){
+			if (DDay == 0) {
 				// console.log("D-Day");
 				return "D-Day";
-			}
-			else if(DDay<0){
+			} else if (DDay < 0) {
 				// console.log("만료");
 				return "만료";
-			}
-			else{
+			} else {
 				// console.log("D-"+DDay); 
-				return "D-"+DDay;
+				return "D-" + DDay;
 			}
 		}
 	}
-
 
 
 	let day = document.querySelectorAll('.expiryDate');

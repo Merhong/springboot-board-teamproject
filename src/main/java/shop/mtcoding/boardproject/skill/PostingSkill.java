@@ -1,13 +1,12 @@
 package shop.mtcoding.boardproject.skill;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import shop.mtcoding.boardproject.posting.Posting;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /* 공고 요구스킬 중간 테이블 */
 // 공고id, 스킬id

@@ -3,20 +3,7 @@ package shop.mtcoding.boardproject.skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import shop.mtcoding.boardproject.posting.Posting;
-import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeDTO;
-import shop.mtcoding.boardproject.resume.ResumeRequest.ResumeUpdateDTO;
-import shop.mtcoding.boardproject.user.User;
-
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class SkillService {
@@ -30,6 +17,7 @@ public class SkillService {
 
     @Autowired
     private PostingSkillRepository postingSkillRepository;
+
 
     public List<Skill> 전체기술조회() {
         // JPA로 모두 찾아서 리턴

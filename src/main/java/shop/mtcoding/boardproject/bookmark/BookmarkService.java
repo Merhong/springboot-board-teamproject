@@ -1,16 +1,11 @@
 package shop.mtcoding.boardproject.bookmark;
 
-import org.aspectj.apache.bcel.generic.RET;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import shop.mtcoding.boardproject._core.error.ex.MyException;
-import shop.mtcoding.boardproject.apply.Apply;
 import shop.mtcoding.boardproject.posting.Posting;
-import shop.mtcoding.boardproject.posting.PostingRepository;
 import shop.mtcoding.boardproject.resume.Resume;
 import shop.mtcoding.boardproject.resume.ResumeRepository;
 import shop.mtcoding.boardproject.user.User;
@@ -35,8 +30,6 @@ public class BookmarkService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PostingRepository postingRepository;
 
     public List<Posting> 유저북마크전체(Integer id) {
         Optional<User> user = userRepository.findById(id);
