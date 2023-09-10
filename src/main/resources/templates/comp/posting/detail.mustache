@@ -149,13 +149,13 @@
 	<div class="d-flex">
 		{{^sessionComp.compname
 		}}<a
-			href="/user/applyForm/{{ postingId }}"
+			href="/user/apply/form/{{ postingId }}"
 			class="w-50 mb-3 btn btn-info"
 		>지원하기</a
 		>
 			<button
 				type="button"
-				action="/user/bookmarkForm/save"
+				action="/user/bookmark/form/save"
 				method="post"
 				class="w-50 ms-2 btn btn-warning mb-3 bookmark-button"
 				data-posting-id="{{ posting.id }}"
@@ -172,7 +172,7 @@
 		if (e.target && e.target.classList.contains("bookmark-button")) {
 			var postingId = e.target.getAttribute("data-posting-id"); // 해당 공고의 ID를 가져옴
 
-			fetch("/user/bookmarkForm/save", {
+			fetch("/user/bookmark/form/save", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/x-www-form-urlencoded",

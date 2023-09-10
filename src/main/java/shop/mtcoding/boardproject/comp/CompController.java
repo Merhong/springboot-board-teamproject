@@ -74,7 +74,7 @@ public class CompController {
     }
 
     // 기업 공고 관리 페이지
-    @GetMapping("/comp/{compId}/postingList")
+    @GetMapping("/comp/{compId}/posting/list")
     public String listView(@PathVariable Integer compId, HttpServletRequest request) {
         // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -97,11 +97,11 @@ public class CompController {
         // 찾은 리스트를 request에 담는다.
         request.setAttribute("postingList", postingList);
         // 담은 리스트를 화면에 보여준다.
-        return "comp/postingList";
+        return "comp/posting/list";
     }
 
     // 기업 공고 등록 페이지
-    @GetMapping("/comp/postingSaveForm")
+    @GetMapping("/comp/posting/saveForm")
     public String postingSaveForm(HttpServletRequest request) {
         // 세션을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -118,7 +118,7 @@ public class CompController {
         // request에 리스트를 담는다.
         request.setAttribute("skillList", skillList);
         // 공고 등록 화면을 보여준다.
-        return "comp/postingSaveForm";
+        return "comp/posting/saveForm";
     }
 
     // 공고 상세보기 페이지
@@ -129,7 +129,7 @@ public class CompController {
         // 찾은 공고를 request에 담는다.
         request.setAttribute("posting", posting);
         // 상세보기 화면을 보여준다.
-        return "comp/postingDetail";
+        return "comp/posting/detail";
     }
 
     // 기업 상세보기 페이지
@@ -140,7 +140,7 @@ public class CompController {
         // 찾은 기업을 request에 담는다.
         request.setAttribute("company", company);
         // 기업페이지 화면을 보여준다.
-        return "comp/compDetail";
+        return "comp/detail";
     }
 
 
@@ -152,7 +152,7 @@ public class CompController {
         // 찾은 공고를 request에 담는다.
         request.setAttribute("posting", posting);
         // 상세보기 화면을 새창으로 보여준다. onclick="openNewWindow('/comp/posting/newWindow/{{id}}')"
-        return "comp/postingDetailOnly";
+        return "comp/posting/detailOnly";
     }
 
     // 공고관리 > 공고 수정 페이지
@@ -190,11 +190,11 @@ public class CompController {
             throw new MyException("오류");
         }
         // 공고 수정 페이지를 보여준다.
-        return "comp/postingUpdateForm";
+        return "comp/posting/updateForm";
     }
 
     // 공고관리 > 지원자 보기 페이지
-    @GetMapping("/comp/posting/{postingId}/resumeList")
+    @GetMapping("/comp/posting/{postingId}/resume/list")
     public String resumeList(@PathVariable Integer postingId, HttpServletRequest request) {
         // sessionAllUser(모든 유저가 가지고 있는 속성)을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -224,10 +224,10 @@ public class CompController {
         request.setAttribute("resumeList", resumeList);
 
         // 지원자 내역 페이지를 보여준다.
-        return "comp/resumeList";
+        return "comp/resume/list";
     }
 
-    @GetMapping("/comp/{compId}/resumeListCompReceived")
+    @GetMapping("/comp/{compId}/resume/listCompReceived")
     public String resumeListCompReceived(@PathVariable Integer compId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         if (sessionAllUser == null) {
@@ -244,10 +244,10 @@ public class CompController {
         List<ApplyResponse.ApplyCompDTO> applyCompDTOList = applyService.기업별모든지원찾기(compId);
         request.setAttribute("applyCompDTOList", applyCompDTOList);
         
-        return "comp/resumeListCompReceived";
+        return "comp/resume/listCompReceived";
     }
 
-    @GetMapping("/comp/{compId}/offerListCompSent")
+    @GetMapping("/comp/{compId}/offer/listCompSent")
     public String offerListCompSent(@PathVariable Integer compId, HttpServletRequest request) {
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
         if (sessionAllUser == null) {
@@ -264,11 +264,11 @@ public class CompController {
         List<RecommendResponse.RecommendCompDTO> recommendCompDTOList = recommendService.기업별모든오퍼찾기(compId);
         request.setAttribute("recommendCompDTOList", recommendCompDTOList);
         
-        return "comp/offerListCompSent";
+        return "comp/offer/listCompSent";
     }
 
     // 공고관리 > 입사 제안 보기
-    @GetMapping("/comp/posting/{postingId}/offerList")
+    @GetMapping("/comp/posting/{postingId}/offer/list")
     public String offerList(@PathVariable Integer postingId, HttpServletRequest request) {
         // sessionAllUser(모든 유저가 가지고 있는 속성)을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -294,11 +294,11 @@ public class CompController {
         request.setAttribute("recommendList", recommendList);
 
         // 입사 제안 목록 페이지를 보여준다.
-        return "comp/offerList";
+        return "comp/offer/list";
     }
 
     // 기업 인재찾기 페이지
-    @GetMapping("/comp/recommendForm")
+    @GetMapping("/comp/recommend/form")
     public String recommendForm(@RequestParam(defaultValue = "all") List<String> skillList, @RequestParam(defaultValue = "all") String position, HttpServletRequest request) {
         // sessionAllUser(모든 유저가 가지고 있는 속성)을 찾는다.
         User sessionAllUser = (User) session.getAttribute("sessionAllUser");
@@ -331,7 +331,7 @@ public class CompController {
         request.setAttribute("userList", userList);
 
         // 인재찾기 페이지를 보여준다.
-        return "comp/recommendForm";
+        return "comp/recommend/form";
     }
 
     // TODO 이력서는 쓴 본인과 기업만 볼 수 있게 막아야 함.
@@ -351,7 +351,7 @@ public class CompController {
         request.setAttribute("resume", resume);
 
         // 이력서 상세보기 페이지를 보여준다.
-        return "comp/resumeDetail";
+        return "comp/resume/detail";
     }
 
     // 인재찾기 > 이력서 보기 페이지
@@ -371,7 +371,7 @@ public class CompController {
         request.setAttribute("resume", resume);
 
         // 이력서 보기 페이지를 보여준다.
-        return "comp/resumeDetailOnly";
+        return "comp/resume/detailOnly";
     }
 
     // 기업 회원가입 페이지
@@ -398,7 +398,7 @@ public class CompController {
         compService.공고작성(saveDTO, sessionComp.getUserId());
 
         // 해당 기업유저의 공고목록을 리다이렉트한다.
-        return "redirect:/comp/" + sessionComp.getUserId() + "/postingList";
+        return "redirect:/comp/" + sessionComp.getUserId() + "/posting/list";
     }
 
     // 기업 공고 수정 POST
@@ -430,7 +430,7 @@ public class CompController {
         compService.공고수정(postingId, updateDTO);
 
         // 해당 기업유저의 공고 목록으로 리다이렉트
-        return "redirect:/comp/" + compId + "/postingList";
+        return "redirect:/comp/" + compId + "/posting/list";
 
     }
 
@@ -493,7 +493,7 @@ public class CompController {
         // 유저id와 공고를 쓴 유저 id를 비교해서 삭제
         if (compId == posting.getUser().getId()) {
             compService.공고삭제(postingId);
-            return Script.href("/comp/" + compId + "/postingList", "삭제 완료");
+            return Script.href("/comp/" + compId + "/posting/list", "삭제 완료");
         }
 
         throw new MyException("권한이 없습니다.");
@@ -516,10 +516,10 @@ public class CompController {
         Apply apply = applyService.공고지원합격(applyId, sessionComp.getUserId());
 
         if(redirectWhere != null){
-            return "redirect:/comp/" + sessionComp.getUserId() + "/resumeListCompReceived";
+            return "redirect:/comp/" + sessionComp.getUserId() + "/resume/listCompReceived";
         }
 
-        return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
+        return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resume/list";
     }
 
     // 공고관리 > 지원자보기 > 불합격 POST
@@ -539,10 +539,10 @@ public class CompController {
         Apply apply = applyService.공고지원불합(applyId, sessionComp.getUserId());
 
         if(redirectWhere != null){
-            return "redirect:/comp/" + sessionComp.getUserId() + "/resumeListCompReceived";
+            return "redirect:/comp/" + sessionComp.getUserId() + "/resume/listCompReceived";
         }
 
-        return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resumeList";
+        return "redirect:/comp/posting/" + apply.getPosting().getId() + "/resume/list";
     }
 
     // 공고관리 > 입사제안 > 제안 취소 POST
@@ -562,9 +562,9 @@ public class CompController {
         Integer postingId = recommendService.입사제안취소(recommendId, sessionComp.getUserId());
 
         if(redirectWhere.equals("offerListCompSent")){
-            return "redirect:/comp/" + sessionComp.getUserId() + "/offerListCompSent";
+            return "redirect:/comp/" + sessionComp.getUserId() + "/offer/listCompSent";
         }
-        return "redirect:/comp/posting/" + postingId + "/offerList";
+        return "redirect:/comp/posting/" + postingId + "/offer/list";
     }
 
     // 공고관리 > 지원자보기 > 이력서 상세보기
@@ -587,7 +587,7 @@ public class CompController {
         List<Posting> postingList = compService.회사별공고찾기(sessionComp.getUserId());
         request.setAttribute("postingList", postingList);
 
-        return "comp/offerDetailOnly";
+        return "comp/offer/detailOnly";
     }
 
     // 공고관리 > 지원자보기 > 이력서 상세보기 > 입사 제안 POST

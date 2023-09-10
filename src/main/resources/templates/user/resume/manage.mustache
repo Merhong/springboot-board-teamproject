@@ -22,17 +22,18 @@
 			<div class="m-2"></div>
 			<a href="/user/updateForm" class="w-100 btn btn-info">마이 페이지</a>
 			<div class="m-2"></div>
-			<a href="/user/resumeForm" class="w-100 btn btn-info">이력서 등록</a>
+			<a href="/user/resume/form" class="w-100 btn btn-info">이력서 등록</a>
 			<div class="m-2"></div>
-			<a href="/user/resumeManage" class="w-100 btn btn-info">이력서 관리</a>
+			<a href="/user/resume/manage" class="w-100 btn btn-info">이력서 관리</a>
 			<div class="m-2"></div>
-			<a href="/user/applyList" class="w-100 btn btn-info">지원내역</a>
+			<a href="/user/apply/list" class="w-100 btn btn-info">지원내역</a>
 			<div class="m-2"></div>
-			<a href="/user/bookmarkForm" class="w-100 btn btn-info">북마크</a>
+			<a href="/user/bookmark/form" class="w-100 btn btn-info">북마크</a>
 			<div class="m-2"></div>
-			<a href="/user/recommendForm" class="w-100 btn btn-info">기업추천</a>
+			<a href="/user/recommend/form" class="w-100 btn btn-info">기업추천</a>
 			<div class="m-2"></div>
 		</div>
+
 		<div class="main col-10">
 			<div>
 				<h1 class="text-center"> 이력서관리하기</h1>
@@ -44,10 +45,10 @@
 						<span type="text" class="w-50 title-link" data-href="/user/resume/{{id}}">{{title}}</span>
 						<div class="d-flex align-items-center">
 							<div class="d-inline-block me-2">
-								<a href="/user/resumeUpdateForm/{{id}}" class="btn btn-info btn-sm text-white">수정</a>
+								<a href="/user/resume/updateForm/{{id}}" class="btn btn-info btn-sm text-white">수정</a>
 							</div>
 							<div class="d-inline-block me-2">
-								<a href="/user/resume/{{id}}/offerList" class="btn btn-warning btn-sm text-white">입사 제안 보기</a>
+								<a href="/user/resume/{{id}}/offer/list" class="btn btn-warning btn-sm text-white">입사 제안 보기</a>
 							</div>
 							<form action="/resume/delete/{{id}}" method="post" class="d-inline-block">
 								<button class="btn btn-danger btn-sm" type="submit">삭제</button>
