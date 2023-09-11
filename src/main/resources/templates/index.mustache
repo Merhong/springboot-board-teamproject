@@ -460,15 +460,15 @@
 				<div class="align-self-end">
 					<input
 						id="applyPage"
-						type="hidden"
+						type="button"
 						class="btn btn-sm btn-danger p-0 ps-1 pe-1 failButton"
 						value="보러가기"
 						style="
               display: flex;
               align-items: end;
-              width: 50px;
-              height: 20px;
-              font-size: 5px;
+              width: 65px;
+              height: 25px;
+              font-size: 14px;
             "
 						onclick="applyPage()"
 					/>
@@ -910,6 +910,7 @@
 				if (message == "true") {
 					console.log("모달 실행  message : " + message);
 					string += "\n 문의에 대한 답변이 달렸습니다.";
+					document.querySelector("#applyPage").setAttribute("onclick", "questionListPage()");
 					openModal(string);
 					string = "[알림] \n";
 					if (stateChange != "true") {
@@ -920,7 +921,7 @@
 				if (stateChange == "true") {
 					console.log("모달 실행  stateChange : " + stateChange);
 					string += "\n 지원결과가 발표되었습니다!";
-					document.querySelector("#applyPage").setAttribute("type", "button");
+					document.querySelector("#applyPage").setAttribute("onclick", "applyPage()");
 					openModal(string);
 					messageCheckOut();
 				}
@@ -932,6 +933,12 @@
 		function applyPage() {
 			messageCheckOut();
 			location.href = "/user/apply/list";
+		}
+
+
+		function questionListPage() {
+			messageCheckOut();
+			location.href = "/question/List";
 		}
 	</script>
 
