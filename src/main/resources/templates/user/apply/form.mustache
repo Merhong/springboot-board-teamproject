@@ -8,9 +8,10 @@
 
 		<div class="d-flex m-2">
 			<div class="col-5">
-				<a href="#"><img src="../../../images/basic.jpg" class="img-fluid"
+				<a href="#"><img src="../../../images/{{ posting.user.photo }}" class="img-fluid"
 				                 style="width:300px; height:200px;"/></a>
 			</div>
+
 
 			<form action="/user/apply" method="post">
 
@@ -32,7 +33,7 @@
 		</div>
 
 		<div class="ms-2 me-2">
-			<a href="/user/resume/form" class="w-100 btn btn-success">이력서 등록하기</a>
+			<a href="/user/resume/form" class="w-100 btn bg-info text-white">이력서 등록하기</a>
 		</div>
 
 		<div class="p-3 m-3 d-flex flex-column align-items-center">

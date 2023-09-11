@@ -38,23 +38,23 @@
 						<div class="input-group mb-3">
 							<span class="input-group-text"><span class="ms-2 me-4">이름</span></span>
 							<input type="text" class="form-control" name="username" value="{{ sessionUser.username }}"
-							       required/>
+							       disabled/>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">전화번호</span>
-							<input type="tel" class="form-control" name="tel" value="{{ sessionUser.tel }}" required/>
+							<input type="tel" class="form-control" name="tel" value="{{ sessionUser.tel }}" disabled/>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text"><span class="ms-2 me-4">주소</span></span>
 							<input type="text" class="form-control" name="address" value="{{#sessionUser.address}}{{
 							sessionUser.address
-							}}{{/sessionUser.address}}{{^sessionUser.address}}{{/sessionUser.address}}" required/>
+							}}{{/sessionUser.address}}{{^sessionUser.address}}{{/sessionUser.address}}" disabled/>
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text">생년월일</span>
 							<input type="date" class="form-control" name="birth" value="{{#sessionUser.birth}}{{
 							sessionUser.birth
-							}}{{/sessionUser.birth}}{{^sessionUser.birth}}{{/sessionUser.birth}}" required/>
+							}}{{/sessionUser.birth}}{{^sessionUser.birth}}{{/sessionUser.birth}}" disabled/>
 						</div>
 					</div>
 				</div>

@@ -21,14 +21,14 @@ values ('네이버', '5555', 'naver@nate.com', '1234', '010612345678', '서울',
 insert into user_tb(compname, comp_register, email, password, tel, address, homepage, photo, role)
 values ('삼성', '4444', 'samsung@nate.com', '1234', '01087654321', '광주', 'samsung.com', '삼성_logo.png', 2);
 
-insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
-values ('홍길동', 'hong@nate.com', '1234', '01012342143', 'basic.jpg', '부산', '1912-01-15', '풀스택', 1);
-insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
-values ('임꺽정', 'im@nate.com', '1234', '01087664434', 'basic.jpg', '서울', '1922-03-13', '백엔드', 1);
-insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
-values ('장보고', 'jang@nate.com', '1234', '01045454545', 'basic.jpg', '광주', '1944-07-07', 'IOS', 1);
-insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
-values ('이순신', 'lee@nate.com', '1234', '01033335555', 'basic.jpg', '서울', '1111-07-07', '백엔드', 1);
+-- insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
+-- values ('홍길동', 'hong@nate.com', '1234', '01012342143', 'basic.jpg', '부산', '1912-01-15', '풀스택', 1);
+-- insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
+-- values ('임꺽정', 'im@nate.com', '1234', '01087664434', 'basic.jpg', '서울', '1922-03-13', '백엔드', 1);
+-- insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
+-- values ('장보고', 'jang@nate.com', '1234', '01045454545', 'basic.jpg', '광주', '1944-07-07', 'IOS', 1);
+-- insert into user_tb(username, email, password, tel, photo, address, birth, position, role)
+-- values ('이순신', 'lee@nate.com', '1234', '01033335555', 'basic.jpg', '서울', '1111-07-07', '백엔드', 1);
 
 
 -- Posting(공고) 테이블
@@ -64,36 +64,35 @@ values (9, '삼성모집', '내용14', '서울', '백엔드', '2023-12-22', '5�
 
 -- Resume(이력서) 테이블
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (2, '지원서1', '대졸', '신입', '하이', true);
+values (2, '유재석지원서1', '대졸', '신입', '하이', true);
 insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (3, '지원서1', '고졸', '4년', 'nihao', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (4, '지원서1', '초대졸', '1년', 'hello', false);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (2, '지원서2', '대졸', '신입', 'ssawadi', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (4, '이력서에요', '초대졸', '1년', 'nanstte', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (2, '지원서입니다', '대졸', '신입', '반갑습니다', false);
-
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (10, '홍길동지원서1', '대졸', '신입', '반갑습니다1', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (10, '이력서1', '대졸', '신입', '반갑습니다2', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (11, '임지원서1', '고졸', '3년', '반갑습니다3', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (11, '임지원서2', '고졸', '3년', '반갑습니다4', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (11, '이력서2', '고졸', '3년', '반갑습니다4', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (12, '장보고지원서2', '대졸', '2년', '반갑습니다5', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (12, '이력서3', '대졸', '2년', '반갑습니다6', false);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (12, '구인자입니다', '대졸', '2년', '반갑습니다7', true);
-insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
-values (13, '구인구직', '고졸', '5년', '반갑습니다8', true);
+values (3, '박명수지원서1', '고졸', '4년', 'nihao', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (4, '지원서1', '초대졸', '1년', 'hello', false);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (2, '지원서2', '대졸', '신입', 'ssawadi', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (4, '이력서에요', '초대졸', '1년', 'nanstte', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (2, '지원서입니다', '대졸', '신입', '반갑습니다', false);ㄴ
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (10, '홍길동지원서1', '대졸', '신입', '반갑습니다1', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (10, '이력서1', '대졸', '신입', '반갑습니다2', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (11, '임지원서1', '고졸', '3년', '반갑습니다3', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (11, '임지원서2', '고졸', '3년', '반갑습니다4', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (11, '이력서2', '고졸', '3년', '반갑습니다4', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (12, '장보고지원서2', '대졸', '2년', '반갑습니다5', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (12, '이력서3', '대졸', '2년', '반갑습니다6', false);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (12, '구인자입니다', '대졸', '2년', '반갑습니다7', true);
+-- insert into resume_tb(user_id, title, grade, career, personal_statement, disclosure)
+-- values (13, '구인구직', '고졸', '5년', '반갑습니다8', true);
 
 -- Skill(기술) 테이블
 insert into skill_tb (skillname)
@@ -129,24 +128,24 @@ insert into userskill_tb(skill_id, user_id)
 values (6, 4);
 insert into userskill_tb(skill_id, user_id)
 values (7, 4);
-insert into userskill_tb(skill_id, user_id)
-values (1, 10);
-insert into userskill_tb(skill_id, user_id)
-values (4, 10);
-insert into userskill_tb(skill_id, user_id)
-values (5, 10);
-insert into userskill_tb(skill_id, user_id)
-values (3, 11);
-insert into userskill_tb(skill_id, user_id)
-values (6, 11);
-insert into userskill_tb(skill_id, user_id)
-values (8, 11);
-insert into userskill_tb(skill_id, user_id)
-values (3, 12);
-insert into userskill_tb(skill_id, user_id)
-values (7, 12);
-insert into userskill_tb(skill_id, user_id)
-values (1, 13);
+-- insert into userskill_tb(skill_id, user_id)
+-- values (1, 10);
+-- insert into userskill_tb(skill_id, user_id)
+-- values (4, 10);
+-- insert into userskill_tb(skill_id, user_id)
+-- values (5, 10);
+-- insert into userskill_tb(skill_id, user_id)
+-- values (3, 11);
+-- insert into userskill_tb(skill_id, user_id)
+-- values (6, 11);
+-- insert into userskill_tb(skill_id, user_id)
+-- values (8, 11);
+-- insert into userskill_tb(skill_id, user_id)
+-- values (3, 12);
+-- insert into userskill_tb(skill_id, user_id)
+-- values (7, 12);
+-- insert into userskill_tb(skill_id, user_id)
+-- values (1, 13);
 
 
 -- PostingSkill 테이블 (중간 테이블)
@@ -207,87 +206,87 @@ values (4, 14);
 
 
 -- Apply 테이블 (중간 테이블)
-insert into apply_tb(resume_id, posting_id, statement, user_id)
-values (1, 2, '대기', 2);
-insert into apply_tb(resume_id, posting_id, statement, user_id)
-values (4, 3, '합격', 2);
-insert into apply_tb(resume_id, posting_id, statement, user_id)
-values (2, 1, '대기', 3);
-insert into apply_tb(resume_id, posting_id, statement, user_id)
-values (5, 3, '불합', 3);
-insert into apply_tb(resume_id, posting_id, statement)
-values (1, 1, '불합');
-insert into apply_tb(resume_id, posting_id, statement)
-values (2, 5, '대기');
--- insert into apply_tb(resume_id, posting_id, statement) 비공개이력서임
--- values (3, 1, '대기');
-insert into apply_tb(resume_id, posting_id, statement)
-values (4, 5, '합격');
-insert into apply_tb(resume_id, posting_id, statement)
-values (5, 6, '대기');
--- insert into apply_tb(resume_id, posting_id, statement) 비공개이력서임
--- values (6, 6, '불합');
-insert into apply_tb(resume_id, posting_id, statement)
-values (7, 2, '대기');
-insert into apply_tb(resume_id, posting_id, statement)
-values (7, 6, '대기');
-insert into apply_tb(resume_id, posting_id, statement)
-values (8, 1, '대기');
-insert into apply_tb(resume_id, posting_id, statement)
-values (8, 7, '합격');
-insert into apply_tb(resume_id, posting_id, statement)
-values (9, 1, '대기');
-insert into apply_tb(resume_id, posting_id, statement)
-values (9, 2, '대기');
-insert into apply_tb(resume_id, posting_id, statement)
-values (10, 5, '불합');
-insert into apply_tb(resume_id, posting_id, statement)
-values (10, 4, '대기');
+-- insert into apply_tb(resume_id, posting_id, statement, user_id)
+-- values (1, 2, '대기', 2);
+-- insert into apply_tb(resume_id, posting_id, statement, user_id)
+-- values (4, 3, '합격', 2);
+-- insert into apply_tb(resume_id, posting_id, statement, user_id)
+-- values (2, 1, '대기', 3);
+-- insert into apply_tb(resume_id, posting_id, statement, user_id)
+-- values (5, 3, '불합', 3);
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (1, 1, '불합');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (2, 5, '대기');
+-- -- insert into apply_tb(resume_id, posting_id, statement) 비공개이력서임
+-- -- values (3, 1, '대기');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (4, 5, '합격');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (5, 6, '대기');
+-- -- insert into apply_tb(resume_id, posting_id, statement) 비공개이력서임
+-- -- values (6, 6, '불합');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (7, 2, '대기');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (7, 6, '대기');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (8, 1, '대기');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (8, 7, '합격');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (9, 1, '대기');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (9, 2, '대기');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (10, 5, '불합');
+-- insert into apply_tb(resume_id, posting_id, statement)
+-- values (10, 4, '대기');
 
 -- UserBookmark 테이블 (중간 테이블)
-insert into userbookmark_tb (user_id, posting_id)
-values (2, 2);
-insert into userbookmark_tb (user_id, posting_id)
-values (2, 3);
-insert into userbookmark_tb (user_id, posting_id)
-values (3, 1);
-insert into userbookmark_tb (user_id, posting_id)
-values (4, 3);
+-- insert into userbookmark_tb (user_id, posting_id)
+-- values (2, 2);
+-- insert into userbookmark_tb (user_id, posting_id)
+-- values (2, 3);
+-- insert into userbookmark_tb (user_id, posting_id)
+-- values (3, 1);
+-- insert into userbookmark_tb (user_id, posting_id)
+-- values (4, 3);
 
 -- CompBookmark 테이블 (중간 테이블)
-insert into compbookmark_tb (user_id, resume_id)
-values (5, 1);
-insert into compbookmark_tb (user_id, resume_id)
-values (5, 2);
-insert into compbookmark_tb (user_id, resume_id)
-values (5, 7);
-insert into compbookmark_tb (user_id, resume_id)
-values (5, 8);
-insert into compbookmark_tb (user_id, resume_id)
-values (5, 9);
-insert into compbookmark_tb (user_id, resume_id)
-values (6, 10);
-insert into compbookmark_tb (user_id, resume_id)
-values (7, 11);
+-- insert into compbookmark_tb (user_id, resume_id)
+-- values (5, 1);
+-- insert into compbookmark_tb (user_id, resume_id)
+-- values (5, 2);
+-- insert into compbookmark_tb (user_id, resume_id)
+-- values (5, 7);
+-- insert into compbookmark_tb (user_id, resume_id)
+-- values (5, 8);
+-- insert into compbookmark_tb (user_id, resume_id)
+-- values (5, 9);
+-- insert into compbookmark_tb (user_id, resume_id)
+-- values (6, 10);
+-- insert into compbookmark_tb (user_id, resume_id)
+-- values (7, 11);
 
 
 -- Recommend 테이블 (중간 테이블)
-insert into recommend_tb(posting_id, resume_id, statement)
-values (1, 1, '대기');
-insert into recommend_tb(posting_id, resume_id, statement)
-values (1, 2, '대기');
+-- insert into recommend_tb(posting_id, resume_id, statement)
+-- values (1, 1, '대기');
+-- insert into recommend_tb(posting_id, resume_id, statement)
+-- values (1, 2, '대기');
 -- insert into recommend_tb(posting_id, resume_id, statement) values (1, 3, '수락'); 비공개이력서임
-insert into recommend_tb(posting_id, resume_id, statement)
-values (5, 4, '거절');
-insert into recommend_tb(posting_id, resume_id, statement)
-values (5, 5, '대기');
+-- insert into recommend_tb(posting_id, resume_id, statement)
+-- values (5, 4, '거절');
+-- insert into recommend_tb(posting_id, resume_id, statement)
+-- values (5, 5, '대기');
 -- insert into recommend_tb(posting_id, resume_id, statement) values (1, 6, '대기'); 비공개이력서임
-insert into recommend_tb(posting_id, resume_id, statement)
-values (4, 7, '대기');
-insert into recommend_tb(posting_id, resume_id, statement)
-values (1, 8, '수락');
-insert into recommend_tb(posting_id, resume_id, statement)
-values (5, 9, '대기');
+-- insert into recommend_tb(posting_id, resume_id, statement)
+-- values (4, 7, '대기');
+-- insert into recommend_tb(posting_id, resume_id, statement)
+-- values (1, 8, '수락');
+-- insert into recommend_tb(posting_id, resume_id, statement)
+-- values (5, 9, '대기');
 
 
 -- Master 테이블

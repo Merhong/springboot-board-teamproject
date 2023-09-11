@@ -29,6 +29,10 @@ public class ResumeService {
 
     @Transactional
     public void 이력서등록(ResumeDTO resumeDTO, Integer id) {
+
+        userSkillRepository.deleteAllByUserId(id);
+
+
         UUID uuid = UUID.randomUUID(); // 랜덤한 해시값을 만들어줌
         String fileName = uuid + "_" + resumeDTO.getPto().getOriginalFilename();
 
@@ -43,6 +47,7 @@ public class ResumeService {
         // 이력서에 해당하는 필드값을 builder로 담는다.
         Resume resume = Resume.builder()
                 .user(User.builder().id(id).build())
+
                 .title(resumeDTO.getTitle())
                 .grade(resumeDTO.getGrade())
                 .career(resumeDTO.getCareer())
@@ -113,6 +118,7 @@ public class ResumeService {
             user.setTel(resumeUpdateDTO.getTel());
             user.setAddress(resumeUpdateDTO.getAddress());
             user.setBirth(resumeUpdateDTO.getBirth());
+            user.setPosition(resumeUpdateDTO.getPosition());
 
             // 사진 파일 업로드를 확인합니다.
             MultipartFile newPhoto = resumeUpdateDTO.getPto();

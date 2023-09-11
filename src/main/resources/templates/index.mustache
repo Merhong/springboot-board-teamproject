@@ -808,6 +808,7 @@
 				}
 				if (body.sucuess == true) {
 					// alert(body.data);
+					document.querySelector("#applyPage").setAttribute("type", "hidden");
 					openModal(body.data);
 					customModal.focus();
 					postingNum.blur();
@@ -821,12 +822,14 @@
 
 				if (body.sucuess == false) {
 					// alert(body.data);
+					document.querySelector("#applyPage").setAttribute("type", "hidden");
 					openModal(body.data);
 					customModal.focus();
 					postingNum.blur();
 				}
 				if (body.sucuess == true) {
 					// alert(body.data);
+					document.querySelector("#applyPage").setAttribute("type", "hidden");
 					openModal(body.data);
 					customModal.focus();
 					postingNum.blur();
