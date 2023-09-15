@@ -271,7 +271,7 @@ public class ResumeController {
         // 3. 이력서 리스트와 유저id를 모델에 추가하고 화면을 보여준다.
         model.addAttribute("resumes", resumes);
         model.addAttribute("userId", userId); // 유저 아이디를 모델에 추가
-        return "/user/resume/manage";
+        return "user/resume/manage";
     }
 
 

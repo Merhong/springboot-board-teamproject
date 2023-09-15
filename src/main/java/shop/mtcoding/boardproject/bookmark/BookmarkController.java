@@ -40,7 +40,7 @@ public class BookmarkController {
         List<Posting> postingList = bookmarkService.유저북마크전체(user.getId());
         request.setAttribute("postingList", postingList);
 
-        return "/user/bookmark/form";
+        return "user/bookmark/form";
     }
 
     // 기업북마크 화면
