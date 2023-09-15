@@ -24,12 +24,12 @@
 				<div class="d-flex">
 					<div class="m-2 col-4 d-flex flex-column align-items-center">
 						<img id="preview"
-						     src="{{#sessionUser.photo}}../../../../../images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}../../../../../images/basic.jpg{{/sessionUser.photo}}"
+						     src="{{#sessionUser.photo}}/images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}/images/basic.jpg{{/sessionUser.photo}}"
 						     class="img-fluid rounded-circle" style="width: 150px; height: 150px"/>
 						<div class="input-group mb-3 mt-3">
 							<input type="file" class="form-control" placeholder="Enter pto" name="pto"
 							       onchange="changePic(event)"
-							       value="{{#sessionUser.photo}}../../../../../images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}../../../../../images/basic.jpg{{/sessionUser.photo}}"/>
+							       value="{{#sessionUser.photo}}/images/{{sessionUser.photo}}{{/sessionUser.photo}}{{^sessionUser.photo}}/images/basic.jpg{{/sessionUser.photo}}"/>
 							<input type="hidden" name="previousPhoto" value="{{ sessionUser.photo }}"/>
 						</div>
 					</div>
