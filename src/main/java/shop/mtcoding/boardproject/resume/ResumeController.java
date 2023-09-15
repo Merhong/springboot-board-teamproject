@@ -223,11 +223,11 @@ public class ResumeController {
                 request.setAttribute("userSkillList", userSkillList);
                 request.setAttribute("skillList", skillList);
                 request.setAttribute("resume", resume);
-                return "/user/resume/updateForm";
+                return "user/resume/updateForm";
             }
 
         }
-        return "redirect:/user/resume/manage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
+        return "redirect:user/resume/manage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
     }
 
 
@@ -250,7 +250,7 @@ public class ResumeController {
                 request.setAttribute("userSkillList", userSkillList);
                 request.setAttribute("skillList", skillList);
                 request.setAttribute("resume", resume);
-                return "/user/resume/detailForm";
+                return "user/resume/detailForm";
             }
         }
         return "redirect:/user/resume/manage"; // 권한 없으면 이력서 관리 페이지로 리다이렉트
