@@ -40,3 +40,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// build시 plain.jar 생성하지 않게 만드는 설정
+jar {
+    enabled = false
+}
