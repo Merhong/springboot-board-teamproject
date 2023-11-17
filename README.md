@@ -2,8 +2,6 @@
 
 [![a](http://img.youtube.com/vi/vgm5Nlc0bks/0.jpg)](https://www.youtube.com/watch?v=vgm5Nlc0bks?t=0s)
 
-https://www.youtube.com/watch?v=vgm5Nlc0bks
-
 ## 기획 (완료)
 
 ## 화면설계 (완료)
