@@ -1,4 +1,6 @@
-# 스프링부트 게시판 팀 프로젝트(4조)
+# 스프링부트 구인구직 프로젝트
+
+https://www.youtube.com/watch?v=vgm5Nlc0bks
 
 ## 기획 (완료)
 
@@ -56,6 +58,9 @@
 - 유효성검사 자동화
 
 ## 테이블 쿼리
+
+![white drawio](https://github.com/Merhong/springboot-board-teamproject/assets/135561696/e0ff2d10-251e-4bad-b9b2-80a87dffbf5a)
+
 
 ```sql
 CREATE TABLE user_tb
